@@ -1,6 +1,7 @@
 # LaTeX Guidelines for The Final Report
-Version on Dec 24, 2020 
-Author: Ezgi
+Version on Dec 24, 2020.
+
+Author: Ezgi.
 
 Assuming that anyone has some sort of familiarity with LaTeX, these are meant to be just *friendly reminders* about how to write the final report.
 
