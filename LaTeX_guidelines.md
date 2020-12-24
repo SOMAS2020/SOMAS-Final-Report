@@ -1,4 +1,4 @@
-# LaTeX Guidelines for The Final Report
+# LaTeX Guidelines for the Final Report
 Version on Dec 24, 2020.
 
 Author: Ezgi.
@@ -27,7 +27,7 @@ I hope you get the idea :)
 
 To refer to these labels, let's say a figure, in the text simply do:
 ```tex
-\ref{fig:XX}
+Figure \ref{fig:XX}
 ```
 
 2. Write *proper* captions for your images! (Sometimes, people don't do this for some reason that I don't understand...)  Finish your caption with a punctuation, please.
