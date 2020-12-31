@@ -1,1 +1,192 @@
 \chapter{Voting}
+\section{Voting Scenarios}
+\label{sec:VotingScenarios}
+
+The voting is called when a collective decision is needed to make in a justified way. A robust voting system is designed for the organisational meetings especially for IIGO in this coursework. % TODO ref to IIGO chapter
+When a voting is called in IIGO, the roles President, Speaker, Judge, and Voters will be empowered to have relevant functions to proceed a series of action:
+\begin{itemize}
+    \item President will be eligible to select a motion for the archipelago to vote for.
+    \item Speaker will be eligible to take charge of the proceeding of voting i.e. receiving ballots, counting ballots, and declare the winner.
+    \item Judge will be eligible to inspect ballots and the Speaker's action. % ref to IIGO judge inspectBallot
+    \item Voters will be eligible to vote i.e. submit ballots.
+\end{itemize}
+
+In an IIGO meeting, the elections of roles and changes of rules need voting for such collective decision-making.
+
+\textbf{Elections of roles:} As per the IIGO specification, the elections of roles will be conducted according to the cycle of accountability i.e. the Judge can initiate the power transfer of the role of President through voting; the President can initiate the power transfer of the role of \texttt{Speaker} through voting; the Speaker can initiate the power transfer of the role of Judge through voting. To prevent multiple-role enactment of one island, the island that has been selected as a role will be removed from the candidates in the voting for other roles in the current turn. Depending on the sequence of the elections called, the candidates for three roles will consist of maximally six, five, and four islands accordingly. The ballots from the Voter islands will be in the format of preference lists, which rank all candidates in an order.
+
+\textbf{Changes of rules:} the President can select a rule from the proposed list to be voted by the Voter islands. The Speaker will host the voting for changes of rules and be responsible for the ballots counting and results declaration. The ballots from the Voter islands will be: Aye, namely agree with the rule change; Nay, namely disagree with the rule change; or Abstain.
+
+
+\section{Voting Methods}
+\label{sec:VotingMethods}
+
+Table \ref{table:votingmethod} indicates available choices for each voting scenario.
+
+\begin{table}[H]
+\caption{Available voting methods for each voting scenario}\label{table:votingmethod}
+\begin{center}
+\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|  }
+ \hline
+ Voting Methods   & Elections of Roles & Changes of Rules   \\
+ \hline
+ Plurality   &     & \checkmark     \\
+ \hline
+ Borda Count &  \checkmark   &      \\
+ \hline
+ Runoff      &  \checkmark    &        \\
+ \hline
+ Instant Runoff    & \checkmark  &     \\
+ \hline
+ Approval  &  \checkmark    &    \\
+ 
+ \hline
+\end{tabular}    
+\end{center}
+\end{table}
+
+\textbf{Plurality} will select the majority choices as the collective decision. When the decision is picking between two options, e.g. whether agree or disagree a change of rule. Unlike the elections, it is not necessary to compare the options left for determining a relative preference. It is straightforward and effective especially when the number of valid ballots (i.e. abstention excluded) is odd. However, it requires consideration when the results are tied. The solution to tied results is regimented with the assumption that the proposer of the voting in such events will vote for "agree". Thus, the proposal will be approved if the number of "agree" votes is more than the number of "disagree" votes. 
+
+\textbf{Borda Count} method will allow voters to rank preference instead of choosing one option only. The order of choices in the preference list determines the Borda points regarding each option. Adding such Borda points from all voters' ballots produces the Borda score for each candidate. Thus, the candidate with the highest Borda score will be the collective decision.
+
+% The tied results are resolved by selecting the most first-nominated candidate. If this still gives multiple winners, the most second-nominated candidate will be selected as the winner. This iterative counting process will act as a tiebreaker for winner selection.
+
+\textbf{Runoff} (also known as the two-round system) is a voting method which is used to pick a single winner from a list of several candidates. 
+%Normally, voters cast a single vote for their preferred candidate, but in our game specification it is also possible for voters to make their preference list.
+Runoff voting is widely recognized and used around the world primarily for the election of the head of state. It is an effective voting method for the selection of candidates.
+
+\texttt{Voter} islands will rank their preference of candidates and submit the preference lists as their ballots. In the first round, two candidates with most first placed votes are chosen among all candidates. The Runoff voting can conclude the election in the first-round if one candidate obtains a majority. Otherwise, the second round need to be considered and utilized where the ballots will be recounted by eliminating the candidates other than the top-two. Subsequently, the candidate with the most votes between the top-two candidates will be the winner.
+
+\textbf{Instant Runoff} is a voting method which is used in single-seat elections which consist of more than two candidates. 
+Individual voters rank their preference of candidates. The candidate who gets the least number of first-placed is eliminated and this step is repeated until only one candidate remains.
+
+% In the event of tied result, alternative rules can be chosen to give a single winner. It is obvious that the effectiveness of this method comes from its flexibility of various rules available in a tie situation.
+
+\textbf{Approval} is a voting method for single winner in which each voter selects a subset of candidates. As of its procedures and usage in the game, Approval will be used for the elections of roles where each voter picks a group of candidates and the most named or approved candidate wins.
+
+\textbf{Tied situation:} In a tied situation, there are three possible rules that can be used to eliminate one or more candidates who get the same number of votes. The Condorcet method is one of the voting methods which selects the candidate that dominates other candidates in term of majority relation which ranks the candidates according to one-to-one comparisons. In other words, the Condorcet winner is the candidate that wins a majority in every one-to-one comparison against other candidates. However, Condorcet method is not guaranteed to work when preference lists form a cycle, which is known as the Condorcet paradox or voting paradox. Alternatively, Hare Rule can be used in a tiebreak where all candidates with the least first-place votes will be all eliminated. Moreover, Coombs Rule could be used in place of Hare Rule if the iterative process of removing candidates with the least first-place votes is not preferred. Coombs Rule indicates that the candidate with the most last-placed votes will be removed.
+
+In this coursework, the pairwise Condorcet winner is chosen for a tiebreak setup which states that a candidate who dominates the other candidate in term of majority relation wins.
+
+% Whereas the Hare rule removes all candidates with the least first-place votes and Coombs Rule iteratively removes a candidate with most last placed votes.
+
+% Interestingly, Instant Runoff method is criticized by Condorcet for its disadvantage which involves removing a candidate who is favored by a majority of voters.
+
+\section{Voting Protocol}
+\label{sec:VotingProtocol}
+Voting Protocol is adopted from an example of formal specification given in Robert's Rules of Order (RONR) that defines a series of sequential actions when a voting event happens. This protocol is applicable to any voting method at certain state of the game (i.e. during IIGO session) whenever a voting event happens. With the basis from RONR\footnote{refer to Prof. J Pitt's Draft Book: Self-Organising Multi-Agent Systems (2020) Chapter 4 "Social Choice Theory", Section 4.6.1 Page 114}, the sequence of actions of voting protocol in this game when a voting event happens is as follows (taken an example of voting event for change of rules): the President selects a rule from the rule proposal list to be voted on; the President notifies the Speaker to hold a voting event for the selected rule; the Speaker calls for a vote for the selected rule by opening ballots to all islands to cast their votes; the Speaker closes the ballots after receiving votes from all islands; the Speaker counts the votes by calling an applicable voting method function for winner selection to produce a result; and finally the Speaker publicly declares the voting result whether the selected rule can be carried out or not. Figure~\ref{fig:RONRVotingProtocol} shows the general sequence of the voting protocol for rules.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[node distance=20pt]
+\centering
+\node[draw, rounded corners] (start)  {The President selects a rule to be voted on};
+\node[draw, below=of start] (step 1)  {The President notifies the Speaker to hold a voting session on the selected rule};
+\node[draw, below=of step 1] (step 2)  {The Speaker opens ballots for all islands to cast the votes};
+\node[draw, below=of step 2] (step 3)  {The Speaker closes ballots after receiving votes from all islands};
+\node[draw, below=of step 3] (step 4)  {The Speaker counts the votes by calling a voting method/function for winner selection};
+\node[draw, below=of step 4, rounded corners] (end)   {The Speaker publicly declares the result of voting};
+ \draw[->] (start)  -- (step 1);
+ \draw[->] (step 1) -- (step 2);
+ \draw[->] (step 2) -- (step 3);
+ \draw[->] (step 3) -- (step 4);
+ \draw[->] (step 4) -- (end);
+\end{tikzpicture}
+\caption{Voting Protocol for Rules}
+\label{fig:RONRVotingProtocol}
+\end{center}
+\end{figure}
+
+For elections of roles, the sequence of actions of the voting protocol is mostly similar to the above explanation in principle, except for some parameters, such as the motion of the vote which is the role itself (President, or Speaker, or Judge), the facilitator of the election/vote event which depends on what role is being held for election (refer to Chapter 5 IIGO for more details on change of roles and power transfer), and the applicable voting method function to call for election that will produce the result, which is different from the voting method used for rules. Refer to Section~\ref{sec:VotingMethods} for more details on voting methods to be used for elections of roles.
+
+In the initial implementation, it is assumed that all 6 islands have the power to vote at any necessary voting scenario and no sanction or power restriction applied to any island when it comes to the right to vote. However, in the final implementation, some complications or dilemma are applied to, i.e. an/some island(s) could lose their right to vote or not permitted to participate in a voting event due to diplomatic sanction. Refer to Chapter 5 IIGO for details on diplomatic sanction. In this case, the Speaker will check and open the ballots to only eligible islands that have the right to vote at that certain stage, rather than to all islands as mentioned in the first scenario above.
+
+\section{Implementation}
+\label{sec:Implementation}
+
+\subsection{Voting for Rules}
+\label{sec:VotingForRules}
+The implementation of voting for rules from infrastructure point of view (file:\texttt{rulevote.go}) basically follows the sequence of voting protocol as described in Section~\ref{sec:VotingProtocol}. At initialisation, there are two defined structs (collection of data fields) that are used as parameters for functions inside the voting algorithm, such as \texttt{RuleVote} and \texttt{BallotBox}. The \texttt{RuleVote} struct consists of 3 variables, i.e. \texttt{ruleToVote} (string) that contains the rule that has been selected by the President to be voted on, \texttt{islandsToVote} (list of integers) that contains a list of \texttt{ClientID} which indicates all eligible islands that participate in the voting session, and \texttt{ballots} (list of boolean) that contains the vote of each respective eligible islands where it can indicate the vote for in-favour or against the proposed rule. The \texttt{BallotBox} struct consists of 2 integer variables that act as accumulators for the count of each possible vote: \texttt{VotesInFavour} and \texttt{VotesAgainst}.
+
+According to Section~\ref{sec:VotingProtocol}, The Speaker firstly starts a voting session by calling \texttt{SetRule(rule)} function that contains the rule selected by The President to be voted on. Next, the Speaker sets all eligible islands that can participate/have the right to vote in the voting session at that state of the game by using \texttt{SetVotingIslands(clientIDs[])} function. After that, the Speaker opens the ballots to get the votes from all eligible islands by calling \texttt{GatherBallots(clientMap[ClientID])} function. Subsequently, the \texttt{GetBallotBox()} function is called by the Speaker to gather the ballots that already contain the votes counting of those who are in-favour or against the proposed rule. Finally, the votes counting is concluded by comparing the votes of those in-favour vs those against, and the in-favour votes win when the counting is greater than or equal to the against votes counting, as reflected in \texttt{CountVotesMajority()} function. The Speaker then uses this result to declare the result of this voting session in IIGO.
+
+\subsection{Elections}
+\label{subsec:Elections}
+The elections for roles implementation can be seen in the file:\texttt{election.go}. At initialisation, there is a defined struct \texttt{Election} that contains 4 parameters, i.e. \texttt{roleToElect} that indicates which role is being voted on (President, or Speaker, or Judge), \texttt{votingMethod} that indicates the voting method being used for the election to determine the winner selection, \texttt{islandsToVote} that contains a list of \texttt{ClientID} which indicates all eligible islands that participate in the voting session, and \texttt{votes} that is a list that contains the order rank of preference of the candidates for the role from each eligible island who casts the vote.
+
+The election session begins by calling the \texttt{ProposeElection(role,method)} function that depends on which role being voted on and which role has obligation to facilitate the election (refer to Chapter 5 IIGO on Change of Roles and Power Transfer sections), and the selected voting method to be used for this election (refer to Section~\ref{sec:VotingMethods} for details on voting methods and Subsection~\ref{subsec:VotingPseudo} for pseudo-code implementation). The election facilitator then opens ballots to all eligible islands to cast their votes by calling \texttt{OpenBallot(clientIDs[])} function. The \texttt{Vote(clientMap[ClientID])} function gathers all the ballots containing the votes from all eligible islands that are obtained from \texttt{GetVoteForElection(roleToElect)} function returned from each client/island code execution. After that, the election facilitator closes the ballots by using \texttt{CloseBallot()} function and it returns the result of the votes counting using the selected voting method by calling each respective voting method function. This result is used by the election facilitator to declare the winner for the elected role. By default, the voting method for election is Borda Count and the function is called \texttt{bordaCountResult()} where the algorithm follows through what are explained in Section~\ref{sec:VotingMethods} and Subsection~\ref{subsec:VotingPseudo} where the Borda scores will be calculated based on the order rank of preference of the candidates from each ballot. The other voting methods can be used for election and it is selected by the election facilitator.
+
+\subsection{Voting Methods Implementation Pseudo-code}
+\label{subsec:VotingPseudo}
+
+\textbf{Plurality}
+\newline
+Call for Voting inputs (int:IslandID, str:"Aye", "Nay" or "Abstain")\\
+\begin{algorithm}[H]
+\ForEach{$ballot \in ballots $}{
+    \If{$Aye$} {Count for $Aye ++ $}
+    \If{$Nay$} {Count for $Nay ++ $}
+}
+\If{$Aye > Nay$}{\Return the Winner: $Aye$}
+\Else{\Return the Winner: $Nay$}
+\end{algorithm}
+
+\ \newline \ \newline \ \newline
+\textbf{Borda Count}
+\newline
+\begin{algorithm}[H]
+\For{all ballot}{
+    $numNotIn\gets N-ballot.length$\\
+    $shareScore\gets 1+...+numNotIn$\\
+    \For{i from 0 to N-1}{
+    \If{i is in ballots} {$scores[i]\gets scores[i]+N-K+1$ }
+    \Else {$scores[i]\gets scores[i]+shareScore/numsNotIn$ }
+    }
+}
+Sort candidates by Borda scores\\
+\Return the candidate with the highest score
+\end{algorithm}
+
+\ \newline \ \newline \ \newline
+\textbf{Runoff}
+\newline
+\begin{algorithm}[H]
+\For{All $ballot \in ballots $}{
+    Select two candidates with most first-placed votes
+}
+\If{either already has a majority}{
+\Return the majority one}
+\Else{Each voter selects one candidate of the top 2\\
+}
+\Return the candidate with the most votes
+\end{algorithm}
+
+\ \newline \ \newline \ \newline
+\textbf{Instant Runoff}
+\newline
+\begin{algorithm}[H]
+\ForEach{$ballot \in ballots $}{
+\For{i from 0 to N-1}{
+\If{i is first choice}{$scores[i]\gets scores[i]+N-K+1$}
+}
+}
+\If{candidate in ballots $>1$}{
+Remove the candidate with the fewest first
+choice votes from the ballots.\\
+GOTO the top for next round of counting
+}
+\Else{\Return the candidate}
+\end{algorithm} 
+
+\ \newline \ \newline \ \newline
+\textbf{Approval}\\
+\begin{algorithm}[H]
+\ForEach{$ballot \in ballots $}{
+    \For{i from 0 to N-1}{
+    \If{i is in ballot} {$scores[i]\gets scores[i]+1$ }
+    }
+
+}
+Sort candidates by scores\\
+\Return the candidate with highest score
+\end{algorithm}
