@@ -121,6 +121,12 @@ $X$, $Y$ and $Z$ are variables that define....
 ```
 Note that there is no comma before "and" in this case -- as this "and" is connecting the *nouns* and therefore, not the same "and" in FANBOYS which are indicated in point 9. 
 
+11. Use full stops appropriately with commas. If the quote can be conceptually replaced by emphasis/bold text, then the full stop should be outside the quotation marks (see Example 2 below). If the sentence ends within the quote the full stop should be inside the quote (see Example 1 below).
+Example 1:
+According to Byron, "Our burgers are fantastic."
+Example 2:
+ The LaTeX guidelines are "fun".
+
 
 ## Todo:
 Write more guidelines as we progress...
