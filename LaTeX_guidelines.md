@@ -91,8 +91,7 @@ Example:
 \end{itemize}
 ```
 
-7. When you **define** a terminology related to your section, you are advised to use `\begin{definition} ... \end{definition}`. A `definition` theorem-like environment will be defined in the report.
-
+7. When you **define** a terminology related to your section, you are advised to use `\begin{definition} ... \end{definition}`. A `definition` theorem-like environment will be defined in the report
 
 Example:
 ```tex
@@ -100,6 +99,28 @@ Example:
     A \textbf{ballot} is related to each island's \textbf{power} to support or disagree with the rule specified in the vote called by the President. 
 \end{definition}
 ```
+
+8. Write "i.e. ..... e.g. ..", NOT "i.e., ..... e.g., ..". I personally think comma is very unnecessary for these abbreviations.
+
+9. Use comma appropriately! A common mistake is to forget using comma before "FANBOYS" which are:
+- for
+- and
+- nor
+- but
+- or
+- yet
+- so
+
+Note that "FANBOYS" are used to connect *clauses*. 
+
+10. Do NOT use comma for the case of connecting words.
+
+Example:
+```tex
+$X$, $Y$ and $Z$ are variables that define....
+```
+Note that there is no comma before "and" in this case -- as this "and" is connecting the *nouns* and therefore, not the same "and" in FANBOYS which are indicated in point 9. 
+
 
 ## Todo:
 Write more guidelines as we progress...
