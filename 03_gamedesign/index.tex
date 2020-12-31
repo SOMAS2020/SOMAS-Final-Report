@@ -8,9 +8,9 @@ The Game is structured as series of Seasons and turns, which concludes once all 
 
 \begin{figure}[!htb]
     \begin{itemize}
-        \item \textbf{Game Start} is defined as the beginning of a simulation. The parameters (e.g. the initial distribution of resources, the initial amount of resources in the common pool, whether islands know when and where the disaster will occur, cost of living...) passed to any given simulation should be modifiable so that experiments can be run on different setups.
-        \item A \textbf{Season} is defined as a series of turns and concludes with a disaster. The Seasons are a way of tracking how many disasters the islands survive and formalise the flow of the game.
-        \item A \textbf{turn} is defined as a series of exchanges between agents in which islands receive a resource update, attend inter-island organisations, and lastly, submit \textbf{actions} to conclude their turns. A turn is equivalent to a day in the original specification from Pitt and is a necessary component of game structure to satisfy the iterative \textit{requirement} from Pitt on how the game is played.
+        \item \textbf{Game Start} is defined as the beginning of a simulation. Each simulation can be configured using a number of parameters, including but not limited to the cost of living, probability of a disaster, and initial resources in the common pool.
+        \item A \textbf{turn} is defined as a series of exchanges between agents in which islands receive resource updates, attend inter-island organisation meetings, and interact with one another and the game state through \textbf{actions}. A turn can be broken down as follows:
+            % this enumerate list still needs review and editing - may require more detail and substantial refactoring
             \begin{enumerate}
                 \item Resource Updates for each island and on global game state
                 \item IIFO makes recommendations about the optimal (and fairest) contributions this turn to mitigate common risk dilemma 
@@ -26,11 +26,12 @@ The Game is structured as series of Seasons and turns, which concludes once all 
                         \item Check if any islands are \textbf{dead}
                     \end{itemize}
             \end{enumerate}        
-        \item The \textbf{game state} is the set of information an island receives at the start of each turn. This includes, but is not limited to, the resources it was allocated the previous turn, the amount of resources left in the common pool and the set of rules for the turn (including any rules that were modified the previous turn). It is important to note that each island's game state is private, so no other island gets another island's resource allocation. 
-        \item An \textbf{action} is a decision an island can make or that is made by any organisational body that updates the game state. This includes things such as taking resources from the common pool (because this would update what is in the common pool in the next turn), donating resources to the common pool, announcing a rule change in the IIGO. While some actions are taken during the turn and some at the end of the turn before the start of the next day, actions are the way in which islands interact with the game. For example, in voting, which takes place in the IIGO, if the committee decides to change a rule or add a new rule, the state of the rules of the game update for the next turn (not in the middle of the turn). This also accurately models the real world in which it takes time for new rules to come into effect both in real governments and distributed software systems. Submitting a vote is also an action, however this updates the vote count immediately for the vote to complete and does not require one turn to update such as a rule change. The key message here is that major updates to the game state happen at the end of a turn and the game is played as a series of turns and Seasons to remain compliant with the original project specification. As a proposition/suggestion, the end of turn actions could include the actual resources allocated to foraging/taken requested from the common pool and more. Actions are related to the environment and core decisions of the game, while the committees such as IIFO and IITO are a place for the exchange of information (see section on IITO/IIFO).
-        \item A \textbf{critical} island is defined as an island whose resources are below the minimum threshold. When this occurs, an island is allowed a grace period during which it is expected to request gifts from other islands in order to reach the minimum amount of resources required to stay in the game.
-        \item A \textbf{death} occurs when an island has been in a \textbf{critical} state for N turns. The exact number of turns affects the difficulty of the game so it was investigated and is discussed in simulations and results section. Once an island is dead, it can no longer participate in the simulation. 
-        \item \textbf{Game over} occurs when all islands have died. 
+        \item A \textbf{Season} is defined as a series of turns and concludes with a disaster. Seasons formalise the flow of the game and provide a method to track the number of disasters the islands survive.
+        \item The \textbf{Game State} is the set of information an island receives at the start of each turn. This includes, but is not limited to, the resources it was allocated the previous turn, the amount of resources left in the common pool and the set of rules for the turn (including any rules that were modified the previous turn). It is important to note that each island's game state is private, so no other island gets another island's resource allocation. 
+        \item An \textbf{Action} is a decision an island can make or that is made by any Inter-Island Organisation that updates the game state. Actions can be made at different stages within a turn both within Inter Island Organisations and at the end of a turn. This includes but is not limited to taking resources from or donating resources to from the common pool, rule changes in the IIGO, and gift requests or acceptances. 
+        \item A \textbf{Critical} island is defined as an island whose resources are below the minimum threshold. When this occurs, an island is allowed a grace period during which it is expected to request gifts from other islands in order to reach the minimum amount of resources required to stay in the game.
+        \item A \textbf{Death} occurs when an island was in a \textbf{critical} state for $N$ turns. The exact number of turns affects the difficulty of the game so it was investigated and is discussed in simulations and results section. Once an island is dead, it can no longer participate in the simulation.
+        \item \textbf{Game Over} is defined as the end of the simulation and occurs when all islands have died or the simulation is completed - whichever occurs first.
     \end{itemize}
     \caption{Game Design Terminology}
     \label{fig:gamedesign-terminology}
@@ -40,12 +41,7 @@ Figure \ref{fig:gamedesign-flow} depicts a high level diagram of the general flo
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics{gamespec-flow.png}
+    \includegraphics{images/gamespec-flow.png}
     \caption{High Level Game Specification Flow Diagram}
     \label{fig:gamedesign-flow}
 \end{figure}
-
-%update figure
-%change when updates occur
-
-\end{document}
