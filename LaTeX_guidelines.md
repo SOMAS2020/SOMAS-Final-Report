@@ -1,5 +1,5 @@
 # LaTeX Guidelines for the Final Report
-Version on Dec 24, 2020.
+Version on Dec 31, 2020.
 
 Author: Ezgi.
 
@@ -102,7 +102,7 @@ Example:
 
 8. Write "i.e. ..... e.g. ..", NOT "i.e., ..... e.g., ..". I personally think comma is very unnecessary for these abbreviations.
 
-9. Use comma appropriately! A common mistake is to forget using comma before "FANBOYS" which are:
+9. Use comma appropriately! A common mistake is to *forget* using comma before "FANBOYS" which are:
 - for
 - and
 - nor
@@ -113,7 +113,7 @@ Example:
 
 Note that "FANBOYS" are used to connect *clauses*. 
 
-10. Do NOT use comma for the case of connecting words.
+10. Do NOT use comma after "and" for the case of connecting words.
 
 Example:
 ```tex
