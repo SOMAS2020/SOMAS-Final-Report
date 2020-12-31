@@ -113,7 +113,7 @@ Example:
 
 Note that "FANBOYS" are used to connect *clauses*. 
 
-10. Do NOT use comma after "and" for the case of connecting words.
+10. Do NOT use comma before "and" for the case of connecting words.
 
 Example:
 ```tex
