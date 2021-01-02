@@ -2,7 +2,7 @@
 \section{Foraging}
 \subsection{Foraging Background}
 
-Foraging is a base requirement that is needed as it is a method of obtaining more resources from the starting amount. Currently in the MVP foraging is based on the concept of inputting resources to get a return.\\
+Foraging is a base requirement that is needed as it is a method of obtaining more resources from the starting amount.Foraging is based on the concept of inputting resources to get a return.\\
 
 \subsubsection{Underlying concept}
 The goal of foraging in this “game” is to introduce a certain dilemma to the agents to further understand the behaviours of multiple (6) intelligent agents working together to reach a goal with different personal goals. By having 2 methods of foraging it introduces the concept of decision making between the islands allowing for strategic interactions to maximise personal benefits whilst still reaching the overarching goal of survival.\\  
@@ -20,46 +20,11 @@ A few changes have to be made to make this dilemma viable for our multi-agent sy
 \end{enumerate}
 
 \newpage
-\subsection{MVP Functions within Foraging}
+\subsection{Functions within Foraging}
 \subsubsection{Inputs, outputs and Parameters}
 
-This is an element implemented in the code base for the MVP. It determines the method of foraging, which is either deer hunting being payoff focused or fishing being risk aversion.\\
+This is an element implemented in the code base. It determines the method of foraging, which is either deer hunting being payoff focused or fishing being risk aversion.\\
 
-\textbf{MVP }Parameter:
-
-\begin{enumerate}
-\item Probability catching Deer $\mathrm{\to}$ float64: \textbf{D}
-
-\item Weight of the Deer $\mathrm{\to}$ float64:\textbf{W}
-
-\item Deer tier decay value $\mathrm{\to}$ float64:\textbf{decay }
-
-\item Maximum deer per hunt $\mathrm{\to}$ uint:\textbf{n}
-
-\item Probability of catching Fish $\mathrm{\to}$ float64:\textbf{F}
-
-\item Deer tier decay value $\mathrm{\to}$ float64\textbf{:decay}
-
-\item Maximum deer per hunt $\mathrm{\to}$ uint:\textbf{n}
-\end{enumerate}
-
-\textbf{Input:}
-
-\begin{enumerate}
-\item \textbf{ }Resources allocated to foraging $\mathrm{\to}$ \textbf{d.ParticipantsContributions }and \textbf{f.ParticipantsContributions}
-
-\item Number of islands collaborating $\mathrm{\to}$ \textbf{d.Participants} and \textbf{f.Participants}
-
-\item Where \textbf{d.} is deer hunting and \textbf{f. }is fishing
-\end{enumerate}
-
-\textbf{Output:}
-
-\begin{enumerate}
-\item \textbf{ }Resource (payoff) return amount $\mathrm{\to}$ float64: \textbf{DtotalReturn}
-
-\item Fishing return amount $\mathrm{\to}$ float64: \textbf{FtotalReturn}
-\end{enumerate}
 
 \subsubsection{Primary Code Function}
 
@@ -67,16 +32,15 @@ This is an element implemented in the code base for the MVP. It determines the m
 \begin{center}
 \begin{tabular}{|p{1.5in}|p{1.5in}|p{1.5in}|} \hline
 \textbf{Functions} & \textbf{Inputs} & \textbf{Outputs} \\ \hline
-\textit{TotalInput} & -Island Number\newline -Foraging amount & -Total foraging amount \\ \hline
-\textit{deerUtilityTier} & -Total foraging amount\newline -Maximum deer per hunt\newline -Decay value & -Tier (according to input resources) \\ \hline
-\textit{deerReturn} & -Bernoulli's probability\newline -Exponential decay & -Weight of the deer (0 if deer was not caught) \\ \hline
-\textit{Hunt} & -Tier\newline -Weight of deer & -Utility (cumulative sum of the weight of the deers) \\ \hline
+\texttt{TotalInput} & -Island Number\newline -Foraging amount & -Total foraging amount \\ \hline
+\texttt{deerUtilityTier} & -Total foraging amount\newline -Maximum deer per hunt\newline -Decay value & -Tier (according to input resources) \\ \hline
+\texttt{deerReturn} & -Bernoulli's probability\newline -Exponential decay & -Weight of the deer (0 if deer was not caught) \\ \hline
+\texttt{Hunt} & -Tier\newline -Weight of deer & -Utility (cumulative sum of the weight of the deers) \\ \hline
 \end{tabular}
 \caption{\label{tab:table-name}Foraging Deer Hunt Method's main functions}
 \end{center}
 \end{table}
 
-\newpage
 \subsubsection{Tier System}
 
 The deer hunting and fishing is divided into tiers (the number of fish that can be caught in a given day) which depends on the total input resources. Where the “zero” tier represents the cost of getting to the hunting location.\\ 
@@ -112,7 +76,7 @@ The tier system is shown above, where n stands for the tiers, with decay costs (
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.6\textwidth]{04_environment/Images/Foraging Tier System.PNG}
+    \includegraphics[width=0.9\textwidth]{04_environment/Images/Foraging Tier System.PNG}
     \caption{Foraging Tier System}
     \label{Images:Foraging Tier System}
 \end{figure}
@@ -121,6 +85,7 @@ As the tiers increase the cost per animal decreases but the total cost increases
 
 Fishing has similar functions with the key difference being the Tiers start at 1 and Normal distribution. \\
 
+\newpage
 \subsection{Examples Distributions}
 \subsubsection{Example of the distribution for foraging return (Deer hunting - payoff dominant)}
 
@@ -133,7 +98,7 @@ Fishing has similar functions with the key difference being the Tiers start at 1
 
 To increase the risk we have used a Bernoulli Random Variable (D) that makes it possible for the hunt to not return any resources. Whilst the Exponential Decay (W) is to disincentive too much resources being placed in hunting and hoping for a high return. However this all comes with the benefit of significantly higher (2x) returns than fishing.\\ 
 
-The above graph represents the return utility which represents the return multiplier of the foraging. The average \textbf{expected mean} return across 1000 iterations is shown by the colourful lines which is close to the \textbd{real mean}. \\
+The above graph represents the return utility which represents the return multiplier of the foraging. The average \textbf{expected mean} return across 1000 iterations is shown by the colourful lines which is close to the \textbd{real mean}.\\
 
 \newpage
 \subsubsection{Fish hunting - risk aversion}
@@ -150,7 +115,7 @@ Fishing is similar to Deer hunting, except that it uses only a Normal Distributi
 As seen in the graphs the return for the deer is almost double that of the fish return whilst the fish return is much easier to obtain due to the lower cost of catching fish. \\
 
 \newpage
-\subsection{Solution concepts}
+\subsection{Solution Concepts}
 \subsubsection{Dominant Strategy}
 
 In our implementation there is no dominant strategy as picking deer hunt when other players switch to fishing could lead to significantly worse returns due to insufficient resources. Whilst picking fish hunt when enough resources are invested in deer hunting will net you a worse return than if you went deer hunting.\\
@@ -174,17 +139,17 @@ At some point all players will be in a position where changing foraging methods 
 
 It is possible for these islands to find the social welfare maximum in this foraging function with enough time. The islands could identify the exact amount of resources needed, for both fishing and deer hunting, to achieve the best return according to the maximum number of animals. Thus by cooperating who goes where and spends how much they are able to maximize their returns without spending more resources than necessary.\\
 
-\subsection{Post-MVP Extended Work}
+\subsection{Extended Work}
 
-For the post-MVP implementations, our additions focus on further exploring the dynamics of our agents and allowing for a more complex decision-making interaction between clients and the environment. Some of these design ideas were implemented in the post-MVP self-organising multi-agent system and others are expressed for the sake of completeness and future work recommendations.\\
+For the future implementations, our additions focus on further exploring the dynamics of our agents and allowing for a more complex decision-making interaction between clients and the environment. Some of these design ideas were later implemented in self-organising multi-agent system and others are expressed for the sake of completeness and future work recommendations.\\
 
 Some changes have been made to make foraging more volatile and unpredictable. These will add to the complexity of the system, allowing the teams to further evaluate the clients’ performance on observing and using learned knowledge to take action.\\
 
 \subsubsection{Incorporated Changes: Population density}
 
-Introducing a model that controls the population density of deer allows us to increase the complexity of the foraging function. In short, the deer hunting capacity decreases with decreasing population and increases with an increasing population. This will then influence the maximum deer per hunt parameter(n), which in turn results in a more complex return calculation function (\textbf{DtotalReturn}), which would make it harder for agents to figure out forage tier boundaries to optimise their strategies.\\
+Introducing a model that controls the population density of deer allows us to increase the complexity of the foraging function. In short, the deer hunting capacity decreases with decreasing population and increases with an increasing population. This will then influence the maximum deer per hunt parameter(n), which in turn results in a more complex return calculation function (\texttt{\textbf{DtotalReturn}}), which would make it harder for agents to figure out forage tier boundaries to optimise their strategies.\\
 
-The population change can be dynamic depending on various environmental factors, fetched from the rest of the system. For example, a Disaster could supposedly cause the population density of deer to halve, making it harder to forage and therefore, causing lower returns. For the post-MVP implementation, the team uses a single species population model and more specifically logistic modelling for the deer and fish population. The model can be described in the equation below. \\
+The population change can be dynamic depending on various environmental factors, fetched from the rest of the system. For example, a Disaster could supposedly cause the population density of deer to halve, making it harder to forage and therefore, causing lower returns. For future implementations, the team uses a single species population model and more specifically logistic modelling for the deer and fish population. The model can be described in the equation below.\\
 
 \begin{equation}
 \frac{\mathrm{d} P}{\mathrm{~d} t}=k(N-P)
@@ -211,9 +176,46 @@ Modelling the population (or linking it to other environmental elements) allows 
 
 \subsubsection{ Incorporated Changes: Method of resource allocation}
 
-Lastly, in the post-MVP implementation, a parameter can be set that allows either an equal split of returns after foraging no matter the input, or a proportional split that is dependent on the amount of resources inputted by each island. Both of these implementations work in accordance to the previous specification. Such change will allow us to observe the concept of free-riding further, looking at how greedy islands behave in the case of uniform resource returns. Will the islands seek to minimise inputs and benefit from the more generous islands, even at the cost of being allocated a lower tier? Will they input just enough to maximise the tier they are foraging in? Or, will they observe other island’s previous contributions and make a decision based on that? These are some of the questions we can explore using this post-MVP change. \\
+Lastly, in future implementations, a parameter can be set that allows either an equal split of returns after foraging no matter the input, or a proportional split that is dependent on the amount of resources inputted by each island. Both of these implementations work in accordance to the previous specification. Such change will allow us to observe the concept of free-riding further, looking at how greedy islands behave in the case of uniform resource returns. Will the islands seek to minimise inputs and benefit from the more generous islands, even at the cost of being allocated a lower tier? Will they input just enough to maximise the tier they are foraging in? Or, will they observe other island’s previous contributions and make a decision based on that? These are some of the questions we can later explore using this future change. \\
 
 \subsection{Future Work Concepts}
+
+For the Future implementations, our additions focus on further exploring the dynamics of our agents and allowing for a more complex decision-making interaction between clients and the environment. Some of these design ideas were later implemented in self-organising multi-agent system and others are expressed for the sake of completeness and future work recommendations.\\
+
+Some changes have been made to make foraging more volatile and unpredictable. These will add to the complexity of the system, allowing the teams to further evaluate the clients’ performance on observing and using learned knowledge to take action.
+
+\subsubsection{Incorporated Changes: Population density}
+
+Introducing a model that controls the population density of deer allows us to increase the complexity of the foraging function. In short, the deer hunting capacity decreases with decreasing population and increases with an increasing population. This will then influence the maximum deer per hunt parameter(n), which in turn results in a more complex return calculation function (\texttt{\textbf{DtotalReturn}}), which would make it harder for agents to figure out forage tier boundaries to optimise their strategies.\\
+
+The population change can be dynamic depending on various environmental factors, fetched from the rest of the system. For example, a Disaster could supposedly cause the population density of deer to halve, making it harder to forage and therefore, causing lower returns. For future implementations, the team uses a single species population model and more specifically logistic modelling for the deer and fish population. The model can be described in the equation below.\\
+
+\begin{equation}
+\frac{\mathrm{d} P}{\mathrm{~d} t}=k(N-P)
+\end{equation}
+
+\begin{itemize}
+        \item “P” is the total Population \item “N” is the maximum deer/fish population (“carrying capacity” formally)
+        \item “k” is the growth coefficient
+        \item “t” is time
+    \end{itemize}
+
+In our implementation \textbf{“k”} and \textbf{“N”} are constants but it would be interesting to see what would happen if we were to increase the growth coefficient, causing a population growth and observing the islands’ dynamics. Will they keep on “investing” higher resources each turn, taking advantage of the deer/fish abundance, or will they stick to their original, safe and static strategy?\\
+
+Below, we can see a simulation of the implemented logistic model, with a growth coefficient of 0.2 and \textbf{“N”} of 8. It can be seen that overtime there is an unpredictable pattern to population changes, which would be interesting to see affecting the tier system and in extend, the deer/fish foraging strategies of the agents.\\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{04_environment/Images/Deer population over time.PNG}
+    \caption{Deer population over time (turns) under Logistic modelling with a growth coefficient of 0.2.}
+    \label{Images:Deer population over time}
+\end{figure}
+
+Modelling the population (or linking it to other environmental elements) allows us to make sure that the system’s dynamics are varying, making it harder for islands to settle onto a single foraging method because it always results in better returns. Pareto optimality is therefore harder to achieve and thus maximising social welfare is trickier, requiring agents to make more informed decisions, recognizing possible patterns. Of course, that would be an easier task for the islands, if they had knowledge on what is affecting the population (i.e. disasters), whereas a logistic model function might be more abstract in the eyes of our agents, requiring more processing. \\
+
+\subsubsection{ Incorporated Changes: Method of resource allocation}
+
+Lastly, in future implementations, a parameter can be set that allows either an equal split of returns after foraging no matter the input, or a proportional split that is dependent on the amount of resources inputted by each island. Both of these implementations work in accordance to the previous specification. Such change will allow us to observe the concept of free-riding further, looking at how greedy islands behave in the case of uniform resource returns. Will the islands seek to minimise inputs and benefit from the more generous islands, even at the cost of being allocated a lower tier? Will they input just enough to maximise the tier they are foraging in? Or, will they observe other island’s previous contributions and make a decision based on that? These are some of the questions we can later explore using this future change. \\
 
 Further work could be done to make sure that there is enough complexity to explore the dynamics of our agents. Due to the project’s time constraints, some interesting ideas were not implemented but were thoroughly examined during the design process.\\
 
@@ -227,7 +229,6 @@ Finally, more foraging options could be added in future implementations. For exa
 
 All of the aforementioned behaviours are of course influenced by island tactics and therefore, an island programmed to be greedy will not cease to be greedy no matter how the surrounding islands’ behaviours change, unless the greedy island can adapt. Therefore, conclusions drawn on specific foraging methods, and how agents react with them, need to take this into account.\\
 
-\newpage
 \section{Disaster}
 \subsection{Disaster Background}
 
@@ -247,17 +248,17 @@ The closest an island from the eye of the storm, the larger the severity on that
 \end{figure}
 
 \newpage
-\subsection{MVP Functions within the Disaster}
+\subsection{Functions within the Disaster}
 It is worth mentioning that the island's geography in infrastructure is the combination of the island number and the island’s fixed location in the archipelago.\\
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|p{1.1in}|p{1.1in}|p{1.1in}|p{1.1in}|} \hline
 \textbf{Functions} & \textbf{Description} & \textbf{Inputs} & \textbf{Outputs} \\ \hline
-\textit{Bernouilli Distribution (pdfGlobal)} & Whether a disaster is going to occur & -The probability of a disaster occurring,\newline -The Global probability variable & Determines the likelihood of a disaster occurring \\ \hline
-\textit{PdfMag} & Exponential distribution & -The spatial PDF & Determine the disaster magnitude \\ \hline
-\textit{Epix,Epi Y} & Spatial probability distribution function & -The spatial PDF\newline -Disaster Magnitude & Determines the location of the disaster epicentre \\ \hline
-\textit{DisasterEffect} & Island's Proximity distance to the eye of the storm & -Island geography\newline -Eye of the storm location & Determine the islands damage \\ \hline
+\textit{Bernouilli Distribution \texttt{(pdfGlobal)}} & Whether a disaster is going to occur & -The probability of a disaster occurring,\newline -The Global probability variable & Determines the likelihood of a disaster occurring \\ \hline
+\texttt{PdfMag} & Exponential distribution & -The spatial PDF & Determine the disaster magnitude \\ \hline
+\texttt{Epix,EpiY} & Spatial probability distribution function & -The spatial PDF\newline -Disaster Magnitude & Determines the location of the disaster epicentre \\ \hline
+\texttt{DisasterEffect} & Island's Proximity distance to the eye of the storm & -Island geography\newline -Eye of the storm location & Determine the islands damage \\ \hline
 \end{tabular}
 \caption{\label{tab:table-name}Disaster's main functions}
 \end{center}
@@ -280,7 +281,7 @@ The image above illustrates the output of the disaster, it first shows the magni
 
 \subsection{Future works Concepts}
 
-For the MVP, the disaster is a random function, meaning that it is possible to predict it with the current game.\\
+The disaster is a random function, meaning that it is possible to predict it with the current game.\\
 
 There are multiple future works ideas that would be developed in the design aspect such as; a deterministic disaster which would be  designed as a straight line that accumulates during the days, once the threshold has been met then the disaster would occur. Another deterministic disaster idea would be to link the disaster’s magnitude to time. Thus, agents will have to learn from past disaster occurrences, creating a memory. Agents will start learning from past disasters and will be able to forecast the next one. Therefore, the agents will be able to forecast that if a disaster did not surface for a long period of time, then the magnitude of the next disaster will be much larger than the previous one.\\
 
@@ -315,7 +316,7 @@ And the Common Pool is responsible for two more actions:
 \end{itemize}
 
 \newpage
-\subsection{MVP functions within the Common pool}
+\subsection{functions within the Common pool}
 
 For each of these action a relevant function has been implemented as follows:\\
 
@@ -324,20 +325,20 @@ For each of these action a relevant function has been implemented as follows:\\
 \begin{tabular}
 {|p{1.1in}|p{1.1in}|p{1.1in}|p{1.1in}|} \hline
 \textbf{Name} & \textbf{Description} & \textbf{Input} & \textbf{Outcome} \\ \hline
-\textit{islandDistribute} & Distribute Resources from Common Pool to Island upon Request & -Requested Amount of Resources\newline -Island Name & Resources subtracted from CP and added to island \\ \hline
-\textit{islandContribute} & Contribute Resources from Island to Common Pool & -Donated Amount of Resources\newline -Island Name & Resources subtracted from Island and added to CP \\ \hline
-\textit{DisasterMitigate} & Mitigate the Disaster with the Amount of Resources in the Common Pool & - Effect of Disaster to each island\newline - Proportional effect of Disaster to each island (magnitude of disaster divided by the distance of the island from epicenter) & Resources in CP were exploited for the mitigation of the disaster and remaining effect has to be mitigated by each island \\ \hline
-\textit{islandDeplete} & Deplete Islands after the disaster (with the amount of disaster that couldn't be mitigated by CP) & -Remaining effect for each Island\newline -List of Islands & The remaining proportional effect of the disaster to each island is causing the depletion of resources \\ \hline
+\texttt{islandDistribute} & Distribute Resources from Common Pool to Island upon Request & -Requested Amount of Resources\newline -Island Name & Resources subtracted from CP and added to island \\ \hline
+\texttt{islandContribute} & Contribute Resources from Island to Common Pool & -Donated Amount of Resources\newline -Island Name & Resources subtracted from Island and added to CP \\ \hline
+\texttt{DisasterMitigate} & Mitigate the Disaster with the Amount of Resources in the Common Pool & - Effect of Disaster to each island\newline - Proportional effect of Disaster to each island (magnitude of disaster divided by the distance of the island from epicenter) & Resources in CP were exploited for the mitigation of the disaster and remaining effect has to be mitigated by each island \\ \hline
+\texttt{islandDeplete} & Deplete Islands after the disaster (with the amount of disaster that couldn't be mitigated by CP) & -Remaining effect for each Island\newline -List of Islands & The remaining proportional effect of the disaster to each island is causing the depletion of resources \\ \hline
 \end{tabular}
 \caption{\label{tab:table-name}Common Pool's main functions}
 \end{center}
 \end{table}
 
-The common pool has been computed as part of the infrastructure: with a threshold that is the amount of resources to hopefully help to completely mitigate the disaster. If the threshold is met, the damage from the disaster on the common pool and islands will be half the actual amount. This incentivises islands to contribute to the common pool and reflect the reality that, if there is enough preparation for the disaster, the damage will be much less compared to no preparation. In the MVP, the threshold is a fixed value.\\
+The common pool has been computed as part of the infrastructure: with a threshold that is the amount of resources to hopefully help to completely mitigate the disaster. If the threshold is met, the damage from the disaster on the common pool and islands will be half the actual amount. This incentivises islands to contribute to the common pool and reflect the reality that, if there is enough preparation for the disaster, the damage will be much less compared to no preparation. Furthermore, it is worth mentioning that the threshold is a fixed value.\\
 
-Another important input to the implementation is the magnitude of the disaster’s damage to each island. As shown in Figure 1.8 , the disaster’s magnitude is 3.458. However, the disaster’s effect on individual islands do not add up to 3.458 because the storm’s epicenter is further away from the islands. This aspect creates a more realistic scenario to the game. From the islands’ individual damage, proportional effects are calculated to determine which island has been hit harder out of the 6 islands. The summation of these proportional effects is equal to 100\%, which is the total effective damage. \\
+Another important input to the implementation is the magnitude of the disaster’s damage to each island. As shown in Figure 1.9 , the disaster’s magnitude is 3.458. However, the disaster’s effect on individual islands do not add up to 3.458 because the storm’s epicenter is further away from the islands. This aspect creates a more realistic scenario to the game. From the islands’ individual damage, proportional effects are calculated to determine which island has been hit harder out of the 6 islands. The summation of these proportional effects is equal to 100\%, which is the total effective damage. \\
 
-If the common pool has enough resources to fully mitigate the disaster, the process is very easy. However, in the unfortunate events, the common pool resources will be used to mitigate each island's damage according to their proportional effect i.e., if an island is hit harder, it will receive more help from the common pool. This is also visualized in Figure 1.8, as island 4 withstands most damage from the storm, the common pool gave island 4 most help with 252.47 resources (“common pool mitigated” column). The updated damage value shows the leftover damage of the disaster that the common pool was not able to mitigate. These leftover damage will be used to further deplete the island's private pool of resources. If there are enough resources in the common pool totally mitigate the disaster then the update damage values will be 0.\\
+If the common pool has enough resources to fully mitigate the disaster, the process is very easy. However, in the unfortunate events, the common pool resources will be used to mitigate each island's damage according to their proportional effect i.e., if an island is hit harder, it will receive more help from the common pool. This is also visualized in Figure 1.9, as island 4 withstands most damage from the storm, the common pool gave island 4 most help with 252.47 resources (“common pool mitigated” column). The updated damage value shows the leftover damage of the disaster that the common pool was not able to mitigate. These leftover damage will be used to further deplete the island's private pool of resources. If there are enough resources in the common pool totally mitigate the disaster then the update damage values will be 0.\\
 
 \begin{figure}[!htb]
     \centering
@@ -346,7 +347,7 @@ If the common pool has enough resources to fully mitigate the disaster, the proc
     \label{Images:Common Pool infrastructure outcome}
 \end{figure}
 
-For the MVP, the common pool threshold is a fixed value and known to islands. In the post-MVP, the functionality of making the Threshold unknown to the islands would be added. \\
+The common pool threshold is a fixed value and known to islands. later, the functionality of making the Threshold unknown to the islands would be added. \\
 
 The common pool resources will be given to each island based on the severity of the damages.\\
 
@@ -358,7 +359,7 @@ The following example can briefly explain this dilemma:\\
 
 If the epicentre of disaster is known to the islands and happens to coincide with the location of Island 1, then Island 4 might not contribute at all to the CP since it will not be affected by the disaster. Moreover, Islands 3 and 5 that will not be severely hit might contribute a small amount to the CP or even zero amount (free riding case). Since the rest of the islands might contribute to the CP, then Islands 3 and 5 will be profited by the contribution of others.\\
 
-We wanted to highlight the importance of prevention and incentivise islands to contribute to the CP, thus if the amount of resources in the common pool exceeds the threshold when the disaster happens, then the “power” of disaster towards the islands and common pool will be decreased. It makes sense in real life, as more preparation will result in less damage. For the MVP, the actual damage of disaster is decreased by half, but this can vary in the post-MVP.\\
+We wanted to highlight the importance of prevention and incentivise islands to contribute to the Common Pool, thus if the amount of resources in the common pool exceeds the threshold when the disaster happens, then the “power” of disaster towards the islands and common pool will be decreased. It makes sense in real life, as more preparation will result in less damage. The actual damage of disaster is decreased by half, but this can vary later.\\
 
 \subsection{Example distribution}
 This can be described by the examples in table X, which shows 4 possible scenario:\\ 
