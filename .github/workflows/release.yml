@@ -19,9 +19,10 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA7: $(echo ${GITHUB_SHA} | cut -c1-8)
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: $SHA7
+          release_name: $SHA7
           draft: false
           prerelease: false
       - name: Upload Release Asset
