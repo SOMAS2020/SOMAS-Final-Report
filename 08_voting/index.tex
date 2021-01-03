@@ -1,1 +1,110 @@
 \chapter{Voting}
+\section{Voting Scenarios}
+\label{sec:VotingScenarios}
+
+Within the context of the coursework, robust voting systems were designed to determine the outcome of collective actions (e.g. elections for legislative, executive and judicial branches in IIGO).
+When voting is called in the IIGO, the President, Speaker, Judge and the islands in the archipelago (i.e. the \emph{Voters}, assuming that no diplomatic sanction is in place) will be empowered to proceed with the following series of actions:
+\begin{itemize}
+    \item The President will be eligible to select a rule for the archipelago to vote for.
+    \item The Speaker will be eligible to take charge of enabling the voting procedure by receiving, counting ballots and ultimately, declaring the winner.
+    \item The islands in the archipelago (i.e. Voters) will be eligible to vote by submitting their ballots\footnote{This is based on the assumption that no diplomatic sanctions are in place for any islands.}.
+\end{itemize}
+
+In an IIGO session, the voting action is needed to decide the next President, Speaker, Judge and also to decide whether or not to adapt a new rule as well as to disable an active one.
+
+\textbf{Elections of IIGO roles:} As per the IIGO specification, the elections of roles will be conducted according to the accountability cycle (see Section XX): The Judge can initiate the transfer-of-power for the Speaker; the President can initiate the transfer-of-power for the Judge; the Speaker can initiate the transfer-of-power for the President. To prevent multiple-role enactment of the same island, the island that has been selected for a role will be removed from the candidate list for other roles in the current turn\footnote{Note that this assumes that the following rule is in place: The President, Speaker and Judge are all different islands.}. Depending on the sequence of the elections called, the candidates for three roles will consist of maximally six, five, and four islands accordingly. The ballots from the Voters will be in the format of preference lists which rank all candidates in the desired order.
+
+\textbf{Changes of rules:} The President has the power to select a rule from the \emph{rule proposal list} to be voted by the Voters. The Speaker will host the voting for this rule and will be responsible for counting the votes in order to declare the result. The votes from the Voters can only be of the following types: \textbf{Aye} (namely agree with the rule change), \textbf{Nay} (namely disagree with the rule change) or \textbf{Abstain}.
+
+
+\section{Voting Methods}
+\label{sec:VotingMethods}
+
+\begin{table}[H]
+\caption{Available voting methods for each voting scenario}\label{table:votingmethod}
+\begin{center}
+\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|  }
+ \hline
+ Voting Methods   & Elections of Roles & Changes of Rules   \\
+ \hline
+ Plurality   &     & \checkmark     \\
+ \hline
+ Borda Count &  \checkmark   &      \\
+ \hline
+ Runoff      &  \checkmark    &        \\
+ \hline
+ Instant Runoff    & \checkmark  &     \\
+ \hline
+ Approval  &  \checkmark    &    \\
+ 
+ \hline
+\end{tabular}    
+\end{center}
+\end{table}
+
+Table \ref{table:votingmethod} indicates the available voting method choices for each voting scenario considered in the coursework.
+
+\textbf{Plurality} will select the relative majority choices as the collective decision. The Plurality voting method will be used to decide whether a change of rule goes into effect in an IIGO session. When the number of valid ballots (i.e. abstention excluded) is odd, the Plurality method can determine the winner without tied results. Otherwise, the solution to tied results is regimented with the assumption that the proposer of the voting in such events will vote for "agree". Thus, the proposal will be approved if the number of "agree" votes is more than the number of "disagree" votes. 
+
+\textbf{Borda Count} method will allow Voters to rank their preference instead of choosing \emph{only} one option. The order of choices in the preference list determines the Borda points regarding each option. Adding such Borda points from all votes produces the Borda score for each candidate. Thus, the candidate with the highest Borda score will be the winner.
+
+\textbf{Runoff} (also known as the two-round system) is a voting method that counts the ballots for two rounds. Voter islands will rank their preference of candidates and submit the preference lists as their ballots. In the first round, candidates with the top most and second most first-place votes are chosen among all candidates. If one of them obtains a majority, the Runoff method can conclude this candidate to be the winner. Otherwise, the second round will proceed where the ballots will be recounted by eliminating the candidates other than the top two choices. Subsequently, the candidate with the most votes between the top two candidates will be the winner.
+
+\textbf{Instant Runoff} is a voting method used in elections for a single seat, that consist of more than two candidates.
+Individual voters rank their preference of candidates. The candidate who gets the least number of first-place is eliminated, and this step is repeated until only one candidate remains.
+
+\textbf{Approval} is a voting method for a single winner in which each voter selects a subset of candidates. Approval will be used for the elections of roles where each voter picks a group of candidates, and the most named or approved candidate wins.
+
+In case of a \textbf{tied election}, three possible rules can eliminate one or more candidates who get the same number of votes:
+\begin{itemize}
+    \item The Condorcet method is one of the voting methods which selects the candidate that dominates other candidates in terms of majority relation which ranks the candidates according to one-to-one comparisons. In other words, the Condorcet winner is the candidate that wins a majority in every one-to-one comparison against other candidates. However, the Condorcet method is not guaranteed to work when preference lists form a cycle, which is known as the Condorcet paradox.
+    \item Hare Rule can be used in a tiebreak where all candidates with the least first-place votes will be all eliminated.
+    \item Coombs Rule can be used in place of Hare Rule if the iterative process of removing candidates with the least first-place votes is not preferred. Coombs Rule states that the candidate with the most last-place votes will be removed.
+\end{itemize}
+
+In this coursework, the pairwise Condorcet winner is chosen as a tiebreaker which states that a candidate who dominates the other candidate in terms of majority relation wins.
+
+\section{Voting Protocol}
+\label{sec:VotingProtocol}
+The suggested voting protocol is adapted from an example of formal specification given in Robert's Rules of Order (RONR) that defines a series of sequential actions when a voting event happens.
+
+This protocol is applicable to any voting method at a certain state of the game.
+
+When a voting event happens, the sequence of actions of the voting protocol in this game is:
+\begin{itemize}
+    \item The President selects a rule from the rule proposal list to be voted on.
+    \item The President notifies the Speaker to hold a voting event for the selected rule.
+    \item The Speaker calls for a vote for the selected rule by opening ballots to all islands to cast their votes.
+    \item The Speaker closes the ballots after receiving votes from all islands.
+    \item The Speaker counts the votes by calling an applicable voting method function for winner selection to produce a result.
+    \item The Speaker publicly declares the voting result whether the selected rule can be carried out or not.
+\end{itemize}
+
+Figure~\ref{fig:RONRVotingProtocol} shows the sequence of the voting protocol for changing and/or adapting a new rule.
+
+\begin{figure}[!htb]
+\begin{center}
+\begin{tikzpicture}[node distance=20pt]
+\centering
+\node[draw, rounded corners] (start)  {The President selects a rule to be voted on};
+\node[draw, below=of start] (step 1)  {The President notifies the Speaker to hold a voting session on the selected rule};
+\node[draw, below=of step 1] (step 2)  {The Speaker opens the ballot for the Voters to cast their vote.};
+\node[draw, below=of step 2] (step 3)  {The Speaker closes the ballot after receiving votes from the Voters.};
+\node[draw, below=of step 3] (step 4)  {The Speaker counts the votes by using a specific voting method to declare the result.};
+\node[draw, below=of step 4, rounded corners] (end)   {The Speaker publicly declares the result for the finalised vote.};
+ \draw[->] (start)  -- (step 1);
+ \draw[->] (step 1) -- (step 2);
+ \draw[->] (step 2) -- (step 3);
+ \draw[->] (step 3) -- (step 4);
+ \draw[->] (step 4) -- (end);
+\end{tikzpicture}
+\caption{Voting Protocol for Rules}
+\label{fig:RONRVotingProtocol}
+\end{center}
+\end{figure}
+
+For elections of roles, the sequence of actions of the voting protocol is mostly similar to the above explanation in principle, except for some parameters, such as the motion of the vote which is the role itself (President, or Speaker, or Judge), the facilitator of the election/vote event which depends on what role is being held for election (refer to Chapter 5 IIGO for more details on change of roles and power transfer), and the applicable voting method function to call for election that will produce the result, which is different from the voting method used for rules. Refer to Section~\ref{sec:VotingMethods} for more details on voting methods to be used for elections of roles.
+
+At the start of the game, it is assumed that all 6 islands have the power to vote at any necessary voting scenario, and no diplomatic sanction is in place for any island. However, in the further turns of the game, some island(s) could lose their right to vote and/or not permitted to participate in a voting event due to the diplomatic sanction(s) in place. Refer to Chapter 5 IIGO for details on diplomatic sanction. In this case, the Speaker will open the ballots to the eligible islands only , i.e. those who are permitted to vote at a certain state of the game.
+
+% Implmentaion section deleted
