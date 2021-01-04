@@ -21,3 +21,6 @@ main.pdf
 # BibTeX
 *.bbl
 *.blg
+
+# TeX Live
+*.fls
