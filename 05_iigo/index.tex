@@ -4,7 +4,7 @@
 The role of IIGO is to maintain, update, and revise the rules concerning provision to managing the long-term collective risk dilemma (ltCRD). 
 
 \begin{itemize}
-    \item There will be 3 distinct branches in the IIGO: \textbf{legislative branch}, \textbf{executive branch} and \textbf{judicial branch}\footnote{This is, as no surprise, inspired by the separation of powers in Western democracies.}.
+    \item There will be 3 distinct branches in the IIGO: the \textbf{legislative branch}, \textbf{executive branch} and \textbf{judicial branch}\footnote{This is, as no surprise, inspired by the separation of powers in Western democracies.}.
     \item Each role is put in power according to the  transfer-of-power rules (see Section~\ref{subsec:transfer-of-power} for more detail).
     \item The head of the legislative branch is the Speaker, the head of the executive branch is the President, and the head of judicial branch is the Judge.
     \begin{itemize}
@@ -49,18 +49,16 @@ An example of an \emph{investigation}: The President has permitted the island $X
 
 
 \begin{definition}
-\textbf{Monitoring} is a government official's
-\textbf{power} to perform event recognition and checking for concurrency against the rules.
+\textbf{Monitoring} is a government official's \textbf{power} to perform event recognition and checking for concurrency against the rules.
 \end{definition}
 
-An example of \emph{monitoring}: The Speaker has performed only the following action: \emph{counted the votes and calculated the result} for a rule. Upon a \emph{monitoring} carried out by the President, it is noticed that the Speaker has not made any \emph{announcement}. Hence, the Speaker has not followed their obligation to \emph{announce} the result of any vote held.
+An example of \emph{monitoring}: The Speaker has performed only the following action: \emph{counted the votes and calculated the result} for a rule. Upon an \emph{monitoring} carried out by the President, it is noticed that the Speaker has not made any \emph{announcement}. Hence, the Speaker has not followed their obligation to \emph{announce} the result of any vote held.
 
 See Section~\ref{sec:accountability} for more information about which roles can monitor which ones.
 
 
 \begin{definition}
-\textbf{Investigative-monitoring} is a government official's
-\textbf{power} to acquire the information used in acting on a governmental power followed by calculation of the expected results and checking for concurrency, exclusively for the actions carried out by a government official they are responsible for.
+\textbf{Investigative-monitoring} is a government official's \textbf{power} to acquire the information used in acting on a governmental power followed by calculation of the expected results and checking for concurrency, exclusively for the actions carried out by a government official they are responsible for.
 \end{definition}
 
 An example of \emph{investigative-monitoring}: The Speaker has performed the following actions: \emph{counted the votes and calculated the result $R$} for a vote $V$ and \emph{announced} the result $R'$ for the vote $V$. Upon a \emph{investigative-monitoring} carried out by the President, it is noticed that $R' \neq R$. Hence, the Speaker has modified the announced result\footnote{Notice that \emph{investigative monitoring} involves tracking concurrency across actions.}.
@@ -106,7 +104,7 @@ In the rest of the specifications, we will be specifically using the following t
 \end{figure} 
 
 
-An example: The Judge has the \emph{power} to carry out investigations at an IIGO session. There are no rules specifying which specific islands that the Judge should investigate. Therefore, the Judge has the \emph{permission} to investigate any `alive' islands during a session. However, the Judge is \emph{obliged} to make at least some number of investigations each turn.
+For example, the Judge has the \emph{power} to carry out investigations at an IIGO session. There are no rules specifying which specific islands the Judge should investigate. Therefore, the Judge has the \emph{permission} to investigate any `alive' islands during a session. However, the Judge is \emph{obliged} to make at least some number of investigations each turn.
 
 
 
@@ -157,18 +155,18 @@ The legislative branch is responsible for \textbf{making the law}.
             The Speaker has the \emph{obligation} to \emph{call} a vote $V$ if and only if the President has \emph{selected} a rule $R$ to be voted on.
         \end {rule_IIGO}
         \begin{rule_IIGO}
-            The Speaker has the \emph{permission} to \emph{call} a vote $V$ for a rule $R$ if and only if rule $R = R^{*}$, where $R^{*}$ is the rule \emph{selected} by the President.
+            The Speaker has the \emph{permission} to \emph{call} a vote $V$ for a rule $R$ if and only if the rule $R = R^{*}$, where $R^{*}$ is the rule \emph{selected} by the President.
         \end {rule_IIGO}
             
         \item Choose which islands are participating in the vote $V$.
        % \footnote{This is our sequential implementation alternative for the power to close the ballot box.}.
         \begin{rule_IIGO}
-            The Speaker has the \emph{obligation} to ask for a vote from all alive islands, except those affected by sanctions that bar them from voting.
+            The Speaker has the \emph{obligation} to ask for a vote from all alive islands.
         \end {rule_IIGO}
             
         \item Declare the result $C$ of a vote $V$. 
         \begin{rule_IIGO}
-            The Speaker has the \emph{obligation} to \emph{declare the result} $C$ for a vote $V$ if and only if vote V has been \emph{called}.
+            The Speaker has the \emph{obligation} to \emph{declare the result} $C$ for a vote $V$ if and only if the vote V has been \emph{called}.
         \end {rule_IIGO}
         \begin{rule_IIGO}
             The Speaker has the \emph{permission} to \emph{declare the result} $C$ for a vote $V$ if $C = C^{*}$, where $C^{*}$ is the result produced by \emph{calling} the vote $V$.
@@ -212,7 +210,7 @@ The judicial branch is responsible for \textbf{evaluating the law}.
         \begin{rule_IIGO}
             The Judge has the \emph{obligation} to invoke a sanction $S$ for an island $X$ if and only if an investigation $I$ has an outcome $\mathbb{O}^{*}$ indicating non-compliance, and $I$ is an investigation of an action taken by island $X$.
         \end{rule_IIGO}
-        \item Invoke even more severe sanctions in the case of further disobedience with respect to previous sanction(s).
+        \item Invoke even more severe sanctions in the case of further disobedience to previous sanction(s).
         \begin{rule_IIGO}
             The Judge has the \emph{permission} to invoke a severer sanction $S'$ for an island $X$ if the island $X$ has not fulfilled the requirements of the previous sanction $S$.
         \end{rule_IIGO}
@@ -236,7 +234,7 @@ All sanctions are of economic nature which include:
             \end{itemize}
         
     \end{itemize}
-    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in the full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with the each time an island breaks a rule, the cumulative penalties accumulated by the island is then used to determine which \textbf{sanction tier} that each island fall into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At a specific turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarise, the sanctioning process follows these steps:
+    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with each time an island breaks a rule, the cumulative penalties accumulated by the island are then used to determine which \textbf{sanction tier} that each island falls into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At each turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarise, the sanctioning process follows these steps:
     
     
     
@@ -252,13 +250,13 @@ All sanctions are of economic nature which include:
 
     \begin{enumerate}
         \item The Judge has the \emph{power} to set custom penalties associated with breaking any rules.
-        \item The Judge is given a list of all events that occurred in the last turn.
+        \item The Judge is given a list of all events that occurred in the previous turn.
         \item The Judge has the \emph{power} to check whether any, or all of these previous events, involve the islands in the archipelago breaking any rules.
         \item Each of the transgressions is scored using the Judge's custom penalties if the Judge has set them. Otherwise, a score of $1$ is given each time a rule is broken.
         \item The Judge has the \emph{power} to revise the sanction thresholds.
         \item Using the latest sanction thresholds available, each island is assigned to a sanction tier based on the sanction score that they have received.
         \item These sanction tiers are broadcasted to all of the islands in the archipelago.
-        \item The Judge then uses sanctions rules in place to calculate the specific amount of resources that each non-compliant island has contribute to the common pool, based on the sanction tier that they are in.
+        \item The Judge then uses sanctions rules in place to calculate the specific amount of resources that each non-compliant island has in order to determine how much it should contribute to the common pool, based on the sanction tier that they are in.
     \end{enumerate}
 
 
@@ -279,7 +277,7 @@ Each island has the \emph{power} to:
 
 
 \begin{rule_IIGO}
-    Each island has the \emph{permission} to take at maximum N resources, where N is the specific allocation made by the President to that island\footnote{If no such allocation is made, the island is \emph{permitted} to take any amount of resources.}.
+    Each island has the \emph{permission} to take at maximum $N$ resources, where $N$ is the specific allocation made by the President to that island\footnote{If no such allocation is made, the island is \emph{permitted} to take any amount of resources.}.
 \end{rule_IIGO}
 \item contribute resources to the common pool.
 \begin{rule_IIGO}
@@ -293,15 +291,14 @@ Each island has the \emph{power} to:
         %\end{itemize}
         %\item vote  for rules in the Legislative Branch and vote for their favourite islands in elections
 \item participate in the legislative branch of the government by casting ballots in votes called by the Speaker
-\item vote for an island to be elected for a specific role (e.g. the President, Judge, Speaker) during the elections\footnote{This will assumed to be true \underline{unless stated otherwise}. %Note that \textbf{diplomatic sanctions} can disable this power of a specific island (see Section~\ref{jud_const}).}.
+\item vote for an island to be elected for a specific role (e.g. the President, Judge, Speaker) during the elections\footnote{This will be assumed to be true \underline{unless stated otherwise}. %Note that \textbf{diplomatic sanctions} can disable this power of a specific island (see Section~\ref{jud_const}).}.
         }.
 \end{itemize}
 \section{Accountability Cycle}
 \label{sec:accountability}
 
 
-To ensure that the government avoids corruption and abuse of power, each branch is accountable to another. The
-President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but quite different meanings in the IIGO context.}. 
+To ensure that the government avoids corruption and abuse of power, each branch is accountable to another. The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but quite different meanings in the IIGO context.}. 
 
 The powers related to the accountability cycle and transfer-of-power for each role can be summarized as the following: 
 \begin{itemize}
@@ -328,9 +325,9 @@ The powers related to the accountability cycle and transfer-of-power for each ro
 %Unlike investigations performed by the Judge, who performs investigations on island actions in the following turn, each role is given the opportunity to check up on the actions of the role it is responsible for immediately after they have been performed. In this sense, the President can monitor (includes investigative-monitoring) the powers (calling a vote and announcing the result) acted on by the Speaker immediately after the Speaker's announcement (or lack there of). The government officials hold a lot of power so this is to ensure that any wrong-doing is determined as quickly as possible. For this project we are only pursuing one degree of monitoring, that is, the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of themselves and keeping all the islands alive is beneficial to everyone. Hence, while the agents might be inclined to break rules in order to benefit themselves, anyone else breaking the rules is seen as undesirable under the assumption that the system in place is there to benefit all. 
 
 
-Through the proposed accountability cycle, each role is given the opportunity to check up on the actions of the role it is accountable for, immediately after they have been performed. It is clear that the IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power} in their hands. The accountability cycle is designed to address the possible abuses of this power. With monitoring, any wrong-doing in the IGO is determined as quickly as possible and the role in question can be replaced. 
+Through the proposed accountability cycle, each role is given the opportunity to check up on the actions of the role it is accountable for immediately after they have been performed. It is clear that the IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power} in their hands. The accountability cycle is designed to address the possible abuses of this power. With monitoring, any wrong-doing in the IGO is determined as quickly as possible and the role in question can be replaced. 
 
-Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules in order to benefit in some form, it is assumed that any non-compliant islands will be negatively seen by the others based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands. 
+Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands.
 
 Let role $X$ be accountable to the role $Y$, which is accountable to the role $Z$. Then:
 \begin{rule_IIGO}
@@ -341,7 +338,7 @@ $Y$ has the \emph{permission} to declare the monitoring result $M$ associated wi
 \end{rule_IIGO}
 
 
-\begin{figure}[H]
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.33]{05_iigo/images/role cycles.png}
 \caption{Accountability cycle (left), the transfer-of-power cycle (middle) and salary cycle (right).}
@@ -382,10 +379,10 @@ Institutional-enabled-power actions in the IIGO have an associated cost with the
 \item Monitoring a role.
 \end{itemize}
 
-Since IIGO has been designed to act in the common good, IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered a communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason behind defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
+Since IIGO has been designed to act in the common good, IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered a communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason why defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
 
 
-As a role performs an institutional-enabled-power actions, the corresponding cost associated with this action is subtracted from the role's budget. A budget of zero means that the role does not have the \emph{power} to perform any of its institutional-power-enabled actions. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it prefers to (as long as those actions are not governed by other rules). 
+As a role performs institutional-enabled-power actions, the corresponding cost associated with this action is subtracted from the role's budget. A budget of zero means that the role does not have the \emph{power} to perform any of its institutional-power-enabled actions. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it prefers to (as long as those actions are not governed by other rules). 
 
 
 
