@@ -1,9 +1,12 @@
 \chapter{Inter Island Trade Organisation (IITO)}
 
+\section{Design}
+\label{sec:IITO:Design}
+
 The role of IITO is to facilitate inter-island communication and to enable the acts of giving and receiving gifts. In a more complete and realistic multi-agent simulation, unrestricted communication between the islands could have been considered, where islands could communicate with one another in an unconstrained manner. However, such a communication style would also assume the fact that the islands are rather complex agents which are able to undertake considerably sophisticated actions. Therefore, for the coursework, specific forms of communication were chosen to sensibly restrict the island complexity while still allowing for interesting interactions between the islands to take place.
 
-\section{Inter-Island Communication}  
-\label{sec:IITO:inter_island_communication}
+\subsection{Inter-Island Communication}  
+\label{subsec:IITO:inter_island_communication}
 
 Islands which can communicate separately from the main governing body level of interactions (i.e. IIGO) makes more complex island behaviour possible. With the implemented systems, islands can:
 
@@ -24,11 +27,38 @@ Islands which can communicate separately from the main governing body level of i
 
 \textbf{Tax History:} Similarly to providing and requesting voting history, islands can request taxation history (i.e. how much the islands were told to contribute in the form of tax by the President) from other islands. Note that an island may choose not to provide this tax history or it can be dishonest about it. If the islands report the true level of taxation, this interaction allows islands to form an opinion about whether the President has decided on a fair\footnote{Note that this fairness metric will be unique to each island, meaning that it is subjective.} amount of taxation.
 
-\textbf{Current Resources:} Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{sec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
+\textbf{Current Resources:} Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{subsec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
 
-\section{Gifting}  
-\label{sec:IITO:gifting}  
+\subsection{Gifting}  
+\label{subsec:IITO:gifting}  
 
 If an island is struggling and requires some additional amount of resources to survive, it may ask the President for an allocation from the common pool but the President may reject this request. The struggling island would still be able to take resources from the common pool if rejected, but law-abiding islands would probably want to avoid such disobedience. To allow islands to still request an additional amount of resources from the other islands, the \textbf{gifting} action is an option. Islands may accept the gift requests if they wish to improve their standing with the requesting islands. They can also accept the gift requests of those whose survival is deemed to be essential for the future of the archipelago. When requesting, giving or receiving a gift, the island can specify a reason for this action, which gives islands more information about the gifting transaction. For example, a requesting island may want to specify that they will move to a critical state in the next round if they do not receive the gift, or an offering island may want to specify that the gift is meant as a reward for successful disaster forecasting.
 
 Islands are also able to offer gifts without a request being made, meaning they can reach out to other islands if they want to boost their popularity.
+
+\section{Implementation}
+\label{sec:IITO:Implementation}
+
+\subsection{Server Client Infrastructure}
+\label{subsec:IITO:server_client_infrastructure}  
+
+All IITO sessions, such as Gift Giving or Common Pool Donations, follow the same client server interaction format. The server acts a middleman for all agent to agent communication, and prompts agents to make decisions or formulate messages during the session. At each stage in a session the server compiles a list of messages from the agents, following that sessions' protocols, and then uses that list as input for the next stage. While a bit abstract this is better explained through an example.
+
+\subsection{Gifting Session}
+\label{subsec:IITO:gifting_session} 
+
+There are four phases to the gifting sessions: Gift requests, Gift offers, Gift responses and Updating gift history. Each part is further explained below and Figure~\ref{fig:IITO:gifting_session_diagram} shows the interactions a single client will have with the server over the session.
+\begin{itemize}
+    \item \textbf{Gift Requests:} Collects the gift requests of all islands. These requests include an amount the client wants and who they wish to request from.
+    \item \textbf{Gift Offers:} Gives the clients any requests that are directed to them and then collects the gift offers from each client. These offers include an amount the client wished to gift and to whom the gift is being offered.
+    \item \textbf{Gift Responses:} Provides the client with all the offers directed towards them and prompts them to respond to each of these offers. These responses contain the amount the client wishes to accept and a reason for their decision.
+    \item \textbf{Updating Gift History:} In this stage client's are told of the outcome of any offers they gave out. A client is told whether or not an offer has been accepted, the reason for the rejection or acceptance and also the amount the receiver wishes take. For example Team 1 may offer 100 resources to Team 2, but Team 2 may only want take 50. The implemented system allows for this behaviour.
+\end{itemize}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{06_iito/images/gifting_diagram.png}
+    \caption{Overview of Client-Server Interactions in a Gifting session}
+    \label{fig:IITO:gifting_session_diagram}
+\end{figure}
+
