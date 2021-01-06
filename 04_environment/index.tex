@@ -2,21 +2,21 @@
 \section{Foraging}
 \subsection{Foraging Background}
 
-Foraging is a base requirement that is needed as it is a method of obtaining more resources from the starting amount. Foraging is based on the concept of inputting resources to get a return.
+Foraging is a fundamental requirement that is needed as it is a method of obtaining more resources from the starting amount. Foraging is based on the concept of inputting resources to get a return.
 
 \subsubsection{Underlying Concept}
 
-The primary objective of foraging in this game is to introduce a dilemma to the agents to investigate their  behaviours and whether they work together despite different personal goals. Including two methods of foraging promotes decision making among the islands, allowing for strategic interactions to maximise personal benefits whilst still reaching the overarching goal of survival. 
+The primary objective of foraging in this game is to introduce a dilemma to the agents in order to investigate their behaviours and whether they work together despite different personal goals. Including two methods of foraging promotes decision making among the islands, allowing for strategic interactions to maximise personal benefits whilst still reaching the overarching goal of survival. 
 
-The inspiration for our concept of foraging comes from the stag hunt game furthermore it introduces elements from it. Specifically, this approach results in a game with \textbf{no dominant strategy} and in which \textbf{ one agents choice can impact another agent's}.
+The inspiration for our concept of foraging comes from the stag hunt game furthermore it introduces elements from it. Specifically, this approach results in a game with \textbf{no dominant strategy} and in which \textbf{one agents choice can impact another agent}.
 
-The concept of stag hunt is that each player selects a method of hunting without information about the others. The social welfare (total payoff) is significantly reduced if their choices differ. The selection of stag suggests that the agent is going for higher \textbf{payoffs} whilst the selection of hare indicates that the agent is going for \textbf{risk aversion} as both agents are required to stag hunt to get any personal welfare.
+The concept of stag hunt is that each agent selects a method of hunting without information about the others. The social welfare (total payoff) is significantly reduced if their choices differ. The selection of stag suggests that the agent is going for higher \textbf{payoffs} whilst the selection of hare indicates that the agent is going for \textbf{risk aversion} as both agents are required to stag hunt to get any personal welfare.
 
 \subsubsection{Modifications to the Original concepts} 
 A few changes have to be made to make this dilemma viable for our multi-agent system, in addition to adding realism. 
 
 \begin{enumerate}
-    \item Changed the dependency to be based on the input resources rather than the number of islands participating. This added a more realistic element to the dilemma as in reality a hunt’s return would be based on the amount of resources (people, food, water and materials) entered rather than the number of islands participating.
+    \item The dependency has changed to be based on the input resources rather than the number of islands participating. This added a more realistic element to the dilemma as in reality a hunt’s return would be based on the amount of resources (different possible resources: people, food, water and materials) entered rather than the number of islands participating.
     \item Instead of a specified return, probabilistic return has been implemented which adds a randomness element to the game to prevent pattern recognition. These probabilities can be tied to the population, disasters, forecasting and number of animals hunted.  
 \end{enumerate}
 
@@ -196,9 +196,11 @@ The closest an island from the eye of the storm, the larger the severity on that
 
 \subsection{Future work}
 
-There are multiple future works ideas that would be developed in the design aspect such as; a deterministic disaster which would be  designed as a straight line that accumulates during the days, once the threshold has been met then the disaster would occur. Another deterministic disaster idea would be to link the disaster’s magnitude to time. Thus, agents will have to learn from past disaster occurrences, creating a memory. Agents will start learning from past disasters and will be able to forecast the next one. Therefore, the agents will be able to forecast that if a disaster did not surface for a long period of time, then the magnitude of the next disaster will be much larger than the previous one.
+There are multiple future work ideas that would be developed in the design aspect such as; a deterministic disaster which would be  designed as a straight line that accumulates during the days, once the threshold has been met then the disaster would occur. Another deterministic disaster idea would be to link the disaster’s magnitude to time. Thus, agents will have to learn from past disaster occurrences, creating a memory. Agents will start learning from past disasters and will be able to forecast the next one. Therefore, the agents will be able to forecast that if a disaster did not surface for a long period of time, then the magnitude of the next disaster will be much larger than the previous one.
 
-Another idea is that agents can invest into forecasting. Therefore, agents will have access to a history of past disasters, which would be utilised to learn and gain knowledge in order to predict the upcoming disaster. The larger the amount of resources invested; the agents will have access to a larger history of previous disasters. Therefore, agents will acquire knowledge, when investing resources.
+Another idea is that agents can invest into forecasting. Therefore, agents will have access to a history of past disasters, which would be utilised to learn and gain knowledge in order to predict the upcoming disasters.
+
+Thus, the more resources invested by the agents in forecasting, the more disaster history data will be provided. This would enable the agents, to apply machine learning techniques to such data, allowing them to acquire more accurate and precise predictions of future events and develop better risk assessments. Therefore, agents will acquire knowledge, when investing in any of their resources.
 
 \section{Common Pool}
 \subsection{Common Pool Background}
@@ -241,7 +243,7 @@ If the epicentre of disaster is known to the islands and happens to coincide wit
 importance of prevention and incentivise islands to contribute to the Common Pool is highlighted, thus if the amount of resources in the common pool exceeds the threshold when the disaster happens, then the “power” of disaster towards the islands and common pool will be decreased. It makes sense in real life, as more preparation will result in less damage. The actual damage of disaster is decreased by half, but this can vary later.
 
 \subsection{Example Distribution}
-This can be described by the examples in Table~\ref{tab:Demonstration of how common works in different scenarios}, which shows 4 possible scenario:
+This can be described by the examples in Table~\ref{tab:Demonstration of how the common pool works in different scenarios}, which shows 4 possible scenario:
 
 \begin{itemize}
     \item Contribution to common pool does not meet threshold and common pool cannot fully mitigate disaster’s damage.
@@ -251,20 +253,21 @@ This can be described by the examples in Table~\ref{tab:Demonstration of how com
 \end{itemize}
 
 \begin{table}[!htb]
-\begin{center} 
-\begin{tabular}{|p{0.9in}|p{0.9in}|p{0.9in}|p{0.9in}|p{0.9in}|} \hline
-& \textbf{Scenario 1} & \textbf{Scenario 2} & \textbf{Scenario 3} & \textbf{Scenario 4} \\ \hline
-\textbf{Disaster total damage} & 1000 & 200 & 1200 & 1200 \\ \hline
-\textbf{CP's threshold} & 500 & 500 & 500 & 500 \\ \hline
-\textbf{CP's current value} & 300 & 300 & 500 & 700 \\ \hline
-\textbf{CP's multiplier} & 1 & 1 & 0.5 & 0.5 \\ \hline
-\textbf{Mitigated damage} & 300 & 200 & 500 & 1200 \\ \hline
-\textbf{Remaining damage} & 700 & 0 & 100 & 0 \\ \hline
-\textbf{CP's remaining value} & 0 & 100 & 0 & 100 \\ \hline
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+                               & \textbf{Scenario 1} & \textbf{Scenario 2} & \textbf{Scenario 3} & \textbf{Scenario 4} \\ \hline
+\textbf{Disaster Total Damage} & 1000                & 200                 & 1200                & 1200                \\ \hline
+\textbf{CP's Threshold}        & 500                 & 500                 & 500                 & 500                 \\ \hline
+\textbf{CP's Current Value}    & 300                 & 300                 & 500                 & 700                 \\ \hline
+\textbf{CP's Multiplier}       & 1                   & 1                   & 0.5                 & 0.5                 \\ \hline
+\textbf{Mitigated Damage}      & 300                 & 200                 & 500                 & 1200                \\ \hline
+\textbf{Remaining Damage}      & 700                 & 0                   & 100                 & 0                   \\ \hline
+\textbf{CP's Remaining Value}  & 0                   & 100                 & 0                   & 100                 \\ \hline
 \end{tabular}
-\caption{Demonstration of how common works in different scenarios}
-\label{tab:Demonstration of how common works in different scenarios}
-\end{center} 
+\end{center}
+\caption{Demonstration of how the common pool works in different scenarios}
+\label{tab:Demonstration of how the common pool works in different scenarios}
 \end{table}
 
 In scenario 1, the disaster total damage is high, however there is no preparation from the islands through contribution to the common pool. As a result, the common pool could not mitigate all of the damage and 70\% of the damage will be directly on the islands.
@@ -273,11 +276,11 @@ In scenario 2, even though there is no preparation, the common pool is still abl
 
 In scenario 3, the disaster damage is high. Fortunately, the islands have prepared themselves moderately through contribution to the common pool. Thus, the islands only have to take very little leftover damage.
 
-In scenario 4, the disaster damage is high and the islands have prepared themselves very well. As a result, the damage is fully mitigated by the common pool, and there is still leftover resource in the pool. 
+In scenario 4, the disaster damage is high, and the islands have prepared themselves very well. As a result, the damage is fully mitigated by the common pool, and there is still leftover resource in the pool. 
 
 
 \subsection{Future Work}
 
-To observe behaviors of agents in different settings, the future works of the common pool will be centered around varying the values of different parameters such as threshold and threshold multiplier. The forecasting function of the disaster part can be used as a tool to variate the common pool’s threshold and multiplier accordingly. In events that damage could be high, the preparation should be done more carefully, thus the common pool’s threshold can be raised to let islands know about potential damage from disaster. The same thing can be done for threshold multiplier, where the multiplier will be greater for bigger disaster. Since threshold and multiplier both encourage the preparation for disaster, one of them can be fixed at certain seasons to observe different behavior of agents when it comes to varying different parameters. 
+To observe behaviors of agents in different settings, the future work of the common pool will be centered around varying the values of different parameters such as threshold and threshold multiplier. The forecasting function of the disaster part can be used as a tool to variate the common pool’s threshold and multiplier accordingly. In events that damage could be high, the preparation should be done more carefully, thus the common pool’s threshold can be raised to let islands know about potential damage from disaster. The same thing can be done for threshold multiplier, where the multiplier will be greater for bigger disaster. Since threshold and multiplier both encourage the preparation for disaster, one of them can be fixed at certain seasons to observe different behavior of agents when it comes to varying different parameters. 
 
 It is worth mentioning that the functionality of making the threshold unknown to the islands would be implemented in our future work.
