@@ -20,41 +20,32 @@ A few changes have to be made to make this dilemma viable for our multi-agent sy
     \item Instead of a specified return, probabilistic return has been implemented which adds a randomness element to the game to prevent pattern recognition. These probabilities can be tied to the population, disasters, forecasting and number of animals hunted.  
 \end{enumerate}
 
+Furthermore, the dynamics of our agents and allowing for a more complex decision-making interaction between islands and the environment has been explored. It is worth mentioning that some of these design ideas were implemented in the coursework. These changes have been made to make foraging more volatile and unpredictable, adding to the complexity of the system, allowing the teams to further evaluate the agents’ performance on observing and to use learned knowledge to take action.
+
 \subsubsection{Tier System}
 
-The deer hunting and fishing is divided into tiers (the number of fish that can be caught in a given day) which depends on the total input resources. Where the “zero” tier represents the cost of getting to the hunting location.
+The deer hunting and fishing is divided into tiers, which depend on the total input resources. Tiers represent the number of fish that can be caught in a given day and the “zero” tier represents the cost associated with getting to the hunting location. Beyond the zero tier, the cost of catching another deer or fish will decrease as it is easier to catch the second animal than the first since the agents have already arrived at the hunting location. It should be noted there is a limit to how many animals the agents can catch in a given day.
 
-Beyond the zero tier, the cost of catching another deer/fish will decrease as it is easier to catch the second animal than the first since the agents have already arrived at the hunting location. It should be noted there is a limit to how many animals the agents can catch in a given day.
-
-The focus of fishing is to avoid risk at the expense of payoff. This means that all tier requirements are lower than the deers. However, the return is also lower and in addition, the “zero” tier is also removed. Thus, if only 1 island goes fishing they are still expected to have a low return as long as they have enough resources to catch the first fish.
-
-The benefit of deer hunting is higher payoffs. However, these improved returns come at the cost of significantly higher tier thresholds and a “zero” tier. Therefore, it is possible for a single island to go deer hunting without enough resources to reach the hunting location leading to no return.
+The focus of fishing is to avoid risk at the expense of payoff. This means that all tier requirements are lower than the deers. However, the return is also lower thus if only one island goes fishing they are still expected to have a low return as long as they have enough resources to catch the first fish. The benefit of deer hunting is higher payoffs. However, these improved returns come at the cost of significantly higher tier thresholds. Therefore, it is possible for a single island to go deer hunting without enough resources to reach the hunting location leading to no return.
 
 \begin{equation}
-Increments\ of\ catching\ n\ deer's=
+\text{Increments of catching $n$ animals}=
 \left( \begin{array}{ll@{}}
-n=0 -> \Delta^0 = 1 \\
-n=1 -> \Delta^1 = 0.8^1 \\
-n=2 -> \Delta^2 = 0.8^2 = 0.64 \\
-n=2 -> \Delta^3 = 0.8^3 = 0.512 \\
-n=4 -> \Delta^4 = 0.8^4 = 0.4096\\
+n=0 \longrightarrow \Delta^0 = 1 \\
+n=1 \longrightarrow \Delta^1 = 0.8^1 \\
+n=2 \longrightarrow \Delta^2 = 0.8^2 = 0.64 \\
+n=2 \longrightarrow \Delta^3 = 0.8^3 = 0.512 \\
+n=4 \longrightarrow \Delta^4 = 0.8^4 = 0.4096\\
 \end{array} \right) 
 \label{eq:Cumulative Cost 1}
 \end{equation}
 
 \begin{equation}
-Cumulative\ deer \ cost \sum_{n=0}^{n} \Delta^{n} = \Delta^{0} + \Delta^{1} + \Delta^{2} + \Delta^{3} + \Delta^{4} + ....
+\text{Utility Tier Cost}=\ \sum_{n=0}^{n} \Delta^{n} = \Delta^{0} + \Delta^{1} + \Delta^{2} + \Delta^{3} + \Delta^{4} + ....
 \label{eq:Cumulative Cost 2}
 \end{equation}
 
-\begin{equation}
-Cumulative\ fishing\ cost \ = \ \sum_{n=1}^{n} \Delta^{n} = \Delta^{1} + \Delta^{2} + \Delta^{3} + \Delta^{4} + \Delta^{5} + ....
-\label{eq:Cumulative Cost 3}
-\end{equation}
-
-Equations that show the formulation of the decay function for tier system.
-
-The tier system is shown in Equation~\eqref{eq:Cumulative Cost 1}, Equation~\eqref{eq:Cumulative Cost 2} and Equation~\eqref{eq:Cumulative Cost 3}, where $n$ stands for the tiers, with decay costs ($\Delta$) of $0.8$ for both the deer hunt and fishing. Fishing cost starts at $n$ is equal to $1$ due to the reduced cost.
+Equation~\eqref{eq:Cumulative Cost 1} and Equation~\eqref{eq:Cumulative Cost 2} show the formulation of the decay function for tier system. The tier system is shown in the ~\ref{fig:Foraging Tier System} where $n$ stands for the tiers, with decay costs ($\Delta$) of $0.8$ for the deer hunt and $0.6$ for fishing.
 
 \begin{figure}[!htb]
     \centering
@@ -63,10 +54,7 @@ The tier system is shown in Equation~\eqref{eq:Cumulative Cost 1}, Equation~\eqr
     \label{fig:Foraging Tier System}
 \end{figure}
 
-Higher tiers result in a lower cost per animal, however, the total cost increases up to a daily catch limit.
-This means that if teams collaborate, they can invest less as individuals to get a collectively greater return through deer hunting. If they invest too much then they will over spend as they reach the daily catch limit. As a result, it is more beneficial for some teams to go fishing because it has a higher daily catch limit, although it comes with lower returns. In other words, there is a need for some self sacrifice to be done to reach maximum welfare.
-
-Fishing has similar functions with the key difference being the tiers start at $1$ and Normal distribution.
+The amount of resources inputted is scaled using a variable and the tiers are then calculated with them, the higher the tiers the lower the cost to catch the next animal. However, the total cost increases up to a daily catch limit. This means that if teams collaborate, they can invest less as individuals to get a collectively greater return through deer hunting. If they invest too much then they will over spend as they reach the daily catch limit. As a result, it is more beneficial for some teams to go fishing because it has a higher daily catch limit, although it comes with lower returns. In other words, there is a need for some self sacrifice to be done to reach maximum welfare. Fishing has similar functions with the key difference being the tiers start at and its Normal distribution.
 
 \newpage
 \subsection{Example Distribution}
@@ -79,14 +67,14 @@ Fishing has similar functions with the key difference being the tiers start at $
     \label{fig:Distribution of Foraging returns Deer Hunting}
 \end{figure}
 
-To increase the risk, the Bernoulli Random Variable ($D$) has been utilised to not guarantee any return resources after a hunt. Whilst the Exponential Decay ($W$) is to disincentive too much resources being placed in hunting and hoping for a high return. However this all comes with the benefit of significantly higher ($2x$) returns than fishing.
+To increase the risk of deer hunting, a Bernoulli Random Variable ($D$) has been utilised to not guarantee any return resources after a hunt. Whilst the Exponential Decay ($W$) is to disincentive too much resources being placed in hunting and hoping for a high return. However, this all comes with the benefit of significantly higher ($2x$) returns than fishing.
 
-Figure~\ref{fig:Distribution of Foraging returns Deer Hunting} represents the return utility which represents the return multiplier of the foraging. The average \textbf{expected mean} return across $1000$ iterations is shown by the colourful lines which is close to the \textbf{real mean}.
+Figure~\ref{fig:Distribution of Foraging returns Deer Hunting} represents the return utility which will be multiplied by an output scale to give the return payoff. The Figure shows the average \textbf{expected mean} return utility, in colour, after $1000$ iterations which is close to the \textbf{real mean}.
 
 \newpage
 \subsubsection{Fish hunting - Risk Aversion}
 
-Fishing is similar to Deer hunting, except that it uses only a Normal Distribution ($F$), which focuses on avoiding risk by being very predictable and safe. Figure~\ref{fig:Distribution of Foraging returns Fishing} illustrates the return utility function of fishing.
+Fishing is similar to Deer hunting, except that it uses only a Normal Distribution ($F$), which focuses on avoiding risk by being very predictable and safe. Figure~\ref{fig:Distribution of Foraging returns Fishing} illustrates the return utility for fishing.
 
 \begin{figure}[!htb]
     \centering
@@ -101,15 +89,15 @@ As seen in Figure~\ref{fig:Distribution of Foraging returns Deer Hunting}and Fig
 \subsection{Solution Concepts}
 \subsubsection{Dominant Strategy}
 
-In this implementation, there is no dominant strategy. Therefore, if an agent decides to go deer hunting, whereas all the other islands are fishing that agent would not get the best return possible. Hence it is not the best strategy. Whilst if an agent goes fishing and there are a sufficient amount of agents deer hunting, then that agent would be passing on the opportunity of gaining a larger return in deer hunting. Hence, it is not the best strategy either.
+In this implementation, there is no dominant strategy. Therefore, if an agent decides to go deer hunting, whereas all the other islands are fishing, that agent would not get the best return possible. Hence it is not the best strategy. Whilst if an agent goes fishing and there are a sufficient amount of agents deer hunting, then that agent would be passing on the opportunity of to gain a larger return in deer hunting. Hence, it is not the best strategy either.
 
 \subsubsection{Nash Equilibrium}
 
-In the regular stag hunt game there are two pure Nash equilibria, where both players go for either payoff or risk aversion. In our implementation there are multiple Nash Equilibria; these would be the points where the islands cannot benefit themselves by moving to deers hunting to generate more return. As there is a limit to how many deers that can be hunted thus by moving to deer hunting they are getting a worse return than if they just stayed at fishing. Whilst the islands at the deer hunt are already making a greater return and have no reason to switch to fishing.
+In the regular stag hunt game, there are two pure Nash Equilibria, where both agents go for either payoff or risk aversion. In our implementation, there are multiple Nash Equilibria. These are the points where the islands cannot benefit themselves by moving to deers hunting to generate more return. As there is a limit to how many deers that can be hunted thus by moving to deer hunting they are getting a worse return than if they just stayed at fishing. Whilst the islands at the deer hunt are already making a greater return and have no reason to switch to fishing.
 
 \subsubsection{Pareto Optimal Strategy}
 
-At some point all players will be in a position where changing foraging methods will not yield any better income for themselves and in fact also hinder others. This is due to the max daily deer hunt limit which will create a maxim return on the deer hunt. Therefore there will be points where the islands will change as the amount of resources being entered into both methods of foraging is the most efficient, this being where deer returns are maximised. There may also be a point where the user can benefit by switching away from deer hunting, however this will cause the other islands in the deer hunt to have a worse pay off due to a possible drop in tier resulting in worse returns.
+At some point, all agents will be in a position where changing foraging methods will not yield any better income for themselves and in fact also hinder others. This is due to the max daily deer hunt limit which creates a maxim return on the deer hunt. Therefore there will be points where the islands will change as the amount of resources being entered into both methods of foraging is the most efficient, this being where deer returns are maximised. There may also be a point where the agent can benefit by switching away from deer hunting. However, this will cause the other islands in the deer hunt to have a worse pay off due to a possible drop in tier resulting in worse returns.
 
 \begin{figure}[!htb]
     \centering
@@ -120,34 +108,31 @@ At some point all players will be in a position where changing foraging methods 
 
 \subsubsection{Social Welfare Maximisation}
 
-It is possible for these islands to find the social welfare maximum in this foraging function with enough time. The islands could identify the exact amount of resources needed, for both fishing and deer hunting, to achieve the best return according to the maximum number of animals. Thus by cooperating who goes where and spends how much they are able to maximize their returns without spending more resources than necessary.
-
-\subsection{Extended Work}
-
-For the future implementations, our additions focus on further exploring the dynamics of our agents and allowing for a more complex decision-making interaction between clients and the environment. Some of these design ideas were later implemented in self-organising multi-agent system and others are expressed for the sake of completeness and future work recommendations.
-
-Some changes have been made to make foraging more volatile and unpredictable. These will add to the complexity of the system, allowing the teams to further evaluate the agents’ performance on observing and using learned knowledge to take action.
+It is possible for these islands to find the social welfare maximum in this foraging function with enough time. The islands could identify the exact amount of resources needed, for both fishing and deer hunting, to achieve the best return according to the maximum number of animals. Thus, by cooperating who goes where and spends how much, they are able to maximize their returns without spending more resources than necessary.
 
 \subsubsection{Incorporated Changes: Population Density}
 
-Introducing a model that controls the population density of deer allows us to increase the complexity of the foraging function. In short, the deer hunting capacity decreases with decreasing population and increases with an increasing population. This will then influence the maximum deer per hunt parameter(n), which in turn results in a more complex return calculation function (\texttt{\textbf{DtotalReturn}}), which would make it harder for agents to figure out forage tier boundaries to optimise their strategies.
+Introducing a model that controls the population density of deer allows us to increase the complexity of the foraging function. In short, the deer hunting capacity decreases with decreasing population and increases with an increasing population. This will then influence the maximum deer per hunt parameter ($n$), which in turn results in a more complex return calculation function (\texttt{\textbf{DtotalReturn}}), which would make it harder for agents to figure out forage tier boundaries to optimise their strategies.
 
-The population change can be dynamic depending on various environmental factors, fetched from the rest of the system. For example, a disaster could supposedly cause the population density of deer to halve, making it harder to forage and therefore, causing lower returns. For future implementations, the team uses a single species population model and more specifically logistic modelling for the deer and fish population. The model can be described in Equation~\eqref{eq:Population Density}.
+The population change can be dynamic depending on various environmental factors, fetched from the rest of the system. For example, a disaster could supposedly cause the population density of deer to halve, making it harder to forage and therefore, causing lower returns. In this current implementation, a single species population model and more specifically logistic modelling for the deer and fish population has been implemented. 
+The model is described in Equation~\eqref{eq:Population Density}.
 
 \begin{equation}
 \frac{\mathrm{d} P}{\mathrm{~d} t}=k(N-P)
 \label{eq:Population Density}
 \end{equation}
-
 \begin{itemize}
-        \item “$P$” is the total Population. \item “$N$” is the maximum deer/fish population (“carrying capacity” formally).
-        \item “$k$” is the growth coefficient.
-        \item “$t$” is time.
+        \item $P$ is the total population. 
+        \item $N$ is the maximum deer and fish population (carrying capacity \footnote{The maximum population size of a biological species that can be sustained in that specific environment.} formally).
+        \item $k$ is the growth coefficient.
+        \item $t$ is time.
     \end{itemize}
 
-In our implementation $k$ and $N$ are constants but it would be interesting to see what would happen if the growth coefficient increases, causing a population growth and observing the islands’ dynamics. Will they keep on “investing” higher resources each turn, taking advantage of the deer/fish abundance, or will they stick to their original, safe and static strategy?
+In our implementation, $k$ and $N$ are constants. 
 
-In Figure~\ref{fig:Deer population over time}, the simulation of the implemented logistic model can be observed, with a growth coefficient of $0.2$ and $N$ of $8$. It can be seen that overtime there is an unpredictable pattern to population changes, which would be interesting to see affecting the tier system and in extend, the deer/fish foraging strategies of the agents.
+However, it is interesting to see what happens if the growth coefficient increases, causing a population growth and observing the islands’ dynamics. Will they keep on “investing” higher resources each turn, taking advantage of the deer and fish abundance, or will they stick to their original, safe and static strategy?
+
+In Figure~\ref{fig:Deer population over time}, the simulation of the implemented logistic model can be observed, with a growth coefficient of $0.2$ and $N$ of $8$. It can be seen that overtime there is an unpredictable pattern to population changes, which would be interesting to see affecting the tier system and in extend, the deer and fish foraging strategies of the agents.
 
 \begin{figure}[!htb]
     \centering
@@ -160,26 +145,30 @@ Modelling the population (or linking it to other environmental elements) allows 
 
 \subsubsection{Incorporated Changes: Method of Resource Allocation}
 
-Lastly, in future implementations, a parameter can be set that allows either an equal split of returns after foraging no matter the input, or a proportional split that is dependent on the amount of resources inputted by each island. Both of these implementations work in accordance to the previous specification. Such change will allow us to observe the concept of free-riding further, looking at how greedy islands behave in the case of uniform resource returns. Will the islands seek to minimise inputs and benefit from the more generous islands, even at the cost of being allocated a lower tier? Will they input just enough to maximise the tier they are foraging in? Or, will they observe other island’s previous contributions and make a decision based on that? These are some of the questions that can later be explored using this future change.
+Moreover, there is a parameter to allow either an equal split of returns after foraging regardless of the input, or a proportional split dependent on the amount of resources inputted by each island. Both of these implementations work in accordance to the previous specification. Such change will allow us to observe the concept of free-riding further, looking at how greedy islands behave in the case of uniform resource returns.
 
-\subsection{Future Work}
+The distribution method is based on two scalars. The first scales the inputs to the tiers, allowing the agent to choose how much they wish the tiers to cost. After which, the number of fish or deer caught is chosen by the tiers which goes into their respective distributions. The output of these distributions are then multiplied by the output scale. This allows the agent to tweak how much return each island can get, it is suggested to keep the output scalar to above the cost of living to ensure the islands have enough resources to survive. 
+
+A few questions that be can asked about the islands relationship and behaviour are:Will the islands seek to minimise inputs and benefit from the more generous islands, even at the cost of being allocated a lower tier? Will they input just enough to maximise the tier they are foraging in? Or, will they observe other island’s previous contributions and make a decision based on that?
+
+\subsubsection{Future Work}
 
 Further work could be done to make sure that there is enough complexity to explore the dynamics of our agents. Due to the project’s time constraints, some interesting ideas were not implemented but were thoroughly examined during the design process.
 
-An important add-on to our previous implementation could be the enforcement of laws by the IIGO for the number of islands that can go foraging. That would introduce the need of internal client relationships, adding another level of decision-making complexity to the agents. The specific alteration could result in some interesting findings. For example, there could be an auction scenario where islands would bid with their input resources, where only the highest bidders would be able to forage, as limited by the IIGO. Therefore, Islands with the lowest resources would be out-bidded, possibly causing a long-term resource depletion that would need to be mitigated by the more resourceful islands later in the game. It would be interesting to see how such change would affect the free-rider problem and how islands would adjust their strategies to out-bid other islands.
+An important add-on to our previous implementation could be the enforcement of laws by the IIGO for the number of islands that can go foraging. That would introduce the need of internal agent relationships, adding another level of decision-making complexity to the agents. The specific alteration could result in some interesting findings. For example, there could be an auction scenario where islands would bid with their input resources, where only the highest bidders would be able to forage, as limited by the IIGO. Therefore, Islands with the lowest resources would be out-bidded, possibly causing a long-term resource depletion that would need to be mitigated by the more resourceful islands later in the game. It would be interesting to see how such change would affect the free-rider problem and how islands would adjust their strategies to out-bid other islands.
 
-Another change that could be made, is to let islands choose who they can forage with. That could be in the form of direct messaging or voting. Essentially, our speculation is that agents would avoid the free-riding problem in both cases by enabling agents to make collective decisions based on communicated resource contributions. That’s because free-riders would be out-voted or not invited for foraging. That, in combination with the aforementioned tier system, would possibly result in all the islands contributing as much as possible to the input foraging “pool”.  However, it would be interesting to see if islands can then reach Pareto optimality, where every single agent gets the best possible return for their input.
+Another change that could be made is to let islands choose who they can forage with. That could be in the form of direct messaging or voting. Essentially, our speculation is that agents would avoid the free-riding problem in both cases by enabling agents to make collective decisions based on communicated resource contributions. That’s because free-riders would be out-voted or not invited for foraging. That, in combination with the aforementioned tier system, would possibly result in all the islands contributing as much as possible to the input foraging “pool”. However, it would be interesting to see if islands can then reach Pareto optimality, where every single agent gets the best possible return for their input.
 
-In addition to the above suggestions, area limited foraging where agents would only be allowed to forage with only one neighbouring island using a ranking algorithm. This could also be enforced and implemented in a future iteration. Moreover, this particular scenario could be extended by programming prey densities to be geofocused, where prey populations could vary between regions on the “map”. Islands would then need to make a strategic plan on how their ranking of neighbouring islands would change in accordance to their returns and returns broadcasted from other island pairs.
+In addition to the above suggestions, agents would be restricted to just a single foraging area where they would only be allowed to forage with one neighbouring island using a ranking algorithm. This could alter the game's dynamics because an agent would only have limited partners(islands) to forage with (other islands in the specified area) which could be explicitly decided or randomly allocated. This could also be enforced and implemented as a future work.Moreover, this particular scenario could be extended by programming prey densities to be geo-focused, where prey populations could vary between regions on the “map”. Islands would then need to make a strategic plan on how their ranking of neighbouring islands would change in accordance to their returns and returns broadcasted from other island pairs.
 
-Finally, more foraging options could be added in future implementations. For example, a third foraging technique, call it whale it hunting, could be created. That would have an even higher return than the deer hunting, deeming it an appealing forage method. The barriers of entry could be similar to that of the deer hunting method in this scenario but at the same time, there would be a more spaced out/expensive tier system. This combination would potentially incentivise cooperation between islands, if their strategy was to maximise returns. Also, as additional foraging methods have been introduced, the type of return has been fixed for each foraging method and observe how agents decide to behave. For example, the deer and fish hunting methods result in returns proportional to inputs, whereas the whale hunting method would result in an equal split of returns between all participating islands. Would this mean that islands choose a fairer division of returns and not go on whale foraging at all? Or Would they be intrigued by the higher costs and choose whale hunting over the other foraging methods? In the latter question agents would need to take in mind that an island may be entering an insignificant amount reaping however, a large reward. It is therefore up to the islands to decide if the higher payoff is worth the risk of other islands free-riding.
+Finally, more foraging options could be added in future implementations. For example, a third foraging technique; "whale hunting"could be created. That would have an even higher return than the deer hunting, deeming it an appealing forage method. The barriers of entry could be similar to that of the deer hunting method in this scenario but at the same time, there would be a more spaced out/expensive tier system. This combination would potentially incentivise cooperation between islands, if their strategy was to maximise returns. Also, as additional foraging methods have been introduced, the type of return has been fixed for each foraging method and observe how agents decide to behave. For example, the deer and fish hunting methods result in returns proportional to inputs, whereas the whale hunting method would result in an equal split of returns between all participating islands. Would this mean that islands choose a fairer division of returns and not go on whale foraging at all? Or Would they be intrigued by the higher costs and choose whale hunting over the other foraging methods? In the latter question agents would need to take in mind that an island may be entering an insignificant amount reaping. However, a large reward. It is therefore up to the islands to decide if the higher payoff is worth the risk of other islands free-riding.
 
-All the aforementioned behaviours are, of course, influenced by island tactics. Therefore, an island programmed to be greedy will not cease to be greedy, no matter how the surrounding islands’ behaviours change, unless the greedy island can adapt. Therefore, agent strategies must attempt to draw conclusions on specific foraging methods and modify their strategies where appropriate.
+All the aforementioned behaviours are, of course, influenced by the island tactics. Therefore, an island programmed to be greedy will not cease to be greedy, no matter how the surrounding islands’ behaviours change, unless the greedy island can adapt. Therefore, agent strategies must attempt to draw conclusions on specific foraging methods and modify their strategies where appropriate.
 
-\section{Disaster}
-\subsection{Disaster Background}
+\subsection{Disaster}
+\subsubsection{Disaster Background}
 
-A game has been designed, where agents are at risk, they will be directly confronting a risk/a disaster once every round. This subset of the game creates a dilemma, where each island (agent) has to survive. They will have the opportunity to work together by investing collectively to the common pool, the disaster will be mitigated if the islands invest enough resources to reach a desired threshold. Otherwise, the islands would face negative impact, which would diminish their available resources. It is worth mentioning that the disaster will first extract resources from the common pool, and then if not enough resources have been invested, resources will be depleted from each island proportionally to their island’s damage.
+A game has been designed to simulate agents at risk. Essentially, they will be directly confronting a risk/disaster once every round. This subset of the game creates a dilemma, where each island (agent) has to survive. They will have the opportunity to work together by investing collectively to the common pool, the disaster will be mitigated if the islands invest enough resources to reach a desired threshold. Otherwise, the islands would face negative impact, which would diminish their available resources. It is worth mentioning that the disaster will first extract resources from the common pool, and then if not enough resources have been invested, resources will be depleted from each island proportionally to their island’s damage.
 
 Furthermore, the disaster has been designed to comprise of an epicentre (eye of the storm), which is limited within the archipelago bounds, it is represented using Cartesian coordinates (EpiX, EpiY). Therefore, all islands or a subset of islands may be affected due to their proximity to the disaster epicentre. The island’s proximity to the disaster epicentre is directly proportional to the island’s damage. In other words, the island's available resources will be diminished based on the disaster magnitude and its location with respect to each island’s fixed location.
 
@@ -194,7 +183,7 @@ The closest an island from the eye of the storm, the larger the severity on that
     \label{fig:Disaster eye of the storm severity}
 \end{figure}
 
-\subsection{Future work}
+\subsubsection{Future work}
 
 There are multiple future work ideas that would be developed in the design aspect such as; a deterministic disaster which would be  designed as a straight line that accumulates during the days, once the threshold has been met then the disaster would occur. Another deterministic disaster idea would be to link the disaster’s magnitude to time. Thus, agents will have to learn from past disaster occurrences, creating a memory. Agents will start learning from past disasters and will be able to forecast the next one. Therefore, the agents will be able to forecast that if a disaster did not surface for a long period of time, then the magnitude of the next disaster will be much larger than the previous one.
 
@@ -202,8 +191,8 @@ Another idea is that agents can invest into forecasting. Therefore, agents will 
 
 Thus, the more resources invested by the agents in forecasting, the more disaster history data will be provided. This would enable the agents, to apply machine learning techniques to such data, allowing them to acquire more accurate and precise predictions of future events and develop better risk assessments. Therefore, agents will acquire knowledge, when investing in any of their resources.
 
-\section{Common Pool}
-\subsection{Common Pool Background}
+\subsection{Common Pool}
+\subsubsection{Common Pool Background}
 
 A game has been designed where six groups of islands (agents) have access to a common-pool resource. In micro-level, each island intends to maximise its utility while in macro-level, all the islands want to maintain sustainability and be protected by the upcoming disaster. The above description specifies a collective action problem where n-agents (six in our case) are seeking access to a common pool resource that is sufficient to satisfy some agents but not to satisfy all of them.
 
@@ -240,10 +229,10 @@ The following example can briefly explain this dilemma:
 
 If the epicentre of disaster is known to the islands and happens to coincide with the location of Island 1, then Island 4 might not contribute at all to the Common Pool since it will not be affected by the disaster. Moreover, Islands 3 and 5 that will not be severely hit might contribute a small amount to the Common Pool or even zero amount (free riding case). Since the rest of the islands might contribute to the Common Pool, then Islands 3 and 5 will be profited by the contribution of others.
 
-importance of prevention and incentivise islands to contribute to the Common Pool is highlighted, thus if the amount of resources in the common pool exceeds the threshold when the disaster happens, then the “power” of disaster towards the islands and common pool will be decreased. It makes sense in real life, as more preparation will result in less damage. The actual damage of disaster is decreased by half, but this can vary later.
+importance of prevention and incentivise islands to contribute to the Common Pool is highlighted, thus if the amount of resources in the common pool exceeds the threshold when the disaster happens, then the “power” of disaster towards the islands and common pool will be decreased. It makes sense in real life, as more preparation will result in less damage. The actual damage of disaster is decreased by half.
 
-\subsection{Example Distribution}
-This can be described by the examples in Table~\ref{tab:Demonstration of how the common pool works in different scenarios}, which shows 4 possible scenario:
+\subsubsection{Example Distribution}
+This can be described by the examples in Table~\ref{tab:Demonstration of how the common pool work in different scenarios}, which shows 4 possible scenario:
 
 \begin{itemize}
     \item Contribution to common pool does not meet threshold and common pool cannot fully mitigate disaster’s damage.
@@ -266,11 +255,11 @@ This can be described by the examples in Table~\ref{tab:Demonstration of how the
 \textbf{CP's Remaining Value}  & 0                   & 100                 & 0                   & 100                 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Demonstration of how the common pool works in different scenarios}
-\label{tab:Demonstration of how the common pool works in different scenarios}
+\caption{Demonstration of how the common pool work in different scenarios}
+\label{tab:Demonstration of how the common pool work in different scenarios}
 \end{table}
 
-In scenario 1, the disaster total damage is high, however there is no preparation from the islands through contribution to the common pool. As a result, the common pool could not mitigate all of the damage and 70\% of the damage will be directly on the islands.
+In scenario 1, the disaster total damage is high. However, there is no preparation from the islands through contribution to the common pool. As a result, the common pool could not mitigate all of the damage and $70\%$ of the damage will be directly on the islands.
 
 In scenario 2, even though there is no preparation, the common pool is still able to mitigate all of the damage thanks to the low damage of disaster. The leftover resource in the common pool will stay there.
 
@@ -279,7 +268,7 @@ In scenario 3, the disaster damage is high. Fortunately, the islands have prepar
 In scenario 4, the disaster damage is high, and the islands have prepared themselves very well. As a result, the damage is fully mitigated by the common pool, and there is still leftover resource in the pool. 
 
 
-\subsection{Future Work}
+\subsubsection{Future Work}
 
 To observe behaviors of agents in different settings, the future work of the common pool will be centered around varying the values of different parameters such as threshold and threshold multiplier. The forecasting function of the disaster part can be used as a tool to variate the common pool’s threshold and multiplier accordingly. In events that damage could be high, the preparation should be done more carefully, thus the common pool’s threshold can be raised to let islands know about potential damage from disaster. The same thing can be done for threshold multiplier, where the multiplier will be greater for bigger disaster. Since threshold and multiplier both encourage the preparation for disaster, one of them can be fixed at certain seasons to observe different behavior of agents when it comes to varying different parameters. 
 
