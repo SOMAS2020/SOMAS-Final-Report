@@ -1,11 +1,11 @@
 \chapter{Team 1 Agent Design}
 
 \section{Opinions on Islands}
-For an agent to become self-organising, it must decide what to do given certain conditions without external input. For this to be possible, the agent must have a personality, and it must hold an opinion about other islands. This will form a basis for the agent to decide on an action.
+For an agent to become self-organising, the agent must determine certain actions given a condition without external input. For this to be possible, the agent must have a personality, and hold an opinion about other islands. This will form a basis for the agent to decide on an action.
 
-Initially, opinions about other teams are neutral. Overtime through IITO and IIGO, opinions on islands will change and different outcome will be achieved depending on the opinion value. Positive values correspond to positive opinions while negative values correspond to negative opinions.
+Initially, the opinion on all existing islands are neutral. Overtime through IITO and IIGO, the opinions on islands will change. This will affect the outcome of IITO and IIGO results. As a note, positive values correspond to positive opinions while negative values correspond to negative opinions.
 
-An agent's personality can change depending on it's current resources. Below is an example of how an agent's personality can be formed:
+An agent's personality can change depending on the current resources. Below is an example of how an agent's personality can be formed:
 \begin{itemize}
     \item If current resources > 10 * living cost, the agent is happy
     \item If 3 * living cost < current resources < 10 * living cost, the agent is anxious
@@ -14,11 +14,10 @@ An agent's personality can change depending on it's current resources. Below is 
 The upper and lower bounds can be changed before a game starts. 
 
 \section{IITO}
-During IITO, opinions between islands can change. For every gift received, team 1 agent's opinion of the gifter increases. However, an islands opinion can decrease if that island promised a gift and was not able to fulfill it. 
+During IITO, the opinion of other island is affected. For every gift received, the opinion of the gifter increases. However, the opinion of an island can decrease if that island promised a gift and was not able to fulfill it. 
 
-When team 1 agent's receives a request for gifts, it will decide how much to offer depending on the personality and its opinion of that island. If the agent is desperate, then it will refuse all gift requests therefore offering a gift of 0. If the agent is anxious, then gift offers will be a proportion of the current resources that it is happy to give away. If the agent is happy, then it will freely offer resources that satisfy the incoming gift request amount.
+When team 1 agent receives a request for gifts, the agent will decide how much to offer depending on the agent's current personality and the opinion of that island. If the agent is desperate, then the agent will refuse all gift requests therefore offering a gift of 0. If the agent is anxious, then gift offers will be a proportion of the current resources that the agent is willing to give away. If the agent is happy, then the agent will freely offer resources that satisfy the incoming gift request amount.
 
-However, at times if an opinion of an island is very high, the agent can decide to give gifts disregarding it's own anxiety. On the other hand, if an opinion of an island is very low, the agent can decide to refuse to send a gift even though the agent is happy. 
+Moreover, if an opinion of an island is very high, the agent can decide to give gifts disregarding the agent's own anxiety. On the other hand, if an opinion of an island is very low, the agent can decide to refuse to send a gift even though the agent is happy. 
 
-Naturally, team 1's agent will accept all gift offers that comes its way. 
-
+For increase survivability, team 1 agent will accept any gift offers that it receives. 
