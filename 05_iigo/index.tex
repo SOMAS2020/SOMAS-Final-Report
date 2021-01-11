@@ -297,8 +297,8 @@ Each island has the \emph{power} to:
 \section{Accountability Cycle}
 \label{sec:accountability}
 
-
-To ensure that the government avoids corruption and abuse of power, each branch is accountable to another. The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but quite different meanings in the IIGO context.}. 
+The IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power}. To ensure that the government is able to avoid corruption and abuse of power, each branch of IIGO is accountable to another through the accountability cycle. 
+The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but not identical meanings and different consequences in the context of IIGO.}. The desired effect is for any wrong-doing in IIGO to be determined as quickly as possible and the role in question to be replaced. 
 
 The powers related to the accountability cycle and transfer-of-power for each role can be summarized as the following: 
 \begin{itemize}
@@ -324,8 +324,7 @@ The powers related to the accountability cycle and transfer-of-power for each ro
 
 %Unlike investigations performed by the Judge, who performs investigations on island actions in the following turn, each role is given the opportunity to check up on the actions of the role it is responsible for immediately after they have been performed. In this sense, the President can monitor (includes investigative-monitoring) the powers (calling a vote and announcing the result) acted on by the Speaker immediately after the Speaker's announcement (or lack there of). The government officials hold a lot of power so this is to ensure that any wrong-doing is determined as quickly as possible. For this project we are only pursuing one degree of monitoring, that is, the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of themselves and keeping all the islands alive is beneficial to everyone. Hence, while the agents might be inclined to break rules in order to benefit themselves, anyone else breaking the rules is seen as undesirable under the assumption that the system in place is there to benefit all. 
 
-
-Through the proposed accountability cycle, each role is given the opportunity to check up on the actions of the role it is accountable for immediately after they have been performed. It is clear that the IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power} in their hands. The accountability cycle is designed to address the possible abuses of this power. With monitoring, any wrong-doing in the IGO is determined as quickly as possible and the role in question can be replaced. 
+The result of monitoring is intended to be a trigger for the initiation of power transfer, whereby a negative result indicates that at least one rule was broken by the role monitored and the role should be re-elected. Each turn, in addition to monitoring the actions taken by the role in that IIGO session, the election that role held in the previous IIGO session, if one was held at all, is checked for compliance with the rules of power-transfer.
 
 Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands.
 
@@ -363,7 +362,7 @@ Refer to the Figure~ \ref{fig:cycles_in_IIGO} for further clarification about th
 \subsection{Budget}
 %Actions associated with the IIGO have an associated cost that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
 
-Institutional-enabled-power actions in the IIGO have an associated cost with them. Some examples for such actions include:
+Institutional-enabled-power actions in the IIGO have an associated cost. Some examples of such actions include:
 
 
 %that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
@@ -379,24 +378,24 @@ Institutional-enabled-power actions in the IIGO have an associated cost with the
 \item Monitoring a role.
 \end{itemize}
 
-Since IIGO has been designed to act in the common good, IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered a communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason why defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
+IIGO has been designed to act in the common good therefore IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason for defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
 
 
-As a role performs institutional-enabled-power actions, the corresponding cost associated with this action is subtracted from the role's budget. A budget of zero means that the role does not have the \emph{power} to perform any of its institutional-power-enabled actions. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it prefers to (as long as those actions are not governed by other rules). 
+As a role performs institutional-enabled-power actions, the cost associated with this action is subtracted from the role's budget. A budget of zero means that the role does not have the \emph{power} to perform any of its institutional-power-enabled actions. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it would like (as long as those actions are not governed by other rules). 
 
 
 
 %As a role performs an endogenous-cost action, the corresponding cost associated with this action is subtracted from the role's budget. Thus, if as a result of an endogenous-cost action a role will be left with negative budget, it will have gone over the budget limit and will have broken the budget rule. A budget of zero means that the role is not allowed to perform any of its institutional-power-enabled actions associated an endogenous-cost. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it pleases (as long as those actions are not governed by other rules). 
 
-The budget rule is also persistent across turns. This means that, assuming nothing else affects the budget, if a role has $100$ resources in its budget at each turn and spends only $10$ resources, this means that this very same role has $90$ resources in its budget at the next turn. On the other hand, islands can choose to increase the budget periodically every turn. This is governed by another budget extension rule.
+The budget rule is also persistent across turns. This means that, assuming nothing else affects the budget, if a role has $100$ resources in its budget at each turn and spends only $10$ resources, this very same role has $90$ resources in its budget at the next turn. On the other hand, islands can choose to increase the budget periodically every turn. This is governed by another budget extension rule.
 
 
 
 
 %one turn and it spends 10, it has 90 resources in it's budget the next turn. 
 
-Finally, it must be noted that the budget is inherently linked with the fact that whether obligations of a specific role can be undergone.
-For example, during \emph{monitoring}, it should not be seen as a rule violation if a role has not acted on an obligation if it would go over the budget as a result. 
+Finally, it must be noted that the budget is inherently linked with  whether the obligations of a specific role can be undertaken.
+For example, during \emph{monitoring}, it is not seen to be a rule violation if a role has not acted on an obligation as doing so would require it to go over budget.
 
 %This can also be seen as an added clause "... and the action is only permitted if they have the budget" to most rules which govern actions with an endogenous-cost.
 %\begin{rule_IIGO}
@@ -417,6 +416,7 @@ A salary is paid to each role in power as an incentive to act in a publicly appr
 In Rule~\ref{rule:salary}, setting $S=0$ (through changing the active rules in place) means that roles do not have the permission to pay any salary. Removing the Rule~\ref{rule:salary} means that the roles may freely choose the amount $S$ for the salary payments.
 
 \section{IIGO Session Order}
+Each IIGO Session can be broken down into a sequence of consecutive actions by the Judiciary, Executive and Legislature. The session is concluded with monitoring, salary payments and elections.
 \subsection{Judicial Actions}
 \begin{enumerate}
     \item The Judge has the \emph{power} to check the history of actions to confirm whether the previously punished island(s) has/have obeyed the previous round's sanctions, meaning whether they contributed to the common pool accordingly in case of economic sanctions.
@@ -454,7 +454,7 @@ In Rule~\ref{rule:salary}, setting $S=0$ (through changing the active rules in p
 \end{enumerate}
 \subsection{End of Session Actions}
 \begin{enumerate}
-    \item The roles pay salary for one another following the accountability cycle in Figure~ \ref{fig:cycles_in_IIGO}.
+    \item The roles pay a salary to one another following the accountability cycle in Figure~ \ref{fig:cycles_in_IIGO}.
     \item The Speaker has the \emph{power} to decide to carry out \emph{monitoring} on: 
     \begin{enumerate}
     \item the resource allocation decided by the President.
