@@ -477,7 +477,53 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
     \item The Judge has the \emph{power} to decide to hold an election for a new President.
 \end{enumerate}
 
+\section{Executive branch Implementation}
 
+The executive branch has been implemented to facilitate the use of powers given to the President. Because any agent could potentially become the President, the implementation of the executive branch has been split into two interconnected parts:
+\begin{itemize}
+\item Client-side implementation of presidential functions, which map directly to the powers given to the President.
+\item Server-side implementation of executive branch actions, which calls the presidential functions only on the currently residing President.
+\end{itemize}
+
+
+
+\subsection{Client-side implementation}
+\label{sub:president:client-side}
+Each agent can become the President at any turn. Therefore each agent should implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
+
+The presidential functions can be divided into two categories:
+\begin{enumerate}
+\item Presidential power functions:
+    \begin{itemize}
+        \item \texttt{SetTaxationAmount} allows the President to decide the amount of taxation individually set to each island. Returns the $map[agent] \xrightarrow[]{} tax$, as well as information about whether the President has acted on its power to set taxation.
+        \item \texttt{EvaluateAllocationRequests} allows the President to decide the allocation of resources distributed from the common pool to the islands. Returns the $map[agent] \xrightarrow[]{} allocation$, as well as information about whether the President has acted on its power to set allocation to common pool resources.
+        \item \texttt{PickRuleToVote} allows the President to select a rule for voting $R∗$ to be passed to the Speaker. Returns the $rule$ to be voted on by the Speaker, as well as information about whether the President has acted on its power to choose a new rule to be incorporated into the \texttt{RulesInPlay}.
+    \end{itemize}
+\item The accountability cycle and transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PaySpeaker} implements the obligation of the President to pay the Speaker its salary. 
+        \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
+        \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its obligation to announce the result of Speaker election.
+    \end{itemize}
+\end{enumerate}
+
+
+Such division gives agents the freedom to implement the presidential functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the Judge inspecting their actions will never find any disobedience occurred. When implementing their presidential functions, islands can either follow a rule-obeying approach or try to exploit their presidential power when they are elected to be the President. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
+
+\subsection{Server-side Implementation}
+\label{sub:president:server-side}
+Server implementation of executive branch provides the President with the framework to use its powers of carrying out the law at the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the President and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different President implementation. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
+
+The flow of every server-side function call of the executive branch can be presented in the following way:
+\begin{enumerate}
+    \item The required information from agents or other roles is obtained. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
+    \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
+    \item Presidential function is called only on the currently residing President with aggregated information as inputs.
+    \item The outcome of the presidential function call is processed.
+    \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
+\end{enumerate}
+
+Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
 
 \section{Future Work}
 
