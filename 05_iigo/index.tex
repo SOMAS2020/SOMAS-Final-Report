@@ -510,7 +510,7 @@ The presidential functions can be divided into two categories:
 
 Such division gives agents the freedom to implement the presidential functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the Judge inspecting their actions will never find any disobedience occurred. When implementing their presidential functions, islands can either follow a rule-obeying approach or try to exploit their presidential power when they are elected to be the President. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
 
-\subsection{Server-side implementation}
+\subsection{Server-side Implementation}
 \label{sub:president:server-side}
 Server implementation of executive branch provides the President with the framework to use its powers of carrying out the law at the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the President and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different President implementation. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
 
