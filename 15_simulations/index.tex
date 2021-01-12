@@ -7,13 +7,13 @@ The purpose of performing simulations and analysing their results is to explore 
 \section{Metrics}
 \label{sec:Simulations:Metric}
 
-To assist in this analysis we need to draw quantifiable results from the simulations. Thus enters the metrics, these numerical values or visualisation give us information on the events of the game that we can then use to compare numerous simulation and draw insights into what effect the changing of certain parameters has on the game. Some metrics are also worth knowing on a turn by turn basis and as such have been represented as graphs. 
+To assist in this analysis we need to draw quantifiable results from the simulations. Thus enters the metrics: these numerical values give us information on the events of the game that we can then use to compare numerous simulations and draw insights into what effect the changing of certain parameters has on the game. Some metrics are also worth knowing on a turn by turn basis and as such have been represented as graphs. 
 
 
 \begin{itemize}
     \item \textbf{Archipelago Survivability}: Turns until all the islands in the archipelago die.
-    \item \textbf{First Island Death}: Turns until a single island dies.
-    \item \textbf{Island Resources$^1$$^2$}: Resource an island has each turn
+    \item \textbf{First Island Death}: Turns until any island dies.
+    \item \textbf{Island Resources$^1$$^2$}: Resource an island has each turn.
     \item \textbf{Gini Index}: A measure of how fair the distribution of resources is across the archipelago.
     \item \textbf{Disasters Survived}: Number of disasters the archipelago has survived.
     \item \textbf{Island Trading$^1$$^2$}: Resources an island has gifted to other islands.
@@ -31,7 +31,7 @@ To assist in this analysis we need to draw quantifiable results from the simulat
 \section{Baseline Simulation}
 \label{sec:Simulations:baseline}
 
-In order to make any meaningful analysis one must first have baseline from which to compare. In our case, this baseline is a 'normal' set of environment conditions which allow the agents to thrive for a significant period of time, around 100 turns. From this baseline we can then start adjusting the configuration of the simulation, either making disaster more frequent/deadly, or making resources more sparse.
+In order to make any meaningful analysis one must first have a baseline from which to compare. In our case, this baseline is a \emph{normal} set of environment conditions which allows the agents to thrive for a significant period of time, chosen at around 100 turns. From this baseline we can then start adjusting the configuration of the simulation, either making disasters more frequent/deadly, or making resources more sparse.
 
 Note: If a metric is not of interest to a certain area of exploration it will not be shown.
 
