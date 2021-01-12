@@ -514,7 +514,16 @@ Such division gives agents the freedom to implement the presidential functions a
 \label{sub:president:server-side}
 Server implementation of executive branch provides the President with the framework to use its powers of carrying out the law at the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the President and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different President implementation. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
 
+The flow of every server-side function call of the executive branch can be presented in the following way:
+\begin{enumerate}
+    \item Obtaining the required information from agents or other roles. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
+    \item Aggregating this information into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$)
+    \item Calling the presidential function only on the currently residing President with aggregated information as inputs
+    \item Processing the outcome of the presidential function call
+    \item Passing the outcome of the action, or lack thereof, to the archipelago
+\end{enumerate}
 
+Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
 
 \section{Future Work}
 
