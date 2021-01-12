@@ -499,11 +499,9 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 \subsection{Legislative Branch}
 \subsection{Judicial Branch}
 \subsection{Accountability Cycle}
-The accountability cycle is implemented 
+The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side.
 
-
-It is not unreasonable to say that the clients produced in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result when a role chooses not to monitor is $true$.
-
+\subsubsection{Client-side}
 The client-side impelmentations are:
 \begin{enumerate}
     \item \texttt{MonitorIIGORole} allows the client to decide whether to monitor the given role. 
@@ -517,5 +515,12 @@ The client-side impelmentations are:
         \item Outputs - $decideToAnnounce:bool$, $monitoringResultToAnnounce:bool$
     \end{itemize} 
 \end{enumerate}
+\subsubsection{Server-side}
+The key server-side implementations are:
+\begin{enumerate}
+    \item \texttt{addToCache} populates a monitoring cache which is a record of actions taken and their results. This function is called after every IIGO action e.g. broadcasting taxation.
+    \item \texttt{monitorRole} performs the monitoring of a role as decided by the role accountable. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
+\end{enumerate}
+It is not unreasonable to say that the clients birthed in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result when a role chooses not to monitor is $true$.
 \subsection{Rule Representation}
 \subsection{Rules In Play}
