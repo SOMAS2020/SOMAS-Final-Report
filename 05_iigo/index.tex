@@ -520,7 +520,7 @@ The flow of every server-side function call of the executive branch can be prese
     \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
     \item Presidential function is called only on the currently residing President with aggregated information as inputs.
     \item The outcome of the presidential function call is processed.
-    \item The outcome of the action, or lack thereof, is passed.
+    \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
 Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
