@@ -499,5 +499,23 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 \subsection{Legislative Branch}
 \subsection{Judicial Branch}
 \subsection{Accountability Cycle}
+The accountability cycle is implemented 
+
+
+It is not unreasonable to say that the clients produced in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result when a role chooses not to monitor is $true$.
+
+The client-side impelmentations are:
+\begin{enumerate}
+    \item \texttt{MonitorIIGORole} allows the client to decide whether to monitor the given role. 
+    \begin{itemize}
+        \item Input - $roleToBeMonitored$
+        \item Output - $decideToMonitor:bool$
+    \end{itemize} 
+    \item \texttt{DecideIIGOMonitoringAnnouncement} allows the client to decide if they would like to announce the result of monitoring and the result that they would like to announce. 
+    \begin{itemize}
+        \item Input - $actualMonitoringResult:bool$
+        \item Outputs - $decideToAnnounce:bool$, $monitoringResultToAnnounce:bool$
+    \end{itemize} 
+\end{enumerate}
 \subsection{Rule Representation}
 \subsection{Rules In Play}
