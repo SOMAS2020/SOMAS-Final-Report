@@ -496,11 +496,8 @@ The mathematics we settled on was Matrices, and the world of linear algebra that
 \linebreak
 The premise of this choice was that if a rule could be represented by matrices, then agents could look up every element of the matrix without difficulty. We'd effectively be able to expose the entire operation to the agent without reducing the scope of our rules too much.
 To give an example of these matrix based rules, let us consider a simple rule first. 
-\linebreak
-\linebreak
 "If you are expected to pay x amount of tax, the amount of tax you pay must be x"
-\linebreak
-\linebreak
+\par
 Quite obviously this is a very simple rule, however it allows us to form a basis for how to represent Rules as matrices.
 If our goal is simply to ensure that an agent pays the expected amount of tax, a basic mathematical operation we can perform is subtract the actual tax paid from the expected.
 If we get 0, we know this agent has adhered to this rule. 
@@ -609,10 +606,7 @@ Let us revist our tax rule once more, adding a further layer of complexity.
 \linebreak
 \linebreak
 "You must pay in tax at least half as many resources as you have and if you've been told to pay tax x you must pay at least tax of x."
-\linebreak
-\linebreak
 In this example there are two separate conditions. We can write both conditions as separate rules.
-\linebreak
 Condition 1:
 \[
     \textrm{Rule matrix: }
@@ -681,25 +675,24 @@ Any agent can inspect the elements of the rule matrix and simply calculate what 
 For example, if an agent is looking at the above rule and knows that their resource count is 120, and also know they've been asked to pay 75, they can go line by line through the matrix to work our what the minimum amount of tax that is needed to be paid.
 \[
     \textrm{Matrix line 1: }
-    \begin{matrix}
+    \begin{bmatrix}
         0 & 2 & -1 & 0
-    \end{matrix}
+    \end{bmatrix}
 \]
 \[
     \textrm{Values to be fed in: }
-    \begin{matrix}
+    \begin{bmatrix}
         75 \\
         x \\
         120 \\
         1
-    \end{matrix}
+    \end{bmatrix}
 \]
 \[
     \textrm{Agent calculation: }
     0*75 + 2x -120 >= 0
 \]
 \[
-    \textrm{Agent calculation: }
     x >= 60
 \]
 A similar calculation for the next line of the matrix yields:
