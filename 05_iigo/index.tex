@@ -477,6 +477,40 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
     \item The Judge has the \emph{power} to decide to hold an election for a new President.
 \end{enumerate}
 
+\section{Executive branch implementation}
+
+The executive branch has been implemented to facilitate the use of powers given to the president. Because any agent could potentially become the president, implementation of the executive branch has been split into two interconnected parts:
+\begin{itemize}
+\item Client-side implementation of presidential functions, which map directly to the powers given to the president.
+\item Server-side implementation of executive branch actions, which calls the presidential functions only on the currently residing president.
+\end{itemize}
+
+\subsection{Client-side implementation}
+\label{sub:president:client-side}
+Each agent can become a president therefore each agent has to implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
+
+The presidential functions can be divided into two categories:
+\begin{enumerate}
+\item Presidential power functions:
+    \begin{itemize}
+        \item \texttt{SetTaxationAmount} allows the president to decide the amount of individual taxation set to each island.
+        \item \texttt{EvaluateAllocationRequests} allows the president to decide the allocation of resources distributed from the common pool to the islands.
+        \item \texttt{PickRuleToVote} allows the president to select a rule for voting R∗ to be passed to the Speaker.
+    \end{itemize}
+\item The accountability cycle and transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PaySpeaker} implements the obligation of the president to pay the Speaker the full salary. 
+        \item \texttt{CallSpeakerElection} implements the power of the president to initiate the transfer-of-power for the Speaker
+        \item \texttt{DecideNextSpeaker} allows the president to modify the outcome of the election and choose not to follow its obligation to announce the result of Speaker election.
+    \end{itemize}
+\end{enumerate}
+
+
+Such an approach gives agents the freedom to implement the president functions however they want, provided that they follow the interface. Some agents may choose to obey the rules to ensure that the Judge monitoring their actions will never find anything wrong. Other islands can follow the same, rule-obeying approach, but use the secret information provided to the president to adapt their strategy to the situation. For example, the president gets access to private-pool resource reports of all the islands and can use this privileged information in other organisations.
+
+\subsection{Server-side implementation}
+\label{sub:president:server-side}
+
 
 
 \section{Future Work}
