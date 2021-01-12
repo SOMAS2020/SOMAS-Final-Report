@@ -234,7 +234,7 @@ All sanctions are of economic nature which include:
             \end{itemize}
         
     \end{itemize}
-    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with each time an island breaks a rule, the cumulative penalties accumulated by the island are then used to determine which \textbf{sanction tier} that each island falls into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At each turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarise, the sanctioning process follows these steps:
+    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with each time an island breaks a rule, the cumulative penalties accumulated by the island are then used to determine which \textbf{sanction tier} that each island falls into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At each turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarize, the sanctioning process follows these steps:
     
     
     
@@ -323,11 +323,11 @@ The powers related to the accountability cycle and transfer-of-power for each ro
 
 The result of monitoring is intended to be a trigger for the initiation of power transfer, whereby a declaration of a negative result indicates that at least one rule was broken by the role monitored and the role should be re-elected. Each turn, in addition to monitoring the actions taken by the role in that IIGO session, the election that role held in the previous IIGO session, if one was held at all, is checked for compliance with the rules of power-transfer.
 
-Figure~ \ref{fig:cycles_in_IIGO} illustrates the reverse nature of the monitoring and power transfer cycles. This is a choice made by design to spread out the process of pre-mature removal from power as a result of wrongdoing. The goal is to avoid malice. If it is one role's power to monitor, it is the other's to initiate and facilitate power transfer. Hence the latter is given a second opinion for cases where the declaration of wrongdoing is not thruthful.
+Figure~ \ref{fig:cycles_in_IIGO} illustrates the reverse nature of the monitoring and power transfer cycles. This is a choice made by design to spread out the process of pre-mature removal from power as a result of wrongdoing. The goal is to avoid malice. If it is one role's power to monitor, it is the other's to initiate and facilitate power transfer. Hence the latter is given a second opinion for cases where the declaration of wrongdoing is not truthful.
 
 Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands. We still have rules governing this process (see Rule~\ref{rule:monitoring_1} and Rule~\ref{rule:monitoring_2}), however these rules are not enforced.
 
-The \emph{one degree of monitoring} is another justification for the reverse nature of the monitoring and power transfer cycles. The addition of a second opionion means that a role does not hold the power to both wrongfully declare wrongdoing and hold an election for the same role. 
+The \emph{one degree of monitoring} is another justification for the reverse nature of the monitoring and power transfer cycles. The addition of a second opinion means that a role does not hold the power to both wrongfully declare wrongdoing and hold an election for the same role. 
 
 Let role $X$ be accountable to the role $Y$, which is accountable to the role $Z$. Then:
 \begin{rule_IIGO} \label{rule:monitoring_1}
@@ -349,7 +349,7 @@ Let role $X$ be accountable to the role $Y$, which is accountable to the role $Z
 \subsection{Transfer-of-power}
 \label{subsec:transfer-of-power}
 
-For the scope of this project we chose only one system of power transfer for the islands to utilise, and it is an election. The islands that hold institutional power are the decision group of the archipellago. They decide on taxes, allocations and sanctions. By holding an election for the institutional roles, the islands are not directly included in the decision group, but they do participate in deciding who will occupy these roles, who makes the aforementioned decisions. An election also opens up another avenue for opinion formation to have an effect. 
+For the scope of this project we chose only one system of power transfer for the islands to utilise, and it is an election. The islands that hold institutional power are the decision group of the archipelago. They decide on taxes, allocations and sanctions. By holding an election for the institutional roles, the islands are not directly included in the decision group, but they do participate in deciding who will occupy these roles, who makes the aforementioned decisions. An election also opens up another avenue for opinion formation to have an effect. 
 \begin{itemize}
     \item Each role has the \emph{power} to call an election vote and declare the winner (see Figure~ \ref{fig:cycles_in_IIGO} for the power transfer cycle). 
 \end{itemize}
@@ -362,23 +362,23 @@ We note that:
 \end{enumerate}
 Refer to the Figure~ \ref{fig:cycles_in_IIGO} for further clarification about the transfer-of-power cycle.
 
-We introcude a \emph{term} length to futher spread out the diversity of the decision group. If the Rule~\ref{rule:roles_must_hold_election} is in play, the roles are obliged to hold an election every N turns. To reduce the scope of the coursework, the term length is defined as a configuration parameter. Thus we reduce the complexity of reasoning the agents have to do with reagard to the transfer-of-power of roles.
+We introduce a \emph{term} length to further spread out the diversity of the decision group. If the Rule~\ref{rule:roles_must_hold_election} is in play, the roles are obliged to hold an election every N turns. To reduce the scope of the coursework, the term length is defined as a configuration parameter. Thus we reduce the complexity of reasoning the agents have to do with regard to the transfer-of-power of roles.
 
 \begin{rule_IIGO} \label{rule:roles_must_hold_election}
-    The role $X$ has the \emph{obligation} to conduct a vote for the election of $Y$ if and only if $Y$ has been in power for more turns than the turn length or if role $Z$ has made a monitoring anbnouncement that indicates wrongdoing by $Y$
+    The role $X$ has the \emph{obligation} to conduct a vote for the election of $Y$ if and only if $Y$ has been in power for more turns than the turn length or if role $Z$ has made a monitoring announcement that indicates wrongdoing by $Y$
 \end{rule_IIGO}
 
 \begin{rule_IIGO} \label{rule:must_appoint_elected_island}
     The role $X$ has the \emph{permission} to \emph{declare the winner} $W$ for an election $E$ if $W = W^{*}$, where $W^{*}$ is the winner produced by \emph{calling} a vote for the election $E$.
 \end {rule_IIGO}
 
-Unlike the speaker, the process of election is more regimented. The power of calling a vote for an election and the power of declaring the result are combined into one action. The decision came as a result of motion to simplify the system for implementation. However, the powers are still, somewhat, kept seperate. When facilitationg an election the roles still have the option to declare a winner of their choosing. Rule~\ref{rule:must_appoint_elected_island} is what governs this choice. The agents don't, however, have the option to not declare a result at all, holding an election will always result in an declaration of the winner. 
+Unlike the speaker, the process of election is more regimented. The power of calling a vote for an election and the power of declaring the result are combined into one action. The decision came as a result of motion to simplify the system for implementation. However, the powers are still, somewhat, kept separate. When facilitating an election the roles still have the option to declare a winner of their choosing. Rule~\ref{rule:must_appoint_elected_island} is what governs this choice. The agents don't, however, have the option to not declare a result at all, holding an election will always result in an declaration of the winner. 
 
 \section{Budget and Salary}
 \subsection{Budget}
 %Actions associated with the IIGO have an associated cost that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
 
-For the simulation we have defined the resources gathered by the islands to be endogenous. Hence we assume that self-organisation will consume those resources and institutional-power actions in the IIGO have an associated cost. The institutional-power actions with such a cost are:
+For the simulation we have defined the resources gathered by the islands to be endogenous. Hence we assume that self-organization will consume those resources and institutional-power actions in the IIGO have an associated cost. The institutional-power actions with such a cost are:
 
 
 %that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
