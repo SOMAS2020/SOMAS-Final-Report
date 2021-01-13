@@ -541,7 +541,7 @@ The presidential functions can be divided into two categories:
     \begin{itemize}
         \item \texttt{PaySpeaker} implements the power of the President to pay the Speaker its salary. 
         \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
-        \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its obligation (if Rule "TODO WHEN MY PR IS MERGED" is in play) to announce the result of Speaker election.
+        \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the result of Speaker election.
     \end{itemize}
 \end{enumerate}
 
@@ -590,8 +590,7 @@ The legislative branch functions can be divided into two categories:
     \begin{itemize}
         \item \texttt{PaySpeaker} implements the power of the Speaker to pay the Judge its salary. 
         \item \texttt{CallJudgeElection} implements the power of the Speaker to call an election for the transfer-of-power for the Judge
-        \item \texttt{DecideNextJudge} allows the Speaker to modify the outcome of the election, if one is called, and choose not to follow its permission (that is, if Rule "TODO WHEN PR 4 IS MERGED" is in play) to announce the actual election result of Judge election.
-
+        \item \texttt{DecideNextJudge} allows the Speaker to modify the outcome of the election, if one is called, and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the actual election result of Judge election.
     \end{itemize}
 \end{enumerate}
 
