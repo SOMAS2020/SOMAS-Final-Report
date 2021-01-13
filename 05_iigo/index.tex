@@ -492,8 +492,15 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 
 
 \section{Implementation} % INFRA implementation to be written here
+<<<<<<< HEAD
+\subsection{Infrastructure Overview}
+\subsection{Executive Branch}
+
+The executive branch has been implemented to facilitate the use of powers given to the President. Because any agent could potentially become the President, the implementation of the executive branch has been split into two interconnected parts:
+=======
 \subsection{IIGO Branches Overview}
 The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
+>>>>>>> main
 \begin{itemize}
 \item Client-side implementation of President, Speaker and Judge functions, which map directly to the powers given to that role.
 \item Server-side implementations of Executive, Legislative and Judicial branch actions, which call the IIGO role functions only on the client currently holding that role i.e. the executive branch only calls functions on the client assigned to the role of President.
@@ -509,7 +516,6 @@ Moreover, the server acts as a guard of the game state and prevents the clients 
 
 
 \subsection{Executive Branch}
-
 
 
 \subsubsection{Client-side}
@@ -548,5 +554,33 @@ The flow of every server-side function call of the executive branch can be prese
 \subsubsection{Legislative Branch}
 \subsubsection{Judicial Branch}
 \subsection{Accountability Cycle}
+The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
+
+It is not unreasonable to say that the clients birthed in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result, when a role chooses not to monitor, is $true$.
+
+\subsubsection{Client-side}
+The client-side impelmentations are:
+\begin{enumerate}
+    \item \texttt{MonitorIIGORole} allows the client to decide whether to monitor the given role. 
+    \begin{itemize}
+        \item Input - $\mathrm{roleToBeMonitored}$
+        \item Output - $\mathrm{decideToMonitor:bool}$
+    \end{itemize} 
+    \item \texttt{DecideIIGOMonitoringAnnouncement} allows the client to decide if they would like to announce the result of monitoring and the result that they would like to announce. 
+    \begin{itemize}
+        \item Input - $\mathrm{actualMonitoringResult:bool}$
+        \item Outputs - $\mathrm{decideToAnnounce:bool}$, $\mathrm{monitoringResultToAnnounce:bool}$
+    \end{itemize} 
+\end{enumerate}
+\subsubsection{Server-side}
+
+The key server-side implementations are:
+\begin{enumerate}
+    \item \texttt{addToCache} populates a monitoring cache which is a record of actions taken and their results. This function is called after every IIGO action (e.g. broadcasting taxation).
+    \item \texttt{monitorRole} performs the monitoring of a role as decided by the accountable role. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
+\end{enumerate}
+
+The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
+
 \subsection{Rule Representation}
 \subsection{Rules In Play}
