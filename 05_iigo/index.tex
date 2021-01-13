@@ -722,7 +722,7 @@ A similar calculation for the next line of the matrix yields:
     \textrm{Agent calculation: }
     x >= 75
 \]
-The agent can understand now to pay a minimum of 75. This system allows Agents to both check if they are compliant, and if not they can calculate which values they need to be compliant.
+Following the equations above, the agent is able to understand that it needs to pay a minimum of $75$ for tax. This system allows the agents both to check if they are compliant and if not, how to calculate which values they need to be compliant.
 As a final note, we have designed an additional abstraction to this rules system to accomodate conditional rules.
 For example if you had the rule "If resources are above 100, you must pay at least 75". 
 To acommodate this we instead split this into two separate rules; "If resources are above 100" and "You must pay at least 75", and conditionally execute them such that if rule 1 fails then the whole structure passes and if rule 1 passes we expect rule 2 to pass.
