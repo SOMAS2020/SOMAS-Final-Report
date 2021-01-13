@@ -518,10 +518,6 @@ Moreover, the server acts as a guard of the game state and prevents the clients 
 \subsection{Executive Branch}
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 \subsubsection{Client-side}
 \label{sub:president:client-side}
 Each agent can become the President at any turn. Therefore each agent should implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
@@ -542,12 +538,6 @@ The presidential functions can be divided into two categories:
     \end{itemize}
 \end{enumerate}
 
-<<<<<<< HEAD
-
-Such division gives agents the freedom to implement the presidential functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the Judge inspecting their actions will never find any disobedience occurred. When implementing their presidential functions, islands can either follow a rule-obeying approach or try to exploit their presidential power when they are elected to be the President. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
-
-=======
->>>>>>> main
 \subsubsection{Server-side}
 \label{sub:president:server-side}
 
@@ -561,14 +551,8 @@ The flow of every server-side function call of the executive branch can be prese
     \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
-<<<<<<< HEAD
-Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
-\subsection{Legislative Branch}
-\subsection{Judicial Branch}
-=======
 \subsubsection{Legislative Branch}
 \subsubsection{Judicial Branch}
->>>>>>> main
 \subsection{Accountability Cycle}
 The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
 
