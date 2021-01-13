@@ -492,7 +492,6 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 
 \section{Implementation} % INFRA implementation to be written here
 
-
 \subsection{IIGO Branches Overview}
 The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
 
@@ -648,4 +647,254 @@ The key server-side implementations are:
 The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
 
 \subsection{Rule Representation}
+
+\begin{quote}
+    "Learn the rules like a pro, so you can break them like an artist."
+    \linebreak
+    \noindent \emph{Pablo Picasso}
+\end{quote}
+
+Rules underpin most of the operation of the IIGO. Hence, we needed their implementation to be rather flexible in our coursework.
+Furthermore, we noticed that following rules will be difficult for agents unless we provided them with the ability to \emph{not} only check whether they are complicit with them but also with the inner workings of the rules so that agents could calculate for themselves how to become complicit if they wish so.
+Moreover, we also concluded that we should rather opt for a mathematical representation of the rules since agents would be able to much more easily inspect the relevant mathematical equation(s) more easily than a text or functional representation of the rules.
+The mathematics we decided to employ was matrices and the world of linear algebra that surrounds them.
+\linebreak
+The premise of this choice was that if a rule could be represented by matrices, then agents could look up every element of the matrix without any significant difficulty. This would enable us to effectively expose the entire operation of any rule to the agent without reducing the scope of our rules too much.
+To give an example for this matrices-based rule representation, let us consider a simple rule first. \\ ```
+\begin{rule_IIGO}
+    "If you are expected to pay $X$ amount of taxation, the amount of tax you pay must be $X$."
+\label{rule:basicTaxRule}
+\end{rule_IIGO}
+\par
+Notice that Rule~\ref{rule:basicTaxRule} is a rather simple one. However, it allows us to form a basis for how to represent rules as matrices.
+If our goal is simply to ensure that an agent pays the expected amount of tax, a basic mathematical operation we can perform is to subtract the actual tax paid from the expected.
+If we obtain $0$ from this subtraction, we can conclude that this agent has adhered to this rule. \\
+Formally, let $x$ and $y$ be the expected and the actual paid amount of tax, respectively. To confirm adherence to the rule, we want to calculate:
+\begin{equation}
+    y - x = 0 . 
+    \label{equation:basicMaths}
+\end{equation}
+
+To turn Equation~\eqref{equation:basicMaths} into a matrix calculation, we simply have to introduce some trivial coefficients.
+\begin{equation}
+    -1*x +
+       1*y = 0
+       \label{equation:coefLinear}
+\end{equation}
+      
+Now, we can write Equation~\eqref{equation:coefLinear} as a matrix calculation.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y
+    \end{bmatrix}   
+    = 0  
+    \label{equation:firstMatrix}
+\end{equation}
+
+We have now encoded this simple rule given as an example in terms of a matrix product. An agent can input their versions of $x$ and $y$, and perform the calculation.
+The agents can then check if their result of Equation~\eqref{equation:firstMatrix} is equal to $0$. Let us examine a slightly more complicated rule. \\
+\begin{rule_IIGO}
+    "If you are expected to pay $x$ amount of tax, the amount of tax you pay must be at least $x$."
+\end{rule_IIGO}
+
+We can rewrite the matrix equation as an inequality.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y
+    \end{bmatrix}   
+    \geq 0
+    \label{equation:basicInequality}  
+\end{equation}
+The addition of the "at least" (i.e. $\geq$) in Equation~\eqref{equation:basicInequality} adds a little bit of complexity to our previously introduced matrix scheme. For this instance, we may not be able to simply check for equality and but instead, need to check for a $\geq$.
+We made a decision that we would ensure all of our calculations would be compared to $0$. This allowed us to reduce the complexity of our calculation algorithms.
+However, with this simplification, we encounter a problem with a rule like Rule~\ref{rule:taxWithOffset}.
+\begin{rule_IIGO}
+    "If you are expected to pay $x$ amount of tax, the amount of tax you pay must be at least $x + 5$."
+    \label{rule:taxWithOffset}
+\end{rule_IIGO}
+In this case, it would be impossible to capture this rule using the previously suggested matrix scheme. Therefore, to capture such cases of rules, we introduce a \emph{constant} to the input list, as below in Equation~\eqref{equation:inequalityWithOffset}.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1 & -5
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        1
+    \end{bmatrix}   
+    \geq 0 
+    \label{equation:inequalityWithOffset} 
+\end{equation}
+
+We have now managed to capture any linear equation or inequality with any constant shift. This is where we decided to limit the scope of our rules from a technical aspect.
+The final section of our scheme is how to inform an agent whether it should be looking for equality or inequality.
+For this end, we incorporate an \emph{auxiliary} vector containing a list of comparison codes to the previously discussed matrix-based rule representation.\\
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+    \hline
+    \multicolumn{1}{|l}{Auxiliary Code} & \multicolumn{1}{l|}{Meaning} \\ \hline
+    0                             & = 0                          \\
+    1                             & > 0               \\
+    2                             & $\geq$ 0            \\
+    3                             & != 0                         \\
+    4                             & real                        
+    \end{tabular}
+    \label{table:auxCodeTable}
+\end{table}
+\linebreak
+As seen in Table~\ref{table:auxCodeTable}, the auxilliary code 4 is reserved for the cases where we want the raw result of the matrix multiplication, which is used sparingly for certain rules.
+We have now arrived at the representation of rules we are using for our coursework. For the rule above, we have the following rule representation:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        -1 & 1 & -5
+    \end{bmatrix}      
+    \label{equation:initialRM}     
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }  
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        1
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\end{equation}
+Let us revisit Rule~\ref{rule:taxWithOffset} once more, adding a further layer of complexity.
+\begin{rule_IIGO}
+    "You must pay in tax at least half as many resources as you have and if you've been told to pay tax $x$, you must pay at least $x$ amount of tax."
+\end{rule_IIGO}
+
+In this example, note that there are two separate conditions. We can write both conditions as separate rules.
+\\ Condition 1:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0
+    \end{bmatrix}
+    \label{equation:rx1}
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\[
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\]
+Condition 2:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        -1 & 1 & 0 & 0
+    \end{bmatrix}
+    \label{equation:rx2}
+\end{equation}
+\begin{equation}
+\textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\end{equation}
+However, we can also write both Equation~\eqref{equation:rx1} and Equation~\eqref{equation:rx2} as a single stacked rule as follows:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0 \\
+        -1 & 1 & 0 & 0 
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 \\
+        2 
+    \end{bmatrix}   
+\end{equation}
+The advantage of this matrix-based rule representation is that the mechanics of the calculation is exposed. 
+Any agent can inspect the elements of the rule matrix in order to easily calculate what values they must provide to adhere to a specific rule.
+For example, if an agent is looking at the above rule and knows that their resource count is $120$, and also know they've been asked to pay $75$, they can go line by line through the matrix to work our what the minimum amount of tax that is needed to be paid.
+\begin{equation}
+    \textrm{Matrix line 1: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{Values to be fed in: }
+    \begin{bmatrix}
+        75 \\
+        x \\
+        120 \\
+        1
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{Agent calculation: }
+    0*75 + 2x -120 \geq 0
+\end{equation}
+\begin{equation}
+    x \geq 60
+\end{equation}
+A similar calculation for the next line of the matrix yields:
+\begin{equation}
+    \textrm{Agent calculation: }
+    x \geq 75
+\end{equation}
+Following the equations above, the agent is able to understand that it needs to pay a minimum of $75$ for tax. This system allows the agents both to check if they are compliant and if not, how to calculate which values they need to be compliant.
+As a final note, we have designed an additional abstraction to this rules system to accomodate conditional rules.
+For example if you had the rule 
+\begin{rule_IIGO}
+    "If resources are above $100$, you must pay at least $75$".
+\end{rule_IIGO} 
+To accommodate this, we instead split this into two separate rules.
+\begin{rule_IIGO}
+    "If resources are above $100$,"
+    \label{rule:cond1}
+\end{rule_IIGO}
+\begin{rule_IIGO}
+    "You must pay at least $75$."
+    \label{rule:cond2}
+\end{rule_IIGO}
+We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then the whole structure passes, and if Rule~\ref{rule:cond1} passes, we expect Rule~\ref{rule:cond2} to pass as well for the rule to be adhered.
+1
 \subsection{Rules In Play}
