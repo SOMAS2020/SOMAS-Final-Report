@@ -87,7 +87,7 @@ A \textbf{term} is the number of turns an island is \emph{permitted} to hold a r
 \end{definition}
 
 \subsection{\emph{Power}, \emph{Permission} and \emph{Obligation} Distinction}
-In the rest of the specifications, we will be specifically using the following three terms to define the actions and responsibilities carried out by the Speaker, President, Judge (see Figure~ \ref{fig:per_obl_sets}):
+In the rest of the specifications, we will be specifically using the following three terms to define the actions and responsibilities carried out by the Speaker, President, Judge (see Figure~\ref{fig:per_obl_sets}):
 \begin{itemize}
     \item Power
     \item Permission
@@ -298,7 +298,7 @@ Each island has the \emph{power} to:
 \label{sec:accountability}
 
 The IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power}. To ensure that the government is able to avoid corruption and abuse of power, each branch of IIGO is accountable to another through the accountability cycle. 
-The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but not identical meanings and different consequences in the context of IIGO.}. The desired effect is for any wrong-doing in IIGO to be determined as quickly as possible and the role in question to be replaced. 
+The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~\ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but not identical meanings and different consequences in the context of IIGO.}. The desired effect is for any wrong-doing in IIGO to be determined as quickly as possible and the role in question to be replaced. 
 
 The powers related to the accountability cycle and transfer-of-power for each role can be summarized as the following: 
 
@@ -324,7 +324,7 @@ The powers related to the accountability cycle and transfer-of-power for each ro
 
 The result of monitoring is intended to be a trigger for the initiation of power transfer, whereby a declaration of a negative result indicates that at least one rule was broken by the role monitored and the role should be re-elected. Each turn, in addition to monitoring the actions taken by the role in that IIGO session, the election that role held in the previous IIGO session, if one was held at all, is checked for compliance with the rules of power-transfer.
 
-Figure~ \ref{fig:cycles_in_IIGO} illustrates the reverse nature of the monitoring and transfer-of-power cycles. This is a design choice made to diversify the islands that hold the powers that enable the process of a role's premature removal from power as a result of wrongdoing, hence helping to avoid malice. If it is one role's power to monitor, it is the other role's power to initiate and facilitate power transfer. Hence the latter is given a second opinion for cases where the declaration of wrongdoing is not truthful.
+Figure~\ref{fig:cycles_in_IIGO} illustrates the reverse nature of the monitoring and transfer-of-power cycles. This is a design choice made to diversify the islands that hold the powers that enable the process of a role's premature removal from power as a result of wrongdoing, hence helping to avoid malice. If it is one role's power to monitor, it is the other role's power to initiate and facilitate power transfer. Hence the latter is given a second opinion for cases where the declaration of wrongdoing is not truthful.
 
 Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands. We still have rules governing this process (see Rule~\ref{rule:monitoring_1} and Rule~\ref{rule:monitoring_2}) although these rules are not enforced.
 
@@ -362,7 +362,7 @@ We note that:
     \item The Judge conducts an election to appoint a new President.
     \item The President conducts an election to appoint a new Speaker.
 \end{enumerate}
-Refer to the Figure~ \ref{fig:cycles_in_IIGO} for further clarification about the transfer-of-power cycle.
+Refer to the Figure~\ref{fig:cycles_in_IIGO} for further clarification about the transfer-of-power cycle.
 
 We introduce a \emph{term} length to increase the diversity of the decision group. If the Rule~\ref{rule:roles_must_hold_election} is in play, the roles are obliged to hold an election every $N$ turns. To reduce the scope of the coursework, the term length is defined as a configuration parameter. Thus, we reduce the complexity of rules surrounding the election of roles and hence the reasoning the agents have to do with regard to these rules.
 
@@ -477,7 +477,7 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 \end{enumerate}
 \subsection{End of Session Actions}
 \begin{enumerate}
-    \item The roles pay a salary to one another following the accountability cycle in Figure~ \ref{fig:cycles_in_IIGO}.
+    \item The roles pay a salary to one another following the accountability cycle in Figure~\ref{fig:cycles_in_IIGO}.
 
     \item The Speaker has the \emph{power} to decide to carry out \emph{monitoring} on:
     \begin{enumerate}
@@ -911,7 +911,7 @@ A similar calculation for the next line of the matrix yields:
 \end{equation}
 Following the equations above, the agent is able to understand that it needs to pay a minimum of $75$ for tax. This system allows the agents both to check if they are compliant and if not, how to calculate which values they need to be compliant.
 As a final note, we have designed an additional abstraction to this rules system to accomodate conditional rules.
-For example if you had the rule 
+For example, if you had the rule:
 \begin{rule_IIGO}
     "If resources are above $100$, you must pay at least $75$".
 \end{rule_IIGO} 
@@ -925,7 +925,6 @@ To accommodate this, we instead split this into two separate rules.
     \label{rule:cond2}
 \end{rule_IIGO}
 We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then the whole structure passes, and if Rule~\ref{rule:cond1} passes, we expect Rule~\ref{rule:cond2} to pass as well for the rule to be adhered.
-1
 \subsection{Rules In Play}
 
 \section{Future Work}
