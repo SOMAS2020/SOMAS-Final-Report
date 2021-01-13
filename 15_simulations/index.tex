@@ -2,36 +2,45 @@
 \section{Introduction}
 \label{sec:Simulations:Intro}
 
-The purpose of performing simulations and analysing their results is to explore the efficacy of each agent's strategy under different conditions. We would like to answer questions such as: does the benefit of organisation outweigh the cost? Or, can the agent strategies overcome the foraging dilemma outlined in Section INSERT REF LATER? The analysis encapsulates the purpose of the entire project, and is the final result of all the work done. In this chapter we aim to prove that our platform and the agents are capable of displaying interesting behaviour and that we can draw conclusions about how certain behaviours and environmental factors affect a multi-agent system.
+The purpose of performing simulations and analysing their results is to explore the efficacy of each agent's strategy under different conditions. We would like to answer questions such as: 
+
+\begin{itemize}
+    \item Does the benefit of running the IIGO outweigh its cost? 
+    \item Can the agent strategies overcome the foraging dilemma outlined in Section INSERT REF LATER? 
+    \item Do the agents act selflessly or selfishly?
+    \item How important is collaboration to an island's survival?
+    \item How do the island's organise themselves under different conditions? %maybe change
+\end{itemize}
+
+The analysis encapsulates the purpose of the entire coursework and therefore, is the final result of all the work done. In this chapter, we aim to prove that our platform and the agents are capable of displaying interesting behaviour and hence, we can draw conclusions about how certain behaviours and environmental factors affect a multi-agent system.
 
 \section{Metrics}
 \label{sec:Simulations:Metric}
 
-To assist in this analysis we need to draw quantifiable results from the simulations. Thus enters the metrics: these numerical values give us information on the events of the game that we can then use to compare numerous simulations and draw insights into what effect the changing of certain parameters has on the game. Some metrics are also worth knowing on a turn by turn basis and as such have been represented as graphs. 
+To assist in this analysis, we need to draw quantifiable results from the simulations. Thus enters the metrics: These numerical values give us information on the events of the game that we can then use to compare numerous simulations and draw insights into what influences the changing of certain parameters has on the game. Some metrics are also worth knowing on a turn by turn basis and as such have been represented as graphs. 
 
 
 \begin{itemize}
-    \item \textbf{Archipelago Survivability}: Turns until all the islands in the archipelago die.
-    \item \textbf{First Island Death}: Turns until any island dies.
-    \item \textbf{Island Resources$^1$$^2$}: Resource an island has each turn.
+    \item \textbf{Archipelago Survivability}: Number of turns until all the islands in the archipelago die.
+    \item \textbf{First Island Death}: Number of turns until any island dies.
+    \item \textbf{Island Resources\footnote{\label{foot:Simulations:per_island}Presented on a per-island basis.}\footnote{\label{foot:Simulations:graph}Presented as a graph.}}: Amount of resources an island has each turn.
     \item \textbf{Gini Index}: A measure of how fair the distribution of resources is across the archipelago.
-    \item \textbf{Disasters Survived}: Number of disasters the archipelago has survived.
-    \item \textbf{Island Trading$^1$$^2$}: Resources an island has gifted to other islands.
-    \item \textbf{Average Disaster Damage Mitigated(ADDM)}: Average disaster damage mitigated by the common pool.
-    \item \textbf{Island Foraging Statistics(IFS)$^1$}: Resources an island has invested and gained from foraging.
-    \item \textbf{Archipelago Foraging Sustainability(AFS)}: The average net forage returns across all islands.
-    \item \textbf{IIGO Roles$^2$}: The power each island has at any turn in the game. Power in this case is occupying one of the three roles in IIGO.
-    \item \textbf{IIGO Allocations$^1$$^2$}: Amount of resources allocated to each island by the president and the amount the island has taken.
-    \item \textbf{IIGO Tax$^1$$^2$}: Amount of resources an island is expected to pay to the common pool for tax and amount the island has paid.
-    \item \textbf{IIGO Sanctions$^1$$^2$}: Amount of resources an island is expected to pay to the common pool for sanctions and amount the island has paid.
+    \item \textbf{Disasters Survived}: Number of disasters the archipelago has survived (At least one island is alive after the disaster).
+    \item \textbf{Island Gifting$^{\ref{foot:Simulations:per_island}}$$^{\ref{foot:Simulations:graph}}$}: Amount of resources an island has gifted to other islands.
+    \item \textbf{Average Disaster Damage Mitigated (ADDM)}: Average disaster damage mitigated by the common pool.
+    \item \textbf{Island Foraging Statistics(IFS)$^{\ref{foot:Simulations:per_island}}$}: Amount of resources an island has invested and gained from foraging.
+    \item \textbf{Archipelago Foraging Sustainability (AFS)}: The average net forage returns across all islands.
+    \item \textbf{IIGO Roles$^{\ref{foot:Simulations:graph}}$}: The power each island has at any turn in the game. \footnote{Power in this case is occupying one of the three roles in IIGO.}
+    \item \textbf{IIGO Allocations$^{\ref{foot:Simulations:per_island}}$$^{\ref{foot:Simulations:graph}}$}: Amount of resources allocated to each island by the President and the amount the island has taken from the common pool.
+    \item \textbf{IIGO Tax$^{\ref{foot:Simulations:per_island}}$$^{\ref{foot:Simulations:graph}}$}: Amount of resources an island is expected to contribute to the common pool in terms of tax and amount of tax an island has actually paid.
+    \item \textbf{IIGO Sanctions$^{\ref{foot:Simulations:per_island}}$$^{\ref{foot:Simulations:graph}}$}: Amount of resources an island is expected to contribute to the common pool due to the imposed sanctions and the amount the island has actually paid, for the imposed sanctions, to the common pool.
     
 \end{itemize}
-\small{$^1$ Presented on a per island basis. $^2$ Presented as a graph}
 
 \section{Baseline Simulation}
 \label{sec:Simulations:baseline}
 
-In order to make any meaningful analysis one must first have a baseline from which to compare. In our case, this baseline is a \emph{normal} set of environment conditions which allows the agents to thrive for a significant period of time, chosen at around 100 turns. From this baseline we can then start adjusting the configuration of the simulation, either making disasters more frequent/deadly, or making resources more sparse.
+In order to make any meaningful analysis one must first have a baseline against which to compare other simulations. In our case, this baseline is a \emph{normal} set of environmental conditions which allows the agents to thrive for a significant period of time, chosen to be around 100 turns. From this baseline, we can then start adjusting the configuration of the simulation by either making disasters more frequent and deadly or making resources more sparse.
 
 Note: If a metric is not of interest to a certain area of exploration it will not be shown.
 
@@ -39,15 +48,15 @@ Note: If a metric is not of interest to a certain area of exploration it will no
 \label{subsec:Simulations:baseline:num_metrics}
 \begin{table}[htb]
     \centering
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l|c|}
     \hline
     \textbf{Metric}                     & \textbf{Value} \\ \hline
-    \textbf{Archipelago Survivability}  &       \\
-    \textbf{First Island Death}         &       \\
-    \textbf{Gini Index}                 &       \\
-    \textbf{Disasters Survived}         &       \\
-    \textbf{ADDM}                       &       \\
-    \textbf{AFS}                        &       \\ \hline
+    \textbf{Archipelago Survivability}  & 50     \\
+    \textbf{First Island Death}         & 50     \\
+    \textbf{Gini Index}                 & 50     \\
+    \textbf{Disasters Survived}         & 50     \\
+    \textbf{ADDM}                       & 50     \\
+    \textbf{AFS}                        & 50     \\ \hline
 \end{tabular}
 \caption{Numerical Metrics}
 \end{table}
@@ -56,27 +65,27 @@ Note: If a metric is not of interest to a certain area of exploration it will no
 \label{subsec:Simulations:baseline:ifs}
 \begin{table}[htb]
     \centering
-        \begin{tabular}{|l|l|l|l|}
+        \begin{tabular}{|p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|}
         \hline
-        Island            & Investment & Return & Ratio \\ \hline
-        \textbf{1: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
-        \textbf{2: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
-        \textbf{3: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
-        \textbf{4: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
-        \textbf{5: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
-        \textbf{6: Total} &            &        &       \\
-        Deer              &            &        &       \\
-        Fish              &            &        &       \\ \hline
+        Island            & Investment  & Return      & Ratio      \\ \hline
+        \textbf{1: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
+        \textbf{2: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
+        \textbf{3: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
+        \textbf{4: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
+        \textbf{5: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
+        \textbf{6: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
+        Deer              & 50          & 50          & 50         \\
+        Fish              & 50          & 50          & 50         \\ \hline
 \end{tabular}
 \caption{Island Foraging Statistics}
 \end{table}
@@ -89,5 +98,5 @@ Note: If a metric is not of interest to a certain area of exploration it will no
 \subsection{Baseline IIGO Roles}
 \label{subsec:Simulations:baseline:IIGO_roles}
 
-\subsection{Baseline Trading}
+\subsection{Baseline Gifting}
 \label{subsec:Simulations:baseline:trading}
