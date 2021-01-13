@@ -552,7 +552,7 @@ The judicial branch has two parts: the Judicial branch itself, which exists on t
 \subsubsection{Client-side}
 The Judge decision making functions can be divided into two categories:
 \begin{enumerate}
-    \item Judge power functions:
+    \item Judicial power functions:
     \begin{itemize}
         \item \texttt{InspectHistory} allows the Judge to inspect the history cache and evaluate whether agents have complied with the rules or transgressed. Provided the history cache, this returns a $map[agent] \xrightarrow[]{} []transgressions$ as well as information about whether the Judge has acted on its power to inspect the history cache.
         \item \texttt{GetRuleViolationSeverity} allows the Judge to set sanction penalties for violating specific rules. Returns a $map[ruleName] \xrightarrow[]{} penalty$. If this is not set by the Judge, the default sanction penalty is 1 unit of resources for every rule broken.
