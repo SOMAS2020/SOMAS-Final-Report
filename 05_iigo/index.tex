@@ -551,7 +551,50 @@ The flow of every server-side function call of the executive branch can be prese
 The judicial branch has two parts, the Judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the judge role which is in the hands of the agent which is currently Judge. This agent is able to use the Judge role to make decisions which  are communicated to the serverside Judicial-branch which performs the actions.
 \subsubsection{Client-side}
 \subsubsection{Server-side}
-\subsubsection{Sanctions}
+\subsection{Sanctions}
+In our archipelago sanctions are the great equaliser. They have been designed with the intention of punishing islands who break rules, and to ensure that others are notified of this. Each sanction will last for a configurable nubmer of turns.
+\subsubsection{Sanction Score}
+The judicial branch is able to evaluate all the actions that have been taken by the islands in the archipelago. 
+The holder of the judge role is given the choice to upload custom scores for any rules which they would like to penalise more or less heavily if broken.
+Any custom scores are then broadcast to all islands, to give them more or less incentive to break these rules. \\
+
+Once the judge has inspected the events of the past turn, and whether or not islands have broken any rules. The judicial branch uses the Judge's custom scoring to calculate the sanction score of each island.
+
+\subsubsection{Sanction Tier}
+With the combined sanction score of each island calculated, the judge must decide which sanction tier to assign each island. 
+There are 5 sanction tiers as well as a \emph{No sanction} option. The judge can upload custom \emph{Sanction score} thresholds for each tier, or they can choose to stick with default values.
+The judicial branch uses either the custom thresholds or default values, as instructed, and considers the sanction scores of each island to place them in a sanction tier. \\
+The sanction tier that each island falls in is broadcast to all islands.
+
+Each sanction tier has an associated rule,
+\begin{itemize}
+    \item Sanction tier 1: \begin{rule_IIGO} 
+        An island in sanction tier $1$ must pay a sanction of $0$\% of their current personal resources plus a constant amount of 10.
+    \end{rule_IIGO}
+    \item Sanction tier 2: \begin{rule_IIGO} 
+        An island in sanction tier $2$ must pay a sanction of $20$\% of their current personal resources plus a constant amount of 10.
+    \end{rule_IIGO}
+    \item Sanction tier 3: \begin{rule_IIGO} 
+        An island in sanction tier $3$ must pay a sanction of $30$\% of their current personal resources plus a constant amount of 10.
+    \end{rule_IIGO}
+    \item Sanction tier 4: \begin{rule_IIGO} 
+        An island in sanction tier $4$ must pay a sanction of $50$\% of their current personal resources plus a constant amount of 10.
+    \end{rule_IIGO}
+    \item Sanction tier 5: \begin{rule_IIGO} 
+        An island in sanction tier $5$ must pay a sanction of $80$\% of their current personal resources plus a constant amount of 10.
+    \end{rule_IIGO}
+\end{itemize}
+
+These rules are used to calculate the exact resource payment that will be required of each isalnd to pay off their sanction. These specific payments are only broadcast to the islands that must pay them.
+
+\subsubsection{Pardons}
+\begin{quote}
+    "Always forgive your enemies; nothing annoys them so much."
+    \noindent Oscar Wilde
+\end{quote}
+The crown jewel of the sanctioning system is \emph{Pardons}. Just after the sanction tiers are calculated but before the sanction payments are broadcast, the island acting as judge is given the option to pardon any particular sanction on any island, even a historic one. 
+If the judge chooses to issue any pardons, every island will be notified of this, and can choose to use this information to form opinions of the judge. 
+Internal to the judical branch, these pardons are used to delete their corresponding sanctions from consideration when calculating the sanction payment that an island will have to pay.
 \subsection{Accountability Cycle}
 The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
 
