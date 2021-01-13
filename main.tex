@@ -1,0 +1,79 @@
+\documentclass[a4paper, twoside]{report}
+% Template author: Y. Panagis
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\hypersetup{colorlinks=false}
+\usepackage{lscape}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[ruled, vlined]{algorithm2e}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{tikz}
+%\usepackage{algpseudocode}
+\usepackage{tabularx}
+%\usepackage{multirow}
+\usepackage{makecell}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\newtheorem{definition}{Definition}
+\newtheorem{rule_IIGO}{Rule}
+
+\usepackage[ruled, vlined]{algorithm2e}
+\usepackage{parskip}
+
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+
+\begin{document}
+    % The Title, Author Name, Date, and abstract go here
+    \title{Self-Organising Multi-Agent Systems: MVP Specifications}
+    \author{SOMAS Class 2020-2021}
+    \date{\today}
+    \maketitle
+
+    \tableofcontents    
+    % if you are adding a new chapter, create a new folder in the root directory of the project
+    % it should begin with a two digit number, followed by an underscore and the name of the section.
+    % This keeps the order of the sections in the side view in keeping with the order of the document.
+    
+    \input{00_introduction/index.tex}
+    \input{01_roles/index.tex}
+    \input{02_specification/index.tex}
+    \input{03_gamedesign/index.tex}
+    \input{04_environment/index.tex}
+    \input{06_iito/index.tex} % yeah, wrong numbering; I KNOW [Ezgi]
+    \input{07_iifo/index.tex}
+    \input{05_iigo/index.tex}
+    \input{08_voting/index.tex}
+    \input{09_team1_agentdesign/index.tex}
+    \input{10_team2_agentdesign/index.tex}
+    \input{11_team3_agentdesign/index.tex}
+    \input{12_team4_agentdesign/index.tex}
+    \input{13_team5_agentdesign/index.tex}
+    \input{14_team6_agentdesign/index.tex}
+    \input{15_simulations/index.tex}
+    \input{16_results/index.tex}
+    \input{17_evaluation/index.tex}
+    \input{18_conclusion/index.tex}
+    
+    % \input{00_example/example.tex}
+    % \input{01_introduction/introduction.tex}
+    % \input{02_gamespec/main.tex}
+    % add more sections here!
+    
+    % \input{03_IITO_IIFO/IITO_IIFO.tex}
+    % \input{04_Rules_IIGO/rules_and_iigo}
+    % \input{05_Environment/environment}
+    % \input{06_Voting/voting.tex}
+\end{document}
