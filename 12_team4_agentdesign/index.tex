@@ -1,1 +1,50 @@
 \chapter{Team 4 Agent Design}
+
+\section{Overview}
+An agent uses the interface that is defined in the infrastructure. In order to define custom behaviours for our agent, we override or extend the base agent (baseclient.go) functions which implement the defined interface. The main idea we have for our agent is that it has internal fields that aid the decision-making process for the actions it performs. Of all the internal fields, we define internal parameters as information that describes the agent itself, such as \texttt{greediness}, \texttt{selfishness} and \texttt{riskTaking} factor, all of which have values between 0 and 1. And the agent stores observations, histories as well as other necessary information such as its trust in others. These fields will be further explained in the following text.\\
+
+\noindent An agent can also be elected one or more roles inside the IIGO session. Each role has the power to perform role actions specified in the Roles section. These actions are implemented as functions in the code and they can be extended and overridden in the same fashion as in the base agent functions. Even though a role and an agent that is not elected a role (a common agent) are two separate structs, a common agent and a role have both read and write access to the internal fields of each other through pointers.
+
+
+\section{IIGO}
+\subsection{Common Agent}
+Within IIGO, a base agent sends a request for the resources it wants from the Common Pool (an allocation request) to the President. And after being granted the resources by the President, the agent takes from the Common Pool. The actions concerning requesting and taking allocations are defined by us.\\
+
+\noindent When requesting an allocation, our agent first decides what it needs. When the agent is not in a critical state, the needed resources are usually a multiple of the basic needs, namely the cost of living plus the critical threshold. This amount is decided so that the agent always takes more from the Common Pool than their definite expenses in the next turn. When in a critical state, the needed resources are a bigger multiple of the basic needs. Because the smaller multiple of basic needs when not critical brought us to critical which indicates that the island needs to take more resources to not slowly drain away its own resources. In order to maintain the Common Pool, we also enforce that what our island needs must not exceed the amount of resources in the Common Pool divided by the number of agents alive.\\
+
+\noindent The agent then calculates what it wants based on what it needs. We use a linear combination of some of the agent's internal fields, and weights (called an \texttt{importance} vector) we set for each of the chosen internal fields to obtain a scaling factor to multiply the needed resources with. The parameters used are \texttt{greediness}, \texttt{selfishness}, \texttt{fairness}, \texttt{collaboration}, \texttt{riskTaking} and trust in the current president. For this particular function, we set the weights to be $4, 1, -1, -1, 1, 1$ respectively. The fields with negative weights negatively impact the scaling factor and vice versa. We deem greediness important in the calculation of this function's scaling factor. The scaling factor is then compared to a preset threshold. If the scaling factor is greater, then the needed resources amount is multiply by the 1 plus the difference between the scaling factor and the preset threshold. The threshold is there to make sure that the scaling factor is not applied all the time, as we don't want our agent to take more than what it needs all the time.
+
+\subsection{Trust metrics}
+%andrzej
+% we update trust as a judge and during iito (?) sessions
+
+% based on the trust we decide (¯\_(ツ)_/¯)
+
+% we maintain the average trust at 0.5
+
+
+
+
+\subsection{President}
+
+
+\subsection{Judge}
+%andrzej
+% implemented honest but curious 
+
+% use information given to judge to update the trust towards all the islands
+
+% honest calling of elections
+
+% rest is based on the basejudge implementation
+
+% no randomness, rule-based
+
+\subsection{Speaker}
+
+
+\section{IIFO}
+
+
+\section{IITO}
+%(put and modify this to fit it somewhere in this section) If our agent is not in a critical state, it requests extra resources in addition to its own wanted resources in an intention to gift to other agents to earn their trust. If this allocation request is approved by the President, it proceeds with the gifting. These gifted resources are given on top of the normal gifts if there are any.
