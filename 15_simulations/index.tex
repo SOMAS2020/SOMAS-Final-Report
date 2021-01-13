@@ -40,63 +40,101 @@ To assist in this analysis, we need to draw quantifiable results from the simula
 \section{Baseline Simulation}
 \label{sec:Simulations:baseline}
 
-In order to make any meaningful analysis one must first have a baseline against which to compare other simulations. In our case, this baseline is a \emph{normal} set of environmental conditions which allows the agents to thrive for a significant period of time, chosen to be around 100 turns. From this baseline, we can then start adjusting the configuration of the simulation by either making disasters more frequent and deadly or making resources more sparse.
+In order to make any meaningful analysis one must first have a baseline against which to compare other simulations. In our case, this baseline is a \emph{normal} set of environmental conditions which allows the agents to thrive for a significant period of time, chosen to be around 100 turns. From this baseline, we can then start adjusting the configuration of the simulation by either making disasters more frequent and deadly or making resources more sparse. The full details of this baseline can be found in Appendix \ref{sec:Config_Appendix:baseline}. 
 
-Note: If a metric is not of interest to a certain area of exploration it will not be shown.
+The sections below illustrate how the metrics will be displayed. For more accuracy some values are aggregated while others that can't be aggregated, such as IIGO Roles, will have multiple graphs shown to display the full range of possibilites using that configuration. No analysis will be done, rather in later sections comparisons will be made against these values and graphs and analysis will be performed then. The reason for this being that the config was tuned to allow the islands to proser and this any analysis would just lead, circularly, back to that conclusion. .All graphs shown are available on the website: https://somas2020.github.io/SOMAS2020/\#/. Here anyone can run their own simulations whilst also being able to choose their own configs.
 
 \subsection{Baseline Numeric Metrics}
 \label{subsec:Simulations:baseline:num_metrics}
+
+Table \ref{table:Simulations:num_metric} shows the aggregate numeric metrics from 3 seperate simulations run with the baseline config. It should be noted, that due to the randomness of the simulation there are occasions where the metrics vary greatly due to the islands being hit by a large disaster however these are rare and were assumed to be anomolies for the sake of averaging values.
+
+Another point worthy of note is that for Archipelago Survivability and First Island Death they are only 100 because the maximum number of turns that we run the simulation for was 100, and thus island would likely survive much farther than this number if the simulation ran for longer.
 \begin{table}[htb]
     \centering
     \begin{tabular}{|l|c|}
     \hline
     \textbf{Metric}                     & \textbf{Value} \\ \hline
-    \textbf{Archipelago Survivability}  & 50     \\
-    \textbf{First Island Death}         & 50     \\
-    \textbf{Gini Index}                 & 50     \\
-    \textbf{Disasters Survived}         & 50     \\
-    \textbf{ADDM}                       & 50     \\
-    \textbf{AFS}                        & 50     \\ \hline
+    \textbf{Archipelago Survivability}  & 100     \\
+    \textbf{First Island Death}         & 100     \\
+    \textbf{Gini Index}                 & 0.22     \\
+    \textbf{Disasters Survived}         & 20     \\
+    \textbf{ADDM}                       & 250     \\
+    \textbf{AFS}                        & 2     \\ \hline
 \end{tabular}
 \caption{Numerical Metrics}
+\label{table:Simulations:num_metric}
 \end{table}
 
 \subsection{Baseline IFS}
 \label{subsec:Simulations:baseline:ifs}
+
+Similarly to the table in subsection \ref{subsec:Simulations:baseline:num_metrics}, Table \ref{table:Simulations:ifs} shows the foraging statistics over 3 simulations run on the baseline config. Once again, these may vary drastically in some simulations of the baseline config where a much larger than average disaster was to hit the archipelago. Those results were not included in the averaging.
+
 \begin{table}[htb]
     \centering
         \begin{tabular}{|p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|}
         \hline
-        Island            & Investment  & Return      & Ratio      \\ \hline
-        \textbf{1: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
-        \textbf{2: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
-        \textbf{3: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
-        \textbf{4: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
-        \textbf{5: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
-        \textbf{6: Total} & \textbf{50} & \textbf{50} & \textbf{50}\\
-        Deer              & 50          & 50          & 50         \\
-        Fish              & 50          & 50          & 50         \\ \hline
+        Island            & Investment      & Return              & Ratio      \\ \hline
+        \textbf{1: Total} & \textbf{1514.1} & \textbf{5915.5} & \textbf{3.90}\\
+        Deer              & 553.3           & 1282.3           & 2.3        \\
+        Fish              & 960.7           & 4633.2           & 4.82         \\ \hline
+        \textbf{2: Total} & \textbf{18673.8} & \textbf{24541.0} & \textbf{1.31}\\
+        Deer              & 7515.8          & 20750.6    & 2.76         \\
+        Fish              & 11158.1          & 3790.4          & 0.34         \\ \hline
+        \textbf{3: Total} & \textbf{2156.5} & \textbf{5290.0} & \textbf{2.45}\\
+        Deer              & 785.4          & 1931.4          & 2.46         \\
+        Fish              & 1371.1          & 3358.6          & 2.45         \\ \hline
+        \textbf{4: Total} & \textbf{5705.1} & \textbf{7973.2} & \textbf{1.39}\\
+        Deer              & 2030.9          & 36966.9          & 1.82         \\
+        Fish              & 3674.1          & 4276.2          & 1.16         \\ \hline
+        \textbf{5: Total} & \textbf{2455.5} & \textbf{5669.4} & \textbf{2.31}\\
+        Deer              & 437.5          & 891.1          & 2.03         \\
+        Fish              & 2018.0          & 4778.2          & 2.37         \\ \hline
+        \textbf{6: Total} & \textbf{5457.42} & \textbf{6206.2} & \textbf{1.14}\\
+        Deer              & 1541.2          & 3306.2          & 2.14         \\
+        Fish              & 3916.2          & 2900.0          & 0.74         \\ \hline
 \end{tabular}
 \caption{Island Foraging Statistics}
+\label{table:Simulations:ifs}
 \end{table}
 
 
 \subsection{Baseline IIGO Tax, Allocations and Sanctions}
 \label{subsec:Simulations:baseline:IIGO}
 
+Due to the similarities between these three metrics it made sense to group then into a single graph. Figure \ref{fig:Simulations:IIGO_numbers} shows how much was expected to be paid by each island for each metric and how much they actually paid. These metrics are the ones to vary the most across the same config, in terms of absolute values. However the trends, such how much tax Team 1 pays relative to the other teams, tends to stay the same.
+
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=1\textwidth]{15_simulations/images/baseline_iigo_tax_alloc_sanction.png}
+    \caption{The tax, allocation and sanction metrics for each Island}
+    \label{fig:Simulations:IIGO_numbers}
+\end{figure} 
+    
 
 \subsection{Baseline IIGO Roles}
 \label{subsec:Simulations:baseline:IIGO_roles}
 
+Figure \ref{fig:Simulations:iigo_roles} show's two possibilites for the IIGO roles that occur when running with the base config. Both result in similar values for the other metrics.
+
+\begin{figure}
+    \centering
+    \subfigure[More Tyranical]{
+      \centering
+      \includegraphics[width=.4\linewidth]{15_simulations/images/baseline_iigo_roles_1.png}
+    }
+    \subfigure[More Inclusive]{
+      \centering
+      \includegraphics[width=.4\linewidth]{15_simulations/images/baseline_iigo_roles_2.png}
+    }
+    \caption{Two potential outcomes for role allocations in IIGO}
+    \label{fig:Simulations:iigo_roles}
+\end{figure}
+
 \subsection{Baseline Gifting}
 \label{subsec:Simulations:baseline:trading}
+
+Add graph after PR
+
+Note: If a metric is not of interest to a certain area of exploration it will not be shown.
