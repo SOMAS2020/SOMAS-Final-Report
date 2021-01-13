@@ -566,7 +566,7 @@ The client-side impelmentations are:
 The key server-side implementations are:
 \begin{enumerate}
     \item \texttt{addToCache} populates a monitoring cache which is a record of actions taken and their results. This function is called after every IIGO action e.g. broadcasting taxation.
-    \item \texttt{monitorRole} performs the monitoring of a role as decided by the role accountable. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
+    \item \texttt{monitorRole} performs the monitoring of a role as decided by the accountable role. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
 \end{enumerate}
 
 The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
