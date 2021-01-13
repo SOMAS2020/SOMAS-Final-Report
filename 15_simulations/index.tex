@@ -47,7 +47,7 @@ The sections below illustrate how the metrics will be displayed. For more accura
 \subsection{Baseline Numeric Metrics}
 \label{subsec:Simulations:baseline:num_metrics}
 
-Table \ref{table:Simulations:num_metric} shows the aggregate numeric metrics from 3 seperate simulations run with the baseline config. It should be noted, that due to the randomness of the simulation there are occasions where the metrics vary greatly due to the islands being hit by a large disaster however these are rare and were assumed to be anomolies for the sake of averaging values.
+Table \ref{table:Simulations:num_metric} shows the aggregate numeric metrics from 5 seperate simulations run with the baseline config. It should be noted, that due to the randomness of the simulation there are occasions where the metrics vary greatly due to the islands being hit by a large disaster however these are rare and were assumed to be anomolies for the sake of averaging values.
 
 Another point worthy of note is that for Archipelago Survivability and First Island Death they are only 100 because the maximum number of turns that we run the simulation for was 100, and thus island would likely survive much farther than this number if the simulation ran for longer.
 \begin{table}[htb]
@@ -57,10 +57,10 @@ Another point worthy of note is that for Archipelago Survivability and First Isl
     \textbf{Metric}                     & \textbf{Value} \\ \hline
     \textbf{Archipelago Survivability}  & 100     \\
     \textbf{First Island Death}         & 100     \\
-    \textbf{Gini Index}                 & 0.22     \\
+    \textbf{Gini Index}                 & 0.39    \\
     \textbf{Disasters Survived}         & 20     \\
-    \textbf{ADDM}                       & 250     \\
-    \textbf{AFS}                        & 2     \\ \hline
+    \textbf{ADDM}                       & 341.7     \\
+    \textbf{AFS}                        & 1.92     \\ \hline
 \end{tabular}
 \caption{Numerical Metrics}
 \label{table:Simulations:num_metric}
@@ -76,24 +76,24 @@ Similarly to the table in subsection \ref{subsec:Simulations:baseline:num_metric
         \begin{tabular}{|p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|>{\centering\arraybackslash}p{0.125\textwidth}|}
         \hline
         Island            & Investment      & Return              & Ratio      \\ \hline
-        \textbf{1: Total} & \textbf{1514.1} & \textbf{5915.5} & \textbf{3.90}\\
-        Deer              & 553.3           & 1282.3           & 2.3        \\
-        Fish              & 960.7           & 4633.2           & 4.82         \\ \hline
-        \textbf{2: Total} & \textbf{18673.8} & \textbf{24541.0} & \textbf{1.31}\\
-        Deer              & 7515.8          & 20750.6    & 2.76         \\
-        Fish              & 11158.1          & 3790.4          & 0.34         \\ \hline
-        \textbf{3: Total} & \textbf{2156.5} & \textbf{5290.0} & \textbf{2.45}\\
-        Deer              & 785.4          & 1931.4          & 2.46         \\
-        Fish              & 1371.1          & 3358.6          & 2.45         \\ \hline
-        \textbf{4: Total} & \textbf{5705.1} & \textbf{7973.2} & \textbf{1.39}\\
-        Deer              & 2030.9          & 36966.9          & 1.82         \\
-        Fish              & 3674.1          & 4276.2          & 1.16         \\ \hline
-        \textbf{5: Total} & \textbf{2455.5} & \textbf{5669.4} & \textbf{2.31}\\
-        Deer              & 437.5          & 891.1          & 2.03         \\
-        Fish              & 2018.0          & 4778.2          & 2.37         \\ \hline
-        \textbf{6: Total} & \textbf{5457.42} & \textbf{6206.2} & \textbf{1.14}\\
-        Deer              & 1541.2          & 3306.2          & 2.14         \\
-        Fish              & 3916.2          & 2900.0          & 0.74         \\ \hline
+        \textbf{1: Total} & \textbf{1515.5} & \textbf{5459.5} & \textbf{3.60}\\
+        Deer              & 1118.2           & 712.5           & 1.79        \\
+        Fish              & 397.2          & 4747.0           & 4.24         \\ \hline
+        \textbf{2: Total} & \textbf{17983.4} & \textbf{14935.8} & \textbf{0.83}\\
+        Deer              & 8162.7          & 11204.0       & 1.37         \\
+        Fish              & 9820.7          & 3731.8          & .38         \\ \hline
+        \textbf{3: Total} & \textbf{2343.5} & \textbf{5450.2} & \textbf{2.32}\\
+        Deer              & 831.35          & 2080.2          & 2.50         \\
+        Fish              & 1371.1          & 3370.0          & 2.23         \\ \hline
+        \textbf{4: Total} & \textbf{7005.16} & \textbf{8658.2} & \textbf{1.24}\\
+        Deer              & 3039.7          & 4846.5          & 1.59         \\
+        Fish              & 3965.4          & 4410.7          & 0.96         \\ \hline
+        \textbf{5: Total} & \textbf{2741.1} & \textbf{5625.8} & \textbf{2.05}\\
+        Deer              & 560.5          & 1214.9          & 2.16         \\
+        Fish              & 2180.6          & 4410.8          & 2.02         \\ \hline
+        \textbf{6: Total} & \textbf{5848.2} & \textbf{7445.6} & \textbf{1.27}\\
+        Deer              & 2079.1          & 3970.5          & 1.91         \\
+        Fish              & 3769.2          & 3475.1          & 0.92         \\ \hline
 \end{tabular}
 \caption{Island Foraging Statistics}
 \label{table:Simulations:ifs}
@@ -135,6 +135,11 @@ Figure \ref{fig:Simulations:iigo_roles} show's two possibilites for the IIGO rol
 \subsection{Baseline Gifting}
 \label{subsec:Simulations:baseline:trading}
 
-Add graph after PR
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=1\textwidth]{15_simulations/images/baseline_gifts.png}
+    \caption{A diagram representing the gifts between all islands}
+    \label{fig:Simulations:IITO_gifts}
+\end{figure} 
 
 Note: If a metric is not of interest to a certain area of exploration it will not be shown.
