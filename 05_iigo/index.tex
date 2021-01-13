@@ -638,6 +638,7 @@ In this example, note that there are two separate conditions. We can write both 
     \begin{bmatrix}
         0 & 2 & -1 & 0
     \end{bmatrix}
+    \label{equation:rx1}
 \end{equation}
 \begin{equation}
     \textrm{   Variables to fill:  }
@@ -654,34 +655,38 @@ In this example, note that there are two separate conditions. We can write both 
         2 
     \end{bmatrix}   
 \]
-\linebreak
 Condition 2:
-\[
+\begin{equation}
     \textrm{Rule matrix: }
     \begin{bmatrix}
         -1 & 1 & 0 & 0
     \end{bmatrix}
-    \textrm{   Variables to fill:  }
+    \label{equation:rx2}
+\end{equation}
+\begin{equation}
+\textrm{   Variables to fill:  }
     \begin{bmatrix}
         \textrm{Amount of tax agent is asked to pay} \\
         \textrm{Amount of tax the agent is actually paying} \\
         \textrm{Amount of resources agent has} \\
         1
     \end{bmatrix}     
-\]
-\[
+\end{equation}
+\begin{equation}
     \textrm{   Auxiliary vector: } 
     \begin{bmatrix}
         2 
     \end{bmatrix}   
-\]
-However, we can also write this as a single stacked rule as follows:
-\[
+\end{equation}
+However, we can also write both \ref{equation:rx1} and \ref{equation:rx2} as a single stacked rule as follows:
+\begin{equation}
     \textrm{Rule matrix: }
     \begin{bmatrix}
         0 & 2 & -1 & 0 \\
         -1 & 1 & 0 & 0 
     \end{bmatrix}
+\end{equation}
+\begin{equation}
     \textrm{   Variables to fill:  }
     \begin{bmatrix}
         \textrm{Amount of tax agent is asked to pay} \\
@@ -689,24 +694,24 @@ However, we can also write this as a single stacked rule as follows:
         \textrm{Amount of resources agent has} \\
         1
     \end{bmatrix}     
-\]
-\[
+\end{equation}
+\begin{equation}
     \textrm{   Auxiliary vector: } 
     \begin{bmatrix}
         2 \\
         2 
     \end{bmatrix}   
-\]
+\end{equation}
 The advantage of this matrix-based rule representation is that the mechanics of the calculation is exposed. 
 Any agent can inspect the elements of the rule matrix in order to easily calculate what values they must provide to adhere to a specific rule.
 For example, if an agent is looking at the above rule and knows that their resource count is 120, and also know they've been asked to pay 75, they can go line by line through the matrix to work our what the minimum amount of tax that is needed to be paid.
-\[
+\begin{equation}
     \textrm{Matrix line 1: }
     \begin{bmatrix}
         0 & 2 & -1 & 0
     \end{bmatrix}
-\]
-\[
+\end{equation}
+\begin{equation}
     \textrm{Values to be fed in: }
     \begin{bmatrix}
         75 \\
@@ -714,22 +719,34 @@ For example, if an agent is looking at the above rule and knows that their resou
         120 \\
         1
     \end{bmatrix}
-\]
-\[
+\end{equation}
+\begin{equation}
     \textrm{Agent calculation: }
-    0*75 + 2x -120 >= 0
-\]
-\[
-    x >= 60
-\]
+    0*75 + 2x -120 \geq 0
+\end{equation}
+\begin{equation}
+    x \geq 60
+\end{equation}
 A similar calculation for the next line of the matrix yields:
-\[
+\begin{equation}
     \textrm{Agent calculation: }
-    x >= 75
-\]
+    x \geq 75
+\end{equation}
 Following the equations above, the agent is able to understand that it needs to pay a minimum of $75$ for tax. This system allows the agents both to check if they are compliant and if not, how to calculate which values they need to be compliant.
 As a final note, we have designed an additional abstraction to this rules system to accomodate conditional rules.
-For example if you had the rule "If resources are above 100, you must pay at least 75". 
-To acommodate this we instead split this into two separate rules; "If resources are above 100" and "You must pay at least 75", and conditionally execute them such that if rule 1 fails then the whole structure passes and if rule 1 passes we expect rule 2 to pass.
+For example if you had the rule 
+\begin{rule_IIGO}
+    "If resources are above $100$, you must pay at least $75$".
+\end{rule_IIGO} 
+To acommodate this we instead split this into two separate rules.
+\begin{rule_IIGO}
+    "If resources are above 100"
+    \label{rule:cond1}
+\end{rule_IIGO}
+\begin{rule_IIGO}
+    "You must pay at least 75"
+    \label{rule:cond2}
+\end{rule_IIGO}
+We then conditionally execute them such that if rule \ref{rule:cond1} fails then the whole structure passes and if rule \ref{rule:cond1} passes we expect rule \ref{rule:cond2} to pass.
 
 \subsection{Rules In Play}
