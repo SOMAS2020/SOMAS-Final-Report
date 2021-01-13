@@ -558,7 +558,7 @@ The Judge decision making functions can be divided into two categories:
         \item \texttt{GetRuleViolationSeverity} allows the Judge to set sanction penalties for violating specific rules. It returns a $map[ruleName] \xrightarrow[]{} penalty$. If this is not set by the Judge, the default sanction penalty is 1 unit of resources for every rule broken.
         \item \texttt{GetSanctionThresholds} allows the Judge to set the sanction penalty thresholds for sanction tiers. It returns a $map[sanctionTier] \xrightarrow[]{} penalty$.
         \item \texttt{GetPardonedIslands} allows the Judge to pardon islands of imposed sanctions. Provided with the list of sanctions, this returns a $map[sanctionID] \xrightarrow[]{} bool$ where a $true$ value indicates that the sanction corresponding to that $ID$ is to be removed from the list of sanctions.
-        \item \texttt{HistoricalRetributionEnabled} allows the Judge to decide whether to inspect the history and accordingly sanction unpunished transgressions from previous turns. This is a boolean value so that historical retribution can be enabled and disabled easily.
+        \item \texttt{HistoricalRetributionEnabled} allows the Judge to decide whether to inspect the history and accordingly sanction any unpunished transgressions from earlier turns. This is a boolean value so that historical retribution can be enabled and disabled easily.
     \end{itemize}
     \item Transfer-of-power functions:
     \begin{itemize}
