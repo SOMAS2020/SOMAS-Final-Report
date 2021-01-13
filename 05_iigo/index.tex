@@ -477,19 +477,6 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
     \item The Judge has the \emph{power} to decide to hold an election for a new President.
 \end{enumerate}
 
-\section{Future Work}
-
-\begin{itemize}
-    \item \textbf{Diplomatic sanctions}: Although having the potential of being a good alternative for severer sanctions discussed in  Section~\ref{sec:sanctions}, diplomatic sanctions are \emph{not} implemented within the scope of the coursework. \\
-    Suggested diplomatic sanctions include:
-        \begin{itemize}
-            \item Revoking an island's eligibility to vote and to be elected for a position.
-            \item Revoking an island's eligibility to propose a rule/motion.
-        \end{itemize}
-    \item \textbf{Immutable rules}: Within the scope of the coursework, a subset of rules could have been categorised as immutable. This means that to change such immutable rules, the islands first need to vote to change their status to be \emph{mutable}, and consequently, hold another vote to change these mutable rules.
-    %\item \textbf{Adding rules to the proposal list: } 
-\end{itemize}
-
 \section{Implementation} % INFRA implementation to be written here
 
 \subsection{IIGO Branches Overview}
@@ -898,3 +885,25 @@ To accommodate this, we instead split this into two separate rules.
 We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then the whole structure passes, and if Rule~\ref{rule:cond1} passes, we expect Rule~\ref{rule:cond2} to pass as well for the rule to be adhered.
 1
 \subsection{Rules In Play}
+
+\section{Future Work}
+
+\textbf{Diplomatic sanctions.} Although having the potential of being a good alternative for severer sanctions discussed in  Section~\ref{sec:sanctions}, diplomatic sanctions are \emph{not} implemented within the scope of the coursework. \\
+    Suggested diplomatic sanctions include:
+        \begin{itemize}
+            \item Revoking an island's eligibility to vote and to be elected for a position.
+            \item Revoking an island's eligibility to propose any rule or a specific rule.
+        \end{itemize}
+\textbf{Immutable rules.} Within the scope of the coursework, a subset of rules could have been categorised as immutable. This means that to change such immutable rules, the islands first need to vote to change their status to be \emph{mutable}, and consequently, hold another vote to change these mutable rules. An example of such an immutable rule could have been "An island in the archipelago cannot hold multiple IIGO roles (i.e. the President, Speaker, and Judge) in the same turn if at least two other islands are still alive.". This immutable rule would allow islands to avoid the tyranny that might arise from the lack of separation of power in any turn.\\
+    %\item \textbf{Adding rules to the proposal list: } 
+\textbf{Scope of IIGO.} Within the scope of the coursework, additional rules could be defined to audit levels of interaction at the IITO, IIFO and foraging. \\
+    Suggested additional rules include:
+        \begin{itemize}
+            \item During an IITO session, each island is not \emph{permitted} to give gifts to a sanctioned island.
+             \item During an IIFO session, a sanctioned island is not \emph{permitted} to learn and share any predictions regarding the long-term collective risk dilemma (i.e. upcoming disasters) and the short-term collective risk dilemma (i.e. returns from foraging)
+             \item Each island has the \emph{power} to propose a \textbf{hunting ban} for a specific animal type (e.g. deer, fish) in order to conserve the relevant animal population.
+             \begin{itemize}
+                \item During foraging, each island is not \emph{permitted} to hunt any of the animal type whose name is in the ban list.
+             \end{itemize}  
+        \end{itemize}
+\textbf{Scalable cost of running the IIGO.} The performance of an IIGO session should be correlated with respect to its allocated budget and costs of IIGO-related actions. For example, if an IIGO-related action $A$ is determined to cost $C$ amount of resources, it should be observed that $A$ is performed more poorly given a budget of $C'$ such that $C' < C$.
