@@ -553,7 +553,7 @@ The legislative branch functions can be divided into two categories:
 \end{enumerate}
 
 \subsubsection{Server-side}
-The speaker server-side is responsible for enabling the information flow, maintaining simulation concurrency concerning action costs, updating the game state, and logging actions for monitoring. Notable functions are \texttt{updateRules}, which implements the concurrency checks and logic for updating the rules in play, and \texttt{RunVote}, which interacts with the voting system.
+The server-side of the legislative branch is responsible for enabling the information flow, maintaining simulation concurrency concerning action costs, updating the game state and logging actions for monitoring. Notable functions are \texttt{updateRules}, which implements the concurrency checks and logic for updating the rules in play, and \texttt{RunVote}, which interacts with the voting system.
 
 \subsection{Judicial Branch}
 The judicial branch has two parts: the judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the Judge role which is in the hands of the agent which is the Judge at a specific turn. This agent is able to use the Judge role to make decisions which are communicated to the server-side judicial branch which performs the actions.
