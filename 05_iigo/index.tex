@@ -492,18 +492,27 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 
 
 \section{Implementation} % INFRA implementation to be written here
-\subsection{Infrastructure Overview}
-\section{Executive Branch Implementation}
-
-The executive branch has been implemented to facilitate the use of powers given to the President. Because any agent could potentially become the President, the implementation of the executive branch has been split into two interconnected parts:
+\subsection{IIGO Branches Overview}
+The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
 \begin{itemize}
-\item Client-side implementation of presidential functions, which map directly to the powers given to the President.
-\item Server-side implementation of executive branch actions, which calls the presidential functions only on the currently residing President.
+\item Client-side implementation of President, Speaker and Judge functions, which map directly to the powers given to that role.
+\item Server-side implementations of Executive, Legislative and Judicial branch actions, which call the IIGO role functions only on the client currently holding that role i.e. the executive branch only calls functions on the client assigned to the role of President.
 \end{itemize}
 
+\subsubsection{Client-side Overview}
+The client-server division gives agents the freedom to implement the IIGO role functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the IIGO role inspecting their actions will never find any wrongdoing. When implementing their President, Speaker and Judge functions, islands can either follow a rule-obeying approach or try to exploit their power once they are elected to be an IIGO role. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
+
+\subsubsection{Server-side Overview}
+The server implementation of each branch provides the IIGO roles with the framework to use their powers of carrying out the law in the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the IIGO roles and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different implementations of each IIGO role. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
+
+Moreover, the server acts as a guard of the game state and prevents the clients in IIGO roles from performing game-breaking actions. For example, server-side of the IIGO branches ensure that the roles are only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the role is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the role will act on its powers.
 
 
-\subsection{Client-side Implementation}
+\subsection{Executive Branch}
+
+
+
+\subsubsection{Client-side}
 \label{sub:president:client-side}
 Each agent can become the President at any turn. Therefore each agent should implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
 
@@ -523,12 +532,9 @@ The presidential functions can be divided into two categories:
     \end{itemize}
 \end{enumerate}
 
-
-Such division gives agents the freedom to implement the presidential functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the Judge inspecting their actions will never find any disobedience occurred. When implementing their presidential functions, islands can either follow a rule-obeying approach or try to exploit their presidential power when they are elected to be the President. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
-
-\subsection{Server-side Implementation}
+\subsubsection{Server-side}
 \label{sub:president:server-side}
-Server implementation of executive branch provides the President with the framework to use its powers of carrying out the law at the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the President and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different President implementation. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
+
 
 The flow of every server-side function call of the executive branch can be presented in the following way:
 \begin{enumerate}
@@ -539,10 +545,8 @@ The flow of every server-side function call of the executive branch can be prese
     \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
-Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
-
-\subsection{Legislative Branch}
-\subsection{Judicial Branch}
+\subsubsection{Legislative Branch}
+\subsubsection{Judicial Branch}
 \subsection{Accountability Cycle}
 \subsection{Rule Representation}
 \subsection{Rules In Play}
