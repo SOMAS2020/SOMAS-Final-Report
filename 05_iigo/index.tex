@@ -490,17 +490,12 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
     %\item \textbf{Adding rules to the proposal list: } 
 \end{itemize}
 
-
 \section{Implementation} % INFRA implementation to be written here
-<<<<<<< HEAD
-\subsection{Infrastructure Overview}
-\subsection{Executive Branch}
 
-The executive branch has been implemented to facilitate the use of powers given to the President. Because any agent could potentially become the President, the implementation of the executive branch has been split into two interconnected parts:
-=======
+
 \subsection{IIGO Branches Overview}
 The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
->>>>>>> main
+
 \begin{itemize}
 \item Client-side implementation of President, Speaker and Judge functions, which map directly to the powers given to that role.
 \item Server-side implementations of Executive, Legislative and Judicial branch actions, which call the IIGO role functions only on the client currently holding that role i.e. the executive branch only calls functions on the client assigned to the role of President.
@@ -530,7 +525,7 @@ The presidential functions can be divided into two categories:
         \item \texttt{EvaluateAllocationRequests} allows the President to decide the allocation of resources distributed from the common pool to the islands. Returns the $map[agent] \xrightarrow[]{} allocation$, as well as information about whether the President has acted on its power to set allocation to common pool resources.
         \item \texttt{PickRuleToVote} allows the President to select a rule for voting $R∗$ to be passed to the Speaker. Returns the $rule$ to be voted on by the Speaker, as well as information about whether the President has acted on its power to choose a new rule to be incorporated into the \texttt{RulesInPlay}.
     \end{itemize}
-\item The accountability cycle and transfer-of-power functions:
+\item Transfer-of-power functions:
     \begin{itemize}
         \item \texttt{PaySpeaker} implements the obligation of the President to pay the Speaker its salary. 
         \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
@@ -551,8 +546,78 @@ The flow of every server-side function call of the executive branch can be prese
     \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
-\subsubsection{Legislative Branch}
-\subsubsection{Judicial Branch}
+\subsection{Legislative Branch}
+\subsection{Judicial Branch}
+The judicial branch has two parts: the judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the Judge role which is in the hands of the agent which is the Judge at a specific turn. This agent is able to use the Judge role to make decisions which are communicated to the server-side judicial branch which performs the actions.
+\subsubsection{Client-side}
+The Judge decision making functions can be divided into two categories:
+\begin{enumerate}
+    \item Judicial power functions:
+    \begin{itemize}
+        \item \texttt{InspectHistory} allows the Judge to inspect the history cache and evaluate whether agents have complied with the rules or transgressed. Provided the history cache, this returns a $map[agent] \xrightarrow[]{} []transgressions$ as well as information about whether the Judge has acted on its power to inspect the history cache.
+        \item \texttt{GetRuleViolationSeverity} allows the Judge to set sanction penalties for violating specific rules. It returns a $map[ruleName] \xrightarrow[]{} penalty$. If this is not set by the Judge, the default sanction penalty is 1 unit of resources for every rule broken.
+        \item \texttt{GetSanctionThresholds} allows the Judge to set the sanction penalty thresholds for sanction tiers. It returns a $map[sanctionTier] \xrightarrow[]{} penalty$.
+        \item \texttt{GetPardonedIslands} allows the Judge to pardon islands of imposed sanctions. Provided with the list of sanctions, this returns a $map[sanctionID] \xrightarrow[]{} bool$ where a $true$ value indicates that the sanction corresponding to that $ID$ is to be removed from the list of sanctions.
+        \item \texttt{HistoricalRetributionEnabled} allows the Judge to decide whether to inspect the history and accordingly sanction any unpunished transgressions from earlier turns. This is a boolean value so that historical retribution can be enabled and disabled easily.
+    \end{itemize}
+    \item Transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PayPresident} implements the obligation of the Judge to pay the President its salary. 
+        \item \texttt{CallPresidentElection} implements the power of the Judge to initiate the transfer-of-power for the President.
+        \item \texttt{DecideNextPresident} allows the Judge to modify the outcome of the election and choose not to follow its obligation to announce the result of President election.
+    \end{itemize}
+\end{enumerate}
+\subsubsection{Server-side}
+The functionality of the server-side of the Judicial branch can be summarised as follows:
+\begin{enumerate}
+    \item Information about actions taken by Islands is used to populate the history cache which is an array of $map[agent] \xrightarrow[]{} action$. This is done server-side because the history cache is considered to be an absolute source of truth i.e. islands do not have the opportunity to lie about actions.
+    \item Judge functions are called to decide which rule violations have taken place, how these will be punished, which violations will be pardoned, whether an election will take place.
+    \item The relevant results of the Judge's actions (sanction information, election result etc.) are processed and packaged into messages that are broadcasted to the agents.
+\end{enumerate}
+\subsection{Sanctions}
+In our archipelago sanctions are the great equaliser. They have been designed with the intention of punishing islands who break rules and to ensure that others are notified of this outcome. Each sanction will last for a configurable number of turns.
+\subsubsection{Sanction Score}
+The judicial branch is able to evaluate all the actions that have been taken by the islands in the archipelago. 
+The holder of the Judge role is given the choice to upload custom scores for any rules which they would like to penalise more or less heavily if broken.
+Any custom scores are then broadcast to all islands, to give them more or less incentive to break these rules. \\
+
+Once the Judge has inspected the events of the past turn and whether or not islands have broken any rules, the judicial branch consequently uses the Judge's custom scoring to calculate the sanction score of each island.
+
+\subsubsection{Sanction Tier}
+With the combined sanction score of each island calculated, the Judge must decide which sanction tier to assign each island. 
+There are 5 sanction tiers as well as a \emph{No sanction} option. The Judge can upload custom \emph{Sanction score} thresholds for each tier, or they can choose to stick with default values.
+The judicial branch uses either the custom thresholds or default values, as instructed, and considers the sanction scores of each island to place them in a sanction tier. \\
+The sanction tier that each island falls in is broadcasted to all islands.
+
+Each sanction tier has an associated rule:
+\begin{itemize}
+    \item Sanction tier 1: \begin{rule_IIGO} 
+        An island in sanction tier $1$ must pay a sanction of $0$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 2: \begin{rule_IIGO} 
+        An island in sanction tier $2$ must pay a sanction of $20$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 3: \begin{rule_IIGO} 
+        An island in sanction tier $3$ must pay a sanction of $30$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 4: \begin{rule_IIGO} 
+        An island in sanction tier $4$ must pay a sanction of $50$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 5: \begin{rule_IIGO} 
+        An island in sanction tier $5$ must pay a sanction of $80$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+\end{itemize}
+
+These rules are used to calculate the exact resource payment that will be required of each island to pay off their sanction. These specific payments are only broadcasted to the islands that must pay them.
+
+\subsubsection{Pardons}
+\begin{quote}
+    "Always forgive your enemies; nothing annoys them so much."
+    \noindent Oscar Wilde
+\end{quote}
+The crown jewel of the sanctioning system is \emph{Pardons}. Just after the sanction tiers are calculated but before the sanction payments are broadcasted, the island acting as the Judge is given the option to pardon any particular sanction on any island, even a sanction levied many turns ago. 
+If the Judge chooses to issue any pardons, every island will be notified of this decision, and can choose to use this information to formulate their opinions of the judge. 
+Internal to the judical branch, these pardons are used to delete their corresponding sanctions from consideration when calculating the sanction payment that an island will have to pay.
 \subsection{Accountability Cycle}
 The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
 
