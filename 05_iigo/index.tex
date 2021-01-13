@@ -538,7 +538,7 @@ Similarly to the President, the Speaker also has client-side functions which dir
 \subsubsection{Client-side}
 The legislative branch functions can be divided into two categories:
 \begin{enumerate}
-\item Speaker power functions:
+\item Legislative power functions:
     \begin{itemize}
         \item \texttt{DecideAgenda} does not directly map to a power of the speaker, but it does aid the agents with keeping track of the rule propagated through the legislative branch functions. By changing the rule given to the agent in \texttt{DecideAgenda}, which is the same rule returned by the President in \texttt{PickRuleToVote}, they can alter the rule passed to them in \texttt{DecideVote} and \texttt{DecideAnnouncement}.
         \item \texttt{DecideVote} enables the institutional power of calling a vote and deciding the participating islands. The information passed to the Speaker is the current rule in the agenda (as returned by \texttt{DecideAgenda}) and a list of all the alive island IDs. The Speaker returns the same type of information along with a boolean indicating whether the agent has chosen to act on this power. The rule returned by the Speaker is the rule that is passed to agents returned by the Speaker if a vote is to be conducted as indicated by the boolean returned by the Speaker.
