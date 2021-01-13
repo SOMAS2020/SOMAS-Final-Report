@@ -525,7 +525,7 @@ The presidential functions can be divided into two categories:
         \item \texttt{EvaluateAllocationRequests} allows the President to decide the allocation of resources distributed from the common pool to the islands. Returns the $map[agent] \xrightarrow[]{} allocation$, as well as information about whether the President has acted on its power to set allocation to common pool resources.
         \item \texttt{PickRuleToVote} allows the President to select a rule for voting $R∗$ to be passed to the Speaker. Returns the $rule$ to be voted on by the Speaker, as well as information about whether the President has acted on its power to choose a new rule to be incorporated into the \texttt{RulesInPlay}.
     \end{itemize}
-\item The accountability cycle and transfer-of-power functions:
+\item Transfer-of-power functions:
     \begin{itemize}
         \item \texttt{PaySpeaker} implements the obligation of the President to pay the Speaker its salary. 
         \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
@@ -550,7 +550,25 @@ The flow of every server-side function call of the executive branch can be prese
 \subsection{Judicial Branch}
 The judicial branch has two parts, the Judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the judge role which is in the hands of the agent which is currently Judge. This agent is able to use the Judge role to make decisions which  are communicated to the serverside Judicial-branch which performs the actions.
 \subsubsection{Client-side}
+The Judge decision making functions can be divided into two categories:
+\begin{enumerate}
+    \item Judge power functions:
+    \begin{itemize}
+        \item \texttt{InspectHistory} allows the Judge to inspect the history cache and evaluate whether agents have complied with the rules or transgressed. Provided the history cache, this returns a $map[agent] \xrightarrow[]{} []transgressions$ as well as information about whether the Judge has acted on its power to inspect the history cache.
+        \item \texttt{GetRuleViolationSeverity} allows the Judge to set sanction penalties for violating specific rules. Returns a $map[ruleName] \xrightarrow[]{} penalty$. If this is not set by the Judge, the default sanction penalty is 1 unit of resources for every rule broken.
+        \item \texttt{GetSanctionThresholds} allows the Judge to set the sanction penalty thresholds for sanction tiers. Returns a $map[sanctionTier] \xrightarrow[]{} penalty$.
+        \item \texttt{GetPardonedIslands} allows the Judge to pardon islands of imposed sanctions. Provided with the list of sanctions, this returns a $map[sanctionID] \xrightarrow[]{} bool$ where a $true$ value indicates that the sanction corresponding to that $ID$ is to be removed from the list of sanctions.
+        \item \texttt{HistoricalRetributionEnabled} allows the Judge to decide whether to inspect the history and accordingly sanction unpunished transgressions from previous turns. This is a boolean value so that historical retribution can be enabled and disabled easily.
+    \end{itemize}
+    \item Transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PayPresident} implements the obligation of the Judge to pay the President its salary. 
+        \item \texttt{CallPresidentElection} implements the power of the Judge to initiate the transfer-of-power for the President.
+        \item \texttt{DecideNextPresident} allows the Judge to modify the outcome of the election and choose not to follow its obligation to announce the result of President election.
+    \end{itemize}
+\end{enumerate}
 \subsubsection{Server-side}
+
 \subsubsection{Sanctions}
 \subsection{Accountability Cycle}
 The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
