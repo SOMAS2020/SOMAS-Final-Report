@@ -528,19 +528,19 @@ The flow of every server-side function call of the executive branch can be prese
     \item The required information from agents or other roles is obtained. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
     \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
     \item Presidential function is called only on the currently residing President with aggregated information as inputs.
-    \item The outcome of the presidential function call is processed. This includes updating the game state, logging information for monitoring, subtracting action costs.
+    \item The outcome of the presidential function call is processed. This includes updating the game state, logging information for monitoring and subtracting the relevant action costs.
     \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
 \subsection{Legislative Branch}
-Similarly to the president the Speaker also has client-side functions which directly map to the Speaker powers described in \ref{sec:legislative}, as well as server-side functions which not only facilitate the implementation of these powers but also handle other functionality, such as the logging needed for monitoring and withdrawal of costs associated with the power.
+Similarly to the President, the Speaker also has client-side functions which directly map to the Speaker's powers described in Section~\ref{sec:legislative}, as well as server-side functions which not only facilitate the implementation of these powers but also handle other functionality, such as the logging needed for monitoring and withdrawal of costs associated with the power.
 
 \subsubsection{Client-side}
 The legislative branch functions can be divided into two categories:
 \begin{enumerate}
-\item Speaker power functions:
+\item Legislative power functions:
     \begin{itemize}
-        \item \texttt{DecideAgenda} does not directly map to a power of the speaker, but it does aid the agents with keeping track of the rule propagated through the legislative branch functions. By changing the rule given to the agent in \texttt{DecideAgenda}, which is the same rule returned by the President in \texttt{PickRuleToVote}, they can alter the rule passed to them in \texttt{DecideVote} and \texttt{DecideAnnouncement}.
+        \item \texttt{DecideAgenda} does not directly map to any power of the Speaker, but it does aid the agents with keeping track of the rule propagated through the legislative branch functions. By changing the rule given to the agent in \texttt{DecideAgenda}, which is the same rule returned by the President in \texttt{PickRuleToVote}, agents can alter the rule passed to them in \texttt{DecideVote} and \texttt{DecideAnnouncement}.
         \item \texttt{DecideVote} enables the institutional power of calling a vote and deciding the participating islands. The information passed to the Speaker is the current rule in the agenda (as returned by \texttt{DecideAgenda}) and a list of all the alive island IDs. The Speaker returns the same type of information along with a boolean indicating whether the agent has chosen to act on this power. The rule returned by the Speaker is the rule that is passed to agents returned by the Speaker if a vote is to be conducted as indicated by the boolean returned by the Speaker.
         \item \texttt{DecideAnnouncement} enables the institutional power of declaring a result of a vote on rules. The information passed to the Speaker is the current rule in the agenda (as returned by \texttt{DecideAgenda}) and the result of the vote held. The Speaker returns the same type of information along with a boolean indicating whether the agent has chosen to act on this power. The rule returned by the Speaker along with the result returned by the Speaker is the information that is processed by the server and broadcasted to all the agents if the agent has chosen to make a declaration as indicated by the boolean returned by the Speaker.
     \end{itemize}
@@ -549,11 +549,12 @@ The legislative branch functions can be divided into two categories:
         \item \texttt{PaySpeaker} implements the power of the Speaker to pay the Judge its salary. 
         \item \texttt{CallJudgeElection} implements the power of the Speaker to call an election for the transfer-of-power for the Judge
         \item \texttt{DecideNextJudge} allows the Speaker to modify the outcome of the election, if one is called, and choose not to follow its permission (that is, if Rule "TODO WHEN PR 4 IS MERGED" is in play) to announce the actual election result of Judge election.
+
     \end{itemize}
 \end{enumerate}
 
 \subsubsection{Server-side}
-The speaker server-side is responsible for enabling the information flow, maintaining simulation concurrency concerning action costs, updating the game state, and logging actions for monitoring. Notable functions are \texttt{updateRules}, which implements the concurrency checks and logic for updating the rules in play, and \texttt{RunVote}, which interacts with the voting system.
+The server-side of the legislative branch is responsible for enabling the information flow, maintaining simulation concurrency concerning action costs, updating the game state and logging actions for monitoring. Notable functions are \texttt{updateRules}, which implements the concurrency checks and logic for updating the rules in play, and \texttt{RunVote}, which interacts with the voting system.
 
 \subsection{Judicial Branch}
 The judicial branch has two parts: the judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the Judge role which is in the hands of the agent which is the Judge at a specific turn. This agent is able to use the Judge role to make decisions which are communicated to the server-side judicial branch which performs the actions.
