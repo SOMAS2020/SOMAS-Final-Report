@@ -548,7 +548,7 @@ The flow of every server-side function call of the executive branch can be prese
 
 \subsection{Legislative Branch}
 \subsection{Judicial Branch}
-The judicial branch has two parts, the Judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the judge role which is in the hands of the agent which is currently Judge. This agent is able to use the Judge role to make decisions which  are communicated to the serverside Judicial-branch which performs the actions.
+The judicial branch has two parts: the Judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the judge role which is in the hands of the agent which is currently Judge. This agent is able to use the Judge role to make decisions which  are communicated to the serverside Judicial-branch which performs the actions.
 \subsubsection{Client-side}
 The Judge decision making functions can be divided into two categories:
 \begin{enumerate}
@@ -568,6 +568,12 @@ The Judge decision making functions can be divided into two categories:
     \end{itemize}
 \end{enumerate}
 \subsubsection{Server-side}
+The functionality of the server-side of the Judicial branch can be summarised as follows:
+\begin{enumerate}
+    \item Information about actions taken by Islands is used to populate the history cache which is an array of $map[agent] \xrightarrow[]{} action$. This is done server-side because the history cache is considered to be an absolute source of truth i.e. islands do not have the opportunity to lie about actions.
+    \item Judge functions are called to decide which rule violations have taken place, how these will be punished, which violations will be pardoned, whether an election will take place.
+    \item The relevant results of the Judge's actions (sanction information, election result etc.) are processed and packaged into messages that are broadcasted to the agents.
+\end{enumerate}
 \subsection{Sanctions}
 In our archipelago sanctions are the great equaliser. They have been designed with the intention of punishing islands who break rules, and to ensure that others are notified of this. Each sanction will last for a configurable nubmer of turns.
 \subsubsection{Sanction Score}
