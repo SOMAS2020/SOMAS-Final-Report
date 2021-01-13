@@ -477,8 +477,6 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
     \item The Judge has the \emph{power} to decide to hold an election for a new President.
 \end{enumerate}
 
-
-
 \section{Future Work}
 
 \begin{itemize}
@@ -494,12 +492,93 @@ Each IIGO Session can be broken down into a sequence of consecutive actions by t
 
 
 \section{Implementation} % INFRA implementation to be written here
-\subsection{Infrastructure Overview}
+
+\subsection{IIGO Branches Overview}
+The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
+
+\begin{itemize}
+\item Client-side implementation of President, Speaker and Judge functions, which map directly to the powers given to that role.
+\item Server-side implementations of Executive, Legislative and Judicial branch actions, which call the IIGO role functions only on the client currently holding that role i.e. the executive branch only calls functions on the client assigned to the role of President.
+\end{itemize}
+
+\subsubsection{Client-side Overview}
+The client-server division gives agents the freedom to implement the IIGO role functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the IIGO role inspecting their actions will never find any wrongdoing. When implementing their President, Speaker and Judge functions, islands can either follow a rule-obeying approach or try to exploit their power once they are elected to be an IIGO role. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
+
+\subsubsection{Server-side Overview}
+The server implementation of each branch provides the IIGO roles with the framework to use their powers of carrying out the law in the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the IIGO roles and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different implementations of each IIGO role. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
+
+Moreover, the server acts as a guard of the game state and prevents the clients in IIGO roles from performing game-breaking actions. For example, server-side of the IIGO branches ensure that the roles are only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the role is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the role will act on its powers.
+
+
 \subsection{Executive Branch}
-\subsection{Legislative Branch}
-\subsection{Judicial Branch}
+
+
+\subsubsection{Client-side}
+\label{sub:president:client-side}
+Each agent can become the President at any turn. Therefore each agent should implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
+
+The presidential functions can be divided into two categories:
+\begin{enumerate}
+\item Presidential power functions:
+    \begin{itemize}
+        \item \texttt{SetTaxationAmount} allows the President to decide the amount of taxation individually set to each island. Returns the $map[agent] \xrightarrow[]{} tax$, as well as information about whether the President has acted on its power to set taxation.
+        \item \texttt{EvaluateAllocationRequests} allows the President to decide the allocation of resources distributed from the common pool to the islands. Returns the $map[agent] \xrightarrow[]{} allocation$, as well as information about whether the President has acted on its power to set allocation to common pool resources.
+        \item \texttt{PickRuleToVote} allows the President to select a rule for voting $R∗$ to be passed to the Speaker. Returns the $rule$ to be voted on by the Speaker, as well as information about whether the President has acted on its power to choose a new rule to be incorporated into the \texttt{RulesInPlay}.
+    \end{itemize}
+\item The accountability cycle and transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PaySpeaker} implements the obligation of the President to pay the Speaker its salary. 
+        \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
+        \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its obligation to announce the result of Speaker election.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Server-side}
+\label{sub:president:server-side}
+
+
+The flow of every server-side function call of the executive branch can be presented in the following way:
+\begin{enumerate}
+    \item The required information from agents or other roles is obtained. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
+    \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
+    \item Presidential function is called only on the currently residing President with aggregated information as inputs.
+    \item The outcome of the presidential function call is processed.
+    \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
+\end{enumerate}
+
+\subsubsection{Legislative Branch}
+\subsubsection{Judicial Branch}
 \subsection{Accountability Cycle}
+The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
+
+It is not unreasonable to say that the clients birthed in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result, when a role chooses not to monitor, is $true$.
+
+\subsubsection{Client-side}
+The client-side impelmentations are:
+\begin{enumerate}
+    \item \texttt{MonitorIIGORole} allows the client to decide whether to monitor the given role. 
+    \begin{itemize}
+        \item Input - $\mathrm{roleToBeMonitored}$
+        \item Output - $\mathrm{decideToMonitor:bool}$
+    \end{itemize} 
+    \item \texttt{DecideIIGOMonitoringAnnouncement} allows the client to decide if they would like to announce the result of monitoring and the result that they would like to announce. 
+    \begin{itemize}
+        \item Input - $\mathrm{actualMonitoringResult:bool}$
+        \item Outputs - $\mathrm{decideToAnnounce:bool}$, $\mathrm{monitoringResultToAnnounce:bool}$
+    \end{itemize} 
+\end{enumerate}
+\subsubsection{Server-side}
+
+The key server-side implementations are:
+\begin{enumerate}
+    \item \texttt{addToCache} populates a monitoring cache which is a record of actions taken and their results. This function is called after every IIGO action (e.g. broadcasting taxation).
+    \item \texttt{monitorRole} performs the monitoring of a role as decided by the accountable role. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
+\end{enumerate}
+
+The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
+
 \subsection{Rule Representation}
+
 \begin{quote}
     "Learn the rules like a pro, so you can break them like an artist."
     \linebreak
@@ -748,5 +827,5 @@ To acommodate this we instead split this into two separate rules.
     \label{rule:cond2}
 \end{rule_IIGO}
 We then conditionally execute them such that if rule \ref{rule:cond1} fails then the whole structure passes and if rule \ref{rule:cond1} passes we expect rule \ref{rule:cond2} to pass.
-
+1
 \subsection{Rules In Play}
