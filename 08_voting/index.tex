@@ -1,6 +1,8 @@
 \chapter{Voting}
-\section{Voting Scenarios}
-\label{sec:VotingScenarios}
+\section{Design}
+\label{sec:VotingDeisng}
+\subsection{Voting Scenarios}
+\label{subsec:VotingScenarios}
 
 Within the context of the coursework, robust voting systems were designed to determine the outcome of collective actions (e.g. elections for legislative, executive and judicial branches in IIGO).
 When voting is called in the IIGO, the President, Speaker, Judge and the islands in the archipelago (i.e. the \emph{Voters}, assuming that no diplomatic sanction is in place) will be empowered to proceed with the following series of actions:
@@ -17,8 +19,8 @@ In an IIGO session, the voting action is needed to decide the next President, Sp
 \textbf{Changes of rules:} The President has the power to select a rule from the \emph{rule proposal list} to be voted by the Voters. The Speaker will host the voting for this rule and will be responsible for counting the votes in order to declare the result. The votes from the Voters can only be of the following types: \textbf{Aye} (namely agree with the rule change), \textbf{Nay} (namely disagree with the rule change) or \textbf{Abstain}.
 
 
-\section{Voting Methods}
-\label{sec:VotingMethods}
+\subsection{Voting Methods}
+\label{subsec:VotingMethods}
 
 \begin{table}[H]
 \caption{Available voting methods for each voting scenario}\label{table:votingmethod}
@@ -64,9 +66,9 @@ In case of a \textbf{tied election}, three possible rules can eliminate one or m
 
 In this coursework, the pairwise Condorcet winner is chosen as a tiebreaker which states that a candidate who dominates the other candidate in terms of majority relation wins.
 
-\section{Voting Protocol}
-\label{sec:VotingProtocol}
-The suggested voting protocol is adapted from an example of formal specification given in Robert's Rules of Order (RONR) that defines a series of sequential actions when a voting event happens.
+\subsection{Voting Protocol}
+\label{subsec:VotingProtocol}
+The suggested voting protocol is adapted from an example of formal specification given in Robert's Rules of Order (RONR)\footnote{Pitt, J. \textit{Self-Organising Multi-Agent Systems} (pp. 113-116). IC Press.} that defines a series of sequential actions when a voting event happens.
 
 This protocol is applicable to any voting method at a certain state of the game.
 
@@ -86,11 +88,11 @@ Figure~\ref{fig:RONRVotingProtocol} shows the sequence of the voting protocol fo
 \begin{center}
 \begin{tikzpicture}[node distance=20pt]
 \centering
-\node[draw, rounded corners] (start)  {The President selects a rule to be voted on};
-\node[draw, below=of start] (step 1)  {The President notifies the Speaker to hold a voting session on the selected rule};
+\node[draw, rounded corners] (start)  {The President selects a rule to be voted on.};
+\node[draw, below=of start] (step 1)  {The President notifies the Speaker to hold a voting session on the selected rule.};
 \node[draw, below=of step 1] (step 2)  {The Speaker opens the ballot for the Voters to cast their vote.};
 \node[draw, below=of step 2] (step 3)  {The Speaker closes the ballot after receiving votes from the Voters.};
-\node[draw, below=of step 3] (step 4)  {The Speaker counts the votes by using a specific voting method to declare the result.};
+\node[draw, below=of step 3] (step 4)  {The Speaker counts the votes by using a specific voting method.};
 \node[draw, below=of step 4, rounded corners] (end)   {The Speaker publicly declares the result for the finalised vote.};
  \draw[->] (start)  -- (step 1);
  \draw[->] (step 1) -- (step 2);
@@ -105,6 +107,113 @@ Figure~\ref{fig:RONRVotingProtocol} shows the sequence of the voting protocol fo
 
 For elections of roles, the sequence of actions of the voting protocol is mostly similar to the above explanation in principle, except for some parameters, such as the motion of the vote which is the role itself (President, or Speaker, or Judge), the facilitator of the election/vote event which depends on what role is being held for election (refer to Chapter 5 IIGO for more details on change of roles and power transfer), and the applicable voting method function to call for election that will produce the result, which is different from the voting method used for rules. Refer to Section~\ref{sec:VotingMethods} for more details on voting methods to be used for elections of roles.
 
-At the start of the game, it is assumed that all 6 islands have the power to vote at any necessary voting scenario, and no diplomatic sanction is in place for any island. However, in the further turns of the game, some island(s) could lose their right to vote and/or not permitted to participate in a voting event due to the diplomatic sanction(s) in place. Refer to Chapter 5 IIGO for details on diplomatic sanction. In this case, the Speaker will open the ballots to the eligible islands only , i.e. those who are permitted to vote at a certain state of the game.
+At the start of the game, it is assumed that all 6 islands have the power to vote at any necessary voting scenario, and no diplomatic sanction is in place for any island. However, in the further turns of the game, some island(s) could lose their right to vote and/or not permitted to participate in a voting event due to the diplomatic sanction(s) in place. Refer to Section~\ref{sec:sanctions} for details on diplomatic sanction. In this case, the Speaker will open the ballots to the eligible islands only , i.e. those who are permitted to vote at a certain state of the game.
 
-% Implmentaion section deleted
+\section{Implementation}
+\label{sec:VotingImplementation}
+In IIGO sessions, the server acts as an intermediary to receive the parameters:
+\begin{itemize}
+    \item the purposes\footnote{When the voting for changes of rules is called, the name of rule to be voted on is passed to the server.} of voting.
+    \item the identities of islands.
+    \item the ballots from islands.
+    \item the voting method that is chosen.
+\end{itemize}
+
+Once it receives all the ballots, the server counts the votes and selects a winner according to the voting-method parameter (see Algorithm~\ref{algo:Plurality}, \ref{algo:Borda}, \ref{algo:Runoff}, \ref{algo:InstantRunoff} and \ref{algo:Approval}). The recommended\footnote{The declaration of winner is subject to the islands' strategies where the initiator of voting may or may not abuse the power to declare a winner without following the voting method that is chosen.} winner is available for the initiator of voting.
+
+\begin{algorithm}[!h]
+\KwData{IslandID, ballots("Aye", "Nay" or "Abstain")}
+\KwResult{the winner}
+$Aye \gets 0$\;
+$Nye \gets 0$\;
+\ForEach{$ballot \in ballots $}{
+    \If{$Aye$} {$Aye \gets Aye+1$\;}
+    \If{$Nay$} {$Nay \gets Nye+1$\;}
+}
+\If{$Aye > Nay$}{\Return $Aye$\;}
+\Else{\Return $Nay$\;}
+\caption{Plurality (available for changes-of-rules votes)}\label{algo:Plurality}
+\end{algorithm}
+
+
+\begin{algorithm}[!h]
+\KwData{IslandID, ballots(lists of IslandIDs), the number of candidates}
+\KwResult{the winner}
+$N \gets$ the number of candidates\;
+initialise $score[N]$ with $0$\;
+\ForEach{$ballot \in ballots $}{
+    $L \gets$ the number of the candidates in the ballot\;
+    $numNotInBallot \gets N-L$ \;
+    $shareScore \gets \Sigma^{numNotInBallot}_{1}$ \;
+    \For{i from 0 to $N-1$}{
+        \If{i is in the ballot}
+        {$K \gets$ the rank of $i$ in the ballot\;
+            $scores[i]\gets scores[i]+N-K+1$\;}
+        \Else{$scores[i]\gets scores[i]+shareScore/numNotInBallot$\;}
+    }
+}
+sort candidates by Borda scores\;
+\Return the candidate with the highest score
+\caption{Borda Count (available for elections votes)}\label{algo:Borda}
+\end{algorithm}
+
+
+\begin{algorithm}[!h]
+\KwData{IslandID, ballots(lists of IslandIDs), the number of candidates}
+\KwResult{the winner}
+$N \gets$ the number of candidates\;
+\ForEach{$ballot \in ballots $}{
+    store the first-place in the ballot in $firstPlace[N]$\;
+}
+    sort $firstPlace[N]$ from the highest to the lowest\;
+    $MostFirstPlace \gets firstPlace[0]$\;
+    $SecondFirstPlace \gets firstPlace[1]$\;
+
+\eIf{$MostFirstPlace$ is the majority}{\Return $MostFirstPlace$\;}{
+    $C_{MFP} \gets$ 0\;
+    $C_{SFP} \gets$ 0\;
+    \For{$ballot \in ballots $}{
+        $K_{MFP} \gets$ the rank of $MostFirstPlace$\;
+        $K_{SFP} \gets$ the rank of $SecondFirstPlace$\;
+        \eIf{$K_{MFP} > K_{SFP}$}{
+        $C_{MFP} \gets C_{MFP}+1$\;}{$C_{SFP} \gets C_{SFP}+1$\;}
+    }
+}
+\eIf{$C_{MFP}>C_{SFP}$}{\Return the candidate of $MostFirstPlace$\;}{\Return the candidate of $SecondFirstPlace$\;}
+
+\caption{Runoff (available for elections votes)}\label{algo:Runoff}
+\end{algorithm} 
+
+
+\begin{algorithm}[!h]
+\KwData{IslandID, ballots(lists of IslandIDs), the number of candidates}
+\KwResult{the winner}
+$N \gets$ the number of candidates\;
+\While{$N>1$}{
+\ForEach{$ballot \in ballots $}{
+\For{i from 0 to $N-1$}{
+\If{i is first choice}{
+$K \gets$ the rank of $i$ in the ballot\;
+$scores[i]\gets scores[i]+N-K+1$\;}
+}
+}
+\eIf{$N>1$}{
+remove the candidate with the fewest first choice votes from the ballots\;}{\Return the candidate\;}
+}
+\caption{Instant Runoff (available for elections votes)}\label{algo:InstantRunoff}
+\end{algorithm} 
+
+
+\begin{algorithm}[!h]
+\KwData{IslandID, ballots(lists of IslandIDs), the number of candidates}
+\KwResult{the winner}
+$N \gets$ the number of candidates\;
+\ForEach{$ballot \in ballots $}{
+    \For{i from 0 to $N-1$}{
+    \If{i is in ballot} {$scores[i]\gets scores[i]+1$\;}
+    }
+}
+sort candidates by scores\;
+\Return the candidate with the highest score\;
+\caption{Approval (available for elections votes)}\label{algo:Approval}
+\end{algorithm}
