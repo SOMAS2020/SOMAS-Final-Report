@@ -14,7 +14,7 @@ An agent's personality can change depending on the current resources. Below is a
 The upper and lower bounds can be changed before a game starts. 
 
 \section{IITO Gifts}
-During IITO, the agent's opinion of other island is affected. For every gift received, the agent's opinion of the gifter increases. However, the agent's opinion of an island can decrease if that island promised a gift and was not able to fulfill it. 
+During IITO, the agent's opinion of other island is affected. For every gift received, the agent's opinion of the gifter increases. However, the agent's opinion of an island can decrease if that island promised a gift and was not able to fulfil it. 
 
 When team 1 agent receives a request for gifts, the agent will decide how much to offer depending on the agent's current personality and the opinion of that island. If the agent is desperate, then the agent will refuse all gift requests therefore offering a gift of 0. If the agent is anxious, then gift offers will be a proportion of the current resources that the agent is willing to give away. If the agent is happy, then the agent will freely offer resources that satisfy the incoming gift request amount.
 
@@ -23,14 +23,13 @@ Moreover, if the agent's opinion of an island is very high, the agent can decide
 For increase survivability, team 1 agent will accept any gift offers that it receives. 
 
 \section{IIFO Disaster}
-% TODO: Reference the correct place for the below line.
-Disasters can happen deterministically or stochastically (mentioned in detail in Chapter~\ref{sec: Game Environment} for more information). For an agent, it is important to determine when a disaster occurs so that as much disaster damage is mitigated using the commonpool. 
+Disasters can happen deterministically or stochastically (mentioned in detail in Chapter~\ref{sec: Disaster} for more information). For an agent, it is important to determine when a disaster occurs so that as much disaster damage is mitigated using the commonpool. 
 % (see Chapter \ref{sec:IIFO:ltCRD} for more information). 
 
 When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of 0. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position x, position y, magnitude and occurrence is calculated. A confidence value is calculated along with the mean disaster metrics. 
 
 % Add a footnote on website?  https://www.mathsisfun.com/data/confidence-interval.html
-The confidence value is calculated by finding the ratio between margin of error and the mean value. The smaller the margin of error, the more confident the agent is. Therefore a difference between the mean value and the margin of error must also be calculated. To begin with, the agent uses the confidence interval equation (where $s =$ standard deviation, $n = $ size of array, $Z = $ confidence interval) to calculate the margin of error:
+The confidence value is calculated by finding the ratio between margin of error and the mean value. The smaller the margin of error, the more confident the agent is. Therefore, a difference between the mean value and the margin of error must also be calculated. To begin with, the agent uses the confidence interval equation (where $s =$ standard deviation, $n = $ size of array, $Z = $ confidence interval) to calculate the margin of error:
 \begin{equation}
     \label{eq: Team1MarginOfError}
     \text{Error} = Z \dfrac{s}{\sqrt{n}} 
