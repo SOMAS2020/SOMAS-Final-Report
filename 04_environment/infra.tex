@@ -2,7 +2,7 @@
 \section{Foraging}
 \subsection{Inputs, Outputs and Functions}
 
-Foraging has been implemented in the code base. It determines the method of foraging. In short, it is either deer hunting being payoff focused or fishing being a risk averse method of foraging. Deer hunting is linked to a population model, based on a logistic population model. The high level inputs include island IDs, resource contributions from those islands and the chosen foraging method. The high level output is a foraging report which include forage type, input resources, number of participants, number caught, total utility, catch sizes, turn.\newline
+Foraging has been implemented in the code base. It determines the method of foraging. In short, it is either deer hunting being payoff focused or fishing being a risk averse method of foraging. Deer hunting is linked to a population model, based on a logistics population model. The high level inputs include island IDs, resource contributions from those islands and the chosen foraging method. The high level output is a foraging report which include forage type, input resources, number of participants, number caught, total utility, catch sizes, turn.\newline
 
 A list of useful and important functions can be found on Table \ref{tab:Foraging Main Functions}, together with a description of what they're doing, as well as their inputs and outputs.
 
@@ -46,15 +46,6 @@ A list of useful and important functions can be found on Table \ref{tab:Foraging
 
 \newpage
 \subsection{Important Implementation Remarks}
-\subsubsection{Utility for a Single Deer}
-The return for a single deer is modelled as a random variable (RV) that is implemented as \texttt{deerReturn()}. It is effectively the combination of two other RVs:
-\begin{itemize}
-    \item $D$: Bernoulli RV represents the binary probability of catching a deer. Usually Bernoulli probability $p$ (i.e. $P(D=1) = p$), will be fairly close to $1$ such that there is a fairly high chance of catching a deer if agents invest sufficient resources.
-    \item $W$: A continuous RV that adds some variance to the return. This could be interpreted as the weight/size of the deer that is caught. $W$ is exponentially distributed such that the prevalence of deer is inversely proportional to their size.
-\end{itemize}
-
-$D$ and $W$ are combined in the expression $H = D(1+W)$ which, in turn, is another RV which corresponds to the output of \texttt{deerReturn()}. Notice how $W$ is irrelevant if $D=0$; the weight of a deer does not matter if it evades capture. Also, the mean return can be shown to be $$E[U] = E[D(1+W)] = p(1+E[W]) = p(1+\frac{1}{\lambda})$$ where $p$ is the Bernoulli probability of $D$ and $\lambda$ is the exponential rate parameter of $W$.
-
 \subsubsection{Dynamics of a Collective Hunt}
 
 A deer hunt is modelled as a stochastic process where the expected utility is proportional to the input resources provided for the hunt. There is no limit to the number of teams $m$ that can join a hunt, however, there is a limit to the number of deer $n$ that can be hunted in a single foraging round. Importantly, $n$ should be chosen such that $n < max(m) = 6$, so that, beyond a certain number of hunters, the utility per team decreases as the same expected return could be achieved with less hunters. 
@@ -70,24 +61,7 @@ U_{\theta}=\left\{\begin{array}{ll}
 \end{array}\right.  \quad \text{where} \quad \Delta^k= \sum_{i=0}^k\delta^i  \quad 
 \end{equation}
 
-Where $n=4$ (maximum number of deer that can be hunted in a single hunt). Notice that the expected return for $n$ deer is simply $n$ times the return of a single deer (i.i.d. assumption). However, the incremental input resources required to hunt $n$ deer decreases as $n$ increases. That is, it costs less (per deer) to hunt more deer - a dynamic that incentivises collaboration amongst agents. This is incorporated using a variable $\delta$ (\texttt{decay} $=$ \texttt{gameConf.ForagingConfig.IncrementalInputDecay}) which is used as follows: for each additional deer (above 1), the incremental cost required to hunt it is calculated by $\delta^n$. This decay parameter $\delta$ should be chosen such that $0< \delta< 1$. Assuming $\delta=0.8$ at the time of implementation 
-
-\begin{equation}
-\text{Minimum input $x$ required to hunt $n$ deer}=
-\left( \begin{array}{ll@{}}
-n=0: \delta^0 = 1 \\
-n=1: \delta^1 = 0.8^1 \\
-n=2: \delta^2 = 0.8^2 = 0.64 \\
-n=2: \delta^3 = 0.8^3 = 0.512 \\
-n=4: \delta^4 = 0.8^4 = 0.4096\\ 
-\end{array} \right)
-\end{equation}
-
-The minimum collective resource input needed to hunt $n$ deer, $x_{min}$, can be calculated as the cumulative cost given by
-
-\begin{equation}
-x_{min} = \Delta^{n-1} = \sum_{i=0}^{n-1}\delta^i = \delta^0 + \delta^1 + \dots + \delta^{n-1}
-\end{equation}
+Where $n=4$ is a parameter that can be altered. (maximum number of deer that can be hunted in a single hunt). Notice that the expected return for $n$ deer is simply $n$ times the return of a single deer (i.i.d. assumption). However, the incremental input resources required to hunt $n$ deer decreases as $n$ increases. That is, it costs less (per deer) to hunt more deer - a dynamic that incentivises collaboration amongst agents. This is incorporated using a variable $\delta$ (\texttt{decay} $=$ \texttt{gameConf.ForagingConfig.IncrementalInputDecay}) which is used as follows: for each additional deer (above 1), the incremental cost required to hunt it is calculated by $\delta^n$. This decay parameter $\delta$ should be chosen such that $0< \delta< 1$. Assuming $\delta=0.8$ at the time of implementation 
 
 \subsubsection{Dynamics between deer population and likelihood of catching a deer}
 
@@ -192,7 +166,7 @@ Table \ref{tab: Common Pool's Main Function} contains a list of important functi
 \hline
 \end{tabular}
 \end{center}
-\caption{Main funcitions of Common Pool for Disaster Mitigation}
+\caption{Main functions of Common Pool for Disaster Mitigation}
 \label{tab: Common Pool's Main Function}
 \end{table}
 
@@ -201,7 +175,7 @@ This section details the implementation of Common Pool disaster mitigation. This
 
 An important input to the implementation is the magnitude of the disaster’s damage on each island. In Figure~\ref{fig:Common Pool infrastructure outcome}, this specific disaster’s magnitude was 3.458. However, the disaster’s effect on individual islands does not add up to 3.458 because the storm’s epicenter is located some distance away from each island. This aspect creates a more realistic scenario. From the individual damage experienced by each island, proportional effects on each island are computed. The summation of these proportional effects is equal to 100$\%$, which is the total effective damage.\newline
 
-If the common pool has enough resources to fully mitigate the disaster, the process is very easy as each island escapes unscathed. However, in the unfortunate event that the total disaster damage exceeds Common Pool resources, all such resources will be distributed to islands in proportion to the damage they experience (regardless of what their prior Common Pool contributions were). This is also visualised in Figure~\ref{fig:Common Pool infrastructure outcome}: Island 4 experiences the most damage from the storm and so, Island 4 receives the maximum Common Pool resource allocation of 252.47 resources (“common pool mitigated” column). The updated damage value shows the leftover damage of the disaster that the common pool was not able to mitigate. Left over damage serves to deplete an island's private pool of resources where applicable. If there is enough resources in the common pool to totally mitigate the disaster, the update damage values will be zero.
+When a disaster strikes the effect of the disaster on each islands is summed compared to the resources in the common pool. If the common pool has more resources than the total effect of the disaster it can fully mitigate the disaster meaning the islands take not damage. However, in the unfortunate event that the total disaster damage exceeds Common Pool resources, the common is first depleted and the total disaster effect is also reduced by the same amount and then the damage is applied to islands in proportion to the original damage they would have experienced (regardless of what their prior Common Pool contributions were). This is also visualised in Figure~\ref{fig:Common Pool infrastructure outcome}: Island 4 experiences the most damage from the storm and so, Island 4 receives the maximum Common Pool resource allocation of 252.47 resources (“common pool mitigated” column). The updated damage value shows the leftover damage of the disaster that the common pool was not able to mitigate. Left over damage serves to deplete an island's private pool of resources where applicable. If there is enough resources in the common pool to totally mitigate the disaster, the update damage values will be zero.
 
 \begin{figure}[!htb]
     \centering
