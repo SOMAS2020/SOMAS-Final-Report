@@ -119,7 +119,7 @@ In IIGO sessions, the server acts as an intermediary to receive the parameters:
     \item the voting method that is chosen.
 \end{itemize}
 
-When receives all the ballots, the server counts the votes and selects a winner according to the voting-method parameter (see Algorithm~\ref{algo:Plurality}, \ref{algo:Borda}, \ref{algo:Runoff}, \ref{algo:InstantRunoff} and \ref{algo:Approval}). The recommended\footnote{The declaration of winner is subject to the islands' strategies where the initiator of voting may or may not abuse the power to declare a winner without following the voting method that is chosen.} winner is available for the initiator of voting.
+Once it receives all the ballots, the server counts the votes and selects a winner according to the voting-method parameter (see Algorithm~\ref{algo:Plurality}, \ref{algo:Borda}, \ref{algo:Runoff}, \ref{algo:InstantRunoff} and \ref{algo:Approval}). The recommended\footnote{The declaration of winner is subject to the islands' strategies where the initiator of voting may or may not abuse the power to declare a winner without following the voting method that is chosen.} winner is available for the initiator of voting.
 
 \begin{algorithm}[!h]
 \KwData{IslandID, ballots("Aye", "Nay" or "Abstain")}
@@ -170,11 +170,11 @@ $N \gets$ the number of candidates\;
     $SecondFirstPlace \gets firstPlace[1]$\;
 
 \eIf{$MostFirstPlace$ is the majority}{\Return $MostFirstPlace$\;}{
+    $C_{MFP} \gets$ 0\;
+    $C_{SFP} \gets$ 0\;
     \For{$ballot \in ballots $}{
         $K_{MFP} \gets$ the rank of $MostFirstPlace$\;
         $K_{SFP} \gets$ the rank of $SecondFirstPlace$\;
-        $C_{MFP} \gets$ 0\;
-        $C_{SFP} \gets$ 0\;
         \eIf{$K_{MFP} > K_{SFP}$}{
         $C_{MFP} \gets C_{MFP}+1$\;}{$C_{SFP} \gets C_{SFP}+1$\;}
     }
