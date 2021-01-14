@@ -1,5 +1,88 @@
 \chapter{Game Design}
 
+\section{Design Approach}
+
+A game was designed to meet the requirements outlined by the specification to provide structure to the inter-island interactions and decisions. This \emph{game design framework} provides a basis for the simulations, experiments and evaluations into different agent strategies and system designs.
+
+The game is structured as series of \emph{seasons} and \emph{turns}, which concludes once all of the islands die. The objective for the islands is to survive for as many turns and seasons as possible. The following definitions provide a detailed outline of the relevant terminology used to formalise the game definition and description.
+
+
+\begin{definition} \label{def:gamestart}
+    \textbf{Game start} is defined as the beginning of a simulation. Each simulation can be configured using a number of parameters, including but not limited to the cost of living, probability of a disaster and initial resources in the common pool.
+\end{definition}
+
+\begin{definition} \label{def:turn}
+    A \textbf{turn} is defined as a series of exchanges between agents in which islands receive resource updates, attend Inter-Island Organisation meetings (e.g. IIGO, IIFO, IITO), and interact with one another and the game state through \textbf{actions}. A turn can be broken down as follows:
+    \begin{enumerate}
+        \item Resource Updates for each island and on global game state.
+        \item The Inter-Island Governmental Organisation (IIGO) decides rule changes, elections, sanctions.
+        \item The Inter-Island Forecasting Organisation (IIFO) provides a forum for information exchange to mitigate both short and long term risk dilemmas.
+        \item Inter-Island Trade Organisation (IITO) facilitates gift exchanges and allows agents to communicate to make deals between one another without organisation supervision.
+        \item Islands submit decisions on their actions to the server to formally end the turn.
+        \item Check if a disaster occurs this turn.
+        \item Server processes actions and updates game and island states.
+            \begin{itemize}
+                \item A cost of living is subtracted from an islands pool before the next term. This is the simulation-level equivalent to using resources to stay alive (e.g. food consumed). These resources are permanently consumed and do NOT go into the common pool. Note: this is NOT the same as the tax.
+                \item Check if the game is over.
+                \item Check if any islands are \textbf{critical} (i.e. below the threshold).
+                \item Check if any islands are \textbf{dead}.
+            \end{itemize}
+    \end{enumerate}        
+\end{definition}
+
+\begin{definition} \label{def:gameseason}
+    A \textbf{season} is defined as a series of turns and concludes with a disaster. Seasons formalise the flow of the game and provide a method to track the number of disasters the islands survive.
+\end{definition}
+
+\begin{definition} \label{def:gamestate}
+    The \textbf{game state} is the set of information an island receives at the start of each turn. This includes, but is not limited to, the resources it was allocated the previous turn, the geographical location of the islands, the quantity of resources left in the common pool and the set of rules for the turn (including any rules that were modified the previous turn). It is important to note that each island's game state is private. Therefore, no other island can see another island's resource allocation.
+\end{definition}
+
+\begin{definition} \label{def:gameaction}
+    An \textbf{action} is a decision an island can make or that is made by any Inter-Island Organisation that updates the game state. Actions can be made at different stages within a turn both within Inter-Island Organisations and at the end of a turn. This includes but is not limited to taking resources from or donating resources to from the common pool, rule changes in the IIGO, and gift requests or acceptances. The following is a brief overview of the actions that agents can take:
+
+    \begin{itemize}
+        \item \textbf{Foraging}: Agents can decide to allocate resources to generate resources through foraging
+        \item \textbf{Gifting}: Agents can choose to send, and accept resource gifts from other agents through the IITO
+        \item Agents can take resources from and give resources to the Common Pool
+        \item Agents can execute \textbf{role actions}. These actions relate to actions agents can take in organisations such as the IIGO and are explained in further detail in the following chapters.
+        \item Agents can share information through the IIFO, for example, regarding predictions of future disaster locations, magnitudes and timing.
+    \end{itemize}
+\end{definition}
+
+\begin{definition} \label{def:gameseason}
+    The \textbf{common pool} is a pool of resources shared by the islands. It is used to mitigate disasters, and act as a central resource storage for tax payments, and agents to share and take resources through self organisation.
+\end{definition}
+
+\begin{definition} \label{def:critical}
+    A \textbf{critical} island is defined as an island whose resources are below the minimum threshold. When this occurs, an island is allowed a grace period during which it is expected to request gifts from other islands in order to reach the minimum amount of resources required to stay in the game.
+\end{definition}
+
+\begin{definition} \label{def:death}
+    A \textbf{death} occurs when an island was in a \textbf{critical} state for $N$ turns. The exact number of turns affects the difficulty of the game so it was investigated and is discussed in simulations and results section. Once an island is dead, it can no longer participate in the simulation.
+\end{definition}
+
+\begin{definition} \label{def:gameover}
+    \textbf{Game over} is defined as the end of the simulation and occurs when all islands have died or the simulation is completed - whichever occurs first.
+\end{definition}
+
+Figure~\ref{fig:gamedesign-flow} depicts a high level diagram of the general flow and structure of the game.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{03_gamedesign/images/gamespec-flow.png}
+    \caption{High Level Game Specification Flow Diagram}
+    \label{fig:gamedesign-flow}
+\end{figure}
+
+\subsection{Design Choice Justification}
+Every action taken in the game adds to the dilemma placed on the agent to explore how they interact and attempt to overcome challenges through self-organisation. To complicate matters further, the meetings occur only to form agreements, which can also be broken after they are made. The allocation also occurs first to assist islands that are struggling by allowing them to take from the common pool immediately and use these resources to forage or, at a minimum, pay their tax.
+
+\subsection{Game Parameters}
+Many of the parameters within the game can be modified to adjust the difficulty of the game. It should be noted that some of these parameters have a greater impact than others. For example, the agents may or may not have access to the common pool threshold level and this knowledge, or lack thereof, will result in entirely different agent performance. This because each agent relies on different strategies and approaches each aspect of the game in a different way. For example, while some agents rely more on social strategies and cooperation to mitigate unknown risk, others rely heavily on calculations and predictions. Each agent strategy will come with its own unique set of benefits and limitations in the context of the game, performing better or worse, under different conditions.
+
+% Start of section on implementation
+
 \section{Implementation}
 \label{sec:GD:implementation}
 
@@ -126,6 +209,7 @@ Developing and maintaining a codebase with contributions from around 40 develope
 
 While Go is strongly typed and would mean that most errors can be detected at compile-time (or even at time of coding with its performant language server), having unit and integration tests greatly improved the maintainability and ease of development of the project--these issues were particularly important as this was a large-scale group software engineering project--developers stepping on each other's toes is a common occurrence in non-tested group project code. Henceforth, tests were required for non-trivial server-side code.
 
+<<<<<<< HEAD
 \subsection{Peer Review}
 
 Peer review was also setup via GitHub pull requests--each change required the approval of another member in the infrastructure team. This practice not only promoted consistent code design and implementation, it minimised mistakes and ensured that the code implementation meets design and implementation requirements set forth. Further, as there was variation in programming skill among code contributors, knowledge sharing was facilitated by code reviews. This was also a critical opportunity for engineers to learn more about the other code being contributed to the project.
@@ -138,3 +222,16 @@ Via GitHub Actions\footnote{https://github.com/features/actions}, continuous int
 \subsection{Continuous Development}
 
 On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in~\ref{sec:GD:implementation:practices}), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
+=======
+\subsubsection{Peer Review}
+
+Peer review was also setup via GitHub pull requests--each change required the approval of another member in the infrastructure team. This practice not only promoted consistent code design and implementation, it minimised mistakes and ensured that the code implementation meets design and implementation requirements set forth. Further, as there was variation in programming skill among code contributors, knowledge sharing was facilitated by code reviews. This was also a critical opportunity for engineers to learn more about the other code being contributed to the project.
+
+\subsubsection{Continuous Integration}
+
+Via GitHub Actions\footnote{https://github.com/features/actions}, continuous integration was set up. Each Pull Request (PR) was set up to trigger automated runs of written tests and a full simulation in addition to static code analysers such as linters. These checks must all pass for the PR to be frequently merged into the main branch. Automated testing and code analysis saved time and facilitates regression testing, as all tests--existing and new--were run for each change. Running a full simulation also served as a good stress-test for the system to make sure that it does not crash on a similar full simulation. Further, automated tests were run on a reference system (Ubuntu 20.04 with Go 1.15.5 and Node 14), helping to prevent system-specific quirks or bugs from polluting the codebase.
+
+\subsubsection{Continuous Deployment}
+
+On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in the Continuous Integration section), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
+>>>>>>> 962869f9957a17b0764e8a570c39fa55a16b5576
