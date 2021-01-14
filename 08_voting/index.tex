@@ -122,7 +122,7 @@ In IIGO sessions, the server acts as an intermediary to receive the parameters:
 Once it receives all the ballots, the server counts the votes and selects a winner according to the voting-method parameter (see Algorithm~\ref{algo:Plurality}, \ref{algo:Borda}, \ref{algo:Runoff}, \ref{algo:InstantRunoff} and \ref{algo:Approval}). The recommended\footnote{The declaration of winner is subject to the islands' strategies where the initiator of voting may or may not abuse the power to declare a winner without following the voting method that is chosen.} winner is available for the initiator of voting.
 
 \begin{algorithm}[!h]
-\KwData{IslandID, ballots("Aye", "Nay" or "Abstain")}
+\KwData{IslandID, ballots(``Aye'', ``Nay'' or ``Abstain'')}
 \KwResult{the winner}
 $Aye \gets 0$\;
 $Nye \gets 0$\;
