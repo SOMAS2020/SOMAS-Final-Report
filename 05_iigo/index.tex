@@ -290,7 +290,7 @@ Each island has the \emph{power} to:
             %\item The game specification includes how many rules an island can propose each turn.
         %\end{itemize}
         %\item vote  for rules in the Legislative Branch and vote for their favourite islands in elections
-\item participate in the legislative branch of the government by casting ballots in votes called by the Speaker
+\item participate in the legislative branch of the government by casting ballots in votes called by the Speaker.
 \item vote for an island to be elected for a specific role (e.g. the President, Judge, Speaker) during the elections\footnote{This will be assumed to be true \underline{unless stated otherwise}. %Note that \textbf{diplomatic sanctions} can disable this power of a specific island (see Section~\ref{jud_const}).}.
         }.
 \end{itemize}
@@ -540,7 +540,7 @@ The presidential functions can be divided into two categories:
 \item The accountability cycle, salary and transfer-of-power functions:
     \begin{itemize}
         \item \texttt{PaySpeaker} implements the power of the President to pay the Speaker its salary. 
-        \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker
+        \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker.
         \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the result of Speaker election.
     \end{itemize}
 \end{enumerate}
@@ -563,7 +563,7 @@ The flow of every server-side function call of the executive branch can be prese
     \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
 \end{enumerate}
 
-Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
+% Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
 
 The flow of every server-side function call of the executive branch can be presented in the following way:
 \begin{enumerate}
@@ -658,7 +658,7 @@ Each sanction tier has an associated rule:
     \end{rule_IIGO}
 \end{itemize}
 
-These rules are used to calculate the exact resource payment that will be required of each island to pay off their sanction. These specific payments are only broadcasted to the islands that must pay them.
+These rules are used to calculate the exact resource payment that will be required of each island to pay off their sanction(s)\footnote{Note that it is possible that multiple sanctions are invoked on the same island.}. These specific payments are only broadcasted to the islands that must pay them.
 
 \subsubsection{Pardons}
 \begin{quote}
@@ -711,7 +711,7 @@ Moreover, we also concluded that we should rather opt for a mathematical represe
 The mathematics we decided to employ was matrices and the world of linear algebra that surrounds them.
 \linebreak
 The premise of this choice was that if a rule could be represented by matrices, then agents could look up every element of the matrix without any significant difficulty. This would enable us to effectively expose the entire operation of any rule to the agent without reducing the scope of our rules too much.
-To give an example for this matrices-based rule representation, let us consider a simple rule first. \\ ```
+To give an example for this matrices-based rule representation, let us consider a simple rule first. \\ 
 \begin{rule_IIGO}
     "If you are expected to pay $X$ amount of taxation, the amount of tax you pay must be $X$."
 \label{rule:basicTaxRule}
@@ -947,7 +947,6 @@ To accommodate this, we instead split this into two separate rules.
     \label{rule:cond2}
 \end{rule_IIGO}
 We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then the whole structure passes, and if Rule~\ref{rule:cond1} passes, we expect Rule~\ref{rule:cond2} to pass as well for the rule to be adhered.
-\subsection{Rules In Play}
 
 \section{Future Work}
 
@@ -964,7 +963,7 @@ We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then
     Suggested additional rules include:
         \begin{itemize}
             \item During an IITO session, each island is not \emph{permitted} to give gifts to a sanctioned island.
-             \item During an IIFO session, a sanctioned island is not \emph{permitted} to learn and share any predictions regarding the long-term collective risk dilemma (i.e. upcoming disasters) and the short-term collective risk dilemma (i.e. returns from foraging)
+             \item During an IIFO session, a sanctioned island is not \emph{permitted} to learn and share any predictions regarding the long-term collective risk dilemma (i.e. upcoming disasters) and the short-term collective risk dilemma (i.e. returns from foraging).
              \item Each island has the \emph{power} to propose a \textbf{hunting ban} for a specific animal type (e.g. deer, fish) in order to conserve the relevant animal population.
              \begin{itemize}
                 \item During foraging, each island is not \emph{permitted} to hunt any of the animal type whose name is in the ban list.
