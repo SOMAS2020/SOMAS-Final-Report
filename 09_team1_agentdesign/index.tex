@@ -41,7 +41,7 @@ When team 1 agent receives a request for gifts, the agent will decide how much t
         \hline
         Anxious & Agent will give away a ratio of the requested amount and its current resources. \\
         \hline
-        Desperate & Agent will refuse any gift requests that it receives. \\ 
+        Desperate & Agent will refuse any gift requests that it receives. \\
         \hline
     \end{tabular}
 \end{table}
@@ -77,6 +77,32 @@ Using the difference between the mean value ($\bar{x}$) and the margin of error 
 Sharing and obtaining other disaster information to and from other islands respectively can increase the survivability of the archipelago. As more disaster prediction is shared, a network of trust between team 1 agent and other island is built. This trust value is primarily based upon the absolute value of the islands prediction on the day the disaster happened. However, if an island shares a disaster prediction with the estimated disaster day to be random or changing erratically each turn, then team 1 agent will begin to distrust that island. 
 
 \section{IIGO: President}
+
+Following the agent's core idea, as the president, the agent will try to enlarge the common pool as well as redistribute wealth among the islands, in an attempt to ensure the survival of as many islands as possible. This is achieved through an aggressive, tiered tax policy as well as denying common pool allocation requests to the wealthier islands.
+
+This policy had to be verified as it could be vulnerable to ``free-rider'' islands, who could avoid paying tax and still reap the benefits of disaster protection from a large common pool and ``bailout'' allocations when they are low on resources.
+
+As a test of this, a simulation was set up with a variable number of lawful and free-rider islands in order to measure the stability of this policy.
+
+Three tax evading islands (half of the islands) was found to be the limit at which this policy would lead to collapse of the IIGO and the common pool. This was deemed an acceptable limit as at least half of the other agent teams would obey tax policy, at least most of the time or with a small amount of evasion. The resource graphs for the cases of two and three tax evading islands can be seen in \autoref{fig:team1:two_invaders} and \autoref{fig:team1:three_invaders}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{09_team1_agentdesign/images/two_invaders}
+\caption{Resource graph. Islands 5 and 6 are evading tax}
+\label{fig:team1:two_invaders}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{09_team1_agentdesign/images/three_invaders}
+\caption{Resource graph. Islands 4 to 6 are evading tax}
+\label{fig:team1:three_invaders}
+\end{figure}
+
+Note here that collapse of IIGO (as in \autoref{fig:team1:three_invaders}, with three tax evaders) does not automatically imply collapse of the archipelago; the islands appeared to survive (and, in fact, thrive) even after the collapse of IIGO.\@ It was taken as an assumption that this was only due to the uniformity of strategies, and in the ``real'' simulation, with heterogeneous agents, collapse of IIGO would lead to collapse of the archipelago.
+
+
 
 \section{Foraging}
 Multiple foraging strategies were developed, initially by intuition and later by attempting to address the shortcomings of previous attempts. They were developed in order and aptly named:
