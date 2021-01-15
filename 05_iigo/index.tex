@@ -151,16 +151,16 @@ The legislative branch is responsible for \textbf{making the law}.
     \begin{itemize}
 
         \item Call a vote $V$ for a rule $R$.
-        \begin{rule_IIGO}
+        \begin{rule_IIGO}\label{rule:call_vote_obl}
             The Speaker has an \emph{obligation} and a \emph{permission} to \emph{call} a vote $V$ if and only if the President has \emph{selected} a rule $R$ to be voted on.
         \end {rule_IIGO}
-        \begin{rule_IIGO}
+        \begin{rule_IIGO} \label{rule:call_vote_perm}
             The Speaker has the \emph{permission} to \emph{call} a vote $V$ for a rule $R$ if and only if the rule $R = R^{*}$, where $R^{*}$ is the rule \emph{selected} by the President.
         \end {rule_IIGO}
 
         \item Choose which islands are participating in the vote $V$.
        % \footnote{This is our sequential implementation alternative for the power to close the ballot box.}.
-        \begin{rule_IIGO}
+        \begin{rule_IIGO} \label{rule:all_islands_vote}
             The Speaker has the \emph{obligation} to ask for a vote from all alive islands.
         \end {rule_IIGO}
 
@@ -697,7 +697,7 @@ The key server-side implementations are:
 
 The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
 
-\subsection{Rule Representation}
+\subsection{Rule Representation} \label{sec:rule_representation}
 
 \begin{quote}
     "Learn the rules like a pro, so you can break them like an artist."
@@ -964,27 +964,27 @@ In this section, we start the evaluation of IIGO by briefly stating or re-visiti
     All islands of the archipelago are part of the interest group of the community. They are both providers and appropriators. They all can participate in the decision making through voting in the legislative branch, elections and can all (not all at once) be a part of a more involved decision-making group, if they are elected to serve as either the Judge, the President or the Speaker. 
     \item Rules-in-Use
     
-    In IIGO we have built a system for storing and checking rules (see chapter TODO). There are operational choice rules (i.e., those introduced by systems of taxation, allocation and sanctions), collective choice rules (e.g., those stating the obligations and permissions of each role as well as the islands of the archipelago). The collective choice rules available to the agents can be seen listed after powers throughout the chapter. IIGO does not employ any constitutional choice rules, that are not "hard-coded" into the system. For example, all islands always vote in elections; in deciding an allocation, the President can be the only island involved in the final decision-making process. This, of course, was a limitation of the available scope of the project.
+    In IIGO we have built a system for storing and checking rules (see Section~\ref*{sec:rule_representation}). There are operational choice rules (i.e., those introduced by systems of taxation, allocation and sanctions), collective choice rules (e.g., those stating the obligations and permissions of each role as well as the islands of the archipelago). The collective choice rules available to the agents can be seen listed after powers throughout the chapter. IIGO does not employ any constitutional choice rules, that are not "hard-coded" into the system. For example, all islands always vote in elections; in deciding an allocation, the President can be the only island involved in the final decision-making process. This, of course, was a limitation of the available scope of the project.
     
     \item Action Arenas
     \begin{enumerate}
         \item The first decision arena of IIGO is that of rules surrounding appropriation and provision. The decision group consists solely of the President, however, all islands can provide information to the President by reporting the number of resources in their common pool as well as requesting a desired allocation. Here the island resource reports and allocation requests are information that the president can use to make a decision and set out the rules that we call tax and allocation. 
         
-        \item The second decision arena of IIGO is that surrounding collective choice rules. This is the process through which islands can change the rules in play and is the main concern of the legislative branch. All islands are involved in this process by proposing rules and voting but the Speaker and the President hold special decision-making powers (Section TODO and Section TODO), which are expressed through the powers they hold.  Of note here is the Speaker's power to decide which islands are to participate in the vote. This power is governed by Rule TODO and is a remnant of a system of sanctions we considered during design, which could bar islands from participating in a vote. It is the Speakers power to call a vote, i.e. send a communication message to all the agents, hence it would have been the Speakers power to enforce such sanctions, by choosing which islands to send a vote request to. This system is not implemented, which begs for such a decision to be more regulated through a constitutional rule.
+        \item The second decision arena of IIGO is that surrounding collective choice rules. This is the process through which islands can change the rules in play and is the main concern of the legislative branch. All islands are involved in this process by proposing rules and voting but the Speaker and the President hold special decision-making powers (Section~\ref*{sec:legislative} and Section~\ref*{sec:executive}), which are expressed through the powers they hold.
         
         \item The third decision arena of IIGO is that surrounding sanctions. Here the Judge is the only actor involved in the decision making of whether to and how harshly to sanction islands, as well as whether to pardon islands.
         
-        \item The fourth decision arena of IIGO is that surrounding monitoring of role powers and elections. The two are interlinked whereby the elected actors have to participate in not only the decision making surrounding elections but also the decision making in monitoring, which in turn can alter the rules in play to oblige other actors to hold elections. Moreover, elections involve the involvement of all islands voting, thus providing information to the island responsible for the appointment of a role.  The investigation of this process, the information flow and the actors involved in the decisions is what allowed us to uncover a significant problem with the current design and implementation of IIGO, as discussed in Section TODO.  It is important to note is the repetitive nature of decisions roles have to make regarding elections, followed by decisions regarding monitoring, followed by elections, e.t.c. 
+        \item The fourth decision arena of IIGO is that surrounding monitoring of role powers and elections. The two are interlinked whereby the elected actors have to participate in not only the decision making surrounding elections but also the decision making in monitoring, which in turn can alter the rules in play to oblige other actors to hold elections. Moreover, elections involve the involvement of all islands voting, thus providing information to the island responsible for the appointment of a role. It is important to note is the repetitive nature of decisions roles have to make regarding elections, followed by decisions regarding monitoring, followed by elections, e.t.c. 
         
         \item The fifth decision arena involves the roles each of the IIGO roles decision regarding managing the costs of IIGO actions. For each action with a cost, the only actor involved is the agent holding the power. There is, however, a budget rule, that grants permission to act on these powers only if there is enough budget. The budget is incremented every turn and the amount of incrementation is to be set by the decision group described in the second decision arena.
         
-        \item The sixth decision arena involves the roles each of the IIGO roles decision regarding managing the salary of other IIGO roles. Similarly to the budget, the only actor involved in this decision is the role that holds the power to make the transaction - a flow of resources from the common pool to the respective (See figure TODO) islands resource pool. This decision is affected by the salary rule (Rule TODO) which just like with budget is set by the decision group described in the second decision arena.
+        \item The sixth decision arena involves the roles each of the IIGO roles decision regarding managing the salary of other IIGO roles. Similarly to the budget, the only actor involved in this decision is the role that holds the power to make the transaction - a flow of resources from the common pool to the respective (see Figure~\ref{fig:cycles_in_IIGO}) islands resource pool. This decision is affected by the salary rule (Rule~\ref{rule:salary}) which just like with budget is set by the decision group described in the second decision arena.
         
         \item The seventh and final action arena IIGO involves the actual appropriation and provision of resources all agents perform each round. Here the decision is in the hands of each island, however, the rules surrounding the decision are formed by the decision group described in the first decision arena. 
     \end{enumerate}
     
 \end{itemize}
-\subsubsection {Evaluation of IIGO with regard to Ostrom’s Design Principles}
+\subsubsection {Evaluation of IIGO with regard to Ostrom’s Design Principles} \label{sec:ostrom_eval}
 \begin{enumerate}
     \item Clearly defined boundaries: those who have rights or entitlement to appropriate resources from the common pool are clearly defined, as are its boundaries.
     
@@ -996,8 +996,13 @@ In this section, we start the evaluation of IIGO by briefly stating or re-visiti
     
     \item Collective-choice arrangements: in particular, self-determination, whereby those affected by the rules participate in the selection, modification and enforcement of those rules.
     
-    To evaluate this principle we must look at action arena 2 and 3. The selection of rules is related to the process of choosing a rule to vote on - islands decide and propose rules for the President to select one. We can notice that the institution is lacking. Which rule to select is a decision made by the President. Moreover, the President also proposes rules the same as every other agent. Hence, while all those affected participate by providing their desired rules to the President, that information may not be utilised. It is possible for opinion formation and the system of elections to, at least in part, remedy this. An agent would be less likely to vote for a President which selects rules that are distant from the agent's optimal ruleset. In an institutional state of oligarchy, this system would have no effect, so another solution might be needed. 
-    Rule modification is the result of the voting system. If all the available rules, those being rule TODO, rule TODO and rule TODO, governing this process are followed by the agents, all agents equally contribute to this decision.  The enforcement of collective choice rules is covered by Ostrom's principles 4 and 8
+    To evaluate this principle we must look at action arena 2 and 3. The selection of rules is related to the process of choosing a rule to vote on - islands decide and propose rules for the President to select one. We can notice that the institution is lacking. Which rule to select is a decision made by the President. Moreover, the President also proposes rules the same as every other agent. Hence, while all those affected participate by providing their desired rules to the President, that information may not be utilised. It is possible for opinion formation and the system of elections to, at least in part, remedy this. An agent would be less likely to vote for a President which selects rules that are distant from the agent's optimal rule-set. In an institutional state of oligarchy, this system would have no effect, so another solution might be needed. 
+
+    Rule modification is the result of the voting system. If all the available rules governing this process are followed by the agents, all agents equally contribute to this decision.  
+
+    Of note here is the Speaker's power to decide which islands are to participate in the vote. This power is governed by Rule~\ref*{rule:all_islands_vote} and is a remnant of a system of sanctions we considered during design, which could bar islands from participating in a vote. It is the Speakers power to call a vote, i.e. send a communication message to all the agents, hence it would have been the Speakers power to enforce such sanctions, by choosing which islands to send a vote request to. This system is not implemented, which begs for such a decision to be more regulated through a constitutional rule.
+
+    The enforcement of collective choice rules is covered by Ostrom's principles 4 and 8
     
 \end{enumerate}
 \subsection{Future Work}
