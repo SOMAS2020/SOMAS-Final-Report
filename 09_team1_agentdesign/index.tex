@@ -11,7 +11,7 @@ The agent's behaviour is affected by what we have termed her \emph{emotional sta
     \centering
     \begin{tabular}{|l|l|}
         \hline
-        Emotional State & Condition \\
+        \textbf{Emotional State} & \textbf{Condition} \\
         \hline
         Happy & Default state \\
         \hline
@@ -35,7 +35,7 @@ When team 1 agent receives a request for gifts, the agent will decide how much t
     \centering
     \begin{tabular}{|c|p{0.5\textwidth}|}
         \hline
-        Emotional State & How is IITO handled? \\
+        \textbf{Emotional State} & \textbf{How is IITO handled?} \\
         \hline
         Happy & Agent will give away resources that satisfies the requested amount. Up to a percent of available resources. \\
         \hline
@@ -46,14 +46,14 @@ When team 1 agent receives a request for gifts, the agent will decide how much t
     \end{tabular}
 \end{table}
 
-During IITO, the agent's opinion of other islands is affected. For every gift received, the agent's opinion of the gifter increases. However, the agent's opinion of an island can decrease if that island promised a gift and did not fulfil it.
+During IITO, the agent's opinion of other islands is affected. For every gift received, the agent's opinion of the gift-giver increases. However, the agent's opinion of an island can decrease if that island promised a gift and did not fulfil it.
 
 Moreover, if the agent's opinion of an island is very high, the agent can decide to give gifts disregarding the agent's own anxiety. On the other hand, if an opinion of an island is very low, the agent can decide to refuse to send a gift even though the agent is happy.
 
 For increase survivability, team 1 agent will accept any gift offers that it receives.
 
 \subsection{Future Work}
-Team 1 agent currently has a very straight-forward IITO strategy. Possible alteration to this strategy could include:
+Team 1 agent currently has a very straightforward IITO strategy. Possible alteration to this strategy could include:
 \begin{itemize}
     \item Being less susceptible to bribery. The agent should stop increasing the opinion of an island after receiving $X$ amount of continuous gifts.
     \item Stop handing out gifts to islands that are not in critical state.
@@ -63,22 +63,22 @@ Team 1 agent currently has a very straight-forward IITO strategy. Possible alter
 \section{IIFO Disaster Prediction}
 Disasters can happen deterministically or stochastically (see Chapter~\ref{sec: Disaster} for more information). For an agent, it is important to predict when a disaster occurs so that as much disaster damage is mitigated using the common pool.
 
-When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of 0. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position x, position y, magnitude and period is calculated. A confidence value is calculated along with the mean disaster metrics and shared along with the prediction.
+When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of $0$. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position ($x$, $y$), magnitude and period is calculated. A confidence value is calculated along with the mean disaster metrics and shared along with the prediction.
 
 % Add a footnote on website?  https://www.mathsisfun.com/data/confidence-interval.html
-The confidence value is calculated by finding the ratio between margin of error and the mean value. The smaller the margin of error, the more confident the agent is in her prediction. Therefore, a difference between the mean value and the margin of error must also be calculated. The confidence interval equation  is used to calculate the margin of error:
+The confidence value is calculated by finding the ratio between margin of error and the mean value. The smaller the margin of error, the more confident the agent is in her prediction. Therefore, a difference between the mean value and the margin of error must also be calculated. The confidence interval equation is used to calculate the margin of error:
 
 \begin{equation}
     \label{eq: Team1MarginOfError}
-    \text{Error} = Z \dfrac{s}{\sqrt{n}}
+    \textsc{Error} = Z \dfrac{s}{\sqrt{n}}
 \end{equation}
 
-Where $s \equiv$ standard deviation, $n \equiv$ size of array, $Z \equiv$ confidence interval.
+where $s$, $n$ and $Z$ are the standard deviation, size of array and confidence interval respectively.
 
 Using the difference between the mean value ($\bar{x}$) and the margin of error and taking the ratio of this result over the mean will provide the agent with the confidence value.
 \begin{equation}
-    \text{Confidence Value} = \frac{\bar{x} - \text{Error}}{\bar{x}}
-\end{equation}
+    \textsc{Confidence Value} = \frac{\bar{x} - \textsc{Error}}{\bar{x}}
+\end{equation}.
 
 The agent maintains a \textbf{trust score} for every island \emph{including itself}. This is based on the accuracy of islands' prediction of time left to the disaster.
 
@@ -105,19 +105,19 @@ This policy had to be verified as it could be vulnerable to ``free-rider'' islan
 
 As a test of this, a simulation was set up with a variable number of lawful and free-rider islands in order to measure the stability of this policy.
 
-Three tax evading islands (half of the islands) was found to be the limit at which this policy would lead to collapse of the IIGO and the common pool. This was deemed an acceptable limit as at least half of the other agent teams would obey tax policy, at least most of the time or with a small amount of evasion. The resource graphs for the cases of two and three tax evading islands can be seen in \autoref{fig:team1:two_invaders} and \autoref{fig:team1:three_invaders}
+Three tax evading islands (half of the islands) was found to be the limit at which this policy would lead to collapse of the IIGO and the common pool. This was deemed an acceptable limit as at least half of the other agent teams would obey tax policy, at least most of the time or with a small amount of evasion. The resource graphs for the cases of two and three tax evading islands can be seen in \autoref{fig:team1:two_invaders} and \autoref{fig:team1:three_invaders}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{09_team1_agentdesign/images/two_invaders}
-\caption{Resource graph. Islands 5 and 6 are evading tax}
+\caption{Resource graph. Islands 5 and 6 are evading tax.}
 \label{fig:team1:two_invaders}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{09_team1_agentdesign/images/three_invaders}
-\caption{Resource graph. Islands 4 to 6 are evading tax}
+\caption{Resource graph. Islands 4 to 6 are evading tax.}
 \label{fig:team1:three_invaders}
 \end{figure}
 

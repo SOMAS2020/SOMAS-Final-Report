@@ -14,6 +14,3 @@ The following are the guidelines for the SOMAS final report.
 Editors should review the writing firstmost for correctness and consistency with the rest of the document and secondly for spelling, grammar and punctuation.
 
 As another reminder, please remember that something done is better than something perfect. Something perfect never gets done. This means that it is better to iteratively work on your sections and build up to something great rather than get caught up in the details from the start.
-
-## Todo:
-Transfer repo to SOMAS2020 org
