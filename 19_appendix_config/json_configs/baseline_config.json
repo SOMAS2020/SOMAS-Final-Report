@@ -1,0 +1,79 @@
+{
+	"Config": {
+		"MaxSeasons": 100,
+		"MaxTurns": 100,
+		"InitialResources": 50,
+		"InitialCommonPool": 0,
+		"CostOfLiving": 10,
+		"MinimumResourceThreshold": 5,
+		"MaxCriticalConsecutiveTurns": 3,
+		"ForagingConfig": {
+			"DeerHuntConfig": {
+				"MaxDeerPerHunt": 5,
+				"IncrementalInputDecay": 0.9,
+				"BernoulliProb": 0.95,
+				"ExponentialRate": 0.3,
+				"InputScaler": 18,
+				"OutputScaler": 18,
+				"DistributionStrategy": "InputProportionalSplit",
+				"ThetaCritical": 0.97,
+				"ThetaMax": 0.99,
+				"MaxDeerPopulation": 20,
+				"DeerGrowthCoefficient": 0.4
+			},
+			"FishingConfig": {
+				"MaxFishPerHunt": 12,
+				"IncrementalInputDecay": 0.95,
+				"Mean": 1.45,
+				"Variance": 0.1,
+				"InputScaler": 18,
+				"OutputScaler": 18,
+				"DistributionStrategy": "EqualSplit"
+			}
+		},
+		"DisasterConfig": {
+			"XMin": 0,
+			"XMax": 10,
+			"YMin": 0,
+			"YMax": 10,
+			"Period": 5,
+			"SpatialPDFType": "Uniform",
+			"MagnitudeLambda": 1,
+			"MagnitudeResourceMultiplier": 85,
+			"CommonpoolThreshold": 200,
+			"StochasticPeriod": false,
+			"CommonpoolThresholdVisible": false,
+			"PeriodVisible": true,
+			"StochasticPeriodVisible": true
+		},
+		"IIGOConfig": {
+			"IIGOTermLengths": {
+				"Judge": 4,
+				"President": 4,
+				"Speaker": 4
+			},
+			"GetRuleForSpeakerActionCost": 2,
+			"BroadcastTaxationActionCost": 2,
+			"ReplyAllocationRequestsActionCost": 2,
+			"RequestAllocationRequestActionCost": 2,
+			"RequestRuleProposalActionCost": 2,
+			"AppointNextSpeakerActionCost": 2,
+			"InspectHistoryActionCost": 2,
+			"HistoricalRetributionActionCost": 2,
+			"InspectBallotActionCost": 2,
+			"InspectAllocationActionCost": 2,
+			"AppointNextPresidentActionCost": 2,
+			"DefaultSanctionScore": 2,
+			"SanctionCacheDepth": 3,
+			"HistoryCacheDepth": 3,
+			"AssumedResourcesNoReport": 100,
+			"SanctionLength": 5,
+			"SetVotingResultActionCost": 2,
+			"SetRuleToVoteActionCost": 2,
+			"AnnounceVotingResultActionCost": 2,
+			"UpdateRulesActionCost": 2,
+			"AppointNextJudgeActionCost": 2,
+			"StartWithRulesInPlay": true
+		}
+	}
+}

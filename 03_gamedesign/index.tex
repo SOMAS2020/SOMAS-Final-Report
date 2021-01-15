@@ -209,15 +209,14 @@ Developing and maintaining a codebase with contributions from around 40 develope
 
 While Go is strongly typed and would mean that most errors can be detected at compile-time (or even at time of coding with its performant language server), having unit and integration tests greatly improved the maintainability and ease of development of the project--these issues were particularly important as this was a large-scale group software engineering project--developers stepping on each other's toes is a common occurrence in non-tested group project code. Henceforth, tests were required for non-trivial server-side code.
 
-\subsection{Peer Review}
+\subsubsection{Peer Review}
 
 Peer review was also setup via GitHub pull requests--each change required the approval of another member in the infrastructure team. This practice not only promoted consistent code design and implementation, it minimised mistakes and ensured that the code implementation meets design and implementation requirements set forth. Further, as there was variation in programming skill among code contributors, knowledge sharing was facilitated by code reviews. This was also a critical opportunity for engineers to learn more about the other code being contributed to the project.
 
-\subsection{Continuous Integration}
-\label{sec:GD:implementation:practices:CI}
+\subsubsection{Continuous Integration}
 
-Via GitHub Actions\footnote{https://github.com/features/actions}, continuous integration was set up. Each Pull Request (PR) was set up to trigger automated runs of written tests and a full simulation in addition to static code analysers such as linters. These checks must all pass for the PR to be merged into the main branch. Automated testing and code analysis saved time and facilitates regression testing, as all tests--existing and new--were run for each change. Running a full simulation also served as a good stress-test for the system to make sure that it does not crash on a similar full simulation. Further, automated tests were run on a reference system (Ubuntu 20.04 with Go 1.15.5 and Node 14), helping to prevent system-specific quirks or bugs from polluting the codebase.
+Via GitHub Actions\footnote{https://github.com/features/actions}, continuous integration was set up. Each Pull Request (PR) was set up to trigger automated runs of written tests and a full simulation in addition to static code analysers such as linters. These checks must all pass for the PR to be frequently merged into the main branch. Automated testing and code analysis saved time and facilitates regression testing, as all tests--existing and new--were run for each change. Running a full simulation also served as a good stress-test for the system to make sure that it does not crash on a similar full simulation. Further, automated tests were run on a reference system (Ubuntu 20.04 with Go 1.15.5 and Node 14), helping to prevent system-specific quirks or bugs from polluting the codebase.
 
-\subsection{Continuous Development}
+\subsubsection{Continuous Deployment}
 
-On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in~\ref{sec:GD:implementation:practices}), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
+On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in the Continuous Integration section), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
