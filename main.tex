@@ -18,8 +18,10 @@
 \usepackage{tikz}
 %\usepackage{algpseudocode}
 \usepackage{tabularx}
-%\usepackage{multirow}
+\usepackage{multirow}
 \usepackage{makecell}
+\usepackage{appendix}
+
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
 
@@ -34,6 +36,7 @@
 
 %% Sets page size and margins
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+\input{utils/json_listings.tex}
 
 \begin{document}
     % The Title, Author Name, Date, and abstract go here
@@ -48,8 +51,6 @@
     % This keeps the order of the sections in the side view in keeping with the order of the document.
     
     \input{00_introduction/index.tex}
-    \input{01_roles/index.tex}
-    \input{02_specification/index.tex}
     \input{03_gamedesign/index.tex}
     \input{04_environment/design.tex}
     \input{06_iito/index.tex} % yeah, wrong numbering; I KNOW [Ezgi]
@@ -63,9 +64,13 @@
     \input{13_team5_agentdesign/index.tex}
     \input{14_team6_agentdesign/index.tex}
     \input{15_simulations/index.tex}
-    \input{16_results/index.tex}
-    \input{17_evaluation/index.tex}
+    \input{16_results_and_eval/index.tex}
     \input{18_conclusion/index.tex}
+
+    \begin{appendices}
+        \input{20_appendix_roles/index.tex}
+        \input{19_appendix_config/sim_configs.tex}
+    \end{appendices}
     
     % \input{00_example/example.tex}
     % \input{01_introduction/introduction.tex}
