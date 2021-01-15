@@ -19,7 +19,7 @@ The benefit of sharing these predictions about foraging returns is due to the fa
 
 If the prediction proves to be inaccurate, the returns from foraging will be less than expected, and the islands that joined the foraging may lose faith in the future predictions of the island that originally proposed the inaccurate prediction. This may make it harder for the island whose predictions turn out to be wrong to convince others to forage together in the future.
 \subsection{Future work}
-As in IITO \ref{subsubsec:IITO:futurework} there were alot of features in IIFO which were discussed but did not make in to the final project. The same justification applies in this section as in IITO for why they did not make the cut. There are a couple of features however that would have been really cool to implement.
+As in IITO \ref{subsec:IITO:futurework} there were alot of features in IIFO which were discussed but did not make in to the final project. The same justification applies in this section as in IITO for why they were not implemented. There are a couple of features however that would have assisted current dilemmas by allowing agents to deliberate over them.
 \subsubsection{Deer Population Sustainability}
 With the deer population dropping as a result of foraging there are points of optimality in this dilemma where the deer population is not overhunted and maintains a stable population giving the islands high output. For this to be properly exploited the islands would need to have some sense of how many deer are in the population or the average output. A forum for discussing this or a new mechanic like scouting or population mapping would allow for exploring sustainable and responsible foraging.
 \section{Implementation}
@@ -57,7 +57,7 @@ struct DisasterPredictionInformation = {
 
 \subsection{Foraging History}
 \label{subsec:IIFO:foraging_history}
-Foraging returns depend on other island's contribution and foraging decisions. It is therefore important to know how much other islands spent on foraging, what resource they foraged and how much they got in return. This information allows agents to update their strategies to take advantage of other client's foraging tactics. The information: below is passed using the pattern described in \ref{sec:IIFO:implementation}
+Foraging returns depend on other island's contribution and foraging decisions. It is therefore important to know how much other islands spent on foraging, what resource they foraged and how much they got in return. This information allows agents to update their strategies in accordance to the other client's foraging tactics. The information: below is passed using the pattern described in \ref{sec:IIFO:implementation}
 \begin{verbatim}
 struct ForagingReturnsInformation = {
    ForagingReturn = resources,
