@@ -8,43 +8,45 @@
 %TODO: VERY IMPORTANT: another potential self burn area. Clarify with Rudolfs about Ostrom's Principles after looking at all the comments Mike has made in that section.
 %TODO: add in rule distance calculation explanation? It's kinda primitive though
 %TODO: President by Andrzej, do talk about disaster prediction
-%TODO: Toby to finish all foraging related stuff (IIFO and End of turn)
+%DONE I THINK: Toby to finish all foraging related stuff (IIFO and End of turn)
 %TODO: add in the use of disaster prediction somewhere if we can?
-%TODO: to finish IITO and gifting, sneak in disaster prediction if possible
+%TODO: to finish IITO and gifting, sneak in disaster prediction if possible - This is done except for the disaster prediction part. Not sure how to add it though, but feel free if you have an idea how.
 %TODO: clear up all the TODO's scattered around in this latex file.
 
 
-\chapter{Team 4 Agent Design}
+\chapter{Team 4 Agent Design}   \label{chap:team4}
 Given that our team invested a lot of time in ensuring feature richness and stability of the infrastructure, we were left with a short time-frame for our agent's implementation and design. Therefore, at times we had to make decisions that guaranteed canny usability, rather than sophistication. For some actions, our agent relies on other teams' agents with different strengths to perform well. 
 
 \section{Agent overview}
-An agent uses the interface that is defined in the infrastructure. In order to define custom behaviours for our agent, we override or extend the base agent (baseclient.go) functions which implement the defined interface. The main idea we have for our agent is that it has internal fields that aid the decision-making process for the actions it performs. Of all the internal fields, we define internal parameters as information that describes the agent itself, namely \texttt{Greediness}, \texttt{Selfishness}, \texttt{Fairness}, \texttt{Collaboration} and \texttt{RiskTaking} factor, all of which have values between 0 and 1. And the agent stores observations, histories as well as other necessary information such as its trust in others. These fields will be further explained in the following text. %TODO: add in evolutionary economic theory background for agent personality
+An agent uses the interface that is defined in the infrastructure. In order to define custom behaviours for our agent, we override or extend the base agent (\texttt{baseclient.go}) functions which implement the defined interface. The main idea we have for our agent is that it has internal fields that aid the decision-making process for the actions it performs. Of all the internal fields, we define internal parameters as information that describes the agent itself, namely \texttt{Greediness}, \texttt{Selfishness}, \texttt{Fairness}, \texttt{Collaboration} and \texttt{RiskTaking}, all of which have decimal values between 0 and 1. The agent stores observations, histories as well as other necessary information such as its trust in others. These internal fields will be discussed in more detail in the following dedicated sections. %TODO: add in evolutionary economic theory background for agent personality
 
-An agent can also be elected one or more roles inside the IIGO session. Each role has the power to perform role actions specified in the Roles section. These actions are implemented as functions in the code and they can be extended and overridden in the same fashion as in the base agent functions. Even though a role and an agent that is not elected a role (a commoner agent) are two separate structs, a commoner agent and a role have both read and write access to the internal fields of each other through pointers. In other words, an agent is always a commoner agent, and a commoner agent can be elected one or more role(s) at the same time.
+
+% TODO: Chapter reference
+An agent can be elected in one or more positions of power inside the IIGO session. Each role has the ability to perform certain actions, specified in chapter 7 (?). From an infrastructure standpoint, these actions are implemented as overridable functions in the same fashion as previously discussed for the base agent. Although the code was design to differentiate a commoner agent and roles in separate structs, they all share read and write access to the internal fields of each other through pointers. In other words, an agent is always a commoner agent, and a commoner agent can be elected one or more role(s) at the same time.
 
 \section{Opinion formation -- Trust}
 \label{sec:team4:trust}
-Trust is the score $[0..1]$, which represents the opinion of all the agents in the game. This metric helps our agent to make the decisions throughout the game based on how trustworthy, helpful or friendly we other agents were. This option about an island is formed based on three observations:
+Trust is the score $[0..1]$, which represents the agent's opinion towards fellow agents in the game. This metric helps it in making decisions throughout the game based on how trustworthy, helpful or friendly it believes other agents were. This generic opinion about an island is formed dynamically based on three recurring observations:
 \begin{itemize}
-    \item The gifts received from this island during the IITO sessions.
-    \item The outcome of the monitoring of positions-of-power conducted as a part of the accountability cycle.
-    \item The evaluation of IIGO actions history, only available to the Judge. This is further explained in Section~\ref{subsec:team4:judge}
+    \item The gifts received from the island during the IITO sessions.
+    \item The outcome of monitoring positions-of-power when conducted as a part of the accountability cycle.
+    \item The evaluation of IIGO actions history, only available to the Judge. This is further explained in Section \ref{subsec:team4:judge}
 \end{itemize}
-Those observations allow the agent to quantitatively reason about both friendliness of other islands towards it, as well as whether they follow the rules in play.
+Those observations allow the agent to quantitatively reason about both friendliness of other islands towards it, as well as how closely they follow the rules in play.
 
-The average trust is maintained at a value of $0.5$. That ensures that the trust is balanced throughout the game. It prevents the inflation of trust when all the islands decide to exchange gifts with the agent. Then, the number of resources gifted will be a deciding factor when updating the trust metrics.
+The average trust score is forced at a value of $0.5$. Such normalisation ensures that the trust is always balanced throughout the game. It prevents the inflation of trust in a scenario where several islands decide to exchange gifts with the agent. Furthermore, the number of resources gifted will be a deciding factor when updating the trust metrics.
 
-Decisions made by our agent can be altered based on the trust score towards certain islands. For example, if the trust of an island is lower than a specified threshold, then the agent will not vote for this island in any elections. Similarly, if holding the role of Judge, will not choose to act upon its power to pardon the island with a low trust score.
+Some decisions made by our agent can be altered based on the trust score towards certain islands. During elections, if the trust of an island is lower than a specified threshold, the agent will never cast its vote in favour of it. Similarly, if holding the role of Judge, it will choose not to act upon its power to pardon the island with a low trust score.
 
-On the other hand, if an agent holds a good opinion about an island, it may choose to act in favour of it. The island may expect to receive gifts from our agents, or be considered for an early pardon from a sanction.
+On the other hand, if the agent holds a good opinion about an island, it may choose to favour it by providing or even deciding to  pardon it from a sanction.
 
 
 \section{IIGO}
-\subsection{Commoner Agent}
-Within IIGO, each (commoner) agent first reports how many resources it has, this reporting behaviour is overridden by us. The president sets a taxation amount according to each agent's self-reported resources level and notifies each agent of the tax demanded. Each (commoner) agent sends a request for the resources it wants from the Common Pool (an allocation request) to the President. And after being granted the resources by the President, the agent takes them from the Common Pool. The actions concerning requesting and taking allocations are overridden by us. Due to a design decision, the action for taking allocations and paying tax do not happen within the IIGO session, it happens after all organisations are run, inside the \texttt{EndOfTurn} session.
+\subsection{Commoner Agent} \label{commoneragent}
+At the start of any IIGO, each (commoner) agent is promped by the president to report how many resources it has. Our agent overrides its reporting behaviour to account for several internal factors, as further discussed in subsection \ref{reportresources}. The president uses this information to set a taxation amount according to each agent's self-report, notifying them of the tax demanded. Each (commoner) agent can later send a request for the specific amount of resources it aims to retrieve from the Common Pool (an allocation request) to the President. Upon receiving a response by the President on the actual amount that was granted, the agent is allowed to access the Common Pool. The actions concerning requesting and taking allocations are overridden, as part of the agent strategy. Due to a design decision, the action for taking allocations and paying tax do not happen within the IIGO session, it happens after all organisations are run, inside the \texttt{EndOfTurn} session.
 
-\subsubsection{Report Resources}
-When reporting the resources our agent has, We use a linear combination of some of the agent's internal fields, and weights (put inside an \texttt{importance} vector) we set for each of the chosen internal fields. The linear combination gives a scaling factor to scale (in this case to divide) the actual resources our agent has (as shown in \eqref{linear_comb}). The parameters used are \texttt{greediness}, \texttt{selfishness}, \texttt{fairness}, \texttt{collaboration}, \texttt{riskTaking} and trust in the current president (all values are between 0 and 1). The weights have real values. The fields with negative weights negatively impact the scaling factor and vice versa. The greater the absolute value of a weight, the bigger impact it has on the scaling factor.
+\subsubsection{Report Resources} \label{reportresources}
+When reporting its resources, our agent uses a weighted linear combination of some of its internal fields. The weighting of each parameter is defined as an array of real values called "importance" and stored in an \texttt{importance} vector. The linear combination outputs a scaling factor to divide to the actual resources our agent has, as shown in \eqref{linear_comb}, in order to compute a untruthful amount to report to the President. The parameters used are \texttt{greediness}, \texttt{selfishness}, \texttt{fairness}, \texttt{collaboration}, \texttt{riskTaking} and trust in the current president (all values are between 0 and 1). Some fields are associated with negative weights as they should logically negatively impact the scaling factor. The greater the absolute value of a weight, the bigger impact it has on the scaling factor.
 
 \begin{equation}\label{linear_comb}
     \begin{bmatrix}
@@ -62,37 +64,45 @@ When reporting the resources our agent has, We use a linear combination of some 
     = Scaling\:Factor
 \end{equation}
 
-The scaling factor is then compared to a preset threshold. If the scaling factor is greater, then the needed resources amount is divided by 
+To decide when to lie, the scaling factor is firstly compared to a preset threshold. If the scaling factor is greater, then the needed resources amount is divided by 
 \begin{equation}
     [1 + (Scaling\:Factor - Preset\:Threshold)]
 \end{equation} 
-The threshold is there to make sure that the scaling factor is not applied all the time, as we don't want our agent to lie about the amount of its resources all the time.
+This conditional statement makes sure that the scaling factor is not always applied, ensuring that our agent will lie on its resources only when deemed a good strategy.
 
 \subsubsection{Paying Tax Contribution}
 %write about this and the lying mechanics
-The \texttt{GetTaxContribution()} function returns the amount an agent is paying in tax. Similar to resource reporting, the tax amount is modified by a scaling factor. When the scaling factor is greater than a preset threshold, the amount of tax paid is the tax demanded multiplied by: 
+The \texttt{GetTaxContribution()} function returns the amount an agent is paying in tax. Similarly to resource reporting, the tax amount is modified by a scaling factor applied only when greater than a preset threshold, as shown in the following equation: 
 \begin{equation}
     [1 + (Scaling \: Factor - Preset \: Threshold)]
 \end{equation}
-, which is likely to happen when the \texttt{Collaboration} of our agent is defined to be high. In addition, the scaling factor is not applied when the tax demanded is more than $\frac{1}{5}$ of the agent's resources. This prevents the agent from generously giving out everything it has.
+Based on the preset weighting for internal parameters, this situation is likely to arise when the \texttt{Collaboration} of our agent is high. In addition, the scaling factor is not applied when the tax demanded is more than $\frac{1}{5}$ of the agent's resources. This prevents it from generously giving out most that it has.
 
 \subsubsection{Requesting Allocation}\label{subsubsection:CommonPoolResourceRequest()}
-This is done in the \texttt{CommonPoolResourceRequest()} function. When requesting an allocation, our agent first decides what it needs. When the agent is not in a critical state, the needed resources are usually a multiple of the basic needs, namely the cost of living plus the critical threshold. This amount is decided so that the agent always takes more from the Common Pool than their definite expenses in the next turn. When in a critical state, the needed resources are a bigger multiple of the basic needs. Because the smaller multiple of basic needs when not critical made the agent critical, which indicates that the island needs to take more resources to not slowly drain away its own resources. In order to maintain the Common Pool, we also enforce that what our island needs must not exceed the amount of resources in the Common Pool divided by the number of agents alive. This is to avoid our agent monopolising the Common Pool resources based on just what it needs.
+The aforementioned action of requesting resources from the common pool is implemented in the \texttt{CommonPoolResourceRequest()} function. When requesting an allocation, our agent first decides what it needs. When not in a critical state, the needed resources are usually a multiple of the basic needs, namely the cost of living plus the critical threshold. This amount is decided so that the agent always takes more from the Common Pool than their definite expenses in the next turn. If critical, the agent will ask for a bigger multiple of the basic needs. This design choice maps the following logic conclusion that the agent draws from the history of the game: if the a smaller multiple when made the agent critical, it must take more to invert the negative trend in resources. In order to avoid draining the Common Pool, our design enforces that what our island needs must not exceed the amount of resources in the Common Pool divided by the number of agents alive. This is to avoid our agent selfishly monopolising the Common Pool resources.
 
 \subsection{President}
 \label{subsec:team4:president}
-%andrzej
-Our agent implements a simple, rule-obeying President. %president also uses disaster prediction which is implemented. The confidence value is between 0 and 100% for each prediction.
+Our agent implements a budget-conscious and rule-obeying President. The main changes, compared to the basic implementation include taxation and resource allocation considerations.
 
-% tax distribution 
+\subsubsection{Tax distribution}
+When deciding tax amounts for the different island, the President considers the following variables:
+\begin{itemize}
+    \item amount of resources in the common pool
+    \item the financial status of the island
+    \item predicted disaster time and magnitude.
+\end{itemize}
 
+The President will abstain from setting taxation for islands in a critical state or in a situation when the resources in the common pool can fully mitigate the predicted damage caused by the next disaster. 
 
-% resource allocations
-% tries to be fair. gives priority to critical islands. uses lowest amount first to ensure that the highest number of island is satisfied with common pool distribution
+Similarly, when the common pool cannot mitigate the next disaster, the President will set taxation for all non-critical island to bring the common pool back to the safe level. In this case, the taxation amount will be higher the sooner the disaster is predicted to occur.
 
-% speaker elections
+\subsubsection{Common pool resource redistribution}
+In order to fairly redistribute the resources placed in the common pool, the President primarily considers the financial status of an island. In other words, the priority in access to the common pool is given to islands in the critical state. 
 
+To ensure the largest possible satisfaction within the archipelago, the islands with smaller requests are given priority. This decision ensures that the highest possible number of agents will be satisfied with their allocation.
 
+The President is also reluctant to allow any resource allocations if the disaster is predicted to occur soon. This, combined with the tax policy, ensures lower damages to the archipelago in the case of disaster.
 
 
 \subsection{Judge}
@@ -146,6 +156,8 @@ This implementation could be further improved to facilitate the \emph{trust} met
 \subsection{Speaker}
 Given the Speaker's role of deciding agendas and announcing the results of voting, the only viable customisation option in making our custom Speaker seemed to be via implementing corruption - in other words, rigging voting results. Other than the obvious reason of avoiding the risk of getting sanctions, we decided against implementing this function into the Speaker's role because in an actual governmental environment, while misprints have occurred and on occasion shaped past history, announcing false results are a very noticeable and easily rectifiable offense. This would be in the disinterest of either honest or dishonest agents. On this note and the following point, it could be said that our Speaker implementation can be described as \emph{honorable and efficient}.
 
+\subsubsection{Action prioritisation}
+
 Our Speaker implementation builds upon the \texttt{baseSpeaker} on a key point: partitioning of budget. The Speaker prioritises the proper running of IIGO in the case of a low budget situation by prioritising its actions according to the rules in play, reflecting the priorities decided by the archipelago. This is done not by changing the actual running order of IIGO (which would require altering the orchestration) but rather enabling/disabling certain actions based on their priorities and cost. Prioritising actions where rules are in play would stop the speaker from performing non-moderated actions instead of actions relating to rules that are still in play. This function is crucial due to the following reasons:
 \begin{itemize}
     \item Not performing monitored actions will result in sanctions, harming the agent's resource pool.
@@ -153,7 +165,7 @@ Our Speaker implementation builds upon the \texttt{baseSpeaker} on a key point: 
 \end{itemize}
 Since these reasons are applicable regardless of honesty, these mechanics are always implemented regardless of agent type.
 
-\section{IIFO}\label{sec:IIFO}
+\section{IIFO}\label{sec:team4:IIFO}
 %I recommend that we write in the order of function execution order. (the end of turn functions that are related to IIFO should be written inside the EndOfTurn section)Only mention the functions that are worth mentioning. For execution order check the ./doc/EXECUTION_ORDER.md file in the SOMAS repo -- Mike
 
 \subsection{Making Disaster Prediction}
@@ -164,7 +176,7 @@ The agent makes predictions about future disasters by getting the mean coordinat
 
 The above is done for each of the 4 prediction values types. This returns a measurement of the distance between the predicted value (mean value) and the corresponding past disasters' values. The computed sum of square of difference (a measure of distance) is normalised with a max distance (see equations \ref{max_distance:1} to \ref{max_distance:3}) for each of the 4 value types, 100\% minus this percentage value is the \texttt{confidence} score. The \texttt{confidence} score for the prediction is the average of the 4 \texttt{confidence} scores.
 
-Note that we can assume that the Central Limit Theorem applies here since we assume different disasters are independent. Namely, the higher the distance between a prediction and samples, the less likely it is for this prediction to be true. And with the CLT assumption, the underlying random variables of the value types (uniform RV for coordinates, geometric RV for both magnitude and turns) do not matter. The calculation of the unique preset threshold is below:
+Note that the Central Limit Theorem can be applied in this calculations since we assume different disasters are independent. Namely, the higher the distance between a prediction and samples, the less likely it is for this prediction to be true. And with the CLT assumption, the underlying random variables of the value types (uniform RV for coordinates, geometric RV for both magnitude and turns) do not matter. The calculation of the unique preset threshold is below:
 \begin{equation}\label{max_distance:1}
     distance_1 = \sum_{i=1}^{len(past\_disasters)}(ValueMax - Mean_i)^2
 \end{equation}
@@ -177,15 +189,15 @@ Note that we can assume that the Central Limit Theorem applies here since we ass
 
 By doing the above unique threshold calculation for each value type, we are setting the predicted values out of bounds to have confidence 0\%. (Note: ValueMax and ValueMin are set in game config)
 
-\subsubsubsection{Making prediction based on other agents' predictions}
+\subsubsection{Making prediction based on other agents' predictions}
 Our agent then receives prediction information from all other agent that sent their information to us. A weighted average (based on trust) of these prediction values are calculated to form our final prediction values.
 
 %Theoretically, We would use  a normal distribution to approximate the sampling distribution of the disaster random variable, which is assumed to be independent across turns, justified by the Central Limit Theorem. And by feeding  calculation approximated to be 
 
 
 % Foraging functions %
-\subsection{} %TODO: Toby to finish the subsection
-IIFO also contains the ability to communicate about the foraging information. As we will go further into in %Link to Foraging
+\subsection{Sharing foraging information} \label{sec:team4:IIFO:forage}
+IIFO also contains the ability to communicate about the foraging information. As we will go further into in Section~\ref{sec:team4:forage},
 we choose to overload both MakeForageInfo and ReceiveForageInfo. In the receive function, we store the received values to a map to be used later when making a decision on which foraging method to go for. 
 
 As we use the foraging information from other teams, our island will also communicate our results to the others. However, we only share with islands that shared with us in the previous round, as well as the island that we trust. Our island is completely truthful for this part and will always report which foraging method we went for, as well as how many resources it generated.
@@ -206,35 +218,34 @@ In addition, when we request allocation in IIGO, we request a bit extra which we
 \subsection{Taking Allocation}
 This RequestAllocation() function for taking allocation from the Common Pool. After running all of the organisation sessions, the agent then calculates what it wants based on what it needs, and takes what it wants from the Common Pool. A scaling factor is calculated using a linear combination of weights and internal fields. When the scaling factor is above a preset threshold, it is applied similar to in Section~\ref{subsubsection:CommonPoolResourceRequest()}.  %talking about scaling factor calculation briefly, the detailed explanation is already done in ResourceReport. %%We use a linear combination of some of the agent's internal fields, and weights (put inside an \texttt{importance} vector) we set for each of the chosen internal fields to obtain a scaling factor to multiply the needed resources with. The parameters used are \texttt{greediness}, \texttt{selfishness}, \texttt{fairness}, \texttt{collaboration}, \texttt{riskTaking} and trust in the current president (all values are between 0 and 1). The weights have real values. For this particular function, we set the weights to be $5, 5, -5, -5, 1, 5$ respectively. The fields with negative weights negatively impact the scaling factor and vice versa. We deem riskTaking less important than other fields in the calculation of this function's scaling factor. The scaling factor is then compared to a preset threshold. If the scaling factor is greater, then the needed resources amount is multiplied by 1 plus the difference between the scaling factor and the preset threshold. The threshold is there to make sure that the scaling factor is not applied all the time, as we don't want our agent to take more than what it needs all the time.
 
-\subsection{Forage}
+\subsection{Forage} \label{sec:team4:forage}
+As mentioned at the start of the chapter, due to the interest of time, our foraging strategy relies on other islands to make intelligent decisions about the foraging strategy. In short, rather than looking at the game configurations to try to intelligently figure out which method to go for and how many resources to generate, we look at other teams' return ratios to decide for ourselves. As will be discovered in the simulation section (\ref{sec:team4:simulation}), our foraging strategy works very well against the other islands created by the other teams, but not so well when we simulate six of our own islands.  
+
 Our foraging strategy is split into two sections. Managing foraging communications is stored inside IIFO.go and our foraging decisions are stored inside Foraging.go
 
-As mentioned in section \ref{sec:IIFO} % Section for Foraging? 
+As mentioned in Section~\ref{sec:team4:IIFO:forage}, 
 the foraging is split into two parts, decision, and return. In the return, we store the results we receive into an array so that we can later use them in the decision making. This is also what we do inside IIFO when we receive the foraging results from the other teams. 
 
 To decide whether to go fishing or to hunt deer the island looks at both its return history as well as looking at the return results received from the other teams. Our island does this is by calculating the return ratio of each island over the past three turns as well as our own. These ratios are then compounded into two separate values, the compounded ratio for deer hunting and the compounded ratio for fishing.  We then pick the foraging method that has the greatest compound ratio. 
 
-This is a very conservative approach as we rely heavily on the other islands to give us their foraging results so that we can make a decision. This meant that the island does not perform very well against itself, but the foraging method works very well when run against the other agents.
-% Show simulations? %
-
-How the island chooses to share its foraging results with other islands was described earlier in Section~\ref{sec:team4:iigo}. 
+How the island chooses to share its foraging results with other islands was described earlier in Section~\ref{sec:team4:IIFO:forage}. 
 
 
-\section{Simulation}
+\section{Simulation}    \label{sec:team4:simulation}
 
 
 
 \subsection{Introduction}
-The team decided to define three different initial personality configurations -
+Three different initial personality configurations were defined -
 \emph{honest} , \emph{moderate} and \emph{dishonest} - in order to simulate how internal parameters would impact the agent's performance and interaction with the other teams.
-In fact, although the agents are designed to adapt their choice-making throughout the game, different personalities allowed to draw interesting hypotheses and observations both show a single agent would effect other agents and the system as a whole. This will be further discussed in Section~\ref{ResultSummary}. 
+These agents are designed to adapt their decision-making processes throughout the game, and each of these different personalities drew interesting hypotheses and observations about how a single agent would affect other agents and the system as a whole. This will be further discussed in Section~\ref{ResultSummary}. 
 
-The team decided to test both the interactions in the archipelago when populated by our clients with different personalities and the default clients developed by other teams (discussed in Section~\ref{againstothers} \nameref{againstothers}) as well as the interactions when only populated by instances of our client (discussed in Section~\ref{againstself} \nameref{againstself}). These simulation efforts have been made to investigate the effectiveness of the agent's strategy, the system's response to the lack of strategy variance, as well as the ability of the agents to react to this issue.
+The team decided to test both the interactions in the archipelago when populated by our agent and the default clients developed by other teams (discussed in Section~\ref{againstothers} \nameref{againstothers}) as well as the interactions when only populated by instances of our agent (discussed in Section~\ref{againstself} \nameref{againstself}). These simulation efforts have been made to investigate the effectiveness of the agent's strategy, the system's response to the lack of strategy variance, as well as the ability of the agents to react to this issue.
 
 \subsection{Multi-agent simulations} \label{againstothers}
 \subsubsection{Honest Client} \label{honestAO}
 The \emph{honest} client has been carefully designed as an agent who would start the game complying to rules, offering help when possible and contributing to the common pool with more taxes when the agent is in abundant wealth. However, the personality of the agent adapts to the environment as it self-organises its strategy based on fellow agents. An irrefutable sign of great flexibility of this agent configuration is the presence of sanctions in its IIGO Report as shown in Figure~\ref{fig:IIGOHO}.
-This testifies that the agent adopts a change in strategy, occasionally breaking the rules. It still maintains a fair and collaborative approach throughout the whole game, getting involved in transactions during the IITO (Figure~\ref{fig:TransactionsHO}) and contributing to the common pool. As shown in the Resources Plot in Figure~\ref{fig:ResourcesHO} , where the agent is represented by the cyan curve, more than once there is a peak in resources that steeply decreases on the following turn, as the agent generously provides gifts to the agents in need and refills the common pool. The agent acts even more magnanimously with islands in a critical state. This behaviour is clearly noticeable in disaster recovery.
+The figure testifies that the agent occasionally breaking the rules - adopting a change in strategy in order to adapt to the strategies of other agents. It still maintains a fair and collaborative approach throughout the whole game, getting involved in transactions during the IITO (Figure~\ref{fig:TransactionsHO}) and contributing to the common pool. As shown in the Resources Plot in Figure~\ref{fig:ResourcesHO} , where the agent is represented by the cyan curve, more than once there is a peak in resources that steeply decreases on the following turn, as the agent generously providing gifts to the agents in need and sometimes also paying slightly more taxes in the common pool. From a design standpoint the team opted for an implementation that would prioritise gifts over over-contributions to the common pool. This decision comes from the consideration that a dishonest agent would counter our efforts in distributing resources to fellow agents. Therefore, prioritising gifting avoids this problem by allowing our agent to deliberately allocate its resources surplus to other islands. The agent acts even more magnanimously with islands in a critical state. This behaviour is clearly noticeable in disaster recovery.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{12_team4_agentdesign/images/IIGOHO.PNG}
@@ -259,7 +270,7 @@ This testifies that the agent adopts a change in strategy, occasionally breaking
 The \emph{moderate} client is configured specifically to start the game with an internal set of parameters that would allow it to score values as close as possible to thresholds in each decision making matrix calculation. The team opted for such a design choice in order to maximise the agent's response time to the environment, making it much more flexible than its two counterparts, who take a longer time to modify their strategy. As a Moderate client was simulated against other teams, the team noticed that it would perform very similarly as the Honest agent, as the other teams were always run on a "honest-like" configuration. Similarly, it would quickly turn its behaviour to dishonest when running against dishonest-like implementations of other teams' agents.
 
 \subsubsection{Dishonest Client}
-The \emph{dishonest} client, aptly named, is designed to take advantage of a large amount of common resources without collaborating with others and systematically abusing positions of power to gain economical advantages. The yielded results highlighted an interesting behaviour of the system and of other agents. As per design, the system is not flexible enough to mitigate such radical and rogue behaviour, resulting in a complete dominance of the dishonest agent. The agent proceeds to appropriate of all resources from the common pool and mercilessly watch other islands die, as profiled in Figure \ref{fig:ResourcesDO}. Eventually unable to survive without the collective help to mitigate disasters, it slowly meets its demise. The other agents do not reach a level of understanding of the game that allows them to comprehend what is going on and try to mitigate it by enforcing more severe rules. It must also be said that the system itself does not allow any hard enforcement, making it impossible for other agents to counter-attack a fully dishonest and selfish strategy, which disregards sanctions and taxes. Given these findings, dishonesty might seem like a dominant strategy as the agent survives the longest, securing all resources for itself. However, the long term dilemma imposes that islands must collaborate to survive for long periods. The dominance of this strategy is fatherly refuted by the simulations performed in subsection \ref{dishonestAD}.
+The \emph{dishonest} client, aptly named, is designed to take advantage of a large amount of common resources without collaborating with others and systematically abusing positions of power to gain economical advantages. The yielded results highlighted an interesting behaviour of the system and of other agents. As per design, the system is not flexible enough to mitigate such radical and rogue behaviour, resulting in a complete dominance of the dishonest agent. The agent proceeds to appropriate of all resources from the common pool and mercilessly watch other islands die, as profiled in Figure \ref{fig:ResourcesDO}. Eventually unable to survive without the collective help to mitigate disasters, it slowly meets its demise. The other agents do not reach a level of understanding of the game that allows them to comprehend what is going on and try to mitigate it by enforcing more severe rules. It must also be said that the system itself does not allow any hard enforcement, making it impossible for other agents to counter-attack a fully dishonest and selfish strategy, which disregards sanctions and taxes. Given these findings, dishonesty might seem like a dominant strategy as the agent survives the longest, securing all resources for itself. However, the long term dilemma imposes that islands must collaborate to survive for long periods. The dominance of this strategy is further refuted by the simulations performed in subsection \ref{dishonestAD}.
 
 \begin{figure}[H]
 \centering
@@ -271,7 +282,7 @@ The \emph{dishonest} client, aptly named, is designed to take advantage of a lar
 \subsection{Uni-Agent Simulations} \label{againstself}
 Simulating our agent against instances of itself raised some interesting talking points. The main issue identified can be referred to as a \emph{lack of variety}, which encompasses the problem of populating the archipelago with islands that share the same "mindset"; therefore, approach dilemma from a unified prospective. This hypothesis was raised as an attempt to explain the poor results of uni-client simulations which have been observed not only when running team 4 agents against themselves, but also when other teams' agents were put against themselves under the uni-agent settings.
 
-In all uni-agent simulations, the common pool was initialised to 10,000 resources, so that the agents could have enough resources to initialise running IIGO sessions.
+In all uni-agent simulations, the common pool was initialised to 1,000 resources, so that the agents could have enough resources to initialise running IIGO sessions.
 
 \subsubsection{Honest Agents Only}
 Populating the game with only honest clients provided a starting environment where all clients in the game are inclined to obey to rules and contribute a lot to the common pool in collective efforts. From this standpoint it makes sense that clients would build strong relations of trust and retain a high opinion of each other, as they treat each other with a fair and collaborative personality. Therefore in the evolution of the game, no agent undertakes any radical change of personality as was the case when our honest client was placed against other teams in subsection \ref{honestAO}. The IIGO Payments histogram in Figure \ref{fig:IIGOHH} nicely shows how the islands do not break any rule throughout the entire run.
@@ -335,7 +346,7 @@ In an attempt to overcome the \emph{lack of variety} problem, simulations were r
 \subsubsection{Lack of variety}
 The \emph{lack of variety} problem was a reoccurring trend in all uni-agent systems. The question comes in when considering whether or not this trend was avoidable or not. Because the agents had a limited number of actions it could take, putting the same strategies up against each other resulted in a stalemate due to the lack of variance. By theory, this would be a problem regardless of what the specific implemented strategy actually contains.
 
-This begs the question on whether an optimal strategy would even exist on a game such as this if all participating agents have the same level of complexity. A possible solution to this may include a type of state machine, an agent design our team has considered on the developing stages. The core concept is that an agent can implement different strategies depending on the situation the agent is put in. However, as demonstrated by the mixed agent uni-agent simulations, making a state machine with our three agents would not have been enough variance to overcome this issue. This indicates that in order to overcome the \emph{lack of variety} problem, it is not enough to have flexible thresholds and parameters - the agent's design approach itself must be radically different at each state. This would require a lot of rewritten and well-partitioned code which was not sufficiently formable in our limited time frame.
+This begs the question on whether an optimal strategy would even exist on a game such as this if all participating agents have the same level of complexity. A possible solution to this may include a more advanced state machine, an agent design our team has considered on the developing stages. The core concept is that an agent can implement different strategies accordingly to the current situation of the game state and its understanding of the other agents' strategies - a complex interpretation which would require ML components to process properly. As demonstrated by the mixed agent uni-agent simulations, making a state machine with our three agents would not have been enough variance to overcome this issue. This indicates that in order to overcome the \emph{lack of variety} problem, it is not enough to have flexible thresholds and parameters - the agent's design approach itself must be radically different at each state. This would require a lot of rewritten and well-partitioned code which was not sufficiently form-able in our limited time frame.
 
 \subsubsection{Ostrom's Principles}
 Evident by the behaviour of the dishonest agents, the tragedy of the commons was not overcome. To search for the cause of this, the system was compared with Ostrom’s principles.
@@ -354,3 +365,6 @@ A lot of Ostrom’s principles have already been enforced from the structure of 
 In this client implementation, principle 3 is missing as the agents do not propose their own rules. Principle 6 is also missing, but this is less clear as to how this would be implemented. The way the game is made, there isn't a lot of room for conflicts to rise between islands, as the only interactions the agents have are in the form of gifts while the only form of opinions exist in the form of internal parameters which are not shared across agents.
 
 This brings rise to the question as to whether Ostrom’s principles would be applicable to a non-ML based agent, and whether Ostrom’s rules require human behaviour as a prerequisite. Even if some rules were pre-made and given to the agents to propose and take down as the agents please, these rules wouldn't be an effect of the agents' organising - it would be an enforcement by us, the makers of the agents. One way to properly implement rule 3 would be to make the agent spontaneously create rules or create all possible rules based on its understanding of the situation of the game, which requres effective collection of all useful information from the game, as well as successful interpretation of the information. In addition, the agent would need to predict the how rules interact with each other, which is not trivial even for humans. Based on this, a further investigation of this could be done by measuring how much human influence can loom over the agents design, and its relevance to the applicability of Ostrom’s principles.
+
+
+Evident by the behaviour of the dishonest agents, even with IIGO present it is still possible to completely drain the common pool from any resources. As examined in the evaluation of IIGO, there are areas of powers withing IIGO which are not governed by institutional design. One of those is a lack of a Zone of Dignity, or similar solution, for the decisions on how much the agents should request in allocations and how much the President can allocate. In the current implementation there are no rules stating that the agent is not permitted to request resource amounts above some threshold. Moreover, there are no "guardrails" the President has to follow when allocating these resources. Thus a greedy agent, like the one we implemented, in combination with a generous President results in disastrous situations, since the common pool stays permanently empty. There is no disaster mitigation and there is nowhere, besides presents, to reach for help in the case of a critical f Hence, a better approach to a dishonest agent in the current IIGO setting would be to keep all other agents minimally satisfied.
