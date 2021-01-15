@@ -18,7 +18,7 @@ Islands which can communicate separately from the main governing body level of i
 \end{itemize}
 
 
-\textbf{Common Pool Donations}: Allows islands to broadcast how much they plan to donate to the common pool and let them declare to the other islands if they plan to donate more than the specified tax amount put forward by the President as a form of virtue signalling. This may help an island redeem itself if it had previously lost trust. Note that an island can lie about the amount it will donate to the common pool if it is trying to maliciously gain favour. Further explanation in section \ref{subsec:IITO:intended_contribution}
+\textbf{Common Pool Donations}: Allows islands to broadcast how much they plan to donate to the common pool and let them declare to the other islands if they plan to donate more than the specified tax amount put forward by the President as a form of virtue signalling. This may help an island redeem itself if it had previously lost trust. Note that an island can lie about the amount it will donate to the common pool if it is trying to maliciously gain favour.
 
 \textbf{Voting History$^{\ref{footnote:IITO:future_work}}$}: Islands can request voting history from other islands or provide their own one unprompted. This interaction enables islands to verify whether the Speaker has been honest when counting the votes for a previously held election. Note that the islands can lie in the voting history that they provide, meaning that the islands may want to only take heed of information from those islands that they already trust.
 
@@ -26,11 +26,8 @@ Islands which can communicate separately from the main governing body level of i
 
 \textbf{Current Resources$^{\ref{footnote:IITO:future_work}}$}: Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{subsec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
 
-\subsection{Future Work}
-\label{subsec:IITO:futurework}
-The full extent of what was discussed for the IITO was not implemented in the end. One of the main reason for this decision was to accommodate the need for a significant amount of time for improving the complexity of the agents (i.e. the islands) in the archipelago. Complexity in this case, meaning exploring deeper the features already present rather than introducing more. Therefore, some inter-island communication methods listed in section \ref{subsec:IITO:inter_island_communication} are left as future work. It is left as an exercise for the imagination of the reader to infer how such additional features would have been exploited by the islands in the archipelago. Team formation for foraging was also discussed, but ultimately abandoned
-\subsubsection{Team formation}
-This was intended as mechanic for allowing teams to explicitly forage together, in one way or another. One idea on how to implement this was to give members of already established teams the ability to accept or reject new members, and the main idea was that the islands would then decide on a resource and forage together, allowing for more explicit and formal communication. This was abandoned partially because the collaboration dilemma is already present in the two resource foraging problem, so adding this added layer of formality and structure seemed to mostly just increase the complexity, without adding any new dilemmas. Even so, it would have been interesting to see if these explicit teams would have introduced more long-term strategies for foraging leading, and how it would have affected trust.
+\subsubsection{Future Work}
+Unfortunately, the full extent of what was planned for the IITO did not come to fruition by the end of the project deadline due to time constraints. One of the main reason for this decision was the fact that the entire class also wanted to allocate some significant amount of time for improving the complexity of the agents (i.e. the islands) in the archipelago. Complexity in this case, meaning exploring deeper the features already present rather than introducing more. Therefore, some inter-island communication methods listed above are left as future work. It is left as an exercise for the imagination of the reader to infer how such additional features would have been exploited by the islands in the archipelago.
 
 \subsection{Gifting}  
 \label{subsec:IITO:gifting}  
@@ -39,16 +36,13 @@ If an island is struggling and requires some additional amount of resources to s
 
 Islands are also able to offer gifts without a request being made, meaning they can reach out to other islands if they want to boost their popularity.
 
-\subsection{Intended contribution}
-\label{subsec:IITO:intended_contribution}
-When contributing to the common pool it would be great know how much other islands were planning on giving as well, to be able to coordinate how much islands are actually planning on giving. A pattern similar to gifting could have established to encourage more explicit communication and discussion this contribution but in consideration for the other teams and to keep complexity low, the intended contribution was rather simply broadcast in the same way as in IIFO. Islands have the option to say how much they intend to contribute and to which islands they want to share this information and islands then receive the signaling information from the islands that explicitly shared their information with them. There is no further discussion past this point, so there is no good way of signaling a change of tactic based on the new information. It still has merit however, as it allows islands to build a history of how much other islands contribute to the main pool, granted that the information sent is truthful obviously.
 \section{Implementation}
 \label{sec:IITO:Implementation}
 
 \subsection{Server Client Infrastructure}
 \label{subsec:IITO:server_client_infrastructure}  
 
-During a turn, once IITO has started, a series of sessions are run, and the conclusion of all these sessions indicates that the IITO is also complete. In the current implementation, these sessions include gift giving and common pool donations, and they all follow the same client-server interaction format\footnote{Server and Client are defined in Definition~\ref{def:server} and Definition~\ref{def:client} respectively}. The server acts an intermediary for all client to client communication, and prompts clients to make decisions or formulate messages during the session. In IITO there are two sessions ran in sequence, gifting (section \ref{subsec:IITO:gifting_session}) and intended contribution signaling (section \ref{subsec:IITO:intended_contribution_session}). Together they facilitate trust based interaction and cooperation. 
+During a turn, once IITO has started, a series of sessions are run, and the conclusion of all these sessions indicates that the IITO is also complete. In the current implementation, these sessions include gift giving and common pool donations, and they all follow the same client-server interaction format\footnote{Server and Client are defined in Definition~\ref{def:server} and Definition~\ref{def:client} respectively}. The server acts an intermediary for all client to client communication, and prompts clients to make decisions or formulate messages during the session. At each stage in a session the server compiles a list of messages from the clients, following that sessions' protocols, and then uses that list as input for the next stage. While a bit abstract this is better explained through an example.
 
 \subsection{Gifting Session}
 \label{subsec:IITO:gifting_session} 
@@ -67,17 +61,3 @@ There are four phases to the gifting sessions: Gift requests, gift offers, gift 
     \caption{Overview of client-server interactions in gifting session.}
     \label{fig:IITO:gifting_session_diagram}
 \end{figure}
-
-\subsection{Intended Contribution Session}
-\label{subsec:IITO:intended_contribution_session}
-The are only two steps to the Intended Contribution Session: The server side implementation is identical to the structure described in \ref{sec:IIFO:implementation}
-\begin{itemize}
-    \item \textbf{Share Intended Contribution Info}: This part collects the intended contribution information from all clients. This information includes the amount the client intends to contribute to the common pool and who they wish to share this information with.
-    \item \textbf{Receive Intended Contribution Info}: In this stage the clients receive the other clients' contribution intentions. A client only receives the these intentions from clients who explicitly said they wanted to share their intention with them.
-\end{itemize}
-The information passed has the only one single number representing how much the agent intends to contribute to the common pool. 
-\begin{verbatim}
-struct IntendedContribitionInformation = {
-   IntendedContribution = Resources
-}
-\end{verbatim}
