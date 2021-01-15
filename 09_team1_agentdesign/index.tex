@@ -148,9 +148,7 @@ The agent maintains a history of foraging decisions and outcomes, including thos
 
 This strategy tries to predict the ideal foraging decision, even if that exact decision was not made in the past. This is done using regression, which is used to find the decision with the highest expected reward.
 
-In detail, regression forages randomly in the initial turns and history is kept as in \nameref{sec:forage-roi}. To make a foraging decision, the history is split by foraged resource (fish or deer), and quadratic regression is performed on contribution versus reward for both resources. From this, a quadratic equation is formed. If the quadratic equation was found to be negative then differentiating this equation would lead to the discovery of the best contribution.
-
-Regression then decides on the forage type by choosing the result that gives the best estimated ROI.
+The \emph{regression} strategy forages randomly in the initial turns and history is kept as in \nameref{sec:forage-roi}. To make a foraging decision, the history is split by foraged resource (fish or deer), and quadratic regression is performed on contribution versus reward for both resources. From this, a quadratic equation is formed. If the quadratic equation found is negative then the optimal contribution can be found by differentiation. If it is positive then a (large) value is chosen as contribution, as a higher contribution should simply lead to a higher reward.
 
 \subsection{Flip Foraging}
 
