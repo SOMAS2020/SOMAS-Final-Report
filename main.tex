@@ -30,6 +30,7 @@
 % \usepackage[dvipsnames]{xcolor}
 \usepackage{arydshln}
 \usepackage{adjustbox}
+\usepackage{titlesec}
 
 \setlength\dashlinedash{0.2pt}
 \setlength\dashlinegap{1.5pt}
@@ -42,6 +43,9 @@
   {\end{tabular}\par\vspace{\belowdisplayskip}}
 
 
+\titleformat{\chapter}[hang]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{1em}{}
+\titlespacing*{\chapter}{0pt}{10pt}{15pt}
 
 
 \usepackage{amsthm}
@@ -56,7 +60,7 @@
 
 
 %% Sets page size and margins
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=2cm]{geometry}
 \input{utils/json_listings.tex}
 
 \usepackage[%

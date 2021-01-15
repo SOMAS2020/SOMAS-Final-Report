@@ -194,7 +194,6 @@ The KDE estimates for a normal distribution for varying numbers of samples using
     \label{fig:KDE_uniform}
 \end{figure}
 
-\newpage
 Another example of the efficacy of our KDE implementation is presented in Figure~\ref{fig:kde-exp}. Here, the distribution of disaster magnitudes - an exponential pdf - is estimated. The estimated PDF is remarkably close to the target, even with as few as 20 samples.
 
 \begin{figure}[!htb]
@@ -206,7 +205,6 @@ Another example of the efficacy of our KDE implementation is presented in Figure
 
 In our implementation, KDE was used to estimate the underlying distributions for each forecast variable of interest. These estimates evolve (become more accurate) with more data and so, our agent theoretically should become a more skilled forecaster with time.
 
-\newpage
 \subsubsection{Confidence of forecasts}
 Another important component of our agent's forecasts is its confidence. This is not only helpful in other decision making processes in our strategy (such as deciding how many resources to contribute to the Common Pool), but is also integral to our reputation amongst other agents. Clearly, if we're producing  inaccurate predictions with high confidence, other agents will quickly learn to no longer trust our forecasts and may begin to stop sharing their forecasting decisions. Therefore, confidence is used carefully and honestly in our implementation; with limited data or inadequate historical accuracy in our estimates, our prediction confidence will be low. As we receive more data and are able to verify the stability of our estimates, the associated prediction confidence increases gradually. 
 
@@ -302,7 +300,6 @@ Voting for IIGO roles are done based on our agent's current opinion on other age
 
 \subsection{Future work}
 Currently, the agent only have one persona when acting as an official role. The personality of the role could be driven by its current wealth. Say if the agent is in \texttt{imperialStudent} state, it may try to find as much resources as possible, no matter how corrupted the process may be. The different personalities will add more dynamic to the simulation and it would be interesting to see how the agent would thrive or decline with different scenarios. 
-\newpage
 \section{Simulation}
 
 This section details the dynamics observed during the simulation of our agent's behaviour the other islands in the Archipelago. Once all agent implementations were finalised, simulations were performed using \textit{baseline} parameters. There is an extensive list of parameters that can be changed with no sensible initial values for many parameters, thus these baseline values had to be determined empirically. The environment is built on a variety of probabilistic models that introduce a lot of variance to the simulations. With this in mind, multiple simulations were run to allow us to evaluate our agent's behaviour in a broader sense.
@@ -316,7 +313,6 @@ The objective was to observe the effect of altering foraging parameters on our a
 
 We first focus on deer hunting, using  \texttt{input proportional} and \texttt{equally distributed} return of the resources. The results are displayed in Table~\ref{fig:Foraging Deer Hunting Parameter Simulation Results}.
 
-\newpage
 \begin{figure} [!htb]
     \centering
     \includegraphics[width=1\textwidth]{13_team5_agentdesign/images/Foarging Simulation Deer Hunting.png}
@@ -324,7 +320,6 @@ We first focus on deer hunting, using  \texttt{input proportional} and \texttt{e
     \label{fig:Foraging Deer Hunting Parameter Simulation Results}
 \end{figure}
 
-\newpage
 Next we changed the deer \texttt{OutputScaler} parameter. Once increased, we notice Figure~\ref{fig:Agent Resources Inversely correlated with the common Pool} shows that our agent is inversely correlated to the common pool resources. Therefore, the common pool resources decrease while our agent's resources increase, and vice versa.
 
 \begin{figure}[!htb]
@@ -355,7 +350,6 @@ When comparing the two methods of distribution, Figure~\ref{fig:Foraging Simulat
     \label{fig:Foraging Simulation MaxDeerpop_Equal}
 \end{figure}
 
-\newpage
 When the maximum deer population parameter in the game increases, the agent attempts to hunt as many deer as possible in a turn (as shown in Figure~\ref{fig:Foraging Simulation MaxDeerpop_Equal}, illustrated in the red line which is limited to a maximum of four deer that can be caught per turn). Whereas, when that parameter decreases, the agent reduces the amount of deer hunting and focuses more on fishing (Figure~\ref{fig:Foraging Simulation MaxDeerpop_Equal_decrease} - the green line represents the number of fish caught and the red line, the number of deer caught)
 
 \begin{figure}[!htb]
@@ -369,7 +363,6 @@ It was spotted that our agent's tendency to over-invest into deer hunting. While
 
 Moreover, Fishing parameters have been altered to evaluate the behaviour and foraging efficiency of our agent. The simulated results are in Table~\ref{fig:Foraging Fishing parameters Simulation Results}.
 
-\newpage 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\textwidth]{13_team5_agentdesign/images/Foarging Simulation Fishing.png}
@@ -402,7 +395,6 @@ However if we increase the \texttt{disasterMagnitudeResourceMultiplier} it can b
 
 The observations made using the above parameters, are dependent on other agent’s dynamics that were implemented. Therefore, without a collective analysis of each individual agents’ performance, conclusions are limited to the observations made solely under the specified experiment. One could only effectively evaluate an agent’s dynamics, taking in mind those of the rest of the agents in the community, given that they differ. Therefore, in future work simulations could be made with a community of only Team 5’s agent instances. Else, one would need to cross-reference the results from individual agent simulations, as well as results of simulating and evaluating the community as a whole. 
 
-\newpage
 \subsection{Resource Management}
 
 In the following experiments, we are testing the amount of the resources of our agent throughout the game. For each experiment, we were keeping all the parameters fixed to baseline and adjusting only one to analyse it would affect our agent overtime. 
@@ -416,19 +408,18 @@ Below, there are two Figu that are representative of our agent's performance in 
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.9\textwidth]{13_team5_agentdesign/images/InitCP120.PNG}
+    \includegraphics[width=0.6\textwidth]{13_team5_agentdesign/images/InitCP120.PNG}
     \caption{Initial Common Pool: 120}
     \label{eq:Initial Common Pool: 120}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.9\textwidth]{13_team5_agentdesign/images/InitCP2000.PNG}
+    \includegraphics[width=0.6\textwidth]{13_team5_agentdesign/images/InitCP2000.PNG}
     \caption{Initial Common Pool: 200}
     \label{Initial Common Pool: 200}
 \end{figure}
 
-\newpage
 \underline{Parameter:} Initial Resources \newline
 \underline{Agent Baseline Value:}200 \newline
 \underline{Tested values:} \{50, 500, 1000\} \newline
@@ -437,7 +428,7 @@ What was observed in these experiments is that our agent is ignorant to the init
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.85\textwidth]{13_team5_agentdesign/images/InitRes.PNG}
+    \includegraphics[width=0.6\textwidth]{13_team5_agentdesign/images/InitRes.PNG}
     \caption{Initial Resources of agent: 1000}
 \end{figure}
 

@@ -115,7 +115,10 @@ In this coursework, there are non-stochastic and stochastic disasters. For the n
 The recommendation of common-pool resource contribution is based on the comparison among our own prediction and shared predictions from others. 
 
 \subsubsection{Implementation} \label{subsubsec:Team6_IIFO:Implementation}
+
 For the foraging, islands can share the most recent foraging decisions they made and the resources obtained to other islands. There is a \texttt{ShareTo} list containing island IDs that our island wishes to share this information with. The following pseudocode describes the logic in our disaster prediction:
+
+
 \begin{algorithm}[H]
 \SetAlgoLined
     \uIf{not knowing the period \textbf{and} not knowing whether it's stochastic}{
