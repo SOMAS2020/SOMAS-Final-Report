@@ -2,7 +2,7 @@
 % Template author: Y. Panagis
 
 \usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -56,6 +56,22 @@
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
 \input{utils/json_listings.tex}
 
+\usepackage[%
+  backend=bibtex      % biber or bibtex
+%,style=authoryear    % Alphabeticalsch
+ ,style=numeric-comp  % numerical-compressed
+ ,sorting=none        % no sorting
+ ,sortcites=true      % some other example options ...
+ ,block=none
+ ,indexing=false
+ ,citereset=none
+ ,isbn=true
+ ,url=true
+ ,doi=true            % prints doi
+ ,natbib=true         % if you need natbib functions
+]{biblatex}
+\addbibresource{bibs/main.bib}  % better than \bibliography
+
 \begin{document}
     % The Title, Author Name, Date, and abstract go here
     \title{Self-Organising Multi-Agent Systems: Final Report}
@@ -85,6 +101,8 @@
     \input{15_simulations/index.tex}
     \input{16_results_and_eval/index.tex}
     \input{18_conclusion/index.tex}
+
+    \printbibliography[heading=bibintoc]
 
     \begin{appendices}
         \input{20_appendix_roles/index.tex}
