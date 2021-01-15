@@ -62,7 +62,7 @@ When reporting its resources, our agent uses a weighted linear combination of so
     = Scaling\:Factor
 \end{equation}
 
-To decide when to lie, the scaling factor is firstly compared to a preset threshold. If the scaling factor is greater, then the amount of the needed resource is divided by 
+To decide when to lie, the scaling factor is first compared to a preset threshold. If the scaling factor is greater, then the amount of the needed resource is divided by 
 \begin{equation}
     [1 + (Scaling\:Factor - Preset\:Threshold)]
 \end{equation} 
@@ -106,7 +106,7 @@ The President is also reluctant to allow any resource allocations if the disaste
 
 \subsection{Judge}
 \label{subsec:team4:judge}
-The Judge implementation provided by our agent can be described as \emph{honest, but curious}. In other words, it follows the rules currently in play, and follows its obligations, however, it extracts the information exclusive to Judge to reason about other agents in the game. An example of such actions is explained in greater detail below in this Section.
+The Judge implementation provided by our agent can be described as \emph{honest, but curious}. In other words, it follows the rules currently in play, and follows its obligations, however, it extracts the information exclusive to the Judge to reason about other agents in the game. An example of such actions is explained in greater detail below in this Section.
 
 The judiciary functions overloaded from the \texttt{basejudge} implementation are:
 \begin{itemize}
@@ -120,7 +120,7 @@ An explanation of the implementation of those functions is presented below.
 \label{subsubsec:team4:judge:inspect_history}
 In the basic implementation, a history of IIGO actions of all the agents is passed to the Judge for inspection, which could become grounds for introducing economic sanctions for non-rule-obeying players. 
 
-Judge truthfully evaluates and reports the rule violations for each of the agents, just as the \texttt{basejudge}. However, it also extracts and saves the information about the private resource pools of all the agents, taxes they were expected to pay, as well as the actual amount paid to the common pool. Additionally, it stores the \texttt{LawfulnessRatio} of each agent, which can be written as:
+Judge truthfully evaluates and reports the rule violations for each of the agents, just as the \texttt{basejudge}. However, it also extracts and saves the information about the private resource pools of all the agents, taxes they were expected to pay, as well as the actual amount paid to the common pool. Additionally, it stores the \texttt{LawfulnessRatio} of each agent, which is defined as:
 
 
 \begin{equation}
@@ -162,7 +162,7 @@ Our Speaker implementation builds upon the \texttt{baseSpeaker} on a key point: 
     \item Not performing monitored actions will result in sanctions, harming the agent's resource pool.
     \item The rules are a representation of the archipelago's expectations, thus not following said priorities is a sign of incompetence - damaging the agent's reputation.
 \end{itemize}
-Since these reasons are applicable regardless of honesty, these mechanics are always implemented regardless of agent type.
+Since these reasons are applicable regardless of honesty, these mechanics are always implemented regardless of the chosen personality type.
 
 \section{IIFO}\label{sec:team4:IIFO}
 %I recommend that we write in the order of function execution order. (the end of turn functions that are related to IIFO should be written inside the EndOfTurn section)Only mention the functions that are worth mentioning. For execution order check the ./doc/EXECUTION_ORDER.md file in the SOMAS repo -- Mike
@@ -247,7 +247,7 @@ The team decided to test both the interactions in the archipelago when populated
 \subsubsection{Honest Client} \label{honestAO}
 The \emph{honest} client has been carefully designed as an agent who would start the game complying to rules, offering help when possible and contributing to the common pool with more taxes when the agent is in abundant wealth. However, the personality of the agent adapts to the environment as it self-organises its strategy based on fellow agents. An irrefutable sign of great flexibility of this agent configuration is the presence of sanctions in its IIGO Report as shown in Figure~\ref{fig:IIGOHO}. The figure testifies that the agent adopts a change in strategy, occasionally breaking the rules. It still maintains a fair and collaborative approach throughout the whole game, getting involved in transactions during the IITO (Figure~\ref{fig:TransactionsHO}) and contributing to the common pool. 
 
-As shown in the Resources Plot in Figure~\ref{fig:ResourcesHO} , where the agent is represented by the cyan curve, more than once there is a peak in resources that steeply decreases on the following turn, as the agent generously providing gifts to the agents in need and sometimes also paying slightly more taxes in the common pool. From a design standpoint the team opted for an implementation that would prioritise gifts over over-contributions to the common pool. This decision comes from the consideration that a dishonest agent would counter our efforts in distributing resources to fellow agents. Therefore, prioritising gifting avoids this problem by allowing our agent to deliberately allocate its resources surplus to other islands. The agent acts even more magnanimously with islands in a critical state. This behaviour is clearly noticeable in disaster recovery.
+As shown in the Resources Plot in Figure~\ref{fig:ResourcesHO} , where the agent is represented by the cyan curve, more than once there is a peak in resources that steeply decreases on the following turn. This happens because the agent is generously providing gifts to the agents in need and sometimes is also paying slightly more taxes into the common pool than required. From a design standpoint the team opted for an implementation that would prioritise gifts over over-contributions to the common pool. This decision comes from the consideration that a dishonest agent would counter our efforts in distributing resources to fellow agents. Therefore, prioritising gifting avoids this problem by allowing our agent to deliberately allocate its resources surplus to other islands. The agent acts even more magnanimously with islands in a critical state. This behaviour is clearly noticeable in disaster recovery.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{12_team4_agentdesign/images/IIGOHO.PNG}
@@ -272,7 +272,7 @@ As shown in the Resources Plot in Figure~\ref{fig:ResourcesHO} , where the agent
 The \emph{moderate} client is configured specifically to start the game with an internal set of parameters that would allow it to score values as close as possible to thresholds in each decision making matrix calculation. The team opted for such a design choice in order to maximise the agent's response time to the environment, making it much more flexible than its two counterparts, who take a longer time to modify their strategy. As a Moderate client was simulated against other teams, the team noticed that it would perform very similarly as the Honest agent, as the other teams were always run on a "honest-like" configuration. Similarly, it would quickly turn its behaviour to dishonest when running against dishonest-like implementations of other teams' agents.
 
 \subsubsection{Dishonest Client}
-The \emph{dishonest} client, aptly named, is designed to take advantage of a large amount of common resources without collaborating with others and systematically abusing positions of power to gain economical advantages. The yielded results highlighted an interesting behaviour of the system and of other agents. As per design, the system can only incentivize avoidance of such radical and rogue behaviour, resulting in a complete dominance of the dishonest agent. The agent proceeds to appropriate of all resources from the common pool and mercilessly watch other islands die, as profiled in Figure \ref{fig:ResourcesDO}. Eventually unable to survive without the collective help to mitigate disasters, it slowly meets its demise. The other agents do not reach a level of understanding of the game that allows them to comprehend what is going on and try to mitigate it by enforcing more severe rules. It must also be said that the system itself does not allow any hard enforcement, making it impossible for other agents to counter-attack a fully dishonest and selfish strategy, which disregards sanctions and taxes. 
+The \emph{dishonest} client, aptly named, is designed to take advantage of a large amount of common resources without collaborating with others and systematically abusing positions of power to gain economical advantages. The yielded results highlighted an interesting behaviour of the system and of other agents. As per design, the system can only incentivise avoidance of such radical and rogue behaviour, resulting in a complete dominance of the dishonest agent. The agent proceeds to appropriate of all resources from the common pool and mercilessly watch other islands die, as profiled in the Figure \ref{fig:ResourcesDO}. Eventually, unable to survive without the collective help to mitigate disasters, dishonest agent slowly meets its demise. The other agents do not reach a level of understanding of the game that allows them to comprehend the changes in game state, adapt to them, and mitigate them by enforcing more severe rules. It must also be said that the system itself does not allow any hard enforcement, making it impossible for other agents to counter-attack a fully dishonest and selfish strategy, which disregards sanctions and taxes. 
 
 Given these findings, dishonesty might seem like a dominant strategy as the agent survives the longest, securing all resources for itself. However, the long term dilemma imposes that islands must collaborate to survive for long periods. The dominance of this strategy is further refuted by the simulations performed in subsection \ref{dishonestAD}.
 
@@ -284,14 +284,14 @@ Given these findings, dishonesty might seem like a dominant strategy as the agen
 \end{figure}
 
 \subsection{Uni-Agent Simulations} \label{againstself}
-Simulating our agent against instances of itself raised some interesting talking points. The main issue identified can be referred to as a \emph{lack of variety}, which encompasses the problem of populating the archipelago with islands that share the same "mindset"; therefore, approach dilemma from a unified prospective. This hypothesis was raised as an attempt to explain the poor results of uni-client simulations which have been observed not only when running team 4 agents against themselves, but also when other teams' agents were put against themselves in uni-agent simulations.
+There are observations to be made from simulating our agent against instances of itself. The main issue identified can be referred to as a \emph{lack of variety}, which encompasses the problem of populating the archipelago with islands that share the same "mindset"; therefore, approach dilemma from a unified perspective. This hypothesis was raised as an attempt to explain the poor results of uni-client simulations which have been observed not only when running team 4 agents against themselves.
 
 In all uni-agent simulations, the common pool was initialised to 1,000 resources, so that the agents could have enough resources to initialise running IIGO sessions.
 
 \subsubsection{Honest Agents Only}
 Populating the game with only honest clients provided a starting environment where all clients in the game are inclined to obey to rules and contribute a lot to the common pool in collective efforts. From this standpoint it makes sense that clients would build strong relations of trust and retain a high opinion of each other, as they treat each other with a fair and collaborative personality. Therefore in the evolution of the game, no agent undertakes any radical change of personality as was the case when our honest client was placed against other teams in subsection \ref{honestAO}. The IIGO Payments histogram in Figure \ref{fig:IIGOHH} nicely shows how the islands do not break any rule throughout the entire run.
 
-It also manifests a very predictable behaviour of each honest agent that is perfectly in line with their design, such as paying more taxes than requested and taking less allocations than granted. The team identified this predictable behaviour as an example of \emph{lack of variety} that shows how agents with the same specification do not have strengths in all aspects of the system to survive in such a complex system that needs to be properly discovered and efficiently exploited.
+It also manifests a very predictable behaviour of each honest agent that is perfectly in line with their design, such as paying more taxes than requested and taking less allocations than granted. We identified this predictable behaviour as an example of \emph{lack of variety} that shows how agents with the same specification do not have strengths in all aspects of the system to survive in such a complex system that needs to be properly discovered and efficiently exploited.
 
 \begin{figure}[H]
 \centering
@@ -348,9 +348,9 @@ In an attempt to overcome the \emph{lack of variety} problem, simulations were r
 \subsection{Results Summary} \label{ResultSummary}
 %Rudolfs suggestion on phrasing it as experts in the field allow all islands to thrive.%
 \subsubsection{Lack of variety}
-The \emph{lack of variety} problem was a reoccurring trend in all our uni-agent simulations. The question comes in when considering whether or not this trend was avoidable or not. Because the agents had a limited number of actions it could take, putting the same strategies up against each other resulted in a stalemate due to the lack of variance. By theory, this would be a problem regardless of what the specific implemented strategy actually contains.
+The \emph{lack of variety} problem was a reoccurring trend in all our uni-agent simulations. The question comes in when considering whether or not this trend was avoidable or not. Because our agents while having strengths in specific areas, had obvious weaknesses when it comes to rule proposal, putting the same agent up against each other resulted in a stalemate due to the lack of coverage of the game's functionalities. This could be a problem with agents that do not have a high level understanding of the whole game.
 
-This begs the question on whether an optimal strategy would even exist on a game such as this if all participating agents have the same level of complexity. A possible solution to this may include a more advanced state machine, an agent design our team has considered on the developing stages. The core concept is that an agent can implement different strategies depending on the situation the agent is put in. This indicates that in order to overcome the \emph{lack of variety} problem, it is not enough to have flexible thresholds and parameters, which are more tactical measures - the agent's design approach itself must be radically different at each state. This would require a lot of rewritten and well-partitioned code which was not sufficiently form-able in our limited time frame.
+This begs the question on whether an optimal strategy would even exist on a game such as this if all participating agents have the same level of complexity. A possible solution to this may be to have a more advanced state machine, an agent design our team has considered on the developing stages. The core concept is that an agent can have a higher level of understanding of the situation the agent is put in. This indicates that in order to overcome the \emph{lack of variety} problem, it is not enough to have flexible thresholds and parameters, which are more tactical measures - the agent's design approach itself must be radically different at each state. This would require a lot of rewritten and well-partitioned code which was not sufficiently form-able in our limited time frame.
 
 \subsubsection{Agent-institution interaction}
 
