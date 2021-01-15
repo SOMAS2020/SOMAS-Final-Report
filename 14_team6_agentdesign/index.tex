@@ -205,14 +205,14 @@ The forging type for current turn is decided by comparing the average ROI of tot
     calculate the average ROI for deer hunting 2 rounds before $\alpha_2$\;
     calculate the average ROI for fish hunting 2 rounds before $\beta_2$\;
     \If{$\alpha_1 > \beta_1$}{
-        \If{$\alpha_1 > \alpha_2$}{$multiplier \gets multiplier + 0.05$}
-        \Else{$multiplier \gets multiplier - 0.05$}
-        \Return deer type
+        \If{$\alpha_1 > \alpha_2$}{$multiplier \gets multiplier + 0.05$\;}
+        \Else{$multiplier \gets multiplier - 0.05$\;}
+        \Return deer type\;
     }
     \Else{
-        \If{$\beta_1 > \beta_2$}{$multiplier \gets multiplier + 0.03$}
-        \Else{$multiplier \gets multiplier - 0.03$}
-        \Return fish type 
+        \If{$\beta_1 > \beta_2$}{$multiplier \gets multiplier + 0.03$\;}
+        \Else{$multiplier \gets multiplier - 0.03$\;}
+        \Return fish type\;
     }
     %\end{algorithmc}
 \end{algorithm}
@@ -307,13 +307,13 @@ For voting implementation, we have completely implemented what has been put forw
 \begin{algorithm}[H]
     \caption{VoteForRule} 
         %\begin{algorithmc}
-        variable list of rules to be changed $varListToBeChanged$\;
-        variable list of variables we care about  $varWeCareAbout$\;
+        $varListToBeChanged \gets$ variable list of rules to be changed\;
+        $varWeCareAbout \gets$ variable list of variables we care about\;
         \If{$varListToBeChanged \cap varWeCareAbout \ne \varnothing$}{
-            \Return Approve
+            \Return Approve\;
         }
         \Else{
-            \Return Abstain
+            \Return Abstain\;
         }
         %\end{algorithmc}
     \end{algorithm}
@@ -322,13 +322,13 @@ For voting implementation, we have completely implemented what has been put forw
 \begin{algorithm}[H]
 \caption{VoteForElection} 
     %\begin{algorithmc}
-    role list of roles we have $roleList$\\
-    role list of the role being changed  $roleBeingChanged$\\
-    our preference to roles ${President, Speaker, Judge}$\\
-    our agent ID $ID$\\
-    candidates number $numCand$\\
-    candidate list except for ourselves $friendList$\\
-    friendship level list $fsLevel$\\
+    $roleList \gets$ role list of roles we have\\
+    $roleBeingChanged \gets$ role list of the role being changed\\
+    ${President, Speaker, Judge} \gets$ our preference to roles \\
+    $ID \gets$ our agent ID\\
+    $numCand \gets$ candidates number\\
+    $friendList \gets$ candidate list except for ourselves\\
+    $fsLevel \gets$ friendship level list\\
     $i, j \in [0, numCand)$\\
     \While{$For \forall i < j, \exists fsLevel[i] > fsLevel[j]$}{
         \If{$(i-j)(fsLevel[i]-fsLevel[j]) > 0$}{
