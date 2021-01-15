@@ -12,7 +12,7 @@ Islands which can communicate separately from the main governing body level of i
 
 \begin{itemize}
     \item Inform other islands of the amount they intend to donate to the common pool.
-    \item Share voting history with other islands\footnote{\label{footnote:IITO:future_work}Not implemented in final system}.
+    \item Share voting history with other islands\footnote{\label{footnote:IITO:future_work}This is not implemented in the final system, left as future work.}.
     \item Share tax amount history with other islands$^{\ref{footnote:IITO:future_work}}$.
     \item Inform other islands of the amount of resources they currently have in their private pool$^{\ref{footnote:IITO:future_work}}$.
 \end{itemize}
@@ -27,7 +27,7 @@ Islands which can communicate separately from the main governing body level of i
 \textbf{Current Resources(Future Work)}: Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{subsec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
 
 \subsubsection{Future Work}
-Unfortunately, the full extent of what was planned for IITO did not come to fruition by the end of the project. The issue was, of course, the time constraint, however it was less about the complexity of the intended parts but more about the increase in complexity of the agents. Each of the sections labelled as (Future Work) above wouldn't have been that hard to implement, but they would mean that agent teams would have had to implement further features on top of the already existing, and frankly quite complicated, heap. Thus, it was deemed that while it would have been great to see these features they were ultimately not worth the cost to agent teams they would have caused. 
+Unfortunately, the full extent of what was planned for the IITO did not come to fruition by the end of the project deadline due to time constraints. One of the main reason for this decision was the fact that the entire class also wanted to allocate some significant amount of time for improving the complexity of the agents (i.e. the islands) in the archipelago. Therefore, some inter-island communication methods listed above are left as future work. It is left as an exercise for the imagination of the reader to infer how such additional features would have been exploited by the islands in the archipelago.
 
 \subsection{Gifting}  
 \label{subsec:IITO:gifting}  
@@ -61,4 +61,3 @@ There are four phases to the gifting sessions: Gift requests, gift offers, gift 
     \caption{Overview of client-server interactions in gifting session.}
     \label{fig:IITO:gifting_session_diagram}
 \end{figure}
-
