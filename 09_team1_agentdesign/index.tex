@@ -1,7 +1,7 @@
 \chapter{Team 1 Agent Design}
 
 \section{Core Idea}
-Team 1 agent, was designed around the idea that the agent wants the whole archipelago to survive. However, the agent does have different configurations that allows it to be more malicious than intended such that interesting simulations may occur.
+Team 1 agent was designed around the idea that the agent wants the whole archipelago to survive. However, the agent does have different configurations that allows it to be more malicious than intended such that interesting simulations may occur.
 
 \section{Emotional state}
 
@@ -24,17 +24,7 @@ The agent's behaviour is affected but what we have termed her \emph{emotional st
 
 
 \section{Opinions on Islands}
-For an agent to become self-organising, the agent must determine certain actions given a condition without external input. For this to be possible, the agent must have defined conditions which team 1 calls 'emotional state', and hold an opinion about other islands. This will form a basis for the agent to decide on an action.
-
-Initially, the opinion on all existing islands are neutral. Overtime through IITO and IIGO, the opinions on islands will change. This will affect the outcome of IITO and IIGO results. As a note, positive values correspond to positive opinions while negative values correspond to negative opinions.
-
-An agent's emotional state can change depending on the current resources. Below is an example of how an agent's emotional state can be formed:
-\begin{itemize}
-    \item If current resources > 10 * living cost, the agent is happy.
-    \item If 3 * living cost < current resources < 10 * living cost, the agent is anxious.
-    \item If the current resources < 3 * living cost, the agent is desperate.
-\end{itemize}
-The upper and lower bounds can be changed before a game starts. 
+As information and resources sharing is possible between islands, it is ideal that the agent forms an opinion of other islands. The information received could be inaccurate or accurate and potentially, the agent would not want to share resources with a selfish island. Initially, the opinion on all existing islands are neutral. Overtime through IITO and IIGO, the opinions on islands will change. This will affect the outcome of IITO and IIGO results. As a note, positive values correspond to positive opinions while negative values correspond to negative opinions.
 
 \section{IITO Gifts}
 During IITO, the agent's opinion of other island is affected. For every gift received, the agent's opinion of the gifter increases. However, the agent's opinion of an island can decrease if that island promised a gift and was not able to fulfil it. 
