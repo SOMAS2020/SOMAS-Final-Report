@@ -8,26 +8,26 @@ The role of IITO is to facilitate inter-island communication and to enable the a
 \subsection{Inter-Island Communication}  
 \label{subsec:IITO:inter_island_communication}
 
-Islands which can communicate separately from the main governing body level of interactions (i.e. IIGO) makes more complex island behaviour possible. With the implemented systems, islands can:
+Islands which can communicate separately from the main governing body level of interactions (i.e. IIGO) makes more complex island behaviour possible. It was intended to allow the islands to be able to:
 
 \begin{itemize}
-    \item Form a group with other islands for collective foraging.
-    \item Decide where their foraging group will forage.
-    \item Inform other islands of the amount they intend to to donate to the common pool.
-    \item Share voting history with other islands.
-    \item Share tax amount history with other islands.
-    \item Inform other islands of the amount of resources they currently have in their private pool.
+    \item Inform other islands of the amount they intend to donate to the common pool.
+    \item Share voting history with other islands\footnote{\label{footnote:IITO:future_work}This is not implemented in the final system, left as future work.}.
+    \item Share tax amount history with other islands$^{\ref{footnote:IITO:future_work}}$.
+    \item Inform other islands of the amount of resources they currently have in their private pool$^{\ref{footnote:IITO:future_work}}$.
 \end{itemize}
 
-\textbf{Team Foraging}: Allows islands to decide between each other whether they will forage together and where they will forage. In this way, islands can cooperate with the others that they trust while avoiding other islands that they deem to have misbehaved or broken rules in the past. If islands suspect that some specific islands have deliberately freeloaded in the previous forages, they may also want to avoid foraging with such islands that have contributed less than what they were supposed to.
 
 \textbf{Common Pool Donations}: Allows islands to broadcast how much they plan to donate to the common pool and let them declare to the other islands if they plan to donate more than the specified tax amount put forward by the President as a form of virtue signalling. This may help an island redeem itself if it had previously lost trust. Note that an island can lie about the amount it will donate to the common pool if it is trying to maliciously gain favour.
 
-\textbf{Voting History}: Islands can request voting history from other islands or provide their own one unprompted. This interaction enables islands to verify whether the Speaker has been honest when counting the votes for a previously held election. Note that the islands can lie in the voting history that they provide, meaning that the islands may want to only take heed of information from those islands that they already trust.
+\textbf{Voting History$^{\ref{footnote:IITO:future_work}}$}: Islands can request voting history from other islands or provide their own one unprompted. This interaction enables islands to verify whether the Speaker has been honest when counting the votes for a previously held election. Note that the islands can lie in the voting history that they provide, meaning that the islands may want to only take heed of information from those islands that they already trust.
 
-\textbf{Tax History}: Similarly to providing and requesting voting history, islands can request taxation history (i.e. how much the islands were told to contribute in the form of tax by the President) from other islands. Note that an island may choose not to provide this tax history or it can be dishonest about it. If the islands report the true level of taxation, this interaction allows islands to form an opinion about whether the President has decided on a fair\footnote{Note that this fairness metric will be unique to each island, meaning that it is subjective.} amount of taxation.
+\textbf{Tax History$^{\ref{footnote:IITO:future_work}}$}: Similarly to providing and requesting voting history, islands can request taxation history (i.e. how much the islands were told to contribute in the form of tax by the President) from other islands. Note that an island may choose not to provide this tax history, or it can be dishonest about it. If the islands report the true level of taxation, this interaction allows islands to form an opinion about whether the President has decided on a fair\footnote{Note that this fairness metric will be unique to each island, meaning that it is subjective.} amount of taxation.
 
-\textbf{Current Resources}: Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{subsec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
+\textbf{Current Resources$^{\ref{footnote:IITO:future_work}}$}: Islands are also able to share the value of the resources that they currently have in their private pool. This information may guide islands when making decisions regarding gifts (Section~\ref{subsec:IITO:gifting}). For example, if an island requests a gift because they are low on resources, the island receiving the request may want to ask how many resources the requesting island has. This can also give an island an indication of the overall level of richness in the archipelago. Similarly to sharing the intended common pool donations along with voting and tax history, the islands can decide not to report or lie about their current amount of resources.
+
+\subsubsection{Future Work}
+Unfortunately, the full extent of what was planned for the IITO did not come to fruition by the end of the project deadline due to time constraints. One of the main reason for this decision was the fact that the entire class also wanted to allocate some significant amount of time for improving the complexity of the agents (i.e. the islands) in the archipelago. Complexity in this case, meaning exploring deeper the features already present rather than introducing more. Therefore, some inter-island communication methods listed above are left as future work. It is left as an exercise for the imagination of the reader to infer how such additional features would have been exploited by the islands in the archipelago.
 
 \subsection{Gifting}  
 \label{subsec:IITO:gifting}  
@@ -61,4 +61,3 @@ There are four phases to the gifting sessions: Gift requests, gift offers, gift 
     \caption{Overview of client-server interactions in gifting session.}
     \label{fig:IITO:gifting_session_diagram}
 \end{figure}
-
