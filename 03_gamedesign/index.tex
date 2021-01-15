@@ -12,7 +12,7 @@ The game is structured as series of \emph{seasons} and \emph{turns}, which concl
 \end{definition}
 
 \begin{definition} \label{def:turn}
-    A \textbf{turn} is defined as a series of exchanges between agents in which islands receive resource updates, attend Inter-Island Organisation meetings (e.g. IIGO, IIFO, IITO), and interact with one another and the game state through \textbf{actions}. A turn can be broken down as follows:
+    A \textbf{turn} is defined as a series of exchanges between agents in which islands receive resource updates, attend Inter-Island Organisation meetings (e.g. IIGO, IIFO, IITO) and interact with one another and the game state through \textbf{actions}. A turn can be broken down as follows:
     \begin{enumerate}
         \item Resource Updates for each island and on global game state.
         \item The Inter-Island Governmental Organisation (IIGO) decides rule changes, elections, sanctions.
@@ -39,11 +39,11 @@ The game is structured as series of \emph{seasons} and \emph{turns}, which concl
 \end{definition}
 
 \begin{definition} \label{def:gameaction}
-    An \textbf{action} is a decision an island can make or that is made by any Inter-Island Organisation that updates the game state. Actions can be made at different stages within a turn both within Inter-Island Organisations and at the end of a turn. This includes but is not limited to taking resources from or donating resources to from the common pool, rule changes in the IIGO, and gift requests or acceptances. The following is a brief overview of the actions that agents can take:
+    An \textbf{action} is a decision an island can make or that is made by any Inter-Island Organisation that updates the game state. Actions can be made at different stages within a turn both within Inter-Island Organisations and at the end of a turn. This includes but is not limited to taking resources from or donating resources to from the common pool, rule changes in the IIGO and gift requests or acceptances. The following is a brief overview of the actions that agents can take:
 
     \begin{itemize}
         \item \textbf{Foraging}: Agents can decide to allocate resources to generate resources through foraging
-        \item \textbf{Gifting}: Agents can choose to send, and accept resource gifts from other agents through the IITO
+        \item \textbf{Gifting}: Agents can choose to send and/or accept resource gifts from other agents through the IITO
         \item Agents can take resources from and give resources to the Common Pool
         \item Agents can execute \textbf{role actions}. These actions relate to actions agents can take in organisations such as the IIGO and are explained in further detail in the following chapters.
         \item Agents can share information through the IIFO, for example, regarding predictions of future disaster locations, magnitudes and timing.
@@ -51,7 +51,7 @@ The game is structured as series of \emph{seasons} and \emph{turns}, which concl
 \end{definition}
 
 \begin{definition} \label{def:gameseason}
-    The \textbf{common pool} is a pool of resources shared by the islands. It is used to mitigate disasters, and act as a central resource storage for tax payments, and agents to share and take resources through self organisation.
+    The \textbf{common pool} is a pool of resources shared by the islands. It is used to mitigate disasters and act as a central resource storage for tax payments and agents to share and take resources through self organisation.
 \end{definition}
 
 \begin{definition} \label{def:critical}
@@ -66,11 +66,11 @@ The game is structured as series of \emph{seasons} and \emph{turns}, which concl
     \textbf{Game over} is defined as the end of the simulation and occurs when all islands have died or the simulation is completed - whichever occurs first.
 \end{definition}
 
-Figure~\ref{fig:gamedesign-flow} depicts a high level diagram of the general flow and structure of the game.
+\autoref{fig:gamedesign-flow} depicts a high level diagram of the general flow and structure of the game.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics{03_gamedesign/images/gamespec-flow.png}
+    \includegraphics[width=\linewidth]{03_gamedesign/images/gamespec-flow.png}
     \caption{High Level Game Specification Flow Diagram}
     \label{fig:gamedesign-flow}
 \end{figure}
@@ -79,7 +79,7 @@ Figure~\ref{fig:gamedesign-flow} depicts a high level diagram of the general flo
 Every action taken in the game adds to the dilemma placed on the agent to explore how they interact and attempt to overcome challenges through self-organisation. To complicate matters further, the meetings occur only to form agreements, which can also be broken after they are made. The allocation also occurs first to assist islands that are struggling by allowing them to take from the common pool immediately and use these resources to forage or, at a minimum, pay their tax.
 
 \subsection{Game Parameters}
-Many of the parameters within the game can be modified to adjust the difficulty of the game. It should be noted that some of these parameters have a greater impact than others. For example, the agents may or may not have access to the common pool threshold level and this knowledge, or lack thereof, will result in entirely different agent performance. This because each agent relies on different strategies and approaches each aspect of the game in a different way. For example, while some agents rely more on social strategies and cooperation to mitigate unknown risk, others rely heavily on calculations and predictions. Each agent strategy will come with its own unique set of benefits and limitations in the context of the game, performing better or worse, under different conditions.
+Many of the parameters within the game can be modified to adjust the difficulty of the game. It should be noted that some of these parameters have a greater impact than others. For example, the agents may or may not have access to the common pool threshold level and this knowledge, or lack thereof, will result in entirely different agent performance. This because each agent relies on different strategies and approaches each aspect of the game differently. For example, while some agents rely more on social strategies and cooperation to mitigate unknown risk, others rely heavily on calculations and predictions. Each agent strategy will come with its own unique set of benefits and limitations in the context of the game, performing better or worse, under different conditions.
 
 % Start of section on implementation
 
@@ -129,13 +129,13 @@ Minimum Working Examples (MWEs) comprising a single server and two clients were 
           Python\footnote{\url{https://www.python.org/}} is widely used by the scientific community in recent years with the growing ubiquity of scientific computation packages available for it. As such, Python was a strong contender as most of the class already know Python from past projects. However, Python's weak typing meant it scored low on the ``easily maintainable'' part--the server and client interfaces would benefit a lot from strong typing. While add-on static typing tools such as \texttt{mypy}\footnote{\url{https://mypy.readthedocs.io/}} could be employed (it is also used in the MWE), it would still not be as powerful as built-in strong typing as in languages such as C\# and Go.
 
     \item \textbf{C\#}\footnote{\url{https://github.com/SOMAS2020/somas-demo-cs}}.
-          C\#\footnote{\url{https://docs.microsoft.com/en-us/dotnet/csharp/}} is the flagship language of the .NET ecosystem. C\# shares a large part of its design to the more popular C++. C\# is strongly-typed, and promotes use of clean Object-Oriented Programming (OOP). Many of the features from C/C++ that can be \emph{dangerous} are not present or hidden, making it more beginner friendly. A drawback is that some experience with C-family languages is required to pick up C\# quickly.
+          C\#\footnote{\url{https://docs.microsoft.com/en-us/dotnet/csharp/}} is the flagship language of the .NET ecosystem. C\# shares a large part of its design to the more popular C++. C\# is strongly-typed and promotes use of clean Object-Oriented Programming (OOP). Many of the features from C/C++ that can be \emph{dangerous} are not present or hidden, making it more beginner-friendly. A drawback is that some experience with C-family languages is required to pick up C\# quickly.
 
     \item \textbf{Go}\footnote{\url{https://github.com/SOMAS2020/somas-demo-go}}.
-          While most of the class was not familiar with Go\footnote{\url{https://golang.org/}}, its simple language syntax and highly-featured toolchain make it very easy to learn. The modern Go toolchain makes it extremely simple for programs to work cross-platform. While Go's omission of OOP and generics might be seen as a disadvantage, it makes it an easy language to learn, and prevents pitfalls commonly caused by such ``features''. Go, like C\#, is strongly typed. Moreover, Golang's great support for WebAssembly\footnote{\url{https://webassembly.org/}} would prove useful for visualisations, further detailed in~\ref{sec:GD:implementation:visualisations}. Another nice feature is that concurrency can be easily implemented in Go, which meant that agent actions could be run concurrently to speed up simulations.
+          While most of the class was not familiar with Go\footnote{\url{https://golang.org/}}, its simple language syntax and highly-featured toolchain make it very easy to learn. The modern Go toolchain makes it extremely simple for programs to work cross-platform. While Go's omission of OOP and generics might be seen as a disadvantage, it makes it an easy language to learn and also prevents pitfalls commonly caused by such ``features''. Go, like C\#, is strongly typed. Moreover, Golang's great support for WebAssembly\footnote{\url{https://webassembly.org/}} would prove useful for visualisations, further detailed in \autoref{sec:GD:implementation:visualisations}. Another nice feature is that concurrency can be easily implemented in Go, which meant that agent actions could be run concurrently to speed up simulations.
 \end{enumerate}
 
-After discussion, scores (out of 10) were given for each stack. Table~\ref{table:techstackscores} shows these scores. The multi-language and Python approaches were removed from consideration--the former due to its low total score and the latter because of its low maintainability. The decision between C\# and Go was harder, and ultimately resulted in a \emph{simple majority} vote by the class. 37 people voted in total, with 25 in favour of Go. Hence, Go was finally chosen.
+After discussion, scores (out of 10) were given for each stack. \autoref{table:techstackscores} shows these scores. The multi-language and Python approaches were removed from consideration--the former due to its low total score and the latter because of its low maintainability. The decision between C\# and Go was harder, and ultimately resulted in a \emph{simple majority} vote by the class. 37 people voted in total, with 25 in favour of Go. Hence, Go was finally chosen.
 
 \begin{table}[h]
     \centering
@@ -195,11 +195,11 @@ After discussion, scores (out of 10) were given for each stack. Table~\ref{table
 \subsection{Visualisations}
 \label{sec:GD:implementation:visualisations}
 
-The visualisations developed to support interpretation and analysis of the data generated by simulations took full advantage of Golang's compatibility with WebAssembly. WebAssembly supports the compilation of source code into WebAssmebly out of the box and can even be run efficiently in most modern browsers. This meant that the website supported real-time in-browser simulations and visualisations.
+The visualisations developed to support interpretation and analysis of the data generated by simulations took full advantage of Golang's compatibility with WebAssembly. WebAssembly supports the compilation of source code into WebAssmebly which can be run efficiently in most modern browsers. This meant that the website supported real-time in-browser simulations and visualisations.
 
-The website (\url{https://somas2020.github.io/SOMAS2020/}) features an array of visualisations that help extract meaning from the raw data. The site was developed using ReactJS, TypeScript, and a series of visualisation libraries including Re-Charts and D3.js. 
+The website (\url{https://somas2020.github.io/SOMAS2020/}) features an array of visualisations that help extract meaning from the raw data. The site was developed using ReactJS, TypeScript and a series of visualisation libraries including Re-Charts and D3.js. 
 
-As the cutting edge front-end development framework used in industry today, ReactJS brought the benefits of decomposition, reusable components, and easier management of the state of content on the Document Object Model (the DOM) of the site. Further, its support for JSX for templating allows it to create complex components, while also remaining a flexible plug in architecture for future visualisations and work. TypeScript's strict typing capabilities on top of this enforced strict typing to improve code quality and reduce runtime errors. 
+As the cutting edge front-end development framework used in industry today, ReactJS brought the benefits of decomposition, reusable components and easier management of the state of content on the Document Object Model (the DOM) of the site. Further, its support for JSX for templating allows it to create complex components, while also remaining a flexible plug in architecture for future visualisations and work. TypeScript's strict typing capabilities on top of this enforced strict typing to improve code quality and reduce runtime errors. 
 
 D3.js is a low level visualisation library that facilitates the creation of dynamic and interactive data visualisations. The focus with each visualisation was to bring clarity to the data through both its visual representation and interactivity. This library was used in the development of the transaction and IITO visualisations on the site. 
 
@@ -219,9 +219,10 @@ While Go is strongly typed and would mean that most errors can be detected at co
 Peer review was also setup via GitHub pull requests--each change required the approval of another member in the infrastructure team. This practice not only promoted consistent code design and implementation, it minimised mistakes and ensured that the code implementation meets design and implementation requirements set forth. Further, as there was variation in programming skill among code contributors, knowledge sharing was facilitated by code reviews. This was also a critical opportunity for engineers to learn more about the other code being contributed to the project.
 
 \subsubsection{Continuous Integration}
+\label{sec:GD:implementation:practices:CI}
 
 Via GitHub Actions\footnote{https://github.com/features/actions}, continuous integration was set up. Each Pull Request (PR) was set up to trigger automated runs of written tests and a full simulation in addition to static code analysers such as linters. These checks must all pass for the PR to be frequently merged into the main branch. Automated testing and code analysis saved time and facilitates regression testing, as all tests--existing and new--were run for each change. Running a full simulation also served as a good stress-test for the system to make sure that it does not crash on a similar full simulation. Further, automated tests were run on a reference system (Ubuntu 20.04 with Go 1.15.5 and Node 14), helping to prevent system-specific quirks or bugs from polluting the codebase.
 
 \subsubsection{Continuous Deployment}
 
-On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in the Continuous Integration section), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
+On receiving PR approval, passing automated tests and finally merging into the main codebase, the visualisation website is automatically rebuilt with the latest changes. This saved time as manual builds were not required. The builds were produced on a reference system (identical to that mentioned in the \nameref{sec:GD:implementation:practices:CI} section), ensuring consistent builds free from system-specific quirks. Further, automated builds meant that the website always runs on the latest codebase.
