@@ -52,7 +52,7 @@ Moreover, if the agent's opinion of an island is very high, the agent can decide
 
 For increase survivability, team 1 agent will accept any gift offers that it receives.
 
-\subsection{Future Works}
+\subsection{Future Work}
 Team 1 agent currently has a very straight-forward IITO strategy. Possible alteration to this strategy could include:
 \begin{itemize}
     \item Being less susceptible to bribery. The agent should stop increasing the opinion of an island after receiving $X$ amount of continuous gifts.
@@ -63,7 +63,7 @@ Team 1 agent currently has a very straight-forward IITO strategy. Possible alter
 \section{IIFO Disaster Prediction}
 Disasters can happen deterministically or stochastically (see Chapter~\ref{sec: Disaster} for more information). For an agent, it is important to predict when a disaster occurs so that as much disaster damage is mitigated using the common pool.
 
-When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of 0. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position x, position y, magnitude and period is calculated. A confidence value is calculated along with the mean disaster metrics.
+When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of 0. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position x, position y, magnitude and period is calculated. A confidence value is calculated along with the mean disaster metrics and shared along with the prediction.
 
 % Add a footnote on website?  https://www.mathsisfun.com/data/confidence-interval.html
 The confidence value is calculated by finding the ratio between margin of error and the mean value. The smaller the margin of error, the more confident the agent is in her prediction. Therefore, a difference between the mean value and the margin of error must also be calculated. The confidence interval equation  is used to calculate the margin of error:
@@ -80,7 +80,22 @@ Using the difference between the mean value ($\bar{x}$) and the margin of error 
     \text{Confidence Value} = \frac{\bar{x} - \text{Error}}{\bar{x}}
 \end{equation}
 
-Sharing and obtaining other disaster information to and from other islands respectively can increase the survivability of the archipelago. As more disaster prediction is shared, a network of trust between team 1 agent and other islands is built. This trust value is primarily based upon the absolute value of the islands prediction on the day the disaster happened. However, if an island shares a disaster prediction with the estimated disaster day to be random or changing erratically each turn, then team 1 agent will begin to distrust that island.
+The agent maintains a \textbf{trust score} for every island \emph{including itself}. This is based on the accuracy of islands' prediction of time left to the disaster.
+
+Sharing and obtaining other disaster information to and from other islands respectively can increase the survivability of the archipelago. As more disaster predictions are shared, a network of trust between team 1 agent and other islands is built.
+
+\subsection{Future Work}
+While team 1 agent has a satisfactory disaster prediction algorithm, it does not make use of this prediction or predictions from other islands in any meaningful way. This is primarily due to disaster prediction being one of the last features to be implemented and not enough time being available to complete it.
+
+Nevertheless, here are some possible uses for the disaster prediction system.
+
+\begin{itemize}
+  \item \textbf{Tax policy} --- As president, the agent could choose to increase or decrease taxation depending on (predicted) time left to disaster.
+  \item \textbf{Voting} --- A trustworthy island could make for a better president, speaker or judge, as they would be able to act according to imminent disasters.
+  \item \textbf{Common pool contribution} --- Based on predicted disaster location the agent may increase or decrease her common pool contribution. If a disaster is expected to affect the agent significantly then she could choose to mitigate resource loss by contributing a large amount to the common pool, as the alternative would be losing more resources.
+\end{itemize}
+
+Finally, prediction accuracy could be improved by using the prediction of the most trustworthy island, whether that is the agent herself or not, or averaging the predictions of the most trustworthy islands.
 
 \section{IIGO: President}
 
