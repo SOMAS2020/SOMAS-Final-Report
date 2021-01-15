@@ -2,7 +2,7 @@
 % Template author: Y. Panagis
 
 \usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -21,8 +21,26 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{appendix}
+% \usepackage[legalpaper, potrait, margin=1in]{geometry}
+\usepackage{gensymb}
+\usepackage{amsthm}
+\usepackage{color,soul}
+\usepackage{array}
+% \usepackage[dvipsnames]{xcolor}
+\usepackage{arydshln}
+\usepackage{adjustbox}
+
+\setlength\dashlinedash{0.2pt}
+\setlength\dashlinegap{1.5pt}
+\setlength\arrayrulewidth{0.3pt}
 
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+
 
 
 \usepackage{amsthm}
@@ -38,9 +56,25 @@
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
 \input{utils/json_listings.tex}
 
+\usepackage[%
+  backend=bibtex      % biber or bibtex
+%,style=authoryear    % Alphabeticalsch
+ ,style=numeric-comp  % numerical-compressed
+ ,sorting=none        % no sorting
+ ,sortcites=true      % some other example options ...
+ ,block=none
+ ,indexing=false
+ ,citereset=none
+ ,isbn=true
+ ,url=true
+ ,doi=true            % prints doi
+ ,natbib=true         % if you need natbib functions
+]{biblatex}
+\addbibresource{bibs/main.bib}  % better than \bibliography
+
 \begin{document}
     % The Title, Author Name, Date, and abstract go here
-    \title{Self-Organising Multi-Agent Systems: MVP Specifications}
+    \title{Self-Organising Multi-Agent Systems: Final Report}
     \author{SOMAS Class 2020-2021}
     \date{\today}
     \maketitle
@@ -67,6 +101,8 @@
     \input{15_simulations/index.tex}
     \input{16_results_and_eval/index.tex}
     \input{18_conclusion/index.tex}
+
+    \printbibliography[heading=bibintoc]
 
     \begin{appendices}
         \input{20_appendix_roles/index.tex}
