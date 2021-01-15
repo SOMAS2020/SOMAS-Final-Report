@@ -1,0 +1,96 @@
+\section{Disasters and Common pool}
+Disasters and the common pool impact the survivability of the players in rather interesting ways. Varying disaster frequency and magnitude had profound effects on the agents ability to survive, and changing the common pool threshold changed their ability to mitigate and handle the disasters. Please note that for all simulations only 10 runs have been used to inform the statistics. We realized the limitation of our toolchain abit too late to make an automated system to gather statistics, so all data has been gathered manually. Please note that all disaster simulations was run with a deterministic period. This was done in an effort to keep the inter run variance manageable to be able to draw conclusions on the resulting data. With an automated toolchain, we would have had the capacity to run several 100s of simulations, allowing exploration of the impact of stochastic versus deterministic periods, as well as investigating the visibility of the period. If this data was to collected manually it would have been too messy to be conclusive. For this section, metrics from the web page have been used. 
+The averages, and variances were calculated based on the 10 runs *6 agent metrics 
+
+\subsection{Disasters}
+For simulating disasters a couple of cases were considered as described in the table below:
+
+\begin{table}[h]
+\begin{tabular}{l|lll}
+\textbf{Simulation ran}           & \textbf{Mag = 50 (easy)} & \textbf{Mag = 200 (medium)} & \textbf{Mag = 500 (hard)} \\ \hline
+\textbf{Period = 1 (Frequent)}    & \checkmark      & x             & x     \\
+\textbf{Period = 5 (Medium)}      & \checkmark      & \checkmark    & \checkmark    \\
+\textbf{Period = 10 (Infrequent)} & x               & x             & \checkmark   
+\end{tabular}
+\caption{Disaster simulations}
+\label{tab:somethingelse}
+\end{table}
+\subsection{Changing magnitude}
+When changing the magnitude of the disasters we change the difficulty of the game for the agents, three settings have been explored: Easy:magnitude=50, Medium:magnitude =200, and Hard:magnitude =500. The data for these runs are shown in \ref{tab:16_results_and_eval:Disasters:magnitude}. It can be observed that as the magnitude increases the disaster impact on islands increases,
+and the common pool disaster mitigation slowly drops. The variance in impact also drastically increases, at about twice the rate of the common pool. Both easy and hard mode have similar foraging variances(resources, fishing and hunting spent). But as the islands survive for 4 times as long in the easy mode, the averages in these simulations are way higher than the hard runs. The crazy high variance in foraging expenditure in the medium configuration can be explained by different islands using different foraging strategies, some islands always pour all their excess resources into foraging, allowing other teams to give less and still receive good results, interestingly this dynamic is better exploited in the fishing scenario, so you would expect a higher spread there, however it seems that the big spenders prefer deer hunting. Overall it seems that as disasters become more violent the islands struggle more, and die quicker. Please check out \ref{fig:AppendixSim:Disaster_mag50}, \ref{fig:AppendixSim:Disaster_mag200} and \ref{fig:AppendixSim:Disaster_mag500}, to see some interesting plots from runs used for the statistics in table \ref{tab:16_results_and_eval:Disasters:magnitude}
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{l|ll|ll|ll}
+                                     & \multicolumn{2}{l}{\textbf{Mag=50}} & \multicolumn{2}{l}{\textbf{Mag=200}} & \multicolumn{2}{l}{\textbf{Mag =500}} \\
+\textbf{Metric}                      & \textbf{Mean}  & \textbf{Variance}  & \textbf{Mean}   & \textbf{Variance}   & \textbf{Mean}   & \textbf{Variance}   \\ \hline
+\textbf{Island longevity}            & 101.0          & 0.0                & 73.53           & 10.3               & 25.5            & 9.5                 \\
+\textbf{Island disaster longevity}   & 20.0           & 0.0                & 14.4            & 2.2                & 4.4             & 2.2                 \\
+\textbf{Island disaster impact}      & 12.0           & 31.2               & 227.3           & 230.7              & 439.9           & 386.4               \\
+\textbf{Island disaster mitigated}   & 247.5          & 34.1               & 382.8           & 101.6              & 139.1           & 181.6               \\
+\textbf{Average amount of resources} & 195.9          & 34.6               & 121.6           & 42.4               & 79.2            & 33.8                \\
+\textbf{Fish Foraging Spent}         & 3737.7         & 2049.0             & 2738.3          & 4474.5             & 390.4           & 1752.4              \\
+\textbf{Deer Foraging Spent}         & 3238.1         & 1976.5             & 2081.4          & 6706.9             & 708.8           & 2190.6              \\
+\textbf{Total Foraging Efficiency}    & 1.7            & 0.5                & 1.8             & 0.6                & 2.0             & 0.2                
+\end{tabular}
+\caption{Average values and variance over ten runs when varying disaster magnitude using baseline config and disaster period =5, deterministic and visible}
+\label{tab:16_results_and_eval:Disasters:magnitude}
+\end{table}
+\end{center}
+\subsection{Impact over time unchanged}
+
+Frequent, easy (50/1=50), medium, medium (200/5=40) and infrequent, hard (500/10 = 50) roughly have the same disaster/period ratio so should in theory give the same impact on the archipelago over time. Smart agents should therefore in theory be able to mitigate these disasters equally effectively. It can be observed that now all three islands are closer to eachother in terms of island longevity, compared to table \ref{tab:16_results_and_eval:Disasters:magnitude}.
+
+For island longevity, the three configurations are now much closer too eachother. The hard, infrequent case has a greater variance, both compared to the hard, medium and the other impact over time matched cases. The agents survived roughly the same amount of disasters as in the hard, medium configuration in \ref{tab:16_results_and_eval:Disasters:magnitude}. This could possibly explained as following: The violence of the disasters had a high chance of wiping out all islands if a bad disaster struck, but due to the stochastic nature of the magnitude this could happen on any given disaster, and therefore there is a wide spread in how long the islands survived, but the mean of disasters survived is still roughly the same. 
+
+For the frequent, easy setting the island survives roughly as long as the medium, medium case, but with a bit greater variance. It naturally survives a far greater number of disasters compared to other runs due to the low magnitude and high frequency. Disaster impact plus disaster mitigated equals 964 resources, which is the highest average impact of any configuration thus far. Even so, the agents have a really good survival rate compared to other experiments ran for the disaster section. It seems that the common pool was able to mitigate a large part of the disaster damage, which is natural considering that the common pool did not need to be too full to mitigate these small changes. For foraging these runs had a greater variance compared to the easy,medium case. This was caused by some simulations where all but one agent dies, and then this last agent thrives and grows crazy rich on hunting.
+
+
+
+The hard, infrequent case the overall variance is much higher than any other simulation. Compared to the mag=500,p=5 case, the agents survive roughly the same amount of disasters, however they are able to mitigate far more of the damage through the common pool, as they had time to fill it up between each disaster and recover. The islands also performed better at foraging and average amount of resources compared to the mag=500,p=5 simulations, but worse than the impact over time equivalents. 
+
+The medium medium case is the same as the configuration discussed in the previous subsection. Apart from the island longevity, it seems to sit nicely in the middle between our easy,frequent and hard,infrequent cases, which is what you would expect. In this simulation both the disaster mitigated and disaster impact reduces as we go right, which was interesting to see. It seems that even with relatively similar disaster impact of time, the more violent disasters were more difficult to prepare for.
+
+In summary, the islands are better equipped to mitigate frequent and smaller disasters than violent and infrequent ones. This leads them to survive longer in the former case.
+\begin{table}[h]
+\begin{tabular}{l|ll|ll|ll}
+                                     & \multicolumn{2}{c}{\textbf{Mag=50 , P=1}}                             & \multicolumn{2}{c}{\textbf{Mag=200, P=5}}                                     & \multicolumn{2}{c}{\textbf{Mag=500, P=10}}                               \\
+\textbf{Metric}                      & \multicolumn{1}{c}{\textbf{Mean}} & \multicolumn{1}{c}{\textbf{Variance}} & \multicolumn{1}{c}{\textbf{Mean}} & \multicolumn{1}{c}{\textbf{Variance}} & \multicolumn{1}{c}{\textbf{Mean}} & \multicolumn{1}{c}{\textbf{Variance}} \\ \hline
+\textbf{Island longevity}            & 68.5                              & 14.9                                 & 73.5                              & 10.3                                 & 51.3                              & 27.1                                  \\
+\textbf{Island disaster longevity}   & 67.5                              & 15.1                                 & 14.4                              & 2.2                                  & 4.8                               & 3.2                                   \\
+\textbf{Island disaster impact}      & 307.4                             & 153.9                                & 227.3                             & 230.7                                & 196.3                             & 129.6                                 \\
+\textbf{Island disaster mitigated}   & 656.8                             & 102.8                                & 382.8                             & 101.6                                & 274.7                             & 233.7                                 \\
+\textbf{Average amount of resources} & 179.8                             & 372.4                                & 121.6                             & 42.4                                 & 117.4                             & 27.2                                  \\
+\textbf{Fish Foraging Spent}         & 1667.2                            & 2551.5                               & 2738.3                            & 4474.5                               & 1660.4                            & 4094.1                                \\
+\textbf{Deer Foraging Spent}         & 2566.6                            & 3988.1                               & 2081.4                            & 6706.9                               & 1166.2                            & 2213.8                                \\
+\textbf{Total Foraging Efficiency}    & 1.8                               & 0.3                                  & 1.8                               & 0.6                                  & 1.8                               & 0.5                                  
+\end{tabular}
+\caption{Average values and variance over ten runs when varying disaster magnitude and period using baseline config}
+\label{tab:16_results_and_eval:Disasters:magnitude_period}
+\end{table}
+\subsection{Common Pool Threshold}
+For this section the impact of the common pool is shown. If the common pool threshold is low, the common pool needs to have less resources to be able to properly mitigate a disaster. The threshold was also made visible to agents, which is different to the baseline configuration. All runs used baseline but with disaster magnitude = 200.
+
+For the basecase of CP =200 and visible, this is exactly equivalent to the medium, medium case discussed in the sections above, however now with the common pool threshold available. Sadly the results have worsened, when the agents saw the common pool threshold and this could be one explanation as to why. Common pool also serves as a budget for IIGO, and the president is allowed to give money from the common pool back to agents. So when the CP threshold is visible I believe there are more contributions overall to fill the common pool.(regretfully it was only realized in writing this paragraph that a metric for this would be useful). I hypothesize that most agents did not have great budgeting models in their agents, which also seems to line up with a lot of the resource graphs. So whenever the common pool had resources it would be drained by either president allocations or running IIGO. This resulted in little accumulation in the common pool, meaning that the agents would keep sinking their money into the common pool hoping to reach the threshold before the disaster, effectively reducing their overall funds and survivability. This was sadly spotted too late to warrant any repairs or further investigation. There is however a counter example to my hypothesis at \ref(fig:AppendixSim:cpvisible)
+
+When the CP threshold is lower the mitigation effect is higher. The chance of halving a disaster's impact is drastically increased as there is more often 100 resources in the pool than 200. As a result the islands survive alot longer, and are able to more stably forage, it is interresting to note that this set of runs had the highest average amount of resources compared to any other simulation, even the easy medium case from \ref{tab:16_results_and_eval:Disasters:magnitude}  where islands did survive slightly longer
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{l|ll|ll|ll}
+                                     & \multicolumn{2}{c}{\textbf{CP=100}}                             & \multicolumn{2}{c}{\textbf{CP=200}}                               & \multicolumn{2}{c}{\textbf{CP=500}}                                        \\
+\textbf{Metric}                      & \multicolumn{1}{c}{\textbf{Means}} & \multicolumn{1}{c}{\textbf{Variance}} & \multicolumn{1}{c}{\textbf{Means}} & \multicolumn{1}{c}{\textbf{Variance}} & \multicolumn{1}{c}{\textbf{Means}} & \multicolumn{1}{c}{\textbf{Variance}} \\ \hline
+\textbf{Island longevity}            & 92.5                               & 3.5                                   & 58.1                               & 14.0                                  & 52.8                               & 8.5                                   \\
+\textbf{Island disaster longevity}   & 18.2                               & 0.8                                   & 11.1                               & 3.0                                   & 9.9                                & 1.9                                   \\
+\textbf{Island disaster impact}      & 206.1                              & 460.5                                 & 277.4                              & 180.9                                 & 349.9                              & 135.7                                 \\
+\textbf{Island disaster mitigated}   & 691.7                              & 70.8                                  & 287.8                              & 190.4                                 & 188.8                              & 40.9                                  \\
+\textbf{Average amount of resources} & 200.8                              & 441.6                                 & 127.9                              & 45.0                                  & 283.3                              & 1667.5                                \\
+\textbf{Fish Foraging Spent}         & 3235.0                             & 2570.6                                & 1642.4                             & 2773.3                                & 1371.5                             & 1861.3                                \\
+\textbf{Deer Foraging Spent}         & 2443.0                             & 2467.8                                & 1886.2                             & 6896.6                                & 1629.3                             & 2318.2                                \\
+\textbf{Total Foraging Efficieny}    & 2.0                                & 0.6                                   & 1.9                                & 0.4                                   & 1.9                                & 0.3                                  
+\end{tabular}
+\caption{Average values and variance over ten runs when varying common pool threshold using baseline config,disaster magnitude =200 and commom pool threshold is visible}
+\label{tab:16_results_and_eval:Disasters:Common_pool}
+\end{table}
+\end{center}
+
+\subsection{Conclusion}
+Disasters were and the common pool are key features of the simulation that impact the sustainability of the game. Naturally, lower common pool thresholds and lower disaster magnitudes lead to an increase in survivability. The opposite effect was also observed. There are still several interesting simulations for investigating disasters.
