@@ -48,7 +48,7 @@ Team 1 agent currently has a very straight-forward IITO strategy. Some interesti
     \item Being proactive in bribery. The agent will give unrequested gifts to the current president in hopes that this will reduce tax and increase resource allocation from the common pool. 
 \end{itemize}
 
-\section{IIFO Disaster}
+\section{IIFO Disaster Prediction}
 Disasters can happen deterministically or stochastically (mentioned in detail in Chapter~\ref{sec: Disaster} for more information). For an agent, it is important to determine when a disaster occurs so that as much disaster damage is mitigated using the common pool. 
 
 When the game starts, the disaster prediction made by the agent is random. This prediction always has a confidence value of 0. As more disasters occur, a history of disasters is built up. Using this history, the mean disaster position x, position y, magnitude and occurrence is calculated. A confidence value is calculated along with the mean disaster metrics. 
@@ -66,6 +66,8 @@ Using the difference between the mean value ($\bar{x}$) and the margin of error 
 
 Sharing and obtaining other disaster information to and from other islands respectively can increase the survivability of the archipelago. As more disaster prediction is shared, a network of trust between team 1 agent and other island is built. This trust value is primarily based upon the absolute value of the islands prediction on the day the disaster happened. However, if an island shares a disaster prediction with the estimated disaster day to be random or changing erratically each turn, then team 1 agent will begin to distrust that island. 
 
+\section{IIGO: President}
+
 \section{Foraging}
 Multiple foraging strategies were developed: 
 \begin{itemize}
@@ -76,4 +78,51 @@ Multiple foraging strategies were developed:
 
 \subsection{Simulations against ourselves}
 
-\section{IIGO: President}
+Multiple foraging strategies were developed, initially by intuition and later by attempting to address the shortcomings of previous attempts:
+
+\subsection{Return on Investment (ROI) Foraging}%
+\label{sec:forage-roi}
+
+This first algorithm is based on repeating successful foraging behaviours in the past, whether those be by the agent herself or another agent.
+
+For the first few turns (the exact amount is configurable) the agent will forage randomly.
+
+The agent maintains a history of foraging decisions and outcomes, including those received from IIFO.\@ When it comes time to forage this history is sorted by ROI, i.e.\ the ratio of profit to contribution. Decisions that resulted in a loss, had profit smaller that the living cost, or had a larger contribution that a (configurable) percentage of available resources are filtered out.
+
+\subsection{Regression Foraging}%
+\label{sec:forage-regression}
+
+This strategy tries to predict the ideal foraging decision, even if that exact decision was not made in the past. This is done using regression, which is used to find the decision with the highest expected reward.
+
+% In detail, history is kept as in \nameref{sec:forage-roi}. To make a foraging decision, the history is split by foraged resource (fish or deer), and quadratic regression is performed on contribution versus reward. The maximum of the regression curve is found for each group and the contribution with the highest
+
+\subsection{Flip Foraging}
+
+This strategy chooses the least foraged resource from the last turn, according to IIFO-reported data. Contributed amount is proportional to the chosen resource's total ROI from last turn. This choice was made under the assumption that ROI is an indicator of the resource's ``condition''. If a resource only gives moderate rewards (proportionally to input) it means that it is probably over-used currently and as such agents should allow it to recover, by scaling down their foraging attempts.
+
+\subsection{Comparison}
+
+To compare the three strategies, simulations were run with six agents, two using \emph{ROI foraging}, two using \emph{regression foraging}, and two using \emph{flip foraging}. IIGO and IITO were also disabled in order to isolate the efficacy of foraging methods from other parts of the game. The simulation was run five times and the results averaged over the 5 games as well as the two agents following the same strategy.
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=0.6\textwidth]{09_team1_agentdesign/images/mean_survival_turns}
+\caption{Mean survival turns for different strategies.}
+\label{fig:team1:mean_survival}
+\end{figure} 
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=0.6\textwidth]{09_team1_agentdesign/images/total_efficiency}
+\caption{Average foraging efficiency}
+\label{fig:team1:average_efficiency}
+\end{figure} 
+
+It is clear from \autoref{fig:team1:mean_survival} that the \emph{flip} foraging strategy dominates the other two in terms of overall effectiveness. However, it is interesting to note that, according to \autoref{fig:team1:average_efficiency}, the \emph{ROI} foraging method is almost as efficient as \emph{flip}, which raises the question of what causes the difference in their success. This difference could be attributed to one core issue with the \emph{ROI strategy}: ignoring the absolute value of rewards. The agent will happily settle for a profit of $11$ resources, if that was obtained with a contribution of $0.1$ resources (a profit of $110000\%$) over a profit $50$ resources for a contribution of $25$ (a measly $100\%$). This means that in the long run living costs overwhelm the \emph{ROI} agent. The \emph{flip} agent does not take expected profit into account and as such is unaffected by this.
+
+\emph{Regression} appears to occupy a medium between \emph{flip} and \emph{ROI}, however it is much less consistent, as evidenced by the error bars in \autoref{fig:team1:mean_survival}, with \emph{regression} surviving for under 10 turns in some runs.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
