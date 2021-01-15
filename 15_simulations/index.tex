@@ -6,7 +6,7 @@ The purpose of performing simulations and analysing their results is to explore 
 
 \begin{itemize}
     \item Does the benefit of running the IIGO outweigh its cost? 
-    \item Can the agent strategies overcome the foraging dilemma outlined in Section INSERT REF LATER? 
+    \item Can the agent strategies overcome the foraging dilemma outlined in Section~\ref{sec:enviroment:foraging}? 
     \item Do the agents act selflessly or selfishly?
     \item How important is collaboration to an island's survival?
     \item How do the island's organise themselves under different conditions? %maybe change
@@ -27,6 +27,7 @@ To assist in this analysis, we need to draw quantifiable results from the simula
     \item \textbf{Gini Index}: A measure of how fair the distribution of resources is across the archipelago.
     \item \textbf{Disasters Survived}: Number of disasters the archipelago has survived (At least one island is alive after the disaster).
     \item \textbf{Island Gifting$^{\ref{foot:Simulations:per_island}}$$^{\ref{foot:Simulations:graph}}$}: Amount of resources an island has gifted to other islands.
+    \item \textbf{Average Disaster Damage Taken (ADDT)}: Average disaster damage taken by all the islands after mitigation.
     \item \textbf{Average Disaster Damage Mitigated (ADDM)}: Average disaster damage mitigated by the common pool.
     \item \textbf{Island Foraging Statistics(IFS)$^{\ref{foot:Simulations:per_island}}$}: Amount of resources an island has invested and gained from foraging.
     \item \textbf{Archipelago Foraging Sustainability (AFS)}: The average net forage returns across all islands.
@@ -59,6 +60,7 @@ Another point worthy of note is that for Archipelago Survivability and First Isl
     \textbf{First Island Death}         & 100     \\
     \textbf{Gini Index}                 & 0.39    \\
     \textbf{Disasters Survived}         & 20     \\
+    \textbf{ADDT}                       & 32.17     \\
     \textbf{ADDM}                       & 341.7     \\
     \textbf{AFS}                        & 1.92     \\ \hline
 \end{tabular}
