@@ -1,7 +1,7 @@
 \chapter{Inter-Island Governmental Organisation (IIGO)}
 
 
-The role of IIGO is to maintain, update, and revise the rules concerning provision to managing the long-term collective risk dilemma (ltCRD). 
+The role of IIGO is to maintain, update, and revise the rules concerning provision to managing the long-term collective risk dilemma (ltCRD).
 
 \begin{itemize}
     \item There will be 3 distinct branches in the IIGO: the \textbf{legislative branch}, \textbf{executive branch} and \textbf{judicial branch}\footnote{This is, as no surprise, inspired by the separation of powers in Western democracies.}.
@@ -9,10 +9,10 @@ The role of IIGO is to maintain, update, and revise the rules concerning provisi
     \item The head of the legislative branch is the Speaker, the head of the executive branch is the President, and the head of judicial branch is the Judge.
     \begin{itemize}
         \item  The Speaker, President and Judge are selected, through a democratic election, from the islands in the archipelago\footnote{This naming is inspired by the roles in the US Government.}.
-        \item The resources gathered by the archipelago are endogenous, hence acting on the institutional powers granted to the Speaker, President or Judge costs resources. 
+        \item The resources gathered by the archipelago are endogenous, hence acting on the institutional powers granted to the Speaker, President or Judge costs resources.
         \item For their duty, the President, the Speaker and the Judge receive a salary for each of their turns in office (see Section~\ref{subsec:salary} for more detail).
         \item The limit of the powers of the President, Speaker and Judge are defined in this chapter (e.g. the Speaker can only call one vote per turn).
- 
+
     \end{itemize}
 \end{itemize}
 
@@ -28,7 +28,7 @@ The role of IIGO is to maintain, update, and revise the rules concerning provisi
 
 
 \begin{definition} \label{def:tax}
-    The \textbf{taxation} is related to the President's \textbf{power} to request a specific \underline{\textbf{minimum}} amount of contribution from each island to the common pool at each round of the game. 
+    The \textbf{taxation} is related to the President's \textbf{power} to request a specific \underline{\textbf{minimum}} amount of contribution from each island to the common pool at each round of the game.
 \end{definition}
 
 \begin{definition} \label{def:alloc_req}
@@ -41,7 +41,7 @@ A \textbf{rule proposal list} is related to each island's \textbf{power} to prop
 \end{definition}
 
 \begin{definition} \label{def:invst}
-    An \textbf{investigation} is related to the Judge's \textbf{power} to acquire information to make a decision, followed by a calculation of the expected results and checking whether some specific rules have been obeyed, exclusively for the actions carried out by the \textbf{islands}. 
+    An \textbf{investigation} is related to the Judge's \textbf{power} to acquire information to make a decision, followed by a calculation of the expected results and checking whether some specific rules have been obeyed, exclusively for the actions carried out by the \textbf{islands}.
 \end{definition}
 
 
@@ -87,7 +87,7 @@ A \textbf{term} is the number of turns an island is \emph{permitted} to hold a r
 \end{definition}
 
 \subsection{\emph{Power}, \emph{Permission} and \emph{Obligation} Distinction}
-In the rest of the specifications, we will be specifically using the following three terms to define the actions and responsibilities carried out by the Speaker, President, Judge (see Figure~ \ref{fig:per_obl_sets}):
+In the rest of the specifications, we will be specifically using the following three terms to define the actions and responsibilities carried out by the Speaker, President, Judge (see Figure~\ref{fig:per_obl_sets}):
 \begin{itemize}
     \item Power
     \item Permission
@@ -96,12 +96,12 @@ In the rest of the specifications, we will be specifically using the following t
 
 
 
-\begin{figure}[H] 
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{05_iigo/images/SOMAS_per_obl.pdf}
 \caption{Relationship between \emph{power}, \emph{permission} and \emph{obligation}.}
 \label{fig:per_obl_sets}
-\end{figure} 
+\end{figure}
 
 
 For example, the Judge has the \emph{power} to carry out investigations at an IIGO session. There are no rules specifying which specific islands the Judge should investigate. Therefore, the Judge has the \emph{permission} to investigate any `alive' islands during a session. However, the Judge is \emph{obliged} to make at least some number of investigations each turn.
@@ -112,10 +112,10 @@ For example, the Judge has the \emph{power} to carry out investigations at an II
 \label{sec:executive}
 The executive branch is responsible for \textbf{carrying out the law}.
 \begin{itemize}
-       
-    \item The President has the \emph{power} to: 
+
+    \item The President has the \emph{power} to:
     \begin{itemize}
-        
+
         \item Select a rule for voting $R^{*}$ to be passed to the Speaker.
         \begin{rule_IIGO}
             The President has the \emph{obligation} to \emph{select} a rule $R^{*}$ if the \emph{rule proposal list} has at least one proposed rule in it.
@@ -123,16 +123,16 @@ The executive branch is responsible for \textbf{carrying out the law}.
         \begin{rule_IIGO}
             The President has the \emph{permission} to \emph{select} a rule $R^{*}$ if and only if $R^{*} \in S$, where $S$ is the \emph{rule proposal list}.
         \end{rule_IIGO}
-        
+
         \item Decide the amount of individual \emph{taxation} (i.e. a specific \emph{minimum} amount of contribution to the common pool for each island) for the current turn.
-        
+
         \begin{itemize}
             \item The President is given the self-reported resource amounts held by each island to assist in this decision.
             %\item Suggested Rule: For any island that has chosen to not report it's resources, the President has the \emph{obligation} to set them an individual tax amount T.
         \end{itemize}
-        
+
         \item Decide the allocation of resources distributed from the common pool to the islands (i.e. a specific \emph{maximum} amount an island is permitted to take from the common pool).
-        
+
         \begin{itemize}
             \item The President is given the \emph{allocation requests} made by each island.
             %\item \emph{}{Suggested Rule:} The President has an obligation to prioritise islands in critical condition.
@@ -149,7 +149,7 @@ The legislative branch is responsible for \textbf{making the law}.
 
     \item The Speaker has the \emph{power} to:
     \begin{itemize}
-        
+
         \item Call a vote $V$ for a rule $R$.
         \begin{rule_IIGO}
             The Speaker has the \emph{obligation} to \emph{call} a vote $V$ if and only if the President has \emph{selected} a rule $R$ to be voted on.
@@ -157,14 +157,14 @@ The legislative branch is responsible for \textbf{making the law}.
         \begin{rule_IIGO}
             The Speaker has the \emph{permission} to \emph{call} a vote $V$ for a rule $R$ if and only if the rule $R = R^{*}$, where $R^{*}$ is the rule \emph{selected} by the President.
         \end {rule_IIGO}
-            
+
         \item Choose which islands are participating in the vote $V$.
        % \footnote{This is our sequential implementation alternative for the power to close the ballot box.}.
         \begin{rule_IIGO}
             The Speaker has the \emph{obligation} to ask for a vote from all alive islands.
         \end {rule_IIGO}
-            
-        \item Declare the result $C$ of a vote $V$. 
+
+        \item Declare the result $C$ of a vote $V$.
         \begin{rule_IIGO}
             The Speaker has the \emph{obligation} to \emph{declare the result} $C$ for a vote $V$ if and only if the vote V has been \emph{called}.
         \end {rule_IIGO}
@@ -232,21 +232,21 @@ All sanctions are of economic nature which include:
                 \item This does not mean that the Judge has the \emph{power} to take resources from an island in order to put them to the common pool -- the island itself is expected to carry out this implication imposed by the sanction itself, otherwise further punishment can be induced by the Judge.
                 \item Similarly, \emph{opinion formulation} will follow accordingly whether the island(s) is/are following the implications imposed by the sanction(s).
             \end{itemize}
-        
+
     \end{itemize}
-    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with each time an island breaks a rule, the cumulative penalties accumulated by the island are then used to determine which \textbf{sanction tier} that each island falls into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At each turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarise, the sanctioning process follows these steps:
-    
-    
-    
+    Sanctions are the associated penalty that comes with an island breaking a specific rule. The Judge is in full control of the penalties associated with breaking any rules. Once the Judge has specified the score of the penalty associated with each time an island breaks a rule, the cumulative penalties accumulated by the island are then used to determine which \textbf{sanction tier} that each island falls into. The score threshold to determine the boundaries of the sanction tiers are set by the Judge. At each turn of the game, each island is told whether they are being sanctioned, and if so, which \textbf{sanction tier} that they are currently in. The \textbf{sanction tiers} of the non-compliant islands are also broadcasted to the other islands in the archipelago. To summarize, the sanctioning process follows these steps:
+
+
+
     %Sanctions are based on an island breaking a rule. Each rule must therefore have an associated penalty. By default, we set these penalties such that they add $1$ to the total sanction score for each island. However, we allow the judge to override this scoring, the judge is able to set their own scores for any particular rule as they desire. This custom scoring is then used when an island breaks a particular rule. By looking at events that occurred in the last turn, and using the customised scoring we provide the holder of the judge role with full control of the penalties for breaking any rules.
-    
-    
 
 
 
 
 
-%we then use the cumulative penalties accumulated by each island to determine which Sanction Tier they fall into. The score threshold's required to fall into these sanction tiers is set by the judge and is checked for monotonicity. Each island is told whether they are being sanctioned, and is so what tier they are in. We also tell other islands about which sanction tiers other islands have fallen into. 
+
+
+%we then use the cumulative penalties accumulated by each island to determine which Sanction Tier they fall into. The score threshold's required to fall into these sanction tiers is set by the judge and is checked for monotonicity. Each island is told whether they are being sanctioned, and is so what tier they are in. We also tell other islands about which sanction tiers other islands have fallen into.
 
     \begin{enumerate}
         \item The Judge has the \emph{power} to set custom penalties associated with breaking any rules.
@@ -290,51 +290,53 @@ Each island has the \emph{power} to:
             %\item The game specification includes how many rules an island can propose each turn.
         %\end{itemize}
         %\item vote  for rules in the Legislative Branch and vote for their favourite islands in elections
-\item participate in the legislative branch of the government by casting ballots in votes called by the Speaker
+\item participate in the legislative branch of the government by casting ballots in votes called by the Speaker.
 \item vote for an island to be elected for a specific role (e.g. the President, Judge, Speaker) during the elections\footnote{This will be assumed to be true \underline{unless stated otherwise}. %Note that \textbf{diplomatic sanctions} can disable this power of a specific island (see Section~\ref{jud_const}).}.
         }.
 \end{itemize}
 \section{Accountability Cycle}
 \label{sec:accountability}
 
-
-To ensure that the government avoids corruption and abuse of power, each branch is accountable to another. The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~ \ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but quite different meanings in the IIGO context.}. 
+The IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power}. To ensure that the government is able to avoid corruption and abuse of power, each branch of IIGO is accountable to another through the accountability cycle. 
+The President is accountable to the Speaker, the Speaker is accountable to the Judge, and the Judge is accountable to the President (see Figure~\ref{fig:cycles_in_IIGO}). This accountability cycle is enacted through \emph{monitoring} actions\footnote{Note that the terms \textbf{monitoring} and \textbf{investigation} have similar but not identical meanings and different consequences in the context of IIGO.}. The desired effect is for any wrong-doing in IIGO to be determined as quickly as possible and the role in question to be replaced. 
 
 The powers related to the accountability cycle and transfer-of-power for each role can be summarized as the following: 
+
 \begin{itemize}
-    \item The Speaker has the \emph{power} to: 
+    \item The Speaker has the \emph{power} to:
     \begin{itemize}
         \item monitor the President.
-        \item announce the result of this monitoring.
-        \item initiate the transfer-of-power for the Judge.
+        \item declare the result of this monitoring and and if the monitoring result indicates wrongdoing, oblige the Judge to initiate power transfer for the President.
     \end{itemize}
-    \item The President has the \emph{power} to: 
+    \item The President has the \emph{power} to:
     \begin{itemize}
         \item monitor the Judge.
-        \item announce the result of this monitoring.
-        \item initiate the transfer-of-power for the Speaker.
+        \item declare the result of this monitoring and if the monitoring result indicates wrongdoing, oblige the Speaker to initiate power transfer for the Judge.
     \end{itemize}
-    \item The Judge has the \emph{power} to: 
+    \item The Judge has the \emph{power} to:
     \begin{itemize}
         \item  monitor the Speaker.
-        \item announce the result of this monitoring.
-        \item initiate the transfer-of-power for the President.
+        \item declare the result of this monitoring and and if the monitoring result indicates wrongdoing, oblige the President to initiate power transfer for the Speaker.
     \end{itemize}
 \end{itemize}
 
-%Unlike investigations performed by the Judge, who performs investigations on island actions in the following turn, each role is given the opportunity to check up on the actions of the role it is responsible for immediately after they have been performed. In this sense, the President can monitor (includes investigative-monitoring) the powers (calling a vote and announcing the result) acted on by the Speaker immediately after the Speaker's announcement (or lack there of). The government officials hold a lot of power so this is to ensure that any wrong-doing is determined as quickly as possible. For this project we are only pursuing one degree of monitoring, that is, the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of themselves and keeping all the islands alive is beneficial to everyone. Hence, while the agents might be inclined to break rules in order to benefit themselves, anyone else breaking the rules is seen as undesirable under the assumption that the system in place is there to benefit all. 
+%Unlike investigations performed by the Judge, who performs investigations on island actions in the following turn, each role is given the opportunity to check up on the actions of the role it is responsible for immediately after they have been performed. In this sense, the President can monitor (includes investigative-monitoring) the powers (calling a vote and announcing the result) acted on by the Speaker immediately after the Speaker's announcement (or lack there of). The government officials hold a lot of power so this is to ensure that any wrong-doing is determined as quickly as possible. For this project we are only pursuing one degree of monitoring, that is, the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of themselves and keeping all the islands alive is beneficial to everyone. Hence, while the agents might be inclined to break rules in order to benefit themselves, anyone else breaking the rules is seen as undesirable under the assumption that the system in place is there to benefit all.
+
+The result of monitoring is intended to be a trigger for the initiation of power transfer, whereby a declaration of a negative result indicates that at least one rule was broken by the role monitored and the role should be re-elected. Each turn, in addition to monitoring the actions taken by the role in that IIGO session, the election that role held in the previous IIGO session, if one was held at all, is checked for compliance with the rules of power-transfer.
+
+Figure~\ref{fig:cycles_in_IIGO} illustrates the reverse nature of the monitoring and transfer-of-power cycles. This is a design choice made to diversify the islands that hold the powers that enable the process of a role's premature removal from power as a result of wrongdoing, hence helping to avoid malice. If it is one role's power to monitor, it is the other role's power to initiate and facilitate power transfer. Hence the latter is given a second opinion for cases where the declaration of wrongdoing is not truthful.
+
+Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands. We still have rules governing this process (see Rule~\ref{rule:monitoring_1} and Rule~\ref{rule:monitoring_2}) although these rules are not enforced.
 
 
-Through the proposed accountability cycle, each role is given the opportunity to check up on the actions of the role it is accountable for immediately after they have been performed. It is clear that the IIGO roles (i.e. the President, Speaker and Judge) hold a considerable amount of \emph{power} in their hands. The accountability cycle is designed to address the possible abuses of this power. With monitoring, any wrong-doing in the IGO is determined as quickly as possible and the role in question can be replaced. 
-
-Within the scope of the coursework, we decided to pursue only \emph{one degree of monitoring}, meaning that the powers relating to the accountability cycle will not be monitored themselves. We assume that agents will act in the interest of all the islands in the archipelago. Hence, while the agents might be inclined to break the rules to benefit in some form, it is assumed that the others will negatively see any non-compliant islands based on the assumption that the proposed IIGO system is in place to maintain the welfare of all the islands.
+The \emph{one degree of monitoring} is another justification for the reverse nature of the monitoring and transfer-of-power cycles. The addition of a second opinion means that a role does not hold the power to both wrongfully declare wrongdoing and hold an election for the same role.
 
 Let role $X$ be accountable to the role $Y$, which is accountable to the role $Z$. Then:
-\begin{rule_IIGO}
-$Y$ has the \emph{obligation} to declare the outcome of the monitoring result $M$ associated with the action $A$ undertaken by $X$ if and only if $Y$ has monitored the action $A$ performed by $X$. 
+\begin{rule_IIGO} \label{rule:monitoring_1}
+    $Y$ has the \emph{obligation} to declare the outcome of the monitoring result $M$ associated with the action $A$ undertaken by $X$ if and only if $Y$ has monitored the action $A$ performed by $X$.
 \end{rule_IIGO}
-\begin{rule_IIGO}
-$Y$ has the \emph{permission} to declare the monitoring result $M$ associated with the action $A$ undertaken by $X$ if and only if $M = M^{*}$, where $M^{*}$ is the outcome of \emph{monitoring} action $A$ performed by $X$\footnote{These constitutional rules should be available to the agents to check their decision against. However, due to having only one degree of accountability cycle in place, these rules are not enforced through any sanctions (i.e. breaking these rules has no consequences as they only deem to be an \emph{agreement} among the roles).}.
+\begin{rule_IIGO} \label{rule:monitoring_2}
+    $Y$ has the \emph{permission} to declare the monitoring result $M$ associated with the action $A$ undertaken by $X$ if and only if $M = M^{*}$, where $M^{*}$ is the outcome of \emph{monitoring} action $A$ performed by $X$\footnote{These constitutional rules should be available to the agents to check their decisions against. However, due to having only one degree of accountability cycle in place, these rules are not enforced through any sanctions (i.e. breaking these rules has no consequence as they are only deemed to be an \emph{agreement} between the roles).}.
 \end{rule_IIGO}
 
 
@@ -348,76 +350,97 @@ $Y$ has the \emph{permission} to declare the monitoring result $M$ associated wi
 
 \subsection{Transfer-of-power}
 \label{subsec:transfer-of-power}
-\begin{enumerate}
-    \item The Speaker conducts a vote for the election of the new Judge.
-    \item The Judge conducts a vote for the election of the new President.
-    \item The President conducts a vote for the election of the new Speaker.
-\end{enumerate}
-Refer to the Figure~ \ref{fig:cycles_in_IIGO} for further clarification about the transfer-of-power cycle.
 
-\begin{rule_IIGO}
-   The role $X$ has the \emph{obligation} to conduct a vote for the election of $Y$ at the end of the term (see Definition~\ref{def:term}) if and only if the role $X$ is accountable to the role $Y$. 
-\end{rule_IIGO}.
+For the scope of this project, we chose elections to be the only system of power transfer for the islands to utilise. The islands that hold institutional power are the decision group of the archipelago. They decide on taxes, allocations and sanctions. By holding an election for the institutional roles, the islands are not directly included in the decision group, but they do participate in deciding who will occupy these roles and thus, who makes the aforementioned decisions. Elections also open up another avenue for opinion formation to have an effect.
+\begin{itemize}
+    \item Each role has the \emph{power} to call an election vote and declare the winner (see Figure~\ref{fig:cycles_in_IIGO} for the transfer-of-power cycle).
+\end{itemize}
+
+We note that:
+\begin{enumerate}
+    \item The Speaker conducts an election to appoint a new Judge.
+    \item The Judge conducts an election to appoint a new President.
+    \item The President conducts an election to appoint a new Speaker.
+\end{enumerate}
+Refer to the Figure~\ref{fig:cycles_in_IIGO} for further clarification about the transfer-of-power cycle.
+
+We introduce a \emph{term} length to increase the diversity of the decision group. If the Rule~\ref{rule:roles_must_hold_election} is in play, the roles are obliged to hold an election every $N$ turns. To reduce the scope of the coursework, the term length is defined as a configuration parameter. Thus, we reduce the complexity of rules surrounding the election of roles and hence the reasoning the agents have to do with regard to these rules.
+
+\begin{rule_IIGO} \label{rule:roles_must_hold_election}
+    The role $X$ has the \emph{obligation} to conduct a vote for the election of $Y$ if and only if $Y$ has been in power for more turns than the turn length or if role $Z$ has made a monitoring announcement that indicates wrongdoing by $Y$.
+\end{rule_IIGO}
+
+\begin{rule_IIGO} \label{rule:must_appoint_elected_island}
+    The role $X$ has the \emph{permission} to \emph{declare the winner} $W$ for an election $E$ if $W = W^{*}$, where $W^{*}$ is the winner produced by \emph{calling} a vote for the election $E$.
+\end {rule_IIGO}
+
+Unlike the rule vote held by the Speaker, the process of election is more regimented. The power of calling a vote for an election and the power of declaring the result are combined into one action. This decision came as a result of a motion to simplify the system for implementation. However, the powers are still kept somewhat separate. When facilitating an election, the roles still have the option to declare a winner of their choosing. Rule~\ref{rule:must_appoint_elected_island} is what governs this choice. However, the agents do not have the option to not declare a result at all: holding an election will always result in a declaration of the winner.
 
 \section{Budget and Salary}
 \subsection{Budget}
 %Actions associated with the IIGO have an associated cost that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
 
-Institutional-enabled-power actions in the IIGO have an associated cost with them. Some examples for such actions include:
+
+For the simulation, we have defined the resources gathered by the islands to be endogenous. Hence we assume that self-organization will consume those resources and institutional-power-enabled actions in the IIGO have an associated cost. The institutional-power-enabled actions with such a cost are:
+
 
 
 %that is defined as a configuration parameter. The institutional-power-enabled actions of  identified to require a "computational" component are:
 
 
-%We have defined the resource to be an endogenous one, hence any computation surrounding the distribution of the resource must use up some of that resource. 
+%We have defined the resource to be an endogenous one, hence any computation surrounding the distribution of the resource must use up some of that resource.
 \begin{itemize}
-\item Calling any vote and computing the winner.
+\item President selecting a rule from the rule proposal list.
+\item President deciding the amount of taxation.
+\item President deciding the allocation of resources from the common pool.
+\item Speaker calling a vote and calculating the winner.
+\item Judge inspecting an island's actions.
+\item Judge inspecting an island's action history retrospectively.
 \item Declaring (e.g. \textit{announcing} the result of a vote).
-\item Setting the amount of \emph{taxation} for each island.
-\item Deciding the allocation distribution for each island.
-\item Inspecting an island's action history.
+\item Holding an election.
 \item Monitoring a role.
 \end{itemize}
 
-Since IIGO has been designed to act in the common good, IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered a communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason why defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
+IIGO has been designed to act in the common good. Therefore IIGO-related costs will be directly withdrawn from the common pool. Since the common pool is considered communal property of the archipelago, there are rules in place to limit how much each role is allowed to spend in order to perform its own institutional-power-enabled actions. This is the reason for defining the \emph{budget} and keeping it separate for each of the three IIGO roles.
 
-
-As a role performs institutional-enabled-power actions, the corresponding cost associated with this action is subtracted from the role's budget. A budget of zero means that the role does not have the \emph{power} to perform any of its institutional-power-enabled actions. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it prefers to (as long as those actions are not governed by other rules). 
-
-
-
-%As a role performs an endogenous-cost action, the corresponding cost associated with this action is subtracted from the role's budget. Thus, if as a result of an endogenous-cost action a role will be left with negative budget, it will have gone over the budget limit and will have broken the budget rule. A budget of zero means that the role is not allowed to perform any of its institutional-power-enabled actions associated an endogenous-cost. The removal of the budget rule from the rules in play means the role is allowed to perform as many such actions as it pleases (as long as those actions are not governed by other rules). 
-
-The budget rule is also persistent across turns. This means that, assuming nothing else affects the budget, if a role has $100$ resources in its budget at each turn and spends only $10$ resources, this means that this very same role has $90$ resources in its budget at the next turn. On the other hand, islands can choose to increase the budget periodically every turn. This is governed by another budget extension rule.
+\begin{rule_IIGO} \label{rule:budget}
+    %Each role has the \emph{obligation} to pay the salary of amount $S$ to another if and only if the amount paid $S'$ is equal to $S$.
+    Each role has the \emph{permission} to act on an institutional-power-enabled action with an associated cost if the budget would not become negative as a result of performing the action.
+ \end{rule_IIGO}
 
 
 
+When a role acts on an institutional-power-enabled action with a cost, the cost associated with this action is subtracted from the role's \emph{budget}. If Rule~\ref{rule:budget} is in play, a budget of zero or less means that the role does not have the \emph{permission} to perform any of its institutional-power actions. The removal of Rule~\ref{rule:budget} from the rules in play means the role is permitted to perform as many such actions as it would like (as long as those actions are not governed by other rules).
 
-%one turn and it spends 10, it has 90 resources in it's budget the next turn. 
+The \emph{budget} is persistent across turns. This means that, assuming nothing else affects the budget, if a role has $100$ resources in its budget at the start of a turn and spends $10$ resources, the same role has $90$ resources in its budget at the start of next turn. On the other hand, islands can choose to increase the budget periodically at every turn. The islands can choose the magnitude of this periodic increase by voting on a rule.
 
-Finally, it must be noted that the budget is inherently linked with the fact that whether obligations of a specific role can be undergone.
-For example, during \emph{monitoring}, it should not be seen as a rule violation if a role has not acted on an obligation if it would go over the budget as a result. 
+%one turn and it spends 10, it has 90 resources in it's budget the next turn.
+
+
+
+Finally, it must be noted that the budget is inherently linked with  whether the obligations of a specific role can be undertaken.
+For example, during \emph{monitoring}, it is not seen to be a rule violation if a role has not acted on an obligation as doing so would require it to go over budget.
 
 %This can also be seen as an added clause "... and the action is only permitted if they have the budget" to most rules which govern actions with an endogenous-cost.
 %\begin{rule_IIGO}
     %The budget is increased by an amount $N$ every turn.
 %\end{rule_IIGO}
 
-%This rule means that, assuming nothing else affects the budget, if a budget is set to increase by 10 resources every turn and the budget is a 100 resources in turn one, the budget is 110 resources in turn 2. Setting this rule to 0 is equal to removing this rule and it means that the budget is never increased. 
+%This rule means that, assuming nothing else affects the budget, if a budget is set to increase by 10 resources every turn and the budget is a 100 resources in turn one, the budget is 110 resources in turn 2. Setting this rule to 0 is equal to removing this rule and it means that the budget is never increased.
 
 
 \subsection{Salary}
 \label{subsec:salary}
-A salary is paid to each role in power as an incentive to act in a publicly approved way. %Hence, each role has the \emph{power} to pay a salary to another role following the salary cycle in Figure~\ref{fig:cycles_in_IIGO}.
+A salary is paid to each role in power as an incentive to be in power. Since our system has regimented the means of power transfer to be an election, this incentive extends to acting in a publicly approved way. %Hence, each role has the \emph{power} to pay a salary to another role following the salary cycle in Figure~\ref{fig:cycles_in_IIGO}.
 \begin{rule_IIGO} \label{rule:salary}
-   %Each role has the \emph{obligation} to pay the salary of amount $S$ to another if and only if the amount paid $S'$ is equal to $S$.
    Each role has the \emph{obligation} to pay the salary of amount $S$ to one another following the salary cycle in Figure~\ref{fig:cycles_in_IIGO}.
 \end{rule_IIGO}
 
 In Rule~\ref{rule:salary}, setting $S=0$ (through changing the active rules in place) means that roles do not have the permission to pay any salary. Removing the Rule~\ref{rule:salary} means that the roles may freely choose the amount $S$ for the salary payments.
 
-\section{IIGO Session order}
-
+\section{IIGO Session Order}
+Each IIGO Session can be broken down into a sequence of consecutive actions by the Judiciary, Executive and Legislature. The session is concluded with monitoring, salary payments and elections.
+\subsection{Judicial Actions}
 \begin{enumerate}
     \item The Judge has the \emph{power} to check the history of actions to confirm whether the previously punished island(s) has/have obeyed the previous round's sanctions, meaning whether they contributed to the common pool accordingly in case of economic sanctions.
     %\begin{itemize}
@@ -429,51 +452,521 @@ In Rule~\ref{rule:salary}, setting $S=0$ (through changing the active rules in p
         \item the island $X$ has retrieved the right amount of the resources from the common pool, based on the \emph{allocation request} evaluated by the previous President.
             \begin{itemize}
             \item An example: In the previous round, the President has decided that the island $X$ can take $Y$ amount of resources from the common pool. If the Judge finds out that the island $X$ has taken an amount of $Y'$ such that $Y' > Y$, the Judge has the \emph{power} to invoke sanctions on the island $X$.
-            
+
             %the Judge is \emph{obliged} and \emph{permitted} to sanction island $X$.
             \end{itemize}
         \end{enumerate}
     \item The Judge has the \emph{power} to invoke sanctions based on the outcome of the inspections.
-    \item The President has the \emph{power} to decide to carry out a \emph{monitoring} on:
-        \begin{enumerate}
-        \item the sanctions imposed by the Judge.
-        \end{enumerate}
+\end{enumerate}
+\subsection{Executive Actions}
+\begin{enumerate}
     \item The islands may report the resources in their private pools to the President.
     \item The President has the \emph{power} to let each island know about the amount of \emph{taxation} they have to pay.
     \item The island has the \emph{power} to make an \emph{allocation request} to the President.
     \item The President has the \emph{power} decide on an allocation of resources and let each island know about the amount of resource allocation they are permitted to take from the common pool.
     \item The island has the \emph{power} to pick and to propose a rule to be voted on to the President.
     \item The President has the \emph{power} to choose a rule to be voted on from the received rule proposals.
-    \item The Speaker has the \emph{power} to decide to carry out a \emph{monitoring} on: 
-        \begin{enumerate}
-        \item the resource allocation decided by the President.
-        \item the rule proposed by the President.
-        \end{enumerate}
+\end{enumerate}
+\subsection{Legislative Actions}
+\begin{enumerate}
     \item The Speaker has the \emph{power} to call a vote.
         \begin{enumerate}
         \item The islands vote in support of, or against, the rule (aye or nay) anonymously.
         \end{enumerate}
     \item The Speaker has the \emph{power} to announce a result of a vote to the islands and carries out the law change, if required (e.g. deleting/rejecting a rule if there is a majority nay vote).
+\end{enumerate}
+\subsection{End of Session Actions}
+\begin{enumerate}
+    \item The roles pay a salary to one another following the accountability cycle in Figure~\ref{fig:cycles_in_IIGO}.
+
+    \item The Speaker has the \emph{power} to decide to carry out \emph{monitoring} on:
+    \begin{enumerate}
+    \item the resource allocation decided by the President.
+    \item the rule proposed by the President.
+    \item the previous IIGO session's election for a new Speaker, if an election was held.
+    \end{enumerate}
+    \item The President has the \emph{power} to decide to carry out \emph{monitoring} on:
+    \begin{enumerate}
+        \item the sanctions imposed by the Judge.
+        \item the previous IIGO session's election for a new President, if an election was held.
+    \end{enumerate}
     \item The Judge has the \emph{power} to decide to carry out \emph{monitoring} on:
-        \begin{enumerate}
+    \begin{enumerate}
         \item the vote called by the Speaker.
         \item the Speaker announcing the result.
+        \item the previous IIGO session's election for a new Judge, if an election was held.
     \end{enumerate}
-    \item The roles pay salary for one another following the accountability cycle in Figure~ \ref{fig:cycles_in_IIGO}.
-
+    \item The Speaker has the \emph{power} to decide to hold an election for a new Judge.
+    \item The President has the \emph{power} to decide to hold an election for a new Speaker.
+    \item The Judge has the \emph{power} to decide to hold an election for a new President.
 \end{enumerate}
 
+\section{Implementation} % INFRA implementation to be written here
 
+\subsection{IIGO Branches Overview}
+The IIGO branches have been implemented to facilitate the use of powers given to the IIGO Roles. Because any agent could potentially become the President, Speaker or Judge, the implementation of each of the corresponding branches has been split into two interconnected parts:
+
+\begin{itemize}
+\item Client-side implementation of President, Speaker and Judge functions, which map directly to the powers given to that role.
+\item Server-side implementations of Executive, Legislative and Judicial branch actions, which call the IIGO role functions only on the client currently holding that role i.e. the executive branch only calls functions on the client assigned to the role of President.
+\end{itemize}
+
+\subsubsection{Client-side Overview}
+The client-server division gives agents the freedom to implement the IIGO role functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the IIGO role inspecting their actions will never find any wrongdoing. When implementing their President, Speaker and Judge functions, islands can either follow a rule-obeying approach or try to exploit their power once they are elected to be an IIGO role. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
+
+\subsubsection{Server-side Overview}
+The server implementation of each branch provides the IIGO roles with the framework to use their powers of carrying out the law in the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the IIGO roles and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different implementations of each IIGO role. It also reduces the complexity of agents and minimizes the amount of work for each of the team implementing their agents.
+
+Moreover, the server acts as a guard of the game state and prevents the clients in IIGO roles from performing game-breaking actions. For example, server-side of the IIGO branches ensure that the roles are only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the role is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the role will act on its powers.
+
+
+\subsection{Executive Branch}
+
+
+\subsubsection{Client-side}
+
+\label{sub:president:client-side}
+Each agent can become the President at any turn. Therefore each agent should implement all of the presidential functions according to the common interface. Those functions directly correspond to the powers of the executive branch outlined in Section~\ref{sec:executive} as well as accountability and transfer-of-power obligations outlined in Section~\ref{sec:accountability}. 
+
+The presidential functions can be divided into two categories:
+\begin{enumerate}
+\item Presidential power functions:
+    \begin{itemize}
+        \item \texttt{SetTaxationAmount} allows the President to decide the amount of taxation individually set to each island. Returns the $map[agent] \xrightarrow[]{} tax$, as well as information about whether the President has acted on its power to set taxation.
+        \item \texttt{EvaluateAllocationRequests} allows the President to decide the allocation of resources distributed from the common pool to the islands. Returns the $map[agent] \xrightarrow[]{} allocation$, as well as information about whether the President has acted on its power to set allocation to common pool resources.
+        \item \texttt{PickRuleToVote} allows the President to select a rule for voting $R∗$ to be passed to the Speaker. Returns the $rule$ to be voted on by the Speaker, as well as information about whether the President has acted on its power to choose a new rule to be incorporated into the \texttt{RulesInPlay}.
+    \end{itemize}
+
+\item The accountability cycle, salary and transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PaySpeaker} implements the power of the President to pay the Speaker its salary. 
+        \item \texttt{CallSpeakerElection} implements the power of the President to initiate the transfer-of-power for the Speaker.
+        \item \texttt{DecideNextSpeaker} allows the President to modify the outcome of the election and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the result of Speaker election.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Server-side}
+\label{sub:president:server-side}
+
+Such division gives agents the freedom to implement the presidential functions as they like, provided that they follow the specified interface. Some agents may choose to obey the rules to ensure that the Judge inspecting their actions will never find any disobedience occurred. When implementing their presidential functions, islands can either follow a rule-obeying approach or try to exploit their presidential power when they are elected to be the President. For example, the President gets access to the reported amounts of private pool resources from all the islands and therefore, can use this confidential information for its own benefit in foraging or gifting.
+
+\subsection{Server-side Implementation}
+\label{sub:president:server-side}
+Server implementation of executive branch provides the President with the framework to use its powers of carrying out the law at the archipelago. The server is responsible for the vast majority of data processing and acts as a bridge between the President and the other agents. For example, the President decides on the tax distribution for the given turn, and the server converts this information into communication messages and broadcasts them to the islands. This ensures that the backend 'logistics' of the game, such as the format of messages passed between islands, remain the same between different President implementation. It also reduces the complexity of agents and minimises the amount of work for each of the team implementing their agents.
+
+The flow of every server-side function call of the executive branch can be presented in the following way:
+\begin{enumerate}
+    \item The required information from agents or other roles is obtained. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
+    \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
+    \item Presidential function is called only on the currently residing President with aggregated information as inputs.
+    \item The outcome of the presidential function call is processed.
+    \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
+\end{enumerate}
+
+% Moreover, the server acts as a guard of the game state and prevents the President from performing game-breaking actions. For example, server-side of executive branch ensures that the President is only allowed to consider taking any action only if the monetary constraints allow. In other words, if the amount of resources in the common pool is lower than the action cost, then the President is not allowed to perform this action, as it would result in a negative amount of resources in the common pool. However, if the common pool holds enough resources, then it is up to the island implementation to decide whether the President will act on its powers.
+
+The flow of every server-side function call of the executive branch can be presented in the following way:
+\begin{enumerate}
+    \item The required information from agents or other roles is obtained. This information includes \emph{allocation requests}, \emph{private pool resource reports} and \emph{rules} proposed by the islands.
+    \item This information is aggregated into a format accepted by the interface of presidential functions (usually in form $map[agent] \xrightarrow[]{} information$).
+    \item Presidential function is called only on the currently residing President with aggregated information as inputs.
+    \item The outcome of the presidential function call is processed. This includes updating the game state, logging information for monitoring and subtracting the relevant action costs.
+    \item The outcome of the action, or lack thereof, is passed to the members of the archipelago.
+\end{enumerate}
+
+\subsection{Legislative Branch}
+Similarly to the President, the Speaker also has client-side functions which directly map to the Speaker's powers described in Section~\ref{sec:legislative}, as well as server-side functions which not only facilitate the implementation of these powers but also handle other functionality, such as the logging needed for monitoring and withdrawal of costs associated with the power.
+
+\subsubsection{Client-side}
+The legislative branch functions can be divided into two categories:
+\begin{enumerate}
+\item Legislative power functions:
+    \begin{itemize}
+        \item \texttt{DecideAgenda} does not directly map to any power of the Speaker, but it does aid the agents with keeping track of the rule propagated through the legislative branch functions. By changing the rule given to the agent in \texttt{DecideAgenda}, which is the same rule returned by the President in \texttt{PickRuleToVote}, agents can alter the rule passed to them in \texttt{DecideVote} and \texttt{DecideAnnouncement}.
+        \item \texttt{DecideVote} enables the institutional power of calling a vote and deciding the participating islands. The information passed to the Speaker is the current rule in the agenda (as returned by \texttt{DecideAgenda}) and a list of all the alive island IDs. The Speaker returns the same type of information along with a boolean indicating whether the agent has chosen to act on this power. The rule returned by the Speaker is the rule that is passed to agents to vote on. The list of agents returned by the Speaker is the list of agents that are asked to vote. A vote does not occur the boolean returned by the Speaker indicates that the agent has chosen to not act on this power.
+        \item \texttt{DecideAnnouncement} enables the institutional power of declaring a result of a vote on rules. The information passed to the Speaker is the current rule in the agenda (as returned by \texttt{DecideAgenda}) and the result of the vote held. The Speaker returns the same type of information along with a boolean indicating whether the agent has chosen to act on this power. The rule returned by the Speaker along with the result returned by the Speaker is the information that is processed by the server and broadcasted to all the agents. This does not occur if the agent has chosen not to make a declaration as indicated by the returned boolean.
+    \end{itemize}
+\item The accountability cycle and transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PaySpeaker} implements the power of the Speaker to pay the Judge its salary. 
+        \item \texttt{CallJudgeElection} implements the power of the Speaker to call an election for the transfer-of-power for the Judge.
+        \item \texttt{DecideNextJudge} allows the Speaker to modify the outcome of the election, if one is called, and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the actual election result of Judge election.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Server-side}
+The server-side of the legislative branch is responsible for enabling the information flow, maintaining simulation concurrency concerning action costs, updating the game state and logging actions for monitoring. Notable functions are \texttt{updateRules}, which implements the concurrency checks and logic for updating the rules in play, and \texttt{RunVote}, which interacts with the voting system.
+
+\subsection{Judicial Branch}
+The judicial branch has two parts: the judicial branch itself, which exists on the server to perform the mechanical actions required for IIGO, and the Judge role which is in the hands of the agent which is the Judge at a specific turn. This agent is able to use the Judge role to make decisions which are communicated to the server-side judicial branch which performs the actions.
+\subsubsection{Client-side}
+The Judge decision making functions can be divided into two categories:
+\begin{enumerate}
+    \item Judicial power functions:
+    \begin{itemize}
+        \item \texttt{InspectHistory} allows the Judge to inspect the history cache and evaluate whether agents have complied with the rules or transgressed. Provided the history cache, this returns a $map[agent] \xrightarrow[]{} []transgressions$ as well as information about whether the Judge has acted on its power to inspect the history cache.
+        \item \texttt{GetRuleViolationSeverity} allows the Judge to set sanction penalties for violating specific rules. It returns a $map[ruleName] \xrightarrow[]{} penalty$. If this is not set by the Judge, the default sanction penalty is 1 unit of resources for every rule broken.
+        \item \texttt{GetSanctionThresholds} allows the Judge to set the sanction penalty thresholds for sanction tiers. It returns a $map[sanctionTier] \xrightarrow[]{} penalty$.
+        \item \texttt{GetPardonedIslands} allows the Judge to pardon islands of imposed sanctions. Provided with the list of sanctions, this returns a $map[sanctionID] \xrightarrow[]{} bool$ where a $true$ value indicates that the sanction corresponding to that $ID$ is to be removed from the list of sanctions.
+        \item \texttt{HistoricalRetributionEnabled} allows the Judge to decide whether to inspect the history and accordingly sanction any unpunished transgressions from earlier turns. This is a boolean value so that historical retribution can be enabled and disabled easily.
+    \end{itemize}
+    \item Transfer-of-power functions:
+    \begin{itemize}
+        \item \texttt{PayPresident} implements the obligation of the Judge to pay the President its salary. 
+        \item \texttt{CallPresidentElection} implements the power of the Judge to initiate the transfer-of-power for the President.
+        \item \texttt{DecideNextPresident} allows the Judge to modify the outcome of the election and choose not to follow its permission (that is, if Rule~\ref{rule:must_appoint_elected_island} is in play) to announce the result of President election.
+    \end{itemize}
+\end{enumerate}
+\subsubsection{Server-side}
+The functionality of the server-side of the Judicial branch can be summarised as follows:
+\begin{enumerate}
+    \item Information about actions taken by Islands is used to populate the history cache which is an array of $map[agent] \xrightarrow[]{} action$. This is done server-side because the history cache is considered to be an absolute source of truth i.e. islands do not have the opportunity to lie about actions.
+    \item Judge functions are called to decide which rule violations have taken place, how these will be punished, which violations will be pardoned, whether an election will take place.
+    \item The relevant results of the Judge's actions (sanction information, election result etc.) are processed and packaged into messages that are broadcasted to the agents.
+\end{enumerate}
+\subsection{Sanctions}
+In our archipelago sanctions are the great equaliser. They have been designed with the intention of punishing islands who break rules and to ensure that others are notified of this outcome. Each sanction will last for a configurable number of turns.
+\subsubsection{Sanction Score}
+The judicial branch is able to evaluate all the actions that have been taken by the islands in the archipelago. 
+The holder of the Judge role is given the choice to upload custom scores for any rules which they would like to penalise more or less heavily if broken.
+Any custom scores are then broadcast to all islands, to give them more or less incentive to break these rules. \\
+
+Once the Judge has inspected the events of the past turn and whether or not islands have broken any rules, the judicial branch consequently uses the Judge's custom scoring to calculate the sanction score of each island.
+
+\subsubsection{Sanction Tier}
+With the combined sanction score of each island calculated, the Judge must decide which sanction tier to assign each island. 
+There are 5 sanction tiers as well as a \emph{No sanction} option. The Judge can upload custom \emph{Sanction score} thresholds for each tier, or they can choose to stick with default values.
+The judicial branch uses either the custom thresholds or default values, as instructed, and considers the sanction scores of each island to place them in a sanction tier. \\
+The sanction tier that each island falls in is broadcasted to all islands.
+
+Each sanction tier has an associated rule:
+\begin{itemize}
+    \item Sanction tier 1: \begin{rule_IIGO} 
+        An island in sanction tier $1$ must pay a sanction of $0$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 2: \begin{rule_IIGO} 
+        An island in sanction tier $2$ must pay a sanction of $20$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 3: \begin{rule_IIGO} 
+        An island in sanction tier $3$ must pay a sanction of $30$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 4: \begin{rule_IIGO} 
+        An island in sanction tier $4$ must pay a sanction of $50$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+    \item Sanction tier 5: \begin{rule_IIGO} 
+        An island in sanction tier $5$ must pay a sanction of $80$\% of their current personal resources plus a constant amount of $10$.
+    \end{rule_IIGO}
+\end{itemize}
+
+These rules are used to calculate the exact resource payment that will be required of each island to pay off their sanction(s)\footnote{Note that it is possible that multiple sanctions are invoked on the same island.}. These specific payments are only broadcasted to the islands that must pay them.
+
+\subsubsection{Pardons}
+\begin{quote}
+    "Always forgive your enemies; nothing annoys them so much."
+    \noindent Oscar Wilde
+\end{quote}
+The crown jewel of the sanctioning system is \emph{Pardons}. Just after the sanction tiers are calculated but before the sanction payments are broadcasted, the island acting as the Judge is given the option to pardon any particular sanction on any island, even a sanction levied many turns ago. 
+If the Judge chooses to issue any pardons, every island will be notified of this decision, and can choose to use this information to formulate their opinions of the judge. 
+Internal to the judical branch, these pardons are used to delete their corresponding sanctions from consideration when calculating the sanction payment that an island will have to pay.
+\subsection{Accountability Cycle}
+The accountability cycle implementation has client and server components, whereby, the decision making functionality is client-side and the monitoring itself occurs server-side. This meets the requirements of monitoring, as detailed in Section~\ref{sec:accountability}.
+
+It is not unreasonable to say that the clients birthed in this coursework lack intelligence and have limited reasoning capabilities. Therefore, the result of monitoring is a simple boolean to allow the clients to make use of the information as effectively as possible. A $false$ value indicates that at least one instance of wrongdoing was discovered, and a $true$ value indicates that the role was compliant. The default value of the monitoring result, when a role chooses not to monitor, is $true$.
+
+\subsubsection{Client-side}
+The client-side impelmentations are:
+\begin{enumerate}
+    \item \texttt{MonitorIIGORole} allows the client to decide whether to monitor the given role. 
+    \begin{itemize}
+        \item Input - $\mathrm{roleToBeMonitored}$
+        \item Output - $\mathrm{decideToMonitor:bool}$
+    \end{itemize} 
+    \item \texttt{DecideIIGOMonitoringAnnouncement} allows the client to decide if they would like to announce the result of monitoring and the result that they would like to announce. 
+    \begin{itemize}
+        \item Input - $\mathrm{actualMonitoringResult:bool}$
+        \item Outputs - $\mathrm{decideToAnnounce:bool}$, $\mathrm{monitoringResultToAnnounce:bool}$
+    \end{itemize} 
+\end{enumerate}
+\subsubsection{Server-side}
+
+The key server-side implementations are:
+\begin{enumerate}
+    \item \texttt{addToCache} populates a monitoring cache which is a record of actions taken and their results. This function is called after every IIGO action (e.g. broadcasting taxation).
+    \item \texttt{monitorRole} performs the monitoring of a role as decided by the accountable role. This function calls the client-side monitoring functions and if specified, evaluates the monitoring cache against the rules in play and then broadcasts the monitoring result to all islands.
+\end{enumerate}
+
+The monitoring cache is cleared after all roles have made a decision on whether to monitor and that decision has been carried out. If the IIGO session terminates early due to an error related to insufficient resources, the cache is not cleared. This allows wrongdoing by an IIGO role to be discovered at a later turn.
+
+\subsection{Rule Representation}
+
+\begin{quote}
+    "Learn the rules like a pro, so you can break them like an artist."
+    \linebreak
+    \noindent \emph{Pablo Picasso}
+\end{quote}
+
+Rules underpin most of the operations of the IIGO. Hence, we needed their implementation to be rather flexible in our coursework.
+Furthermore, we noticed that following rules will be difficult for agents unless we provided them with the ability to \emph{not} only check whether they are complicit with them but also with the inner workings of the rules so that agents could calculate for themselves how to become complicit if they wish so.
+Moreover, we also concluded that we should rather opt for a mathematical representation of the rules since agents would be able to much more easily inspect the relevant mathematical equation(s) more easily than a text or functional representation of the rules.
+The mathematics we decided to employ was matrices and the world of linear algebra that surrounds them.
+\linebreak
+The premise of this choice was that if a rule could be represented by matrices, then agents could look up every element of the matrix without any significant difficulty. This would enable us to effectively expose the entire operation of any rule to the agent without reducing the scope of our rules too much.
+To give an example for this matrices-based rule representation, let us consider a simple rule first. \\ 
+\begin{rule_IIGO}
+    "If you are expected to pay $X$ amount of taxation, the amount of tax you pay must be $X$."
+\label{rule:basicTaxRule}
+\end{rule_IIGO}
+\par
+Notice that Rule~\ref{rule:basicTaxRule} is a rather simple one. However, it allows us to form a basis for how to represent rules as matrices.
+If our goal is simply to ensure that an agent pays the expected amount of tax, a basic mathematical operation we can perform is to subtract the actual tax paid from the expected.
+If we obtain $0$ from this subtraction, we can conclude that this agent has adhered to this rule. \\
+Formally, let $x$ and $y$ be the expected and the actual paid amount of tax, respectively. To confirm adherence to the rule, we want to calculate:
+\begin{equation}
+    y - x = 0 . 
+    \label{equation:basicMaths}
+\end{equation}
+
+To turn Equation~\eqref{equation:basicMaths} into a matrix calculation, we simply have to introduce some trivial coefficients.
+\begin{equation}
+    -1*x +
+       1*y = 0
+       \label{equation:coefLinear}
+\end{equation}
+      
+Now, we can write Equation~\eqref{equation:coefLinear} as a matrix calculation.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y
+    \end{bmatrix}   
+    = 0  
+    \label{equation:firstMatrix}
+\end{equation}
+
+We have now encoded this simple rule given as an example in terms of a matrix product. An agent can input their versions of $x$ and $y$, and perform the calculation.
+The agents can then check if their result of Equation~\eqref{equation:firstMatrix} is equal to $0$. Let us examine a slightly more complicated rule. \\
+\begin{rule_IIGO}
+    "If you are expected to pay $x$ amount of tax, the amount of tax you pay must be at least $x$."
+\end{rule_IIGO}
+
+We can rewrite the matrix equation as an inequality.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y
+    \end{bmatrix}   
+    \geq 0
+    \label{equation:basicInequality}  
+\end{equation}
+The addition of the "at least" (i.e. $\geq$) in Equation~\eqref{equation:basicInequality} adds a little bit of complexity to our previously introduced matrix scheme. For this instance, we may not be able to simply check for equality and but instead, need to check for a $\geq$.
+We made a decision that we would ensure all of our calculations would be compared to $0$. This allowed us to reduce the complexity of our calculation algorithms.
+However, with this simplification, we encounter a problem with a rule like Rule~\ref{rule:taxWithOffset}.
+\begin{rule_IIGO}
+    "If you are expected to pay $x$ amount of tax, the amount of tax you pay must be at least $x + 5$."
+    \label{rule:taxWithOffset}
+\end{rule_IIGO}
+In this case, it would be impossible to capture this rule using the previously suggested matrix scheme. Therefore, to capture such cases of rules, we introduce a \emph{constant} to the input list, as below in Equation~\eqref{equation:inequalityWithOffset}.
+\begin{equation}
+    \begin{bmatrix}
+        -1 & 1 & -5
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        1
+    \end{bmatrix}   
+    \geq 0 
+    \label{equation:inequalityWithOffset} 
+\end{equation}
+
+We have now managed to capture any linear equation or inequality with any constant shift. This is where we decided to limit the scope of our rules from a technical aspect.
+The final section of our scheme is how to inform an agent whether it should be looking for equality or inequality.
+For this end, we incorporate an \emph{auxiliary} vector containing a list of comparison codes to the previously discussed matrix-based rule representation.\\
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+    \hline
+    \multicolumn{1}{|l}{Auxiliary Code} & \multicolumn{1}{l|}{Meaning} \\ \hline
+    0                             & = 0                          \\
+    1                             & > 0               \\
+    2                             & $\geq$ 0            \\
+    3                             & != 0                         \\
+    4                             & real                        
+    \end{tabular}
+    \label{table:auxCodeTable}
+\end{table}
+\linebreak
+As seen in Table~\ref{table:auxCodeTable}, the auxilliary code 4 is reserved for the cases where we want the raw result of the matrix multiplication, which is used sparingly for certain rules.
+We have now arrived at the representation of rules we are using for our coursework. For the rule above, we have the following rule representation:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        -1 & 1 & -5
+    \end{bmatrix}      
+    \label{equation:initialRM}     
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }  
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        1
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\end{equation}
+Let us revisit Rule~\ref{rule:taxWithOffset} once more, adding a further layer of complexity.
+\begin{rule_IIGO}
+    "You must pay in tax at least half as many resources as you have and if you've been told to pay tax $x$, you must pay at least $x$ amount of tax."
+\end{rule_IIGO}
+
+In this example, note that there are two separate conditions. We can write both conditions as separate rules.
+\\ Condition 1:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0
+    \end{bmatrix}
+    \label{equation:rx1}
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\[
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\]
+Condition 2:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        -1 & 1 & 0 & 0
+    \end{bmatrix}
+    \label{equation:rx2}
+\end{equation}
+\begin{equation}
+\textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 
+    \end{bmatrix}   
+\end{equation}
+However, we can also write both Equation~\eqref{equation:rx1} and Equation~\eqref{equation:rx2} as a single stacked rule as follows:
+\begin{equation}
+    \textrm{Rule matrix: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0 \\
+        -1 & 1 & 0 & 0 
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{   Variables to fill:  }
+    \begin{bmatrix}
+        \textrm{Amount of tax agent is asked to pay} \\
+        \textrm{Amount of tax the agent is actually paying} \\
+        \textrm{Amount of resources agent has} \\
+        1
+    \end{bmatrix}     
+\end{equation}
+\begin{equation}
+    \textrm{   Auxiliary vector: } 
+    \begin{bmatrix}
+        2 \\
+        2 
+    \end{bmatrix}   
+\end{equation}
+The advantage of this matrix-based rule representation is that the mechanics of the calculation is exposed. 
+Any agent can inspect the elements of the rule matrix in order to easily calculate what values they must provide to adhere to a specific rule.
+For example, if an agent is looking at the above rule and knows that their resource count is $120$, and also know they've been asked to pay $75$, they can go line by line through the matrix to work our what the minimum amount of tax that is needed to be paid.
+\begin{equation}
+    \textrm{Matrix line 1: }
+    \begin{bmatrix}
+        0 & 2 & -1 & 0
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{Values to be fed in: }
+    \begin{bmatrix}
+        75 \\
+        x \\
+        120 \\
+        1
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \textrm{Agent calculation: }
+    0*75 + 2x -120 \geq 0
+\end{equation}
+\begin{equation}
+    x \geq 60
+\end{equation}
+A similar calculation for the next line of the matrix yields:
+\begin{equation}
+    \textrm{Agent calculation: }
+    x \geq 75
+\end{equation}
+Following the equations above, the agent is able to understand that it needs to pay a minimum of $75$ for tax. This system allows the agents both to check if they are compliant and if not, how to calculate which values they need to be compliant.
+As a final note, we have designed an additional abstraction to this rules system to accomodate conditional rules.
+For example, if you had the rule:
+\begin{rule_IIGO}
+    "If resources are above $100$, you must pay at least $75$".
+\end{rule_IIGO} 
+To accommodate this, we instead split this into two separate rules.
+\begin{rule_IIGO}
+    "If resources are above $100$,"
+    \label{rule:cond1}
+\end{rule_IIGO}
+\begin{rule_IIGO}
+    "You must pay at least $75$."
+    \label{rule:cond2}
+\end{rule_IIGO}
+We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then the whole structure passes, and if Rule~\ref{rule:cond1} passes, we expect Rule~\ref{rule:cond2} to pass as well for the rule to be adhered.
 
 \section{Future Work}
 
-\begin{itemize}
-    \item \textbf{Diplomatic sanctions}: Although having the potential of being a good alternative for severer sanctions discussed in  Section~\ref{sec:sanctions}, diplomatic sanctions are \emph{not} implemented within the scope of the coursework. \\
+\textbf{Diplomatic sanctions.} Although having the potential of being a good alternative for severer sanctions discussed in  Section~\ref{sec:sanctions}, diplomatic sanctions are \emph{not} implemented within the scope of the coursework. \\
     Suggested diplomatic sanctions include:
         \begin{itemize}
             \item Revoking an island's eligibility to vote and to be elected for a position.
-            \item Revoking an island's eligibility to propose a rule/motion.
+            \item Revoking an island's eligibility to propose any rule or a specific rule.
         \end{itemize}
-    \item \textbf{Immutable rules}: Within the scope of the coursework, a subset of rules could have been categorised as immutable. This means that to change such immutable rules, the islands first need to vote to change their status to be \emph{mutable}, and consequently, hold another vote to change these mutable rules.
+
+\textbf{Immutable rules.} Within the scope of the coursework, a subset of rules could have been categorised as immutable. This means that to change such immutable rules, the islands first need to vote to change their status to be \emph{mutable}, and consequently, hold another vote to change these mutable rules. An example of such an immutable rule could have been "An island in the archipelago cannot hold multiple IIGO roles (i.e. the President, Speaker, and Judge) in the same turn if at least two other islands are still alive.". This immutable rule would allow islands to avoid the tyranny that might arise from the lack of separation of power in any turn.\\
     %\item \textbf{Adding rules to the proposal list: } 
-\end{itemize}
+\textbf{Scope of IIGO.} Within the scope of the coursework, additional rules could be defined to audit levels of interaction at the IITO, IIFO and foraging. \\
+    Suggested additional rules include:
+        \begin{itemize}
+            \item During an IITO session, each island is not \emph{permitted} to give gifts to a sanctioned island.
+             \item During an IIFO session, a sanctioned island is not \emph{permitted} to learn and share any predictions regarding the long-term collective risk dilemma (i.e. upcoming disasters) and the short-term collective risk dilemma (i.e. returns from foraging).
+             \item Each island has the \emph{power} to propose a \textbf{hunting ban} for a specific animal type (e.g. deer, fish) in order to conserve the relevant animal population.
+             \begin{itemize}
+                \item During foraging, each island is not \emph{permitted} to hunt any of the animal type whose name is in the ban list.
+             \end{itemize}  
+        \end{itemize}
+\textbf{Scalable cost of running the IIGO.} The performance of an IIGO session should be correlated with respect to its allocated budget and costs of IIGO-related actions. For example, if an IIGO-related action $A$ is determined to cost $C$ amount of resources, it should be observed that $A$ is performed more poorly given a budget of $C'$ such that $C' < C$.
