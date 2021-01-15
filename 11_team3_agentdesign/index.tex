@@ -1,38 +1,8 @@
- \documentclass{article}
-
-\usepackage[legalpaper, potrait, margin=1in]{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage{gensymb}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{color,soul}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{float}
-\usepackage{array}
-\usepackage{arydshln}
-\usepackage{amsthm}
-\usepackage{adjustbox}
-\newtheorem{definition}{Definition}
-\setlength\dashlinedash{0.2pt}
-\setlength\dashlinegap{1.5pt}
-\setlength\arrayrulewidth{0.3pt}
- 
- \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-
-
- 
- 
-
-\newenvironment{conditions}
-  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
-  {\end{tabular}\par\vspace{\belowdisplayskip}}
-
+\chapter{Team 3 Agent Design}
 
 \title{Team 3: Pittstop Agent Strategy}
-%\author{Ezgi Özyılkan (Team 3),  Preet Lalli (Team 3), Rūdolfs Spuris (Team 4)\footnote{We would like to thank the shepherd (Professor Jeremy Pitt) and reviewers.}}
-%\date{December 1, 2020}
-
-\begin{document}
+\author{Ezgi Özyılkan (Team 3),  Preet Lalli (Team 3), Rūdolfs Spuris (Team 4)\footnote{We would like to thank the shepherd (Professor Jeremy Pitt) and reviewers.}}
+\date{December 1, 2020}
 
 \maketitle
 
@@ -100,7 +70,7 @@ In the following turn, the \texttt{trustScore} map is updated by averaging all c
 
 \begin{figure}[H] 
 \centering
-\includegraphics[width=0.75\textwidth]{figures/TrustScores.jpg}
+\includegraphics[width=0.75\textwidth]{11_team3_agentdesign/figures/TrustScores.jpg}
 \caption{Diagram showing the series of changes to trust scores during a single turn.}
 \label{fig:trust_scores}
 \end{figure}
@@ -124,7 +94,7 @@ Those principles were converted into Equation~\ref{team3:eq:compliance}, shown h
 
 where:
 \begin{conditions}
- c     &  \textttt{compliance} at a given turn \\
+ c     &  \texttt{compliance} at a given turn \\
  t     &  time since the agent was last caught by a Judge (in number of turns) \\
  n    &  number of times the agent has been caught since the game started \\   
  \texttt{complianceLevel} &  target compliance - global parameters (see Table~\ref{tab:team3:parameter_effects})
@@ -134,7 +104,7 @@ Figure~\ref{fig:compliance_decay} illustrates how compliance decays based on the
 
 \begin{figure}[H] 
 \centering
-\includegraphics[width=0.4\textwidth]{figures/compliance_graph.pdf}
+\includegraphics[width=0.4\textwidth]{11_team3_agentdesign/figures/compliance_graph.pdf}
 \caption{Compliance decay over several turns with $\texttt{complianceLevel}=0.3$.}
 \label{fig:compliance_decay}
 \end{figure} 
@@ -182,13 +152,13 @@ We implemented voting by evaluating the performance of each island that held the
 \subsection{Environment}
 
 \subsubsection{Foraging}
-Foraging for our agent was implemented to maximise the return while maintaining a risk proportional to the \textttt{riskFactor} parameter. To achieve this, we use foraging results from previous turn from our island and the ones shared by other islands in  IIFO.
+Foraging for our agent was implemented to maximise the return while maintaining a risk proportional to the \texttt{riskFactor} parameter. To achieve this, we use foraging results from previous turn from our island and the ones shared by other islands in  IIFO.
 Our foraging strategy decision making ensures we are not in a critical state if foraging does not turn profitable.
 
 At every turn, we follow the following strategy:
 
 \begin{enumerate}
-    \item Determine maximum foraging investment amount amount using the \textttt{riskFactor} parameter, our current resources and our estimation of the critical threshold.
+    \item Determine maximum foraging investment amount amount using the \texttt{riskFactor} parameter, our current resources and our estimation of the critical threshold.
     \item Set the maximum foraging investment amount based on our current resources and the minimum leftover resources amount.
     \item Compute the expected return of investment of both foraging techniques, hunting and fishing, using the stored history of past foraging returns. 
     \item If one foraging technique has a positive expected return, we compute a decay factor to adjust our investment based on what islands have chosen to forage in the last turn and how many dears/fishes were caught. This ensures that we do not hunt when the population is too low or that a lot of other islands are foraging with us.
@@ -225,7 +195,7 @@ At every turn, we follow the following strategy:
 \end{enumerate}
 
 \subsubsection{Gift Offers}
-We make gift offers based on the other islands' gift requests, their respective \textt{trustScores}, and some of our agent's parameters such as \texttt{friendliness} and \texttt{selfishness}. However, if our island is critical, we do not many make any offers so that we can stay alive, but if our island's local pool resources are less than 10\% of \texttt{initialResourcesAtStartOfGame}, we still make a $0.01$ amount of gift offer to all alive islands. Our main strategy is to give as many gifts to the islands to maintain a good relationship with them.\\
+We make gift offers based on the other islands' gift requests, their respective \texttt{trustScores}, and some of our agent's parameters such as \texttt{friendliness} and \texttt{selfishness}. However, if our island is critical, we do not many make any offers so that we can stay alive, but if our island's local pool resources are less than 10\% of \texttt{initialResourcesAtStartOfGame}, we still make a $0.01$ amount of gift offer to all alive islands. Our main strategy is to give as many gifts to the islands to maintain a good relationship with them.\\
 
 In all other circumstances, we process the \texttt{receivedRequests} in the following manner:
 
@@ -239,7 +209,7 @@ In all other circumstances, we process the \texttt{receivedRequests} in the foll
     \item Rank the islands based on their trust score in descending order.
     \item Allocate the gift offers starting from the most trustworthy islands onwards, until we run out of our gift budget.
 \end{enumerate}
-\\
+
 Lastly, when we actually send the gifts to other islands at the end of each turn, we inflate our gift offers to improve other islands' opinion of us.
 
 \subsubsection{Gift Responses}
@@ -407,7 +377,7 @@ We created three vastly different agent strategies by tweaking all agent paramet
 The \textit{Gandhi} agent behaves like an altruist - with low risk and selfishness factors, and a perfect compliance level.
 
 \subsubsection{Putin and \textit{Benevolent} Putin}
-The \textit{Putin} agent is built to be a tyrannical dictator, with high risk, maximum selfishness and a low compliance level. It never contributes to the common pool. The Putin agent also has its \textttt{adv} parameter set to \textit{Malice}. This setting activates a new set of methods that abuse the powers of the Speaker, Judge and President respectively.  Once elected into a position of power, the Putin agent abuses the accountability and transfer-of-power cycles to take over the IIGO. As President, it increases taxation and steals the entire common pool for itself, thereby shutting the IIGO down and killing all other islands.
+The \textit{Putin} agent is built to be a tyrannical dictator, with high risk, maximum selfishness and a low compliance level. It never contributes to the common pool. The Putin agent also has its \texttt{adv} parameter set to \textit{Malice}. This setting activates a new set of methods that abuse the powers of the Speaker, Judge and President respectively.  Once elected into a position of power, the Putin agent abuses the accountability and transfer-of-power cycles to take over the IIGO. As President, it increases taxation and steals the entire common pool for itself, thereby shutting the IIGO down and killing all other islands.
 
  \textit{Benevolent} Putin is built to be less extreme. It is less harsh when in power, and most importantly does not take control of the common pool - IIGO is therefore able to continue for the entire game. The Benevolent Putin is a more realistic representation of authoritarian regimes around the world, letting enough resources for others to barely survive.
 
@@ -514,7 +484,7 @@ Every team member was also assigned responsibility contributing to the agent-str
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{figures/post_mvp_trello.png}
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{11_team3_agentdesign/figures/post_mvp_trello.png}
     \caption{Screenshot of post-MVP agent strategy kanban Board.}
     \label{fig:post_mvp_trello}
 \end{figure}
