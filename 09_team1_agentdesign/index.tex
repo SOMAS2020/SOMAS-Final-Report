@@ -79,14 +79,13 @@ Sharing and obtaining other disaster information to and from other islands respe
 \section{IIGO: President}
 
 \section{Foraging}
-Multiple foraging strategies were developed: 
+Multiple foraging strategies were developed, initially by intuition and later by attempting to address the shortcomings of previous attempts. They were developed in order and aptly named:
 \begin{itemize}
     \item Return on Investment (ROI)
     \item Regression
     \item Flip Forage
 \end{itemize}
 
-Multiple foraging strategies were developed, initially by intuition and later by attempting to address the shortcomings of previous attempts.
 
 \subsection{Return on Investment (ROI) Foraging}%
 \label{sec:forage-roi}
@@ -95,18 +94,20 @@ This first algorithm is based on repeating successful foraging behaviours in the
 
 For the first few turns (the exact amount is configurable) the agent will forage randomly.
 
-The agent maintains a history of foraging decisions and outcomes, including those received from IIFO.\@ When it comes time to forage this history is sorted by ROI, i.e.\ the ratio of profit to contribution. Decisions that resulted in a loss, had profit smaller that the living cost, or had a larger contribution that a (configurable) percentage of available resources are filtered out.
+The agent maintains a history of foraging decisions and outcomes, including those received from IIFO.\@ When it comes time to forage, this history is sorted by ROI, i.e.\ the ratio of profit to contribution. Decisions that resulted in a loss, had profit smaller than the living cost, or had a larger contribution than a (configurable) percentage of available resources, are filtered out.
 
 \subsection{Regression Foraging}%
 \label{sec:forage-regression}
 
 This strategy tries to predict the ideal foraging decision, even if that exact decision was not made in the past. This is done using regression, which is used to find the decision with the highest expected reward.
 
-% In detail, history is kept as in \nameref{sec:forage-roi}. To make a foraging decision, the history is split by foraged resource (fish or deer), and quadratic regression is performed on contribution versus reward. The maximum of the regression curve is found for each group and the contribution with the highest
+In detail, regression forages randomly in the initial turns and history is kept as in \nameref{sec:forage-roi}. To make a foraging decision, the history is split by foraged resource (fish or deer), and quadratic regression is performed on contribution versus reward for both resources. From this, a quadratic equation is formed. If the quadratic equation was found to be negative then differentiating this equation would lead to the discovery of the best contribution. 
+
+Regression then decides on the forage type by choosing the result that gives the best estimated ROI.
 
 \subsection{Flip Foraging}
 
-This strategy chooses the least foraged resource from the last turn, according to IIFO-reported data. Contributed amount is proportional to the chosen resource's total ROI from last turn. This choice was made under the assumption that ROI is an indicator of the resource's ``condition''. If a resource only gives moderate rewards (proportionally to input) it means that it is probably over-used currently and as such agents should allow it to recover, by scaling down their foraging attempts.
+This strategy chooses the least foraged resource from the last turn, according to IIFO-reported data. Contributed amount is proportional to the chosen resource's total ROI from last turn. This choice was made under the assumption that ROI is an indicator of the resource's ``condition''. If a resource only gives moderate rewards (proportionally to input) it means that it is probably over-used currently and as such agents should allow it to recover, by scaling down their foraging attempts or by switching foraging types.
 
 \subsection{Comparison}
 
