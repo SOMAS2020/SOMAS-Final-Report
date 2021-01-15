@@ -952,21 +952,22 @@ We then conditionally execute them such that if Rule~\ref{rule:cond1} fails then
 \subsection{Ostrom’s Design Principles and IIGO}
 \subsubsection{Institutional Analysis and Development framework overview of IIGO}
 
-In this section, we start the evaluation of IIGO by briefly stating or re-visiting the institution's \emph{Bio-Physical Characteristics}, \emph{Attributes of the Community}, \emph{Rules-in-Use}, as well as defining the distinct \emph{Action Arenas} and relevant \emph{Actors}.
+In this section, we start the evaluation of IIGO by briefly stating or re-visiting the institution's \emph{Bio-Physical Characteristics}, \emph{Attributes of the Community}, \emph{Rules-in-Use}, as well as defining the distinct \emph{Action Arenas} and relevant \emph{Actors}:
 
 \begin{itemize}
-    \item Bio-Physical Characteristics
+    \item \textbf{Bio-Physical Characteristics}
     
     Resources are stored in two distinct \emph{facilities}: in private pools and in the common pool. The only \emph{facility} that can generate resources is foraging. Resources are expended through the cost of living, disaster events, cost of IIGO actions and potentially foraging. In the scope of this coursework, IIGO is only concerned with managing the movement of resources between private pools and the common pool. 
     
-    \item Attributes of the Community
+    \item \textbf{Attributes of the Community}
     
     All islands of the archipelago are part of the interest group of the community. They are both providers and appropriators. They all can participate in the decision making through voting in the legislative branch, elections and can all (not all at once) be a part of a more involved decision-making group, if they are elected to serve as either the Judge, the President or the Speaker. 
-    \item Rules-in-Use
+
+    \item \textbf{Rules-in-Use}
     
     In IIGO we have built a system for storing and checking rules (see Section~\ref*{sec:rule_representation}). There are operational choice rules (i.e., those introduced by systems of taxation, allocation and sanctions), collective choice rules (e.g., those stating the obligations and permissions of each role as well as the islands of the archipelago). The collective choice rules available to the agents can be seen listed after powers throughout the chapter. IIGO does not employ any constitutional choice rules, that are not "hard-coded" into the system. For example, all islands always vote in elections; in deciding an allocation, the President can be the only island involved in the final decision-making process. This, of course, was a limitation of the available scope of the project.
     
-    \item Action Arenas
+    \item \textbf{Action Arenas}
     \begin{enumerate}
         \item The first decision arena of IIGO is that of rules surrounding appropriation and provision. The decision group consists solely of the President, however, all islands can provide information to the President by reporting the number of resources in their common pool as well as requesting a desired allocation. Here the island resource reports and allocation requests are information that the president can use to make a decision and set out the rules that we call tax and allocation. 
         
@@ -974,8 +975,8 @@ In this section, we start the evaluation of IIGO by briefly stating or re-visiti
         
         \item The third decision arena of IIGO is that surrounding sanctions. Here the Judge is the only actor involved in the decision making of whether to and how harshly to sanction islands, as well as whether to pardon islands.
         
-        \item The fourth decision arena of IIGO is that surrounding monitoring of role powers and elections. The two are interlinked whereby the elected actors have to participate in not only the decision making surrounding elections but also the decision making in monitoring, which in turn can alter the rules in play to oblige other actors to hold elections. Moreover, elections involve the involvement of all voting islands, thus providing information to the island responsible for the appointment of a role. It is important to note is the repetitive nature of decisions roles have to make regarding elections, followed by decisions regarding monitoring, followed by elections, e.t.c. 
-        
+        \item The fourth decision arena of IIGO is that surrounding monitoring of role powers and elections. The two are interlinked whereby the elected actors have to participate in not only the decision making surrounding elections but also the decision making in monitoring, which in turn can alter the rules in play to oblige other actors to hold elections. Moreover, elections involve the involvement of all voting islands, thus providing information to the island responsible for the appointment of a role. It is important to note the repetitive nature of decisions roles have to make regarding elections, followed by decisions regarding monitoring, followed by elections, and so on.
+
         \item The fifth decision arena involves the roles each of the IIGO roles decision regarding managing the costs of IIGO actions. For each action with a cost, the only actor involved is the agent holding the power. There is, however, a budget rule, that grants permission to act on these powers only if there is enough budget. The budget is incremented every turn and the amount of incrementation is to be set by the decision group described in the second decision arena.
         
         \item The sixth decision arena involves the roles each of the IIGO roles decision regarding managing the salary of other IIGO roles. Similarly to the budget, the only actor involved in this decision is the role that holds the power to make the transaction - a flow of resources from the common pool to the respective (see Figure~\ref{fig:cycles_in_IIGO}) islands resource pool. This decision is affected by the salary rule (Rule~\ref{rule:salary}) which just like with budget is set by the decision group described in the second decision arena.
@@ -1002,8 +1003,9 @@ In this section, we start the evaluation of IIGO by briefly stating or re-visiti
 
     Of note here is the Speaker's power to decide which islands are to participate in the vote. This power is governed by Rule~\ref*{rule:all_islands_vote} and is a remnant of a system of sanctions we considered during design, which could bar islands from participating in a vote. It is the Speakers power to call a vote, i.e. send a communication message to all the agents, hence it would have been the Speakers power to enforce such sanctions, by choosing which islands to send a vote request to. This system is not implemented, which begs for such a decision to be more regulated through a constitutional rule.
 
-    The enforcement of collective choice rules is discussed in Ostrom's principle 4
 
+    The enforcement of collective choice rules is discussed in with Ostrom's 4th principle.
+    
     \item Monitoring, of both state conditions and appropriator behaviour, is by appointed agencies, who are either accountable to the resource appropriators or are appropriators themselves.
     
     The first set of monitoring is performed by the Judge. It is described in Action Arena 3. While the Judge is always a resource appropriator, under an institutional state of tyranny or oligarchy, where the role of the Judge is only ever in the hands of one or a few islands, the decision group consists of only one island. Moreover, in the current IIGO implementation, there is no way to monitor the behaviour of the Judge in this regard, there is no way to confirm that the monitoring results announced by the Judge are concurrent with the state and events of the game. This is an issue that should be addressed in future iterations of IIGO.
