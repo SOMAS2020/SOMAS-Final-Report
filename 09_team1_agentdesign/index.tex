@@ -1,7 +1,27 @@
 \chapter{Team 1 Agent Design}
 
 \section{Core Idea}
-Team 1 Agent was designed around the idea that the agent wants the whole archipelago to survive. However, the agent does have different configurations that allows it to be more malicious than intended such that interesting simulations may occur.
+Team 1 agent, henceforth Lucy, was designed around the idea that the agent wants the whole archipelago to survive. However, the agent does have different configurations that allows it to be more malicious than intended such that interesting simulations may occur.
+
+\section{Emotional state}
+
+The agent's behaviour is affected but what we have termed her \emph{emotional state}. This is governed by the agent's current resources in relation to the living costs.
+
+\begin{table} [htb]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        Emotional State & Condition \\
+        \hline
+        Happy & Default state \\
+        \hline
+        Anxious & Current resources under 5 times the living costs \\
+        \hline
+        Desperate & Agent in critical state \\
+        \hline
+    \end{tabular}
+\end{table}
+
 
 \section{Opinions on Islands}
 For an agent to become self-organising, the agent must determine certain actions given a condition without external input. For this to be possible, the agent must have defined conditions which team 1 calls 'emotional state', and hold an opinion about other islands. This will form a basis for the agent to decide on an action.
